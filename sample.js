@@ -7,9 +7,8 @@ function getCBio(parameters) {
 	console.log('eclipse :: inside getCBio()');
 	var apiURL = 'http://www.cbioportal.org/public-portal/webservice.do?';
 	var cBioResults = '';
-	
+
 	console.log('eclipse :: ' + apiURL + parameters);
-	$('#queryResultsArea').append('<br/>adwdwadw<br/>');
 	
 	// Call the cBio RESTful API
 	$.ajax( {
@@ -18,7 +17,7 @@ function getCBio(parameters) {
   		dataType: 'text',
   		success:function(data) {
 			cBioResults = data;
-			$('#queryResultsArea').append('<br/>Results:<br/>' + cBioResults);
+			$('#queryResult').append(cBioResults);
   		},
   		error: function(jqXHR, textStatus, errorThrown) {
   			$('#queryResultsArea').append('<br/>Error: ' + textStatus + ' ' + errorThrown);
