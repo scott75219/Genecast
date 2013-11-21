@@ -6,9 +6,11 @@
 function getCBio(parameters) {
 	console.log('eclipse :: inside getCBio()');
 	var apiURL = 'http://www.cbioportal.org/public-portal/webservice.do?';
-	var cBioResults = ''
-	console.log(apiURL + parameters);
-
+	var cBioResults = '';
+	
+	console.log('eclipse :: ' + apiURL + parameters);
+	$('#queryResultsArea').append('<br/>adwdwadw<br/>');
+	
 	// Call the cBio RESTful API
 	$.ajax( {
 		type:'get', //Could be 'get' depending on your needs
@@ -16,9 +18,10 @@ function getCBio(parameters) {
   		dataType: 'text',
   		success:function(data) {
 			cBioResults = data;
-			$('#queryResultsArea').val('Results:<br/>' + cBioResults);
+			$('#queryResultsArea').append('<br/>Results:<br/>' + cBioResults);
   		},
-  		error: function() {
+  		error: function(jqXHR, textStatus, errorThrown) {
+  			$('#queryResultsArea').append('<br/>Error: ' + textStatus + ' ' + errorThrown);
   			console.log('eclipse :: ajax error');
   		}
 	});
@@ -32,6 +35,9 @@ function getCBio(parameters) {
 //'getProfileData
 function getProfileData() {
 	console.log('eclipse :: inside getProfileData()');
+	$('#queryCriteriaArea').val('');
+	$('#queryResultsArea').val('');
+	
 	$('#queryCriteriaArea').append(
 		'<div class="controls">' +
 		'<label>Case Set ID: </label><br/>' +
@@ -55,51 +61,47 @@ function getProfileData() {
 
 	$('#queryCriteriaArea').append(
 		'<div class="controls">' +
-		'<input type="button" value="Get Profile Data" id="getGetProfileDataButton"><br/>' +
+		'<input type="button" value="Get Profile Data" id="getGetProfileDataButton"> ' +
+		'<input type="button" value="Clear" id="clearGetProfileDataButton"><br/>' +
   		'</div>'
 	);
+	
+	$('#queryResultsArea').append(
+		'<div class="controls">' +
+		'<input type="button" value="Go Back" id="returnToStartButton"><br/>' +
+		'</div>'
+	)
+	.hide();
 
+	// Clear the text boxes
+	$("#clearGetProfileDataButton").click(function() {
+		$(':text').val('');
+	});
+	
 	// Action for click Get Profile Data button
 	$("#getGetProfileDataButton").click(function() {
 		
 		console.log($("#case_set_idTextBox").val() + " " + $("#genetic_profile_idTextBox").val() + " " + $("#gene_listTextBox").val());
+		
+		// Button to go back to start screen
+
+		$('#queryCriteriaArea').hide('slow');
+		$('#queryResultsArea').show();
+		
 		var getCBioResult = getCBio('cmd=getProfileData' +
 			'&case_set_id=' + $("#case_set_idTextBox").val() +
 			'&genetic_profile_id=' + $("#genetic_profile_idTextBox").val() +
 			'&gene_list=' + $("#gene_listTextBox").val());
-			
-		$('#queryCriteriaArea').hide('slow');
+		
 		$("#returnToStartButton").click(function() {
-			$('#queryResultsArea').hide('slow');
 			$('#queryCriteriaArea').show();
+			$('#queryResultsArea').hide('slow');
 			return false;
 		});
-	
-		return false;
-	});
-	
-	
-		// Action for click Get Profile Data button
-	$("#getGetProfileDataButton").click(function() {
-		
-		console.log($("#case_set_idTextBox").val() + " " + $("#genetic_profile_idTextBox").val() + " " + $("#gene_listTextBox").val());
-		$('#queryCriteriaArea').hide('slow');
-		
-		var getCBioResult = getCBio('cmd=getProfileData' +
-			'&case_set_id=' + $("#case_set_idTextBox").val() +
-			'&genetic_profile_id=' + $("#genetic_profile_idTextBox").val() +
-			'&gene_list=' + $("#gene_listTextBox").val());
-			
-		// Button to go back to start screen
-		$('#queryResultsArea').append(
-			'<div class="controls">' +
-			'<input type="button" value="Go Back" id="returnToStartButton"><br/>' +
-			'</div>'
-		);
 
-		
 		return false;
 	});
+	
 	console.log('eclipse :: end getProfileData()');
 	return true;
 }
@@ -110,7 +112,6 @@ function startApp() {
 	console.log("eclipse :: inside startApp()");
 
 	// go to Get Profile Data screen
-	$('#queryCriteriaArea').val('');
 	var getProfileDataResult = getProfileData();
 	
 	
