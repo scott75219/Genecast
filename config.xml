@@ -14,9 +14,18 @@
     </description>
 
     <author href="https://j-mal.com" email="github.congos@xoxy.net">
-        Jamal Theodore - tickTackHack - The George Washington University
+        Jamal Theodore
     </author>
-	<access origin="*" subdomains="true" />
+    
+	<gap:platform name="android" />
+	<gap:platform name="blackberry" />
+	<gap:platform name="winphone" />
+
+    <preference name="permissions" value="none"/>
+    <preference name="android-targetSdkVersion" value="11" />
+    <preference name="android-installLocation" value="auto" />
+    
+	<access origin="http://www.cbioportal.org" />
 	<content src="index.html" />
 	<preference name="Fullscreen" value="true" />
 	<preference name="WebViewBounce" value="true" />
