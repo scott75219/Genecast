@@ -103,12 +103,13 @@ function onDeviceReady() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-    console.log('eclipse :: onLoad');
+/*    console.log('eclipse :: onLoad');
 
     console.log('eclipse :: waiting on deviceready...');
-    
+  */  
+  	$('p').css({ 'color': 'blue'});
     document.addEventListener('deviceready', onDeviceReady(), false);
-    console.log('eclipse :: end onLoad');
+    /*console.log('eclipse :: end onLoad');*/
 
 }
 
