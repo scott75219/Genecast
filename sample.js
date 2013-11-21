@@ -15,14 +15,15 @@ function getCBio(parameters) {
  		url: apiURL + parameters,
   		dataType: 'text',
   		success:function(data) {
-		cBioResults = data;
+			cBioResults = data;
+			$('#queryResultsArea').val('Results:<br/>' + cBioResults);
   		},
   		error: function() {
   			console.log('eclipse :: ajax error');
   		}
 	});
 	console.log('eclipse :: cBioResults: ' + cBioResults);
-	alert(cBioResults);
+	
 	console.log('eclipse :: end getCBio()');
 	return cBioResults; 
 }
@@ -68,10 +69,37 @@ function getProfileData() {
 			'&gene_list=' + $("#gene_listTextBox").val());
 			
 		$('#queryCriteriaArea').hide('slow');
-		
+		$("#returnToStartButton").click(function() {
+			$('#queryResultsArea').hide('slow');
+			$('#queryCriteriaArea').show();
+			return false;
+		});
+	
 		return false;
 	});
 	
+	
+		// Action for click Get Profile Data button
+	$("#getGetProfileDataButton").click(function() {
+		
+		console.log($("#case_set_idTextBox").val() + " " + $("#genetic_profile_idTextBox").val() + " " + $("#gene_listTextBox").val());
+		$('#queryCriteriaArea').hide('slow');
+		
+		var getCBioResult = getCBio('cmd=getProfileData' +
+			'&case_set_id=' + $("#case_set_idTextBox").val() +
+			'&genetic_profile_id=' + $("#genetic_profile_idTextBox").val() +
+			'&gene_list=' + $("#gene_listTextBox").val());
+			
+		// Button to go back to start screen
+		$('#queryResultsArea').append(
+			'<div class="controls">' +
+			'<input type="button" value="Go Back" id="returnToStartButton"><br/>' +
+			'</div>'
+		);
+
+		
+		return false;
+	});
 	console.log('eclipse :: end getProfileData()');
 	return true;
 }
