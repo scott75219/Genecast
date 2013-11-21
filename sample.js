@@ -8,13 +8,8 @@ function getCBio(parameters) {
 	var apiURL = 'http://www.cbioportal.org/public-portal/webservice.do?';
 	var cBioResults = ''
 	console.log(apiURL + parameters);
-	/*
-	var jqxr = $.get(apiURL + parameters, function(data) {
-		cBioResults = data;
-  		}, 'jsonp')
-  		.fail(function(){console.log('eclipse :: error');});
-	
-	*/
+
+	// Call the cBio RESTful API
 	$.ajax( {
 		type:'get', //Could be 'get' depending on your needs
  		url: apiURL + parameters,
@@ -91,7 +86,6 @@ function startApp() {
 	var getProfileDataResult = getProfileData();
 	
 	
-	$('#d2').css("color","yellow");
 	console.log("eclipse :: end startApp()");
 }
 
@@ -101,7 +95,6 @@ function startApp() {
 function onDeviceReady() {
     // Now safe to use device APIs
     console.log('eclipse :: inside onDeviceReady()');
-    $('#d2').css("color","brown");
     startApp();
     console.log('eclipse :: end onDeviceReady()');
     
@@ -111,16 +104,7 @@ function onDeviceReady() {
 //
 function onLoad(){
     console.log('eclipse :: onLoad');
-	/*
-    var div1 = 'abc';
-    document.getElementById('d1').value = 'dwadadwa';
-    $('#d1').val('blup!');
 
-    var div2 = document.getElementById('d1').value;
-
-    document.getElementById('d1').innerHTML = (div2 + div1);
-    $('#d1').css("color","blue");
-	*/
     console.log('eclipse :: waiting on deviceready...');
     
     document.addEventListener('deviceready', onDeviceReady(), false);

@@ -7,15 +7,21 @@
 
     <!-- versionCode is optional and Android only -->
 	
-    <name>PhoneGap Tutorial</name>
+    <name>cBio Portal Mobile</name>
 
     <description>
-        As based on youtube.com/user/rubicks33
+        Query the cBio Portal cancer genomic database.
     </description>
 
     <author href="https://j-mal.com" email="github.congos@xoxy.net">
-        Phone gap tutorial - tickTackHack
+        Jamal Theodore - tickTackHack - The George Washington University
     </author>
-	<access uri="https://www.cbioportal.org" subdomains="true">
-	</access>
+	<access origin="*" subdomains="true" />
+	<content src="index.html" />
+	<preference name="Fullscreen" value="true" />
+	<preference name="WebViewBounce" value="true" />
+	
+	<preference name="BackgroundColor" value="0xff0000ff"/>
+	<preference name="LoadingDialog" value="Loading. Please wait..."/>
+	<preference name="LoadUrlTimeoutValue" value="20000"/>
 </widget>
