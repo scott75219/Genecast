@@ -34,8 +34,7 @@ function getCBio(parameters) {
 //'getProfileData
 function getProfileData() {
 	console.log('eclipse :: inside getProfileData()');
-	$('#queryCriteriaArea').val('');
-	$('#queryResultsArea').val('');
+
 	
 	$('#queryCriteriaArea').append(
 		'<div class="controls">' +
@@ -111,6 +110,36 @@ function getProfileData() {
 //
 function startApp() {
 	console.log("eclipse :: inside startApp()");
+	$('#queryCriteriaArea').val('');
+	$('#queryResultsArea').val('');
+	
+	$('#queryCriteriaArea').append(
+		'<select name="selectCBioCommand" id="selectCBioCommand" tabindex="1">\
+			<option value="">-- Select country --</option>\
+			<optgroup label="North America">\
+				<option value="1">USA</option>\
+				<option value="9">Canada</option>\
+			</optgroup>\
+			<optgroup label="Europe">\
+				<option value="2">France</option>\
+				<option value="3">Spain</option>\
+				<option value="6">Bulgaria</option>\
+				<option value="7" disabled="disabled">Greece</option>\
+				<option value="8">Italy</option>\
+			</optgroup>\
+			<optgroup label="Asia" disabled="disabled">\
+				<option value="5">Japan</option>\
+				<option value="11">China</option>\
+			</optgroup>\
+			<option value="4">Brazil</option>\
+			<option value="10">South Africa</option>\
+		</select>'	
+	);
+
+	$(function () {
+			$("#selectCBioCommand").selectbox();
+		});
+
 
 	// go to Get Profile Data screen
 	var getProfileDataResult = getProfileData();
