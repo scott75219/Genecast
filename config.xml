@@ -7,10 +7,10 @@
 
     <!-- versionCode is optional and Android only -->
 	
-    <name>cBio Portal Mobile</name>
+    <name>cBioPortal Mobile</name>
 
     <description>
-        Query the cBio Portal cancer genomic database.
+        Query the cBioPortal cancer genomic database.
     </description>
 
     <author href="https://j-mal.com" email="github.congos@xoxy.net">
