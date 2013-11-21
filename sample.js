@@ -95,6 +95,8 @@ function getProfileData() {
 		$("#returnToStartButton").click(function() {
 			$('#queryCriteriaArea').show();
 			$('#queryResultsArea').hide('slow');
+			$('#queryResult').val('');
+			
 			return false;
 		});
 
