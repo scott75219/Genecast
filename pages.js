@@ -37,6 +37,7 @@ function getProfileData() {
 
 	
 	$('#queryCriteriaArea').append(
+		'<p>Fill in fields below with valid cBio Get Profile Data query. (error checking not yet implemented).</p>' +
 		'<div class="controls">' +
 		'<label>Case Set ID: </label><br/>' +
   		'<input type="text" name="case_set_idTextBox" id="case_set_idTextBox" value="" ><br/>' +
@@ -108,12 +109,13 @@ function getProfileData() {
 
 // Home screen of app
 //
-function startApp() {
-	console.log("eclipse :: inside startApp()");
+function home() {
+	console.log("eclipse :: inside home()");
 	$('#queryCriteriaArea').val('');
 	$('#queryResultsArea').val('');
 	
 	$('#queryCriteriaArea').append(
+		'Choose operation: ' +
 		'<select name="selectCBioCommand" id="selectCBioCommand" tabindex="1">\
 			<option value="">-- Select country --</option>\
 			<optgroup label="North America">\
@@ -137,15 +139,13 @@ function startApp() {
 	);
 
 	$(function () {
-			$("#selectCBioCommand").selectbox();
-		});
-
+		$("#selectCBioCommand").selectbox();
+	});
 
 	// go to Get Profile Data screen
 	var getProfileDataResult = getProfileData();
-	
-	
-	console.log("eclipse :: end startApp()");
+		
+	console.log("eclipse :: end home()");
 }
 
 
@@ -154,7 +154,7 @@ function startApp() {
 function onDeviceReady() {
     // Now safe to use device APIs
     console.log('eclipse :: inside onDeviceReady()');
-    startApp();
+    home();
     console.log('eclipse :: end onDeviceReady()');
     
 }
