@@ -17,14 +17,15 @@ function getCBioData(parameters) {
   		dataType: 'text',
   		success:function(data) {
 			cBioResults = data;
-			$('#queryResult').append(cBioResults);
+			processCBioResults(cBioResults);
   		},
   		error: function(jqXHR, textStatus, errorThrown) {
-  			$('#queryResultsArea').append('<br/>Error: ' + textStatus + ' ' + errorThrown);
   			console.log('eclipse :: ajax error');
+  			processCBioResults(textStatus + ' ' + errorThrown);
   		}
 	});
-	console.log('eclipse :: cBioResults: ' + cBioResults);
+	
+
 	
 	console.log('eclipse :: end getCBioData()');
 	return cBioResults; 
@@ -32,94 +33,109 @@ function getCBioData(parameters) {
 
 // Interface for Get Profile Data
 //'getProfileData
-function getProfileData() {
-	console.log('eclipse :: inside getProfileData()');
+function getProfileDataForm() {
+	console.log('eclipse :: ' + arguments.callee.toString().match(/function\s+([^\s\(]+)/));
 
-	
-	$('#queryCriteriaArea').append(
-		'<p>Fill in fields below with valid cBio Get Profile Data query. (error checking not yet implemented).</p>' +
+	var getProfileDataTextBoxForm = 
 		'<div class="controls">' +
 		'<label>Case Set ID: </label><br/>' +
-  		'<input type="text" name="case_set_idTextBox" id="case_set_idTextBox" value="" ><br/>' +
-  		'</div>'
-	);
-	
-	$('#queryCriteriaArea').append(
-		'<div class="controls">' +
+  		'<input type="text" name="case_set_idTextBox" id="case_set_idTextBox" value="" /><br/>' +
+  		'</div>'+
+  		'<div class="controls">' +
 		'<label>Genetic Profile ID: </label><br/>' +
-  		'<input type="text" name="genetic_profile_idTextBox" id="genetic_profile_idTextBox" value="" ><br/>' +
-  		'</div>'
-	);
-	
-	$('#queryCriteriaArea').append(
-		'<div class="controls">' +
+  		'<input type="text" name="genetic_profile_idTextBox" id="genetic_profile_idTextBox" value="" /><br/>' +
+  		'</div>' +
+  		'<div class="controls">' +
 		'<label>Gene List (comma separated.): </label><br/>' +
-  		'<input type="text" name="gene_listTextBox" id="gene_listTextBox" value="" ><br/>' +
-  		'</div>'
-	);
-
-	$('#queryCriteriaArea').append(
-		'<div class="controls">' +
-		'<input type="button" value="Get Profile Data" id="getGetProfileDataButton"> ' +
-		'<input type="button" value="Clear" id="clearGetProfileDataButton"><br/>' +
-  		'</div>'
-	);
+  		'<input type="text" name="gene_listTextBox" id="gene_listTextBox" value="" /><br/>' +
+  		'</div>';
 	
-	$('#queryResultsArea').append(
-		'<div class="controls">' +
-		'<input type="button" value="Go Back" id="returnToStartButton"><br/>' +
-		'</div>'
-	)
-	.hide();
+	console.log('eclipse :: ' + arguments.callee.toString().match(/function\s+([^\s\(]+)/));
 
-	// Clear the text boxes
-	$("#clearGetProfileDataButton").click(function() {
-		$(':text').val('');
-	});
+	return getProfileDataTextBoxForm;
+}
+
+// Parse the results from a call
+//
+function processCBioResults(cBioResults){
+	$('#queryResult').html('Results:<br/>' + cBioResults);
+}
+
+
+// Portal to the cBio query screens
+//
+function doCBioQuery(command){
+	console.log("eclipse :: inside doCBioQuey()");
+	var parameters = '';
+	var inputForm = '';
 	
-	// Action for click Get Profile Data button
-	$("#getGetProfileDataButton").click(function() {
+	$('#topNav').show();	
+	$('#queryCriteriaArea').show();
+
+
+  		
+	switch(command) {
+		case 'getProfileData': inputForm = getProfileDataForm();  break;
+	}
+
+	$('#queryCriteriaArea').html(
+		'<div class="controls">' +
+		'<input type="button" value="Submit" id="submitCBioQueryButton"> ' +
+		'<input type="button" value="Clear" id="clearCBioQueryButton"><br/>' +
+  		'</div>' +
+  		inputForm);	
+
+ 	// Action to submit query
+	$("#submitCBioQueryButton").click(function() {
 		
-		console.log($("#case_set_idTextBox").val() + " " + $("#genetic_profile_idTextBox").val() + " " + $("#gene_listTextBox").val());
+		console.log('eclipse :: parameters: ' + parameters);
 		
 		// Button to go back to start screen
-
 		$('#queryCriteriaArea').hide('slow');
 		$('#queryResultsArea').show();
 		
-		var getCBioDataResult = getCBioData('cmd=getProfileData' +
-			'&case_set_id=' + $("#case_set_idTextBox").val() +
-			'&genetic_profile_id=' + $("#genetic_profile_idTextBox").val() +
-			'&gene_list=' + $("#gene_listTextBox").val());
+		switch(command) {
+			case 'getProfileData': 
+				parameters = '&case_set_id=' + $("#case_set_idTextBox").val() +
+					'&genetic_profile_id=' + $("#genetic_profile_idTextBox").val() +
+					'&gene_list=' + $("#gene_listTextBox").val();
+				break;
+		}
 		
-		$("#returnToStartButton").click(function() {
-			$('#queryCriteriaArea').show();
-			$('#queryResultsArea').hide('slow');
-			$('#queryResult').val('');
-			
-			return false;
-	 	});
-
+		// Query the cBio database
+		getCBioData(command + parameters);
 		return false;
 	});
 	
-	console.log('eclipse :: end getProfileData()');
-	return true;
+	// Action to Clear the text boxes
+	$("#clearCBioQueryButton").click(function() {
+		$('#queryCriteriaArea :text').val('');
+	});
+	
+	console.log("eclipse :: end doCBioQuey()");
 }
 
 // Home screen of app
 //
 function home() {
 	console.log("eclipse :: inside home()");
+	
+	$('#topNav').hide();
+	
+	$('#queryCriteriaArea').hide();
+	$('#queryResultsArea').hide();
 
-	
-	
-	
-	$('#queryCriteriaArea').val('');
-	$('#queryResultsArea').val('');
-	
-	// go to Get Profile Data screen
-	var getProfileDataResult = getProfileData();
+	// UI event listeners
+	$("#goBackButton").click(function() {
+		home();
+		
+		return false;
+ 	});
+ 	
+	$('#cBioCommandSelect').change(function(){
+		console.log('eclipse :: cBioCommandSelect selection = ' + $('#cBioCommandSelect option:selected').val());
+		doCBioQuery($('#cBioCommandSelect option:selected').val());
+	});
 		
 	console.log("eclipse :: end home()");
 }

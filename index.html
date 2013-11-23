@@ -12,10 +12,14 @@
 
   </head>
   <body onload="onLoad()">
-
+	<div class="controls">
+		<div id="topNav">
+			<input type="button" id="goBackButton" value=" < " /><br/>
+		</div>
+	</div>
   	<form class="form-vertical">
 			Choose operation:
-			<select name="selectCBioCommand" id="selectCBioCommand" tabindex="1">
+			<select name="cBioCommandSelect" id="cBioCommandSelect" tabindex="1">
 				<option value="">-- Select query --</option>
 				<option value="getTypesOfCancer">All Types of Cancer</option>
 				<option value="getCancerStudies">All Cancer Studies</option>
@@ -28,8 +32,9 @@
 				<option value="getProteinArrayData">RPPA-based Proteomics Data</option>
 			</select>
 
-	  	<div id="queryCriteriaArea"> </div>
-	  	<div id="queryResultsArea">Results:
+	  	<div id="queryCriteriaArea"> 
+  		</div>
+	  	<div id="queryResultsArea">
 	  		<div id='queryResult'> </div>
   		</div>
   	</form>
