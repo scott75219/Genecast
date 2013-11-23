@@ -31,30 +31,6 @@ function getCBioData(parameters) {
 	return cBioResults; 
 }
 
-// Interface for Get Profile Data
-//'getProfileData
-function getProfileDataForm() {
-	console.log('eclipse :: ' + arguments.callee.toString().match(/function\s+([^\s\(]+)/));
-
-	var getProfileDataTextBoxForm = 
-		'<div class="controls">' +
-		'<label>Case Set ID: </label><br/>' +
-  		'<input type="text" name="case_set_idTextBox" id="case_set_idTextBox" value="" /><br/>' +
-  		'</div>'+
-  		'<div class="controls">' +
-		'<label>Genetic Profile ID: </label><br/>' +
-  		'<input type="text" name="genetic_profile_idTextBox" id="genetic_profile_idTextBox" value="" /><br/>' +
-  		'</div>' +
-  		'<div class="controls">' +
-		'<label>Gene List (comma separated.): </label><br/>' +
-  		'<input type="text" name="gene_listTextBox" id="gene_listTextBox" value="" /><br/>' +
-  		'</div>';
-	
-	console.log('eclipse :: ' + arguments.callee.toString().match(/function\s+([^\s\(]+)/));
-
-	return getProfileDataTextBoxForm;
-}
-
 // Parse the results from a call
 //
 function processCBioResults(cBioResults){
@@ -67,40 +43,49 @@ function processCBioResults(cBioResults){
 function doCBioQuery(command){
 	console.log("eclipse :: inside doCBioQuey()");
 	var parameters = '';
-	var inputForm = '';
+	var inputForm;
+	var parameterList;
 	
 	$('#topNav').show();	
 	$('#queryCriteriaArea').show();
 
 
-  		
+  	// set up input text boxes for each cBio command type
 	switch(command) {
-		case 'getProfileData': inputForm = getProfileDataForm();  break;
+		case 'getProfileData': inputForm = 
+			'<div class="controls">\
+				<div id="parameterGroup">\
+					<label>Case Set ID: </label><br/>\
+			  		<input type="text" name="case_set_idTextBox" id="case_set_idTextBox" value="" /><br/>\
+					<label>Genetic Profile ID: </label><br/>\
+			  		<input type="text" name="genetic_profile_idTextBox" id="genetic_profile_idTextBox" value="" /><br/>\
+					<label>Gene List (comma separated): </label><br/>\
+			  		<input type="text" name="gene_listTextBox" id="gene_listTextBox" value="" /><br/>\
+		  		</div>\
+	  		</div>';
+	  		parameterList = ['&case_set_id=','&genetic_profile_id=','&gene_list='];
+	  		break;
 	}
 
 	$('#queryCriteriaArea').html(
-		'<div class="controls">' +
-		'<input type="button" value="Submit" id="submitCBioQueryButton"> ' +
-		'<input type="button" value="Clear" id="clearCBioQueryButton"><br/>' +
-  		'</div>' +
+		'<div class="controls">\
+			<input type="button" value="Submit" id="submitCBioQueryButton">\
+			<input type="button" value="Clear" id="clearCBioQueryButton"><br/>\
+  		</div>' +
   		inputForm);	
 
  	// Action to submit query
 	$("#submitCBioQueryButton").click(function() {
 		
-		console.log('eclipse :: parameters: ' + parameters);
-		
 		// Button to go back to start screen
 		$('#queryCriteriaArea').hide('slow');
 		$('#queryResultsArea').show();
 		
-		switch(command) {
-			case 'getProfileData': 
-				parameters = '&case_set_id=' + $("#case_set_idTextBox").val() +
-					'&genetic_profile_id=' + $("#genetic_profile_idTextBox").val() +
-					'&gene_list=' + $("#gene_listTextBox").val();
-				break;
-		}
+		
+		$('#parameterGroup input').each(function(index){
+			parameters = parameters + parameterList.shift() + $(this).val();
+		});
+		console.log('eclipse :: paramters: ' + parameters);
 		
 		// Query the cBio database
 		getCBioData(command + parameters);
