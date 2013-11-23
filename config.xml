@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/2.0"
-        id        = "com.tickTackHack.PhonegapTutorial"
+        id        = "com.tickTackHack.cBioPortalMobile"
         versionCode="1" 
         version   = "0.0.1">
 
@@ -22,15 +22,13 @@
 	<gap:platform name="winphone" />
 
     <preference name="permissions" value="none"/>
-    <preference name="android-targetSdkVersion" value="11" />
-    <preference name="android-installLocation" value="auto" />
     
 	<access origin="http://www.cbioportal.org" />
 	<content src="index.html" />
 	<preference name="Fullscreen" value="true" />
 	<preference name="WebViewBounce" value="true" />
 	
-	<preference name="BackgroundColor" value="0xff0000ff"/>
+	<preference name="BackgroundColor" value="0xef0000ff"/>
 	<preference name="LoadingDialog" value="Loading. Please wait..."/>
 	<preference name="LoadUrlTimeoutValue" value="20000"/>
 </widget>
