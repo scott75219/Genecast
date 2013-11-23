@@ -3,8 +3,8 @@
 
 // Get data from cBio Portal REST api
 //
-function getCBio(parameters) {
-	console.log('eclipse :: inside getCBio()');
+function getCBioData(parameters) {
+	console.log('eclipse :: inside getCBioData()');
 	var apiURL = 'http://www.cbioportal.org/public-portal/webservice.do?';
 	var cBioResults = '';
 
@@ -26,7 +26,7 @@ function getCBio(parameters) {
 	});
 	console.log('eclipse :: cBioResults: ' + cBioResults);
 	
-	console.log('eclipse :: end getCBio()');
+	console.log('eclipse :: end getCBioData()');
 	return cBioResults; 
 }
 
@@ -87,7 +87,7 @@ function getProfileData() {
 		$('#queryCriteriaArea').hide('slow');
 		$('#queryResultsArea').show();
 		
-		var getCBioResult = getCBio('cmd=getProfileData' +
+		var getCBioDataResult = getCBioData('cmd=getProfileData' +
 			'&case_set_id=' + $("#case_set_idTextBox").val() +
 			'&genetic_profile_id=' + $("#genetic_profile_idTextBox").val() +
 			'&gene_list=' + $("#gene_listTextBox").val());
@@ -98,7 +98,7 @@ function getProfileData() {
 			$('#queryResult').val('');
 			
 			return false;
-		});
+	 	});
 
 		return false;
 	});
@@ -111,65 +111,26 @@ function getProfileData() {
 //
 function home() {
 	console.log("eclipse :: inside home()");
+
+	
+	
+	
 	$('#queryCriteriaArea').val('');
 	$('#queryResultsArea').val('');
 	
-	$('#queryCriteriaArea').append(
-		'Choose operation: ' +
-		'<select name="selectCBioCommand" id="selectCBioCommand" tabindex="1">\
-			<option value="">-- Select country --</option>\
-			<optgroup label="North America">\
-				<option value="1">USA</option>\
-				<option value="9">Canada</option>\
-			</optgroup>\
-			<optgroup label="Europe">\
-				<option value="2">France</option>\
-				<option value="3">Spain</option>\
-				<option value="6">Bulgaria</option>\
-				<option value="7" disabled="disabled">Greece</option>\
-				<option value="8">Italy</option>\
-			</optgroup>\
-			<optgroup label="Asia" disabled="disabled">\
-				<option value="5">Japan</option>\
-				<option value="11">China</option>\
-			</optgroup>\
-			<option value="4">Brazil</option>\
-			<option value="10">South Africa</option>\
-		</select>'	
-	);
-
-	$(function () {
-		$("#selectCBioCommand").selectbox();
-	});
-
 	// go to Get Profile Data screen
 	var getProfileDataResult = getProfileData();
 		
 	console.log("eclipse :: end home()");
 }
 
-
-// device APIs are available
-//
-function onDeviceReady() {
-    // Now safe to use device APIs
-    console.log('eclipse :: inside onDeviceReady()');
-    home();
-    console.log('eclipse :: end onDeviceReady()');
-    
-}
-
 // Wait for device API libraries to load
 //
 function onLoad(){
-/*    console.log('eclipse :: onLoad');
-
-    console.log('eclipse :: waiting on deviceready...');
-  */  
-  	$('p').css({ 'color': 'blue'});
-    document.addEventListener('deviceready', onDeviceReady(), false);
-    /*console.log('eclipse :: end onLoad');*/
-
+    document.addEventListener('deviceready', function(){
+	    console.log('eclipse :: device is ready');
+    	home();
+    }, false);
 }
 
 
