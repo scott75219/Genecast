@@ -22,6 +22,11 @@
 	<gap:platform name="winphone" />
 
     <preference name="permissions" value="none"/>
+
+	<icon src="resources/icons/android/drawable-ldpi/ic_launcher.png" gap:platform="android" gap:density="ldpi" />
+	<icon src="resources/icons/android/drawable-mdpi/ic_launcher.png" gap:platform="android" gap:density="mdpi" />
+	<icon src="resources/icons/android/drawable-hdpi/ic_launcher.png" gap:platform="android" gap:density="hdpi" />
+	<icon src="resources/icons/android/drawable-xhdpi/ic_launcher.png" gap:platform="android" gap:density="xhdpi" />
     
 	<access origin="http://www.cbioportal.org" />
 	<content src="index.html" />
