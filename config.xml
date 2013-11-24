@@ -19,8 +19,7 @@
     
     
 	<gap:platform name="android" />
-	<gap:platform name="winphone" />
-
+	
     <preference name="permissions" value="none"/>
 
 	<icon src="icons/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
