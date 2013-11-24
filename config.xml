@@ -34,7 +34,7 @@
 	<preference name="Fullscreen" value="true" />
 	<preference name="WebViewBounce" value="true" />
 	
-	<preference name="BackgroundColor" value="0xef0000ff"/>
+	<preference name="BackgroundColor" value="0xEE00FF"/>
 	<preference name="LoadingDialog" value="Loading. Please wait..."/>
 	<preference name="LoadUrlTimeoutValue" value="20000"/>
 </widget>
