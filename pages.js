@@ -42,6 +42,7 @@ function processCBioResults(cBioResults){
 //
 function doCBioQuery(command){
 	console.log("eclipse :: inside doCBioQuey()");
+	
 	var parameters = '';
 	var inputForm;
 	var parameterList;
@@ -88,7 +89,7 @@ function doCBioQuery(command){
 		console.log('eclipse :: paramters: ' + parameters);
 		
 		// Query the cBio database
-		getCBioData(command + parameters);
+		getCBioData('cmd=' + command + parameters);
 		return false;
 	});
 	
