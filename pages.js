@@ -45,7 +45,7 @@ function doCBioQuery(command){
 	
 	var parameters = '';
 	var inputForm;
-	var parameterList;
+	var inputElems = new Array();
 	
 	$('#topNav').show();	
 	$('#queryCriteriaArea').show();
@@ -53,21 +53,59 @@ function doCBioQuery(command){
 
   	// set up input text boxes for each cBio command type
 	switch(command) {
-		case 'getProfileData': inputForm = 
-			'<div class="controls">\
-				<div id="parameterGroup">\
-					<label>Case Set ID: </label><br/>\
-			  		<input type="text" name="case_set_idTextBox" id="case_set_idTextBox" value="" /><br/>\
-					<label>Genetic Profile ID: </label><br/>\
-			  		<input type="text" name="genetic_profile_idTextBox" id="genetic_profile_idTextBox" value="" /><br/>\
-					<label>Gene List (comma separated): </label><br/>\
-			  		<input type="text" name="gene_listTextBox" id="gene_listTextBox" value="" /><br/>\
-		  		</div>\
-	  		</div>';
-	  		parameterList = ['&case_set_id=','&genetic_profile_id=','&gene_list='];
+		case 'getTypesOfCancer':
+			// no parameters
+			break;
+
+  		case 'getCancerStudies':
+  			// no parameters
+  			break;
+  		case 'getGeneticProfiles':
+  			inputElems.push(
+  				{label: 'Cancer Study ID', id: 'cancer_study_id'});	
+  			break;
+		case 'getCaseLists': 
+  			inputElems.push(
+  				{label: 'Cancer Study ID', id: 'cancer_study_id'});	
+  			break;
+		case 'getProfileData': 
+		  	inputElems.push(
+		  		{label: 'Case Set ID', id: 'case_set_id'}, 
+		  		{label: 'Genetic Profile ID', id: 'genetic_profile_id'},
+		  		{label: 'Gene List', id: 'gene_list'});
+	  		break;
+		case 'getMutationData': 
+		  	inputElems.push(
+		  		{label: 'Genetic Profile ID', id: 'genetic_profile_id'},
+		  		{label: 'Case Set ID', id: 'case_set_id'}, 
+		  		{label: 'Gene List', id: 'gene_list'});
+	  		break;
+		case 'getClinicalData': 
+		  	inputElems.push(
+		  		{label: 'Case Set ID', id: 'case_set_id'});
+	  		break;
+		case 'getProteinArrayInfo': 
+		  	inputElems.push(
+		  		{label: 'Cancer Study ID', id: 'cancer_study_id'},
+		  		{label: 'Protein Array Type', id: 'protein_array_type'}, 
+		  		{label: 'Gene List', id: 'gene_list'});
+	  		break;		
+		case 'getProteinArrayData': 
+		  	inputElems.push(
+		  		{label: 'Case Set ID', id: 'case_set_id'}, 
+		  		{label: 'Array Info?', id: 'array_info'});
 	  		break;
 	}
-
+	
+	inputForm = '<div class="controls"><div id="parameterGroup">';
+	$.each(inputElems,function(index, val){
+		inputForm = inputForm +
+			'<label>' + val.label + ': </label>' +
+			'<input type="text" name="' + val.id + '" id="' + val.id + '" value="" /><br/>';
+	});
+	
+	inputForm = inputForm + '</div></div>';
+	
 	$('#queryCriteriaArea').html(
 		'<div class="controls">\
 			<input type="button" value="Submit" id="submitCBioQueryButton">\
@@ -84,9 +122,8 @@ function doCBioQuery(command){
 		
 		
 		$('#parameterGroup input').each(function(index){
-			parameters = parameters + parameterList.shift() + $(this).val();
+			parameters = parameters + '&' + $(this).attr('id') + '=' + $(this).val();
 		});
-		console.log('eclipse :: paramters: ' + parameters);
 		
 		// Query the cBio database
 		getCBioData('cmd=' + command + parameters);
