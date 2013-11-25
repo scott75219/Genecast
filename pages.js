@@ -97,6 +97,7 @@ function doCBioQuery(command){
 	  		break;
 	}
 	
+	
 	inputForm = '<div class="controls"><div id="parameterGroup">';
 	$.each(inputElems,function(index, val){
 		inputForm = inputForm +
