@@ -7,7 +7,8 @@ function home() {
 	console.log("eclipse :: inside home()");
 	
 	$('#topNav').hide();
-	
+	$('.homemenu-buttons').show();
+    $('#cBioCommandSelect').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
 
@@ -18,6 +19,13 @@ function home() {
 		return false;
  	});
  	
+ 	// menu buttons
+ 	$(document).on('click', '#reconnoiter-button', function(e){
+ 		$('.homemenu-buttons').hide();
+        $('#cBioCommandSelect').show();
+        
+    });
+    
 	$('#cBioCommandSelect').change(function(){
 		console.log('eclipse :: cBioCommandSelect selection = ' + $('#cBioCommandSelect option:selected').val());
 		doCBioQuery($('#cBioCommandSelect option:selected').val());
