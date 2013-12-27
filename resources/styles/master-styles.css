@@ -9,4 +9,7 @@
 
 .ui-header .ui-title {
 	font-size: 20px;
+	text-overflow: clip;
+	margin-right: 10%;
+	float: right;
 }
