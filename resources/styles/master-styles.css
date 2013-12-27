@@ -1,4 +1,12 @@
-.ui-page .ui-header{
-	background-color: #FFFFF0;
+.ui-bar-a {
+	background-color: #FFF0C5;
+	background-image: none;
+	border: none;
+	color: #000;
+	text-shadow: 0;
 	height: 50px;
+}
+
+.ui-header .ui-title {
+	font-size: 25px;
 }
