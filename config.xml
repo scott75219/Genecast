@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/2.0"
-        id        = "com.tickTackHack.cBioPortalMobile"
+        id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
         version   = "0.0.1">
 
     <!-- versionCode is optional and Android only -->
 	
-    <name>cBioPortal Mobile</name>
+    <name>HIVE Reconnoiter</name>
 
     <description>
-        Unofficial mobile app for the cBio Portal cancer genome database.
+        Query cancer genome data.
     </description>
 
     <author href="https://j-mal.com" email="github.congos@xoxy.net">
