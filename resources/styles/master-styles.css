@@ -10,5 +10,6 @@
 .ui-header .ui-title {
 	font-size: 20px;
 	text-overflow: clip;
-	margin-top: 5px;
+	margin-left: 10px;
+	margin: 5px;
 }
