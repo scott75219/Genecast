@@ -139,5 +139,3 @@ function doCBioQuery(command){
 	console.log("eclipse :: end doCBioQuey()");
 }
 
-
-
