@@ -7,11 +7,10 @@ function home() {
 	console.log("eclipse :: inside home()");
 	
 	$('#topNav').hide();
-	$('.homemenu-buttons').show();
-    $('#cBioCommandSelect').hide();
+    $('#reconnoiter-screen').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
-
+	$('.homemenu-buttons').show();
 	// UI event listeners
 	$("#goBackButton").click(function() {
 		home();
@@ -22,7 +21,7 @@ function home() {
  	// menu buttons
  	$(document).on('click', '#reconnoiter-button', function(e){
  		$('.homemenu-buttons').hide();
-        $('#cBioCommandSelect').show();
+        $('#reconnoiter-screen').show();
         
     });
     

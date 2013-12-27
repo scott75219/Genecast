@@ -19,37 +19,40 @@
   		<img src="resources/icons/hive_logo.png" width="90" height="35" style="float: left;"/> 
 		<h1>HIVE Tools</h1>
 	</div>
+	<div class="controls homemenu">
+		<img src="resources/images/reconnoiter-button.png" class="homemenu-buttons" id="reconnoiter-button"/>
+	</div>
 	<div class="controls">
 		<div id="topNav">
 			<input type="button" id="goBackButton" value=" < " /><br/>
 		</div>
-	</div>
-	<div class="controls homemenu">
-		<img src="resources/images/reconnoiter-button.png" class="homemenu-buttons" id="reconnoiter-button"/>
-	</div>
-  	<form class="form-vertical">
-  		
-			Choose operation:
-			<select name="cBioCommandSelect" id="cBioCommandSelect" tabindex="1">
-				<option value="">-- Select query --</option>
-				<option value="getTypesOfCancer">All Types of Cancer</option>
-				<option value="getCancerStudies">All Cancer Studies</option>
-				<option value="getGeneticProfiles">All Genetic Profiles for Specific Study</option>
-				<option value="getCaseLists">All Case Lists for Specific Study</option>
-				<option value="getProfileData">Profile Data</option>
-				<option value="getMutationData">Extended Mutation Data</option>
-				<option value="getClinicalData">Clinical Data</option>
-				<option value="getProteinArrayInfo">Protein/Phosphoprotein Antibody Information</option>
-				<option value="getProteinArrayData">RPPA-based Proteomics Data</option>
-			</select>
 
-	  	<div id="queryCriteriaArea"> 
-  		</div>
-	  	<div id="queryResultsArea">
-	  		<div id='queryResult'> </div>
-  		</div>
-  	</form>
-
+  	
+	  	<div id="reconnoiter-screen">
+		  	<form class="form-vertical">
+		  		
+					Choose operation:
+					<select name="cBioCommandSelect" id="cBioCommandSelect" tabindex="1">
+						<option value="">-- Select query --</option>
+						<option value="getTypesOfCancer">All Types of Cancer</option>
+						<option value="getCancerStudies">All Cancer Studies</option>
+						<option value="getGeneticProfiles">All Genetic Profiles for Specific Study</option>
+						<option value="getCaseLists">All Case Lists for Specific Study</option>
+						<option value="getProfileData">Profile Data</option>
+						<option value="getMutationData">Extended Mutation Data</option>
+						<option value="getClinicalData">Clinical Data</option>
+						<option value="getProteinArrayInfo">Protein/Phosphoprotein Antibody Information</option>
+						<option value="getProteinArrayData">RPPA-based Proteomics Data</option>
+					</select>
+		
+			  	<div id="queryCriteriaArea"> 
+		  		</div>
+			  	<div id="queryResultsArea">
+			  		<div id='queryResult'> </div>
+		  		</div>
+		  	</form>
+	  	</div>
+	</div>
   </body>
   	
 </html>
