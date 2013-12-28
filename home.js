@@ -13,7 +13,7 @@ function home() {
 	$('#queryResultsArea').hide();
 	$('#homemenu').show();
 	// UI event listeners
-	$("#goBackButton").click(function() {
+	$("#hivelogo-backbtn").click(function() {
 		home();
 		
 		return false;
