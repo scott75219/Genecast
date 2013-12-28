@@ -175,24 +175,24 @@ function loadMetaData(){
 	//  Adds Meta Data to the Page.
 	//  Tiggered at the end of successful AJAX/JSON request.
 	function addMetaDataToPage() {
-		$("#select_gene_set").append("<option value='" + key + "'>"
-                + "in loadMetaData"" + "</option>");
-		json = window.metaDataJson;
-		jQuery.each(json.gene_sets,function(key,gene_set){
-        $("#select_gene_set").append("<option value='" + key + "'>"
-                + gene_set.name + "</option>");
-        
-    });  //  end for each gene set loop
+		
+
 	} 
     
     function loadContent() {
 	    //  Get Portal JSON Meta Data via JQuery AJAX
+	    $("#select_gene_set").append("<option value='xxx'>loadMetaData</option>");
 	    jQuery.getJSON("http://www.cbioportal.org/public-portal/portal_meta_data.json",function(json){
 	        //  Store JSON Data in global variable for later use
 	        window.metaDataJson = json;
-	
 	        //  Add Meta Data to current page
-	        addMetaDataToPage();
+	        json = window.metaDataJson;
+	        $("#select_gene_set").append("<option value='xxx'>loadMetaData2</option>");
+			jQuery.each(json.gene_sets,function(key,gene_set){
+       		 $("#select_gene_set").append("<option value='" + key + "'>"
+                + gene_set.name + "</option>");
+        
+    		});  //  end for each gene set loop
 	    });
 	}
 	
