@@ -40,10 +40,8 @@ function home() {
  			$('#textarea_gene_set').val();
  			$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + $('#select_genes option:selected').val());
  		});
- 		 		
-        $('#reconnoiter-screen').show();
 
-		// Event handler to add gene to text area when Add button clicked
+		// Event handler to run query when submit button clicked
  		$(document).on('click', '#btn_gene_set_sbt', function(e){
  			event.preventDefault();
  			// do query

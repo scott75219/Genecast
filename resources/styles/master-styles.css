@@ -44,7 +44,7 @@
 	overflow: auto;
 }
 
-button #btn_gene_set_add, #btn_gene_set_rst {
+button #btn_gene_set_add, #btn_gene_set_rst, #btn_gene_set_sbt {
 	float: right;
-	width: 150px;
+	width: 70px;
 }
