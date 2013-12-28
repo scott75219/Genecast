@@ -19,8 +19,8 @@
 }
 
 #homemenu {
-	margin: 0 auto;
-	margin-top: 60px;
-	margin-left: 50px;
+	position: absolute;
+	top: 50%;
+	margin-left: 30%;
 	
 }
