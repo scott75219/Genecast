@@ -40,13 +40,13 @@ function home() {
  			$('#textarea_gene_set').val();
  			$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + $('#select_genes option:selected').val());
  		});
-/*
+
 		// Event handler to run query when submit button clicked
  		$(document).on('click', '#btn_gene_set_sbt', function(e){
 			$('#textarea_gene_set').val('');
  			// do query
  		});
- 		 		*/
+ 		 	
         $('#reconnoiter-screen').show();        
     });
     
