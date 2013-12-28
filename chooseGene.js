@@ -193,7 +193,7 @@ function loadMetaData(){
                 	+ gene_set.name + "</option>");
         		
         		// Add individual genes to a list
-        		gene_array.push(window.metaDataJson.gene_sets[key].gene_list.split(/,|\s+/));
+        		gene_array.push(window.metaDataJson.gene_sets[key].gene_list.split(/,\s+/));
     		});  //  end for each gene set loop
     		$("#select_gene_set").append("/<optgroup>");
     		// Add individual genes to list
