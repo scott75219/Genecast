@@ -175,6 +175,8 @@ function loadMetaData(){
 	//  Adds Meta Data to the Page.
 	//  Tiggered at the end of successful AJAX/JSON request.
 	function addMetaDataToPage() {
+		$("#select_gene_set").append("<option value='" + key + "'>"
+                + "in loadMetaData"" + "</option>");
 		json = window.metaDataJson;
 		jQuery.each(json.gene_sets,function(key,gene_set){
         $("#select_gene_set").append("<option value='" + key + "'>"
