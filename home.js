@@ -24,7 +24,7 @@ function home() {
  		$('#hivelogo-backbtn').attr("src",img_logoback);
  		$('#homemenu').hide();
  		
- 		/* loadMetaData(); */
+ 		loadMetaData();
  		
  		// Event handler to reset input form when Reset button clicked
  		$(document).on('click', '#btn_gene_set_rst', function(e){
