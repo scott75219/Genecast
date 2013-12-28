@@ -10,7 +10,7 @@ function home() {
     $('#reconnoiter-screen').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
-	$('.homemenu-buttons').show();
+	$('#homemenu').show();
 	// UI event listeners
 	$("#goBackButton").click(function() {
 		home();
@@ -20,7 +20,7 @@ function home() {
  	
  	// menu buttons
  	$(document).on('click', '#reconnoiter-button', function(e){
- 		$('.homemenu-buttons').hide();
+ 		$('#homemenu').hide();
         $('#reconnoiter-screen').show();
         
     });
