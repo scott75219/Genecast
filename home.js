@@ -29,8 +29,8 @@ function home() {
  		// Event handler to reset input form when Reset button clicked
  		$(document).on('click', '#btn_gene_set_rst', function(e){
  			event.preventDefault();
- 			$("#select_genes option:first").attr('selected','selected');
- 			$('#select_genes').selectmenu('refresh', true);
+ 			$("#select_gene_set option:first").attr('selected','selected');
+ 			$('#select_gene_set').selectmenu('refresh', true);
  			$('#textarea_gene_set').val('');
  		});
  		
@@ -38,7 +38,7 @@ function home() {
  		$(document).on('click', '#btn_gene_set_add', function(e){
  			event.preventDefault();
  			$('#textarea_gene_set').val();
- 			$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + $('#select_genes option:selected').val());
+ 			$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + $('#select_gene_set option:selected').val());
  		});
 
 		// Event handler to run query when submit button clicked
