@@ -5,8 +5,7 @@
 //
 function home() {
 	console.log("eclipse :: inside home()");
-	
-	$('#topNav').hide();
+	$('#goBackButton').hide()
     $('#reconnoiter-screen').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
@@ -20,6 +19,7 @@ function home() {
  	
  	// menu buttons
  	$(document).on('click', '#reconnoiter-button', function(e){
+ 		$('#goBackButton').show();
  		$('#homemenu').hide();
         $('#reconnoiter-screen').show();
         
