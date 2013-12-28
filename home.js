@@ -43,7 +43,7 @@ function home() {
 
 		// Event handler to run query when submit button clicked
  		$(document).on('click', '#btn_gene_set_sbt', function(e){
- 			event.preventDefault();
+			$('#textarea_gene_set').val('');
  			// do query
  		});
  		 		
