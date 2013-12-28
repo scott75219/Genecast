@@ -139,3 +139,8 @@ function doCBioQuery(command){
 	console.log("eclipse :: end doCBioQuey()");
 }
 
+// Grab valid HUGO gene codes and case studies from CGDS
+function loadMetaData(){
+	
+	return true;
+}

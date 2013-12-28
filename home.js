@@ -23,14 +23,32 @@ function home() {
  	$(document).on('click', '#reconnoiter-button', function(e){
  		$('#hivelogo-backbtn').attr("src",img_logoback);
  		$('#homemenu').hide();
+ 		
+ 		loadMetaData();
+ 		// Event handler to reset input form when Reset button clicked
+ 		$(document).on('click', '#btn_gene_set_rst', function(e){
+ 			event.preventDefault();
+ 			$("#select_genes")[0].selectedIndex = 0;
+ 			$('#textarea_gene_set').val('');
+ 		});
+ 		
+		// Event handler to add gene to text area when Add button clicked
+ 		$(document).on('click', '#btn_gene_set_add', function(e){
+ 			event.preventDefault();
+ 			$('#textarea_gene_set').val();
+ 			$('#textarea_gene_set').val($('#textarea_gene_set').val() + $('#select_genes option:selected').val());
+ 		});
+ 		 		
         $('#reconnoiter-screen').show();
         
     });
     
+    /*
 	$('#cBioCommandSelect').change(function(){
 		console.log('eclipse :: cBioCommandSelect selection = ' + $('#cBioCommandSelect option:selected').val());
 		doCBioQuery($('#cBioCommandSelect option:selected').val());
 	});
+	*/
 		
 	console.log("eclipse :: end home()");
 }
