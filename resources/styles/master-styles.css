@@ -6,6 +6,7 @@
 	background-color: #FFF0C5;
 	background-image: none;
 	border: none;
+	padding-top: 4px;
 	color: #000;
 	text-shadow: 0;
 	height: 42px;
@@ -31,7 +32,7 @@
 }
 
 #hivelogo {
-	float: right;
+	
 }
 
 #goBackButton {
