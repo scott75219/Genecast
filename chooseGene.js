@@ -192,5 +192,7 @@ function loadMetaData(){
 	        addMetaDataToPage();
 	    });
 	}
+	
+	loadContent();
 	return true;
 }
