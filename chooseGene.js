@@ -181,18 +181,28 @@ function loadMetaData(){
     
     function loadContent() {
 	    //  Get Portal JSON Meta Data via JQuery AJAX
-	    $("#select_gene_set").append("<option value='xxx'>loadMetaData</option>");
+	    var gene_array = [];
 	    jQuery.getJSON("http://www.cbioportal.org/public-portal/portal_meta_data.json",function(json){
 	        //  Store JSON Data in global variable for later use
 	        window.metaDataJson = json;
 	        //  Add Meta Data to current page
 	        json = window.metaDataJson;
-	        $("#select_gene_set").append("<option value='xxx'>loadMetaData2</option>");
+	        $("#select_gene_set").append("<optgroup label='Gene Sets'>");
 			jQuery.each(json.gene_sets,function(key,gene_set){
-       		 $("#select_gene_set").append("<option value='" + key + "'>"
-                + gene_set.name + "</option>");
-        
+       			$("#select_gene_set").append("<option value='" + key + "'>"
+                	+ gene_set.name + "</option>");
+        		
+        		// Add individual genes to a list
+        		gene_array.push(window.metaDataJson.gene_sets[key].gene_list.split(/\s+/).sort());
     		});  //  end for each gene set loop
+    		$("#select_gene_set").append("/<optgroup>");
+    		// Add individual genes to list
+    		$("#select_gene_set").append("<optgroup label='Individual Genes'>");
+			jQuery.each(gene_array,function(key,gene_set){
+					$("#select_gene_set").append("<option value='" + key + "'>"
+	                	+ key + "</option>"); 
+			});
+    		$("#select_gene_set").append("/<optgroup>");
 	    });
 	}
 	
