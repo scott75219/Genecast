@@ -181,7 +181,7 @@ function loadMetaData(){
                 + gene_set.name + "</option>");
         
     });  //  end for each gene set loop
-	}
+	} 
     
     function loadContent() {
 	    //  Get Portal JSON Meta Data via JQuery AJAX
