@@ -29,6 +29,7 @@ function home() {
  		$(document).on('click', '#btn_gene_set_rst', function(e){
  			event.preventDefault();
  			$("#select_genes")[0].selectedIndex = 0;
+ 			$("#select_genes option:first").attr('selected','selected');
  			$('#textarea_gene_set').val('');
  		});
  		
