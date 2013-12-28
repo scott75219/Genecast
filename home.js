@@ -5,7 +5,7 @@
 //
 function home() {
 	console.log("eclipse :: inside home()");
-	$('#goBackButton').hide()
+	$('#goBackButton').hide();
     $('#reconnoiter-screen').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
