@@ -1,26 +1,39 @@
 .ui-page {
 	background: #FFFFF0;
 }
+
 .ui-bar-a {
 	background-color: #FFF0C5;
 	background-image: none;
 	border: none;
 	color: #000;
 	text-shadow: 0;
-	height: 40px;
+	height: 42px;
 }
-
 
 .ui-header .ui-title {
 	font-size: 20px;
 	text-overflow: clip;
 	margin-left: 10px;
 	margin: 5px;
+	width: 130px;
 }
 
 #homemenu {
 	position: absolute;
-	top: 50%;
-	margin-left: 30%;
+	top: 40%;
+	margin-left: 20%;
 	
+}
+
+#screen-title {
+	margin-left: 40%;
+}
+
+#hivelogo {
+	float: right;
+}
+
+#goBackButton {
+	float: left;
 }

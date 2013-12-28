@@ -16,19 +16,18 @@
   </head>
   <body onload="onLoad()">
   	<div data-role="header" data-position="fixed">
-  		<img src="resources/icons/hive_logo.png" width="90" height="35" style="float: left;"/> 
-		<h1>HIVE Tools</h1>
+  		
+  		<input type="button" id="goBackButton" value=" << " /> 
+  		<span id="screen-title">HIVE Tools</span>
+  		<img src="resources/icons/hive_logo.png" width="90" height="35" id="hivelogo"/>
 	</div>
+	<br />
 	<div class="controls" id="homemenu">
 		<img src="resources/images/reconnoiter-button.png" class="homemenu-buttons" id="reconnoiter-button"/>
 		<img src="resources/images/pubcast-button.png" class="homemenu-buttons" id="pubcast-button"/>
 
 	</div>
 	<div class="controls">
-		<div id="topNav">
-			<input type="button" id="goBackButton" value=" < " /><br/>
-		</div>
-
   	
 	  	<div id="reconnoiter-screen">
 		  	<form class="form-vertical">
