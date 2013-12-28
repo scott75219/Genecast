@@ -5,7 +5,9 @@
 //
 function home() {
 	console.log("eclipse :: inside home()");
-	$('#goBackButton').hide();
+	var img_logoonly = "resources/icons/hive_logo.png";
+	var img_logoback = "resources/icons/hive_logo-backbutton.png";
+	$('#hivelogo-backbtn').attr("src",img_logoonly);
     $('#reconnoiter-screen').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
@@ -19,7 +21,7 @@ function home() {
  	
  	// menu buttons
  	$(document).on('click', '#reconnoiter-button', function(e){
- 		$('#goBackButton').show();
+ 		$('#hivelogo-backbtn').attr("src",img_logoback);
  		$('#homemenu').hide();
         $('#reconnoiter-screen').show();
         
