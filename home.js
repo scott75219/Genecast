@@ -38,11 +38,18 @@ function home() {
  		$(document).on('click', '#btn_gene_set_add', function(e){
  			event.preventDefault();
  			$('#textarea_gene_set').val();
- 			$('#textarea_gene_set').val($('#textarea_gene_set').val() + $('#select_genes option:selected').val());
+ 			$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + $('#select_genes option:selected').val());
  		});
  		 		
         $('#reconnoiter-screen').show();
-        
+
+		// Event handler to add gene to text area when Add button clicked
+ 		$(document).on('click', '#btn_gene_set_sbt', function(e){
+ 			event.preventDefault();
+ 			// do query
+ 		});
+ 		 		
+        $('#reconnoiter-screen').show();        
     });
     
     /*

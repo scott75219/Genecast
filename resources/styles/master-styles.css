@@ -39,3 +39,11 @@
 	float: left;
 	maring-left: 5px;
 }
+
+#textarea_gene_set {
+	overflow: auto;
+}
+
+button #btn_gene_set_add, #btn_gene_set_rst {
+	width: 150px;
+}
