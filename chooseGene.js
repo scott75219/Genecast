@@ -179,6 +179,7 @@ function loadMetaData(){
 		jQuery.each(json.gene_sets,function(key,gene_set){
         $("#select_gene_set").append("<option value='" + key + "'>"
                 + gene_set.name + "</option>");
+        
     });  //  end for each gene set loop
 	}
     
