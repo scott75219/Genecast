@@ -198,9 +198,9 @@ function loadMetaData(){
     		$("#select_gene_set").append("/<optgroup>");
     		// Add individual genes to list
     		$("#select_gene_set").append("<optgroup label='Individual Genes'>");
-			jQuery.each(gene_array,function(key,gene_set){
-					$("#select_gene_set").append("<option value='" + key + "'>"
-	                	+ key + "</option>"); 
+			jQuery.each(gene_array,function(index,val){
+					$("#select_gene_set").append("<option value='" + val + "'>"
+	                	+ val + "</option>"); 
 			});
     		$("#select_gene_set").append("/<optgroup>");
 	    });
