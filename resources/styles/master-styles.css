@@ -40,3 +40,11 @@
 	maring-left: 5px;
 }
 
+#textarea_gene_set {
+	overflow: auto;
+}
+
+button #btn_gene_set_add, #btn_gene_set_rst, #btn_gene_set_sbt {
+	float: right;
+	width: 40px;
+}
