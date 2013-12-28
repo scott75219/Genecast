@@ -5,7 +5,7 @@
 //
 function home() {
 	console.log("eclipse :: inside home()");
-	$('#goBackButton').attr("disabled",true);
+	$('#goBackButton').hide();
     $('#reconnoiter-screen').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
