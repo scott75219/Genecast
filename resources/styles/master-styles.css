@@ -45,5 +45,6 @@
 }
 
 button #btn_gene_set_add, #btn_gene_set_rst {
+	float: right;
 	width: 150px;
 }
