@@ -12,6 +12,8 @@ function home() {
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
 	$('#homemenu').show();
+	$("#select_gene_set option:first").attr('selected','selected');
+	
 	// UI event listeners
 	$("#hivelogo-backbtn").click(function() {
 		home();
