@@ -37,11 +37,12 @@
 				<select name="select_gene_set" id="select_gene_set" tabindex="1">
 					<option>Select Gene or Gene Set</option>
 				</select>
-				
-				<textarea name="textarea_gene_set" id="textarea_gene_set" readonly="true"> </textarea>	
-				<!--<button type="button" id="btn_gene_set_add" >Add</button>--> 
-  				<a data-role="button" class="reconnoiter-screen-btn" id="btn_gene_set_rst">Reset</a>
-  				<a data-role="button" class="reconnoiter-screen-btn" id="btn_gene_set_sbt">Submit</a>
+				<span>
+					<textarea name="textarea_gene_set" id="textarea_gene_set" readonly="true"> </textarea>	
+					<!--<button type="button" id="btn_gene_set_add" >Add</button>--> 
+	  				<a data-role="button" class="reconnoiter-screen-btn" id="btn_gene_set_rst">Reset</a>
+	  				<a data-role="button" class="reconnoiter-screen-btn" id="btn_gene_set_sbt">Submit</a>
+  				</span>
   			</form>
 
   			
@@ -67,7 +68,7 @@
 
 		  	</form>-->
 		  	
-		  	<div id="resultsArea">
+		  	<div id="resultsArea" style="clear: both;">
 		  		<div id="crosscancer-container"> </div>
 		  	<script type="text/template" id="cross-cancer-main-tmpl">
     <div id="tabs">
