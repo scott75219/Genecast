@@ -25,7 +25,7 @@
  * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
  */
 
-(function($, _, Backbone, d3) {
+//(function($, _, Backbone, d3) {
 
 	// TODO 3d Visualizer should be initialized before document get ready
 	// ...due to incompatible Jmol initialization behavior
@@ -34,7 +34,7 @@
 	//_mut3dVis.init();
 
 	// Prepare eveything only if the page is ready to load
-    $(function(){
+//    $(function(){
         // Some semi-global utilities
         // Here are some options that we will use in this view
         var width = 600;
@@ -1077,7 +1077,7 @@
 
         new AppRouter();
         Backbone.history.start();
-    });
+//    });
 
-})(window.jQuery, window._, window.Backbone, window.d3);
+//})(window.jQuery, window._, window.Backbone, window.d3);
 
