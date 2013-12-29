@@ -40,7 +40,9 @@ function home() {
  		$(document).on('click', '#btn_gene_set_add', function(e){
  			event.preventDefault();
  			$('#textarea_gene_set').val();
- 			$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + window.metaDataJson.gene_sets[$('#select_gene_set option:selected').val()].gene_list);
+ 			//$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + window.metaDataJson.gene_sets[$('#select_gene_set option:selected').val()].gene_list);
+			$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + $('#select_gene_set option:selected').val());
+
  		});
 
 		// Event handler to run query when submit button clicked
