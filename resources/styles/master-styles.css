@@ -19,6 +19,10 @@
 	width: 130px;
 }
 
+.reconnoiter-screen-btn {
+	width: 200px !important;
+}
+
 #homemenu {
 	position: absolute;
 	top: 40%;
