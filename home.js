@@ -67,6 +67,8 @@ function home() {
 		  			processCBioResults(textStatus + ' ' + errorThrown);
 		  		}
 			});
+			
+			crosscancer();
  		});
  		 	
         $('#reconnoiter-screen').show();        

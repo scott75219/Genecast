@@ -35,6 +35,7 @@
 
 	// Prepare eveything only if the page is ready to load
 //    $(function(){
+	function crosscancer() {
         // Some semi-global utilities
         // Here are some options that we will use in this view
         var width = 600;
@@ -1077,6 +1078,7 @@
 
         new AppRouter();
         Backbone.history.start();
+  }
 //    });
 
 //})(window.jQuery, window._, window.Backbone, window.d3);
