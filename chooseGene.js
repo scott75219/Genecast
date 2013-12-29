@@ -195,7 +195,7 @@ function loadMetaData(){
 	        		// Add individual genes to a list
 	        		var temp = gene_set.gene_list.split(/\s+/);
 	        		jQuery.each(temp, function(i,e) { 
-	        			if (jQuery.inArray(e, gene_array) == -1) gene_array.push(gene_array);
+	        			if (jQuery.inArray(e, gene_array) == -1) gene_array.push(e);
         			});
     		});  //  end for each gene set loop
     		$("#select_gene_set").append("/<optgroup>");
