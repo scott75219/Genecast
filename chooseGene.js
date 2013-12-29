@@ -189,7 +189,7 @@ function loadMetaData(){
 	        json = window.metaDataJson;
 	        $("#select_gene_set").append("<optgroup label='Gene Sets'>");
 			jQuery.each(json.gene_sets,function(key,gene_set){
-	       			$("#select_gene_set").append("<option value='" + key + "'>"
+	       			$("#select_gene_set").append("<option value='" + gene_set.gene_list.replace(",","") + "'>"
 	                	+ gene_set.name + "</option>");
 	        		
 	        		// Add individual genes to a list
