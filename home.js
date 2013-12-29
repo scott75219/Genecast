@@ -11,8 +11,10 @@ function home() {
     $('#reconnoiter-screen').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
-	$('#homemenu').show();
+	$('#textarea_gene_set').val('');
 	$("#select_gene_set option:first").attr('selected','selected');
+	$('#homemenu').show();
+	
 	
 	// UI event listeners
 	$("#hivelogo-backbtn").click(function() {
@@ -37,9 +39,9 @@ function home() {
  		});
  		
 		// Event handler to add gene to text area when Add button clicked
- 		$(document).on('click', '#btn_gene_set_add', function(e){
+ 		$(document).on('change', '#select_gene_set', function(e){
  			event.preventDefault();
- 			$('#textarea_gene_set').val();
+ 			//$('#textarea_gene_set').val();
  			//$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + window.metaDataJson.gene_sets[$('#select_gene_set option:selected').val()].gene_list);
 			$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + $('#select_gene_set option:selected').val());
 
