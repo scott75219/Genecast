@@ -189,13 +189,13 @@ function loadMetaData(){
 	        json = window.metaDataJson;
 	        $("#select_gene_set").append("<optgroup label='Gene Sets'>");
 			jQuery.each(json.gene_sets,function(key,gene_set){
-				if(key != "user-defined-list") {
+				//if(key != "user-defined-list") {
 	       			$("#select_gene_set").append("<option value='" + key + "'>"
 	                	+ gene_set.name + "</option>");
 	        		
 	        		// Add individual genes to a list
 	        		gene_array.push(window.metaDataJson.gene_sets[key].gene_list.split(/\s+/));
-        		}
+        		//}
     		});  //  end for each gene set loop
     		$("#select_gene_set").append("/<optgroup>");
     		// Add individual genes to list
