@@ -52,7 +52,7 @@ function home() {
 			$('#textarea_gene_set').val('');
  			// do query
  			var apiURL = 'http://www.cbioportal.org/public-portal/crosscancerquery.json?';
- 			var parameters = "gene_list=" + $('#select_gene_set option:selected').val().split(/[ ,]+/).filter(function(v){return v!=='';}).join(',')
+ 			var parameters = "gene_list=" + $('#textarea_gene_set').val().split(/[ ,]+/).filter(function(v){return v!=='';}).join(',')
  				+ "&data_priority=1";
  			$.ajax( {
 				type:'get', //Could be 'get' depending on your needs
