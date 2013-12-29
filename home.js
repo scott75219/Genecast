@@ -51,6 +51,21 @@ function home() {
  		$(document).on('click', '#btn_gene_set_sbt', function(e){
 			$('#textarea_gene_set').val('');
  			// do query
+ 			var apiURL = 'http://www.cbioportal.org/public-portal/crosscancerquery.json?';
+ 			var parameters = "gene_list=" + $('#select_gene_set option:selected').val().split(/[ ,]+/).filter(function(v){return v!=='';}).join(',')
+ 				+ "&data_priority=1";
+ 			$.ajax( {
+				type:'get', //Could be 'get' depending on your needs
+		 		url: apiURL + parameters,
+		  		dataType: 'json',
+		  		success:function(data) {
+					$('#resultsArea').text(data);
+		  		},
+		  		error: function(jqXHR, textStatus, errorThrown) {
+		  			console.log('eclipse :: ajax error');
+		  			processCBioResults(textStatus + ' ' + errorThrown);
+		  		}
+			});
  		});
  		 	
         $('#reconnoiter-screen').show();        

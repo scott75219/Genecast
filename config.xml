@@ -3,18 +3,18 @@
         xmlns:gap = "http://phonegap.com/ns/2.0"
         id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
-        version   = "0.0.2">
+        version   = "0.0.3">
 
     <!-- versionCode is optional and Android only -->
 	
     <name>HIVE Reconnoiter</name>
 
     <description>
-        Query cancer genome data.
+        Query Cancer Genomic Data Server (CGDS).
     </description>
 
     <author href="https://j-mal.com" email="github.congos@xoxy.net">
-        Jamal Theodore
+        Jamal Theodore (GWU)
     </author>
     
     
