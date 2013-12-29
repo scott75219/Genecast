@@ -19,8 +19,14 @@
 	width: 130px;
 }
 
-.reconnoiter-screen-btn {
+#textarea_gene_set {
 	width: 200px !important;
+	height: 300px !important;
+	float: left !important;
+}
+.reconnoiter-screen-btn {
+	float: right !important;
+	width: 100px !important;
 }
 
 #homemenu {
