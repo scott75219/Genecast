@@ -59,7 +59,7 @@ function home() {
 		 		url: apiURL + parameters,
 		  		dataType: 'text',
 		  		success:function(data) {
-					$('#resultsArea').text(data);
+					$('#resultsArea').html("<h3>Cross-cancer Alteration Summary for " + gene_list.split(/[ ,]+/).join(', ') + "</h3><br />" + data);
 		  		},
 		  		error: function(jqXHR, textStatus, errorThrown) {
 		  			console.log('eclipse :: ajax error');
