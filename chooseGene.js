@@ -173,7 +173,7 @@ function doCBioQuery(command){
  */
 function loadMetaData(){
 	//  Adds Meta Data to the Page.
-	//  Tiggered at the end of successful AJAX/JSON request.
+	//  Triggered at the end of successful AJAX/JSON request.
 	function addMetaDataToPage() {
 		
 
@@ -194,7 +194,7 @@ function loadMetaData(){
 	                	+ gene_set.name + "</option>");
 	        		
 	        		// Add individual genes to a list
-	        		gene_array.push(window.metaDataJson.gene_sets[key].gene_list.split(/\s+/));
+	        		gene_array.push(gene_set.gene_list.split(/\s+/));
         		//}
     		});  //  end for each gene set loop
     		$("#select_gene_set").append("/<optgroup>");
