@@ -134,7 +134,7 @@
                     success: function() {
                         window.studies = studies;
 
-                        $.getJSON("portal_meta_data.json", function(metaData) {
+                        $.getJSON("http://www.cbioportal.org/public-portal/portal_meta_data.json", function(metaData) {
                             var histDataOrg = studies.toJSON();
                             (new HideStudyControlView({
                                 model: {
@@ -1039,7 +1039,7 @@
 
         var Studies = Backbone.Collection.extend({
             model: Study,
-            url: "crosscancerquery.json",
+            url: "http://www.cbioportal.org/public-portal/crosscancerquery.json",
             defaults: {
                 gene_list: "",
                 data_priority: 0
