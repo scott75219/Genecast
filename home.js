@@ -50,14 +50,14 @@ function home() {
 		// Event handler to run query when submit button clicked
  		$(document).on('click', '#btn_gene_set_sbt', function(e){
  			var gene_list = $('#textarea_gene_set').val().split(/[ ,]+/).filter(function(v){return v!=='';}).join(',');
-			$('#textarea_gene_set').val(gene_list);
+			$('#resultsArea').text('');
  			// do query
  			var apiURL = 'http://www.cbioportal.org/public-portal/crosscancerquery.json?';
  			var parameters = "gene_list=" + gene_list + "&data_priority=1";
  			$.ajax( {
 				type:'get', //Could be 'get' depending on your needs
 		 		url: apiURL + parameters,
-		  		dataType: 'json',
+		  		dataType: 'text',
 		  		success:function(data) {
 					$('#resultsArea').text(data);
 		  		},
