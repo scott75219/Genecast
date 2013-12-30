@@ -49,11 +49,11 @@ function crosscancer(input) {
         	this.genes = genes;
         }
         */
-        var width = 600;
+        var width = 650;
         var height = 300;
-        var paddingLeft = 5;
+        var paddingLeft = 60;
         var paddingRight = 5;
-        var paddingTop = 60;
+        var paddingTop = 90;
         var histBottom = 200;
         var fontFamily = "sans-serif";
         var animationDuration = 800;
@@ -182,19 +182,26 @@ console.log("eclipse :: right before render_");
 	    jQuery.getJSON(url,function(json){
 	    	console.log('eclipse :: got the json');
 	        //  Store JSON Data in global variable for later use
-	        window.metaDataJson = json;
+	        //window.crossCancerDataJson = json;
 	        //console.log('eclipse :: json: ' + JSON.stringify(json));
 	        
 	        
-	        $.each(json, function(k,v) { console.log('eclipse :: json output: ' + k + ' ' + v);});
+	       // $.each(json, function(k,v) { console.log('eclipse :: json output: ' + k + ' ' + v);});
 	        //  Add Meta Data to current page
 	       // addMetaDataToPage();
 
 // HISTORGRAM
-
+						$('#cctitlecontainer').html(input.title);
 						window.studies = json;
 
                        var metaData = window.metaDataJson; 
+                       
+                       var metaData2 = new Object();
+                       $.each(window.metaDataJson, function(k, e) { 
+                       		$.each(e, function(key, element) {
+                       			console.log("eclipse :: metaData: " + k + ' ' + e + ' ' + key + ' ' + element);
+                       		//metaData2[]
+                       	});		});
                             var histDataOrg = window.studies;
 
                             var histData = filterAndSortData(histDataOrg);
@@ -339,7 +346,7 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                 .style("stroke-width", "1")
                                 .attr("class", function(d, i) { return d.studyId + " alt-cnaup"; })
                             ;
-
+/*
                             var infoBarGroup = histogram.append("g");
                             infoBarGroup.selectAll("rect")
                                 .data(histData, key)
@@ -385,7 +392,7 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                     });
                                 });
 
-
+*/
                             var annotations = histogram.append("g");
                             annotations.selectAll("text")
                                 .data(["Cancer type", "Mutation data", "CNA data"])
@@ -414,13 +421,13 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                 .attr("r", circleTTR)
                                 .attr("class", function(d, i) { return d.studyId + " annotation-type"; })
                                 .style("stroke", "lightgray")
-                                .style("stroke-width", "1")
+                                .style("stroke-width", "1")/*
                                 .each(function(d, i) {
                                     var qOpts = _.extend(defaultQTipOptions, {
                                         content: metaData.type_of_cancers[metaData.cancer_studies[d.studyId].type_of_cancer]
                                     });
                                     $(this).qtip(qOpts);
-                                });
+                                })*/;
 
                             var mutGroups = histogram.append("g");
                             // This is for mutation data availability
@@ -437,14 +444,14 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                 .attr("font-weight", "bold")
                                 .attr("font-size", "10px")
                                 .attr("class", function(d, i) { return d.studyId + " annotation-mut"; })
-                                .each(function(d, i) {
+                                /*.each(function(d, i) {
                                     var qOpts = _.extend(defaultQTipOptions, {
                                         content: metaData.cancer_studies[d.studyId].has_mutation_data
                                             ? "Mutation data available"
                                             : "Mutation data not available"
                                     });
                                     $(this).qtip(qOpts);
-                                });
+                                })*/;
 
 
                             // This is for CNA data availability
@@ -462,14 +469,14 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                 .attr("font-weight", "bold")
                                 .attr("font-size", "10px")
                                 .attr("class", function(d, i) { return d.studyId + " annotation-cna"; })
-                                .each(function(d) {
+                                /*.each(function(d) {
                                     var qOpts = _.extend(defaultQTipOptions, {
                                         content: metaData.cancer_studies[d.studyId].has_cna_data
                                             ? "CNA data available"
                                             : "CNA data not available"
                                     });
                                     $(this).qtip(qOpts);
-                                });
+                                })*/;
 
 
                             var abbrGroups = histogram.append("g");
@@ -491,13 +498,12 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                     return "rotate(-60, " + xLoc + ", " + yLoc +  ")";
                                 })
                                 .attr("class", function(d, i) { return d.studyId + " annotation-abbr"; })
-                                .each(function(d, i) {
+                                /*.each(function(d, i) {
                                     var qOpts = _.extend(defaultQTipOptions, {
                                         content: metaData.cancer_studies[d.studyId].name
                                     });
                                     $(this).qtip(qOpts);
-                                })
-                            ;
+                                })*/ ;
 
                             var yAxisEl = histogram.append("g")
                                 .attr("class", "axis")
@@ -589,14 +595,14 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                             var numOfGenes = genes.length;
                             var numOfStudies = histData.length;
 
-                            (new CCTitleView({
+                           /* (new CCTitleView({
                                model: {
                                    numOfStudies: numOfStudies,
                                    numOfGenes: numOfGenes,
                                    genes: genes.join(', ')
                                }
                             })).render();
-
+							*/
                             var redrawHistogram = function() {
                                 histData = filterAndSortData(histDataOrg);
 
