@@ -25,8 +25,7 @@
  * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
  */
 
-//(function($, _, Backbone, d3) {
-
+function crosscancer(input) {
 	// TODO 3d Visualizer should be initialized before document get ready
 	// ...due to incompatible Jmol initialization behavior
 	var _mut3dVis = null;
@@ -34,15 +33,27 @@
 	//_mut3dVis.init();
 
 	// Prepare eveything only if the page is ready to load
-//    $(function(){
-	function crosscancer() {
+
+		console.log('eclipse :: in crosscancer()');
         // Some semi-global utilities
         // Here are some options that we will use in this view
+        /*
+        function Study (studyId, typeOfCancer, mutationProfile, cnaProfile, caseSetId, caseSetLength, alterations, genes ) {
+        	this.studyId = studyId;
+        	this.typeOfCancer = typeOfCancer;
+        	this.mutationProfile = mutationProfile;
+        	this.cnaProfile = cnaProfile;
+        	this.caseSetId = caseSetId;
+        	this.caseSetLength = caseSetLength;
+        	this.alterations = alterations;
+        	this.genes = genes;
+        }
+        */
         var width = 600;
         var height = 300;
         var paddingLeft = 5;
         var paddingRight = 5;
-        var paddingTop = 10;
+        var paddingTop = 60;
         var histBottom = 200;
         var fontFamily = "sans-serif";
         var animationDuration = 800;
@@ -82,21 +93,22 @@
         var filterAndSortData = function(histDataOrg) {
             var histData = [];
             _.each(histDataOrg, function(study) {
-                var showStudy = $("#histogram-remove-study-" + study.studyId).is(":checked");
-                if(!study.skipped && showStudy)
+        //        var showStudy = $("#histogram-remove-study-" + study.studyId).is(":checked");
+              //  if(!study.skipped && showStudy)
+              
                     histData.push(study);
             });
 
-            switch($("#histogram-sort-by").val()) {
-                case "alteration":
+          //  switch($("#histogram-sort-by").val()) {
+         //       case "alteration":
                     // Sort by total number of frequency
                     histData.sort(function(a, b) {
                          return calculateFrequency(b, 0, "all") - calculateFrequency(a, 1, "all");
                     });
-                    break;
-                case "name":
-                    break; // keep the order
-            }
+          //          break;
+         //       case "name":
+           //         break; // keep the order
+         //   }
 
             return histData;
         };
@@ -106,51 +118,88 @@
             return Math.round( number * multiplier ) / multiplier;
         };
 
+
+        /* Models */
+        var Study = Backbone.Model.extend({
+            defaults: {
+                studyId: "",
+                caseSetId: "",
+                genes: "",
+                skipped: false,
+                alterations: {
+                    mutation: 0,
+                    cnaUp: 0,
+                    cnaDown: 0,
+                    other: 0,
+                    all: 0
+                }
+            }
+        });
+
+        var Studies = Backbone.Collection.extend({
+            model: Study,
+            url: "http://www.cbioportal.org/public-portal/crosscancerquery.json",
+            defaults: {
+                gene_list: "",
+                data_priority: 0
+            },
+
+            initialize: function(options) {
+                options = _.extend(this.defaults, options);
+                this.url += "?gene_list=" + options.gene_list + "&data_priority=" + options.data_priority;
+
+                return this;
+            }
+        });
+        
         /* Views */
-        var MainView = Backbone.View.extend({
-            el: "#crosscancer-container",
-            template: _.template($("#cross-cancer-main-tmpl").html()),
 
-            render: function() {
-                this.$el.html(this.template(this.model));
 
-                $("#tabs").tabs({ active: this.model.tab == "mutation" ? 1 : 0 }).show();
-
-                var priority = this.model.priority;
+console.log("eclipse :: right before render_");
+                var priority = 1;
                 if(priority == 2) {
                     $("#cc-mutations-link").parent().hide();
                 } else {
                     $("#cc-mutations-link").parent().show();
                 }
 
-                var genes = this.model.genes;
-                var orgQuery = this.model.genes;
+                var genes = "BRCA1,BRCA2";
+                var orgQuery = "BRCA1,BRCA2";
 
-                var studies = new Studies({
-                    gene_list: genes,
-                    data_priority: priority
-                });
 
-                studies.fetch({
-                    success: function() {
-                        window.studies = studies;
 
-                        $.getJSON("http://www.cbioportal.org/public-portal/portal_meta_data.json", function(metaData) {
-                            var histDataOrg = studies.toJSON();
-                            (new HideStudyControlView({
-                                model: {
-                                    metaData: metaData,
-                                    studies: histDataOrg
-                                }
-                            })).render();
+//console.log("eclipse :: after study constr " + genes + " " + studies.gene_list);
+
+
+
+    function loadMutationData(input) {
+    	console.log('eclipse :: in loadMutationData()');
+	    //  Get Portal JSON Meta Data via JQuery AJAX
+	    var url = "http://www.cbioportal.org/public-portal/crosscancerquery.json";
+	    url += "?gene_list=" + input.g + "&data_priority=" + input.d;
+	    console.log('eclipse :: fetching ' + url);
+	    // reads in JSON as json[].{studyId, typeOfCancer, mutationProfile,...}
+	    jQuery.getJSON(url,function(json){
+	    	console.log('eclipse :: got the json');
+	        //  Store JSON Data in global variable for later use
+	        window.metaDataJson = json;
+	        //console.log('eclipse :: json: ' + JSON.stringify(json));
+	        
+	        
+	        $.each(json, function(k,v) { console.log('eclipse :: json output: ' + k + ' ' + v);});
+	        //  Add Meta Data to current page
+	       // addMetaDataToPage();
+
+// HISTORGRAM
+
+						window.studies = json;
+
+                       var metaData = window.metaDataJson; 
+                            var histDataOrg = window.studies;
+
                             var histData = filterAndSortData(histDataOrg);
 
-                            (new DownloadSummaryView({
-                                model: {
-                                    metaData: metaData,
-                                    studies: histData
-                                }
-                            })).render();
+							
 
                             var hiddenStudies = _.reduce(histDataOrg, function(seed, study) {
                                 if(study.skipped) {
@@ -158,15 +207,7 @@
                                 }
                                 return seed;
                             }, []);
-
-                            (new StudiesWithNoDataView({
-                                model: {
-                                    hiddenStudies: hiddenStudies,
-                                    metaData: metaData,
-                                    priority: priority
-                                }
-                            })).render();
-
+console.log('eclipse :: histData.length: ' + + histData.length);
                             var studyLocIncrements = (width - (paddingLeft + paddingRight)) / histData.length;
                             var studyWidth = studyLocIncrements * .75;
                             var verticalCirclePadding = 20;
@@ -176,10 +217,12 @@
                             var circleTTR = Math.min(studyWidth, 20) / 2;
 
                             var color = function(cType) {
+                            	console.log('eclipse :: metaData.cancer_colors[cType]: ' + metaData.cancer_colors[cType]);
                                 return metaData.cancer_colors[cType];
                             };
 
                             var key = function(d) {
+                            	console.log('eclipse :: d.studyId: ' + d.studyId);
                                 return d.studyId;
                             };
 
@@ -841,245 +884,14 @@
 			                            "cancer study": "visible"
 		                            }
 	                            }
-                            };
+                            };  //END HISTOGRAM
 
-                            var el = "#mutation_details";
-                            $(el).html("");
 
-                            var defaultView = MutationViewsUtil.initMutationDetailsView(
-	                            el, // target div
-	                            {el: el, model: model, mut3dVis: _mut3dVis}, // view options
-	                            "#tabs", // main tabs (containing the mutations tab)
-	                            "Mutations"); // name of the mutations tab
-                            // end of mutation details
+	    });
+	}
+	console.log('eclipse :: start loadMutationData()');
+	loadMutationData(input);
 
-                        });
-                    }
-                }); // Done with the histogram
+}
 
-                $("#customize-controls .close-customize a").click(function(e) {
-                    e.preventDefault();
-                    $("#customize-controls").slideToggle();
-                });
-
-                return this;
-            }
-        });
-
-        var DownloadSummaryView = Backbone.View.extend({
-            el: "#cc-download-text",
-
-            render: function() {
-                var studies = this.model.studies;
-                var metaData = this.model.metaData;
-
-                var dtxt = "STUDY_ABBREVIATION\tSTUDY_NAME\tNUM_OF_CASES_ALTERED\tPERCENT_CASES_ALTERED\n";
-                _.each(studies, function(aStudy) {
-                    dtxt += getStudyAbbr(aStudy, metaData)
-                        + "\t" + metaData.cancer_studies[aStudy.studyId].name
-                        + "\t" + aStudy.alterations.all
-                        + "\t" + fixFloat(calculateFrequency(aStudy, 0, "all")*100, 1) + "%\n";
-                });
-                this.$el.text(dtxt);
-
-                return this;
-            }
-        });
-
-        var HideStudyControlView = Backbone.View.extend({
-            el: "#cancerbycancer-controls",
-            template: _.template($("#cc-remove-study-tmpl").html()),
-            render: function() {
-
-                var thatModel = this.model;
-                var thatTmpl = this.template;
-                var thatEl = this.$el;
-
-                _.each(thatModel.studies, function(aStudy) {
-                    if(aStudy.skipped) { return; }
-
-                    thatEl.append(
-                        thatTmpl({
-                            studyId: aStudy.studyId,
-                            name: thatModel.metaData.cancer_studies[aStudy.studyId].name,
-                            checked: true,
-                            altered: aStudy.alterations.all > 0
-                        })
-                    );
-                });
-
-                $("#show-hide-studies-toggle").click(function() {
-                    $("#show-hide-studies .triangle").toggle();
-                    $("#cancerbycancer-controls").slideToggle();
-                });
-
-                return this;
-            }
-        });
-
-        var StudyToolTipView = Backbone.View.extend({
-            template: _.template($("#study-tip-tmpl").html()),
-            render: function() {
-                var study = this.model.study;
-                var metaData = this.model.metaData;
-                var genes = this.model.genes;
-
-                var summary = {
-                    name: metaData.cancer_studies[study.studyId].name,
-                    caseSetLength: study.caseSetLength,
-                    // frequencies
-                    allFrequency: fixFloat(calculateFrequency(study, 0, "all") * 100, 1),
-                    mutationFrequency: fixFloat(calculateFrequency(study, 0, "mutation")  * 100, 1),
-                    deletionFrequency: fixFloat(calculateFrequency(study, 0, "cnaDown") * 100, 1),
-                    amplificationFrequency: fixFloat(calculateFrequency(study, 0, "cnaUp") * 100, 1),
-                    multipleFrequency: fixFloat(calculateFrequency(study, 0, "other") * 100, 1),
-                    // raw counts
-                    allCount: study.alterations.all,
-                    mutationCount: study.alterations.mutation,
-                    deletionCount: study.alterations.cnaDown,
-                    amplificationCount: study.alterations.cnaUp,
-                    multipleCount: study.alterations.other,
-                    // and create the link
-                    studyLink: _.template($("#study-link-tmpl").html(), { study: study, genes: genes } )
-                };
-
-                this.$el.html(this.template(summary));
-                this.$el.find("table.cc-tip-table tr.cc-hide").remove();
-                this.$el.find("table.cc-tip-table").dataTable({
-                    "sDom": 't',
-                    "bJQueryUI": true,
-                    "bDestroy": true,
-                    "aaSorting": [[ 1, "desc" ]],
-                    "aoColumns": [
-                        { "bSortable": false },
-                        { "bSortable": false }
-                    ]
-                });
-
-                return this;
-            }
-        });
-
-        var StudiesWithNoDataView = Backbone.View.extend({
-            el: "#studies-with-no-data",
-            template:_.template($("#studies-with-no-data-tmpl").html()),
-
-            render: function() {
-                if(this.model.priority == 0) { return; } // no need
-
-                var thatModel = this.model;
-
-                if(thatModel.hiddenStudies.length > 0) {
-                    this.$el.html(this.template(thatModel));
-                    var ulEl = this.$el.find("#not-shown-studies");
-                    _.each(thatModel.hiddenStudies, function(hiddenStudy) {
-                        ulEl.append(
-                            _.template($("#studies-with-no-data-item-tmpl").html(),
-                            thatModel.metaData.cancer_studies[hiddenStudy.studyId])
-                        );
-                    });
-                }
-                return this;
-            }
-        });
-
-        var EmptyView = Backbone.View.extend({
-            el: "#crosscancer-container",
-            template: _.template($("#cross-cancer-main-empty-tmpl").html()),
-
-            render: function() {
-                this.$el.html(this.template(this.model));
-                return this;
-            }
-        });
-
-        var CCTitleView = Backbone.View.extend({
-            el: "#cctitlecontainer",
-            template: _.template($("#crosscancer-title-tmpl").html()),
-
-            render: function() {
-                this.$el.html(this.template(this.model));
-
-                // Let's bind button events
-                $("#histogram-download-pdf").click(function() {
-                    var formElement = $("form.svg-to-pdf-form");
-                    formElement.find("input[name=svgelement]").val($("#cchistogram").html());
-                    formElement.submit();
-                });
-
-                $("#histogram-download-svg").click(function() {
-                    var formElement = $("form.svg-to-file-form");
-                    formElement.find("input[name=svgelement]").val($("#cchistogram").html());
-                    formElement.submit();
-                });
-
-                $("#histogram-customize").click(function() {
-                    $("#customize-controls").slideToggle();
-                });
-
-                return this;
-            }
-        });
-
-        /* Models */
-        var Study = Backbone.Model.extend({
-            defaults: {
-                studyId: "",
-                caseSetId: "",
-                genes: "",
-                skipped: false,
-                alterations: {
-                    mutation: 0,
-                    cnaUp: 0,
-                    cnaDown: 0,
-                    other: 0,
-                    all: 0
-                }
-            }
-        });
-
-        var Studies = Backbone.Collection.extend({
-            model: Study,
-            url: "http://www.cbioportal.org/public-portal/crosscancerquery.json",
-            defaults: {
-                gene_list: "",
-                data_priority: 0
-            },
-
-            initialize: function(options) {
-                options = _.extend(this.defaults, options);
-                this.url += "?gene_list=" + options.gene_list + "&data_priority=" + options.data_priority;
-
-                return this;
-            }
-        });
-
-        /* Routers */
-        AppRouter = Backbone.Router.extend({
-            routes: {
-                "crosscancer/:tab/:priority/:genes": "mainView",
-                "crosscancer/*actions": "emptyView"
-            },
-
-            emptyView: function(actions) {
-                (new EmptyView()).render();
-            },
-
-            mainView: function(tab, priority, genes) {
-                (new MainView({
-                    model: {
-                        tab: tab,
-                        priority: priority,
-                        genes: genes
-                    }
-                })).render();
-            }
-        });
-
-        new AppRouter();
-        Backbone.history.start();
-  }
-//    });
-
-//})(window.jQuery, window._, window.Backbone, window.d3);
 

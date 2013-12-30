@@ -175,42 +175,46 @@ function loadMetaData(){
 	//  Adds Meta Data to the Page.
 	//  Triggered at the end of successful AJAX/JSON request.
 	function addMetaDataToPage() {
+		var gene_array = [];
+		json = window.metaDataJson;
+	    $("#select_gene_set").append("<optgroup label='Gene Sets'>");
+		jQuery.each(json.gene_sets,function(key,gene_set){
+			if(key == "user-defined-list") return;
+			$("#select_gene_set").append("<option value='" + gene_set.gene_list.replace(",","") + "'>"
+	        	+ gene_set.name + "</option>");
+			
+			// Add individual genes to a list
+			var temp = gene_set.gene_list.split(/\s+/);
+			jQuery.each(temp, function(i,e) { 
+				if (jQuery.inArray(e, gene_array) == -1) gene_array.push(e);
+			});
+		});  //  end for each gene set loop
 		
-
+		$("#select_gene_set").append("/<optgroup>");
+		// Add individual genes to list
+		$("#select_gene_set").append("<optgroup label='Individual Genes'>");
+		gene_array.sort();
+		jQuery.each(gene_array,function(index,val){
+				$("#select_gene_set").append("<option value='" + val + "'>"
+                	+ val + "</option>"); 
+		});
+		$("#select_gene_set").append("/<optgroup>");		
+		
+		return true;
 	} 
     
-    function loadContent() {
+    function loadMetaDataContent() {
 	    //  Get Portal JSON Meta Data via JQuery AJAX
-	    var gene_array = [];
+	    
 	    jQuery.getJSON("http://www.cbioportal.org/public-portal/portal_meta_data.json",function(json){
 	        //  Store JSON Data in global variable for later use
 	        window.metaDataJson = json;
 	        //  Add Meta Data to current page
-	        json = window.metaDataJson;
-	        $("#select_gene_set").append("<optgroup label='Gene Sets'>");
-			jQuery.each(json.gene_sets,function(key,gene_set){
-				if(key == "user-defined-list") return;
-       			$("#select_gene_set").append("<option value='" + gene_set.gene_list.replace(",","") + "'>"
-                	+ gene_set.name + "</option>");
-        		
-        		// Add individual genes to a list
-        		var temp = gene_set.gene_list.split(/\s+/);
-        		jQuery.each(temp, function(i,e) { 
-        			if (jQuery.inArray(e, gene_array) == -1) gene_array.push(e);
-    			});
-		});  //  end for each gene set loop
-    		$("#select_gene_set").append("/<optgroup>");
-    		// Add individual genes to list
-    		$("#select_gene_set").append("<optgroup label='Individual Genes'>");
-    		gene_array.sort();
-			jQuery.each(gene_array,function(index,val){
-					$("#select_gene_set").append("<option value='" + val + "'>"
-	                	+ val + "</option>"); 
-			});
-    		$("#select_gene_set").append("/<optgroup>");
+	        addMetaDataToPage();
+
 	    });
 	}
 	
-	loadContent();
+	loadMetaDataContent();
 	return true;
 }

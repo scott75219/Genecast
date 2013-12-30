@@ -49,26 +49,32 @@ function home() {
 
 		// Event handler to run query when submit button clicked
  		$(document).on('click', '#btn_gene_set_sbt', function(e){
+ 			console.log('eclipse :: submit button clicked');
  			var gene_list = $('#textarea_gene_set').val().split(/[ ,]+/).filter(function(v){return v!=='';}).join(',');
-			$('#resultsArea').html('<p id="loading">Loading results...</p><div id="cchistogram"> cchistogram</div>');
+ 			var data_priority = 1;
+			$('#crosscancer-container').show();
  			// do query
- 			var apiURL = 'http://www.cbioportal.org/public-portal/crosscancerquery.json?';
- 			var parameters = "gene_list=" + gene_list + "&data_priority=1";
- 			$.ajax( {
+ 			//var apiURL = 'http://www.cbioportal.org/public-portal/crosscancerquery.json?';
+ 			//var parameters = "gene_list=" + gene_list + "&data_priority=" + data_priority;
+ 			crosscancer({title: "Cross-cancer Alteration Summary for " + gene_list.split(/[ ,]+/).join(', '), g: gene_list, d:data_priority});
+ 			/*$.ajax( {
 				type:'get', //Could be 'get' depending on your needs
 		 		url: apiURL + parameters,
 		  		dataType: 'text',
-		  		success:function(data) {
-		  			$('#loading').remove();
-					$('#resultsArea').append("<h3>Cross-cancer Alteration Summary for " + gene_list.split(/[ ,]+/).join(', ') + "</h3><br />" + data);
+		  		success:function(data) { 
+		  			
+					//$('#resultsArea').append("<h3>Cross-cancer Alteration Summary for " + gene_list.split(/[ ,]+/).join(', ') + "</h3><br />" + data);
+					console.log('eclipse :: submit ajax data loaded');
+					
 		  		},
 		  		error: function(jqXHR, textStatus, errorThrown) {
 		  			console.log('eclipse :: ajax error');
 		  			processCBioResults(textStatus + ' ' + errorThrown);
 		  		}
-			});
+			});*/
 			
-			crosscancer();
+			
+			
  		});
  		 	
         $('#reconnoiter-screen').show();        
