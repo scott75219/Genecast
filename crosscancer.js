@@ -512,7 +512,7 @@ console.log('eclipse :: histData.length: ' + + histData.length);
 
                             // Define where the label should appear
                             var labelCorX = 15;
-                            var labelCorY = paddingTop+10 + (histBottom/2);
+                            var labelCorY = paddingTop+30 + (histBottom/2);
 
                             // Add axis label
                             histogram.append("g")
