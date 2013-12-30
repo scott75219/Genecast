@@ -253,7 +253,10 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                 .append("svg")
                                 .attr("width", width)
                                 .attr("height", height);
-
+							svg.append("rect")
+							    .attr("width", "100%")
+							    .attr("height", "100%")
+							    .attr("fill", "pink");
                             // define Y axis
                             var yAxis = d3.svg.axis()
                                 .scale(yScale)

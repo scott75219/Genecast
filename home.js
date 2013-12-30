@@ -53,6 +53,8 @@ function home() {
  			var gene_list = $('#textarea_gene_set').val().split(/[ ,]+/).filter(function(v){return v!=='';}).join(',');
  			var data_priority = 1;
 			$('#crosscancer-container').show();
+			$('#cctitlecontainer').html('');
+			$('#cchistogram').html('Loading...');
  			// do query
  			//var apiURL = 'http://www.cbioportal.org/public-portal/crosscancerquery.json?';
  			//var parameters = "gene_list=" + gene_list + "&data_priority=" + data_priority;
