@@ -27,6 +27,7 @@ function home() {
  	$(document).on('click', '#reconnoiter-button', function(e){
  		$('#hivelogo-backbtn').attr("src",img_logoback);
  		$('#homemenu').hide();
+ 		$('#screen-title').text('HIVE Reconnoiter');
  		
  		loadMetaData();
  		
