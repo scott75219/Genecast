@@ -58,7 +58,7 @@ function home() {
  			// do query
  			//var apiURL = 'http://www.cbioportal.org/public-portal/crosscancerquery.json?';
  			//var parameters = "gene_list=" + gene_list + "&data_priority=" + data_priority;
- 			crosscancer({title: "Cross-cancer Alteration Summary for " + gene_list.split(/[ ,]+/).join(', '), g: gene_list, d:data_priority});
+ 			crosscancer({title: "Cross-cancer Alteration Summary for " + gene_list.split(/[ ,]+/).join(', ') + ' (All Studies)', g: gene_list, d:data_priority});
  			/*$.ajax( {
 				type:'get', //Could be 'get' depending on your needs
 		 		url: apiURL + parameters,

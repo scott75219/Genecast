@@ -197,11 +197,7 @@ console.log("eclipse :: right before render_");
                        var metaData = window.metaDataJson; 
                        
                        var metaData2 = new Object();
-                       $.each(window.metaDataJson, function(k, e) { 
-                       		$.each(e, function(key, element) {
-                       			console.log("eclipse :: metaData: " + k + ' ' + e + ' ' + key + ' ' + element);
-                       		//metaData2[]
-                       	});		});
+
                             var histDataOrg = window.studies;
 
                             var histData = filterAndSortData(histDataOrg);
@@ -224,12 +220,12 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                             var circleTTR = Math.min(studyWidth, 20) / 2;
 
                             var color = function(cType) {
-                            	console.log('eclipse :: metaData.cancer_colors[cType]: ' + metaData.cancer_colors[cType]);
+                            	//console.log('eclipse :: metaData.cancer_colors[cType]: ' + metaData.cancer_colors[cType]);
                                 return metaData.cancer_colors[cType];
                             };
 
                             var key = function(d) {
-                            	console.log('eclipse :: d.studyId: ' + d.studyId);
+                            	//console.log('eclipse :: d.studyId: ' + d.studyId);
                                 return d.studyId;
                             };
 
@@ -253,10 +249,7 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                 .append("svg")
                                 .attr("width", width)
                                 .attr("height", height);
-							svg.append("rect")
-							    .attr("width", "100%")
-							    .attr("height", "100%")
-							    .attr("fill", "pink");
+
                             // define Y axis
                             var yAxis = d3.svg.axis()
                                 .scale(yScale)
@@ -878,22 +871,9 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                             };
                             var servletName = "http://www.cbioportal.org/public-portal/crosscancermutation.json";
                             // init mutation data proxy with the data servlet config
-                            var proxy = new MutationDataProxy(genes.join(" "));
-                            proxy.initWithoutData(servletName, servletParams);
-                            // init default mutation details view
-                            var model = {
-                                mutationProxy: proxy,
-                                sampleArray: [],
-                                diagramOpts: {
-                                    showStats: true
-                                },
-	                            tableOpts: {
-		                            columnVisibility: {
-			                            // TODO "excludeIfHidden" instead?
-			                            "cancer study": "visible"
-		                            }
-	                            }
-                            };  //END HISTOGRAM
+                             
+                             
+                             //END HISTOGRAM
 
 
 	    });
