@@ -49,12 +49,12 @@ function crosscancer(input) {
         	this.genes = genes;
         }
         */
-        var width = 650;
-        var height = 300;
-        var paddingLeft = 60;
+        var width = 700;
+        var height = 350;
+        var paddingLeft = 100;
         var paddingRight = 5;
-        var paddingTop = 90;
-        var histBottom = 200;
+        var paddingTop = 20;
+        var histBottom = 150;
         var fontFamily = "sans-serif";
         var animationDuration = 800;
 
@@ -191,7 +191,7 @@ console.log("eclipse :: right before render_");
 	       // addMetaDataToPage();
 
 // HISTORGRAM
-						$('#cctitlecontainer').html(input.title);
+						$('#cctitlecontainer').html('<h3>' + input.title + '</h3>');
 						window.studies = json;
 
                        var metaData = window.metaDataJson; 
@@ -512,7 +512,7 @@ console.log('eclipse :: histData.length: ' + + histData.length);
 
                             // Define where the label should appear
                             var labelCorX = 15;
-                            var labelCorY = paddingTop + (histBottom/2);
+                            var labelCorY = paddingTop+10 + (histBottom/2);
 
                             // Add axis label
                             histogram.append("g")
