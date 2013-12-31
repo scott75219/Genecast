@@ -177,7 +177,8 @@ function loadMetaData(){
 	function addMetaDataToPage() {
 		var gene_array = [];
 		json = window.metaDataJson;
-	    $("#select_gene_set").append("<optgroup label='Gene Sets'>");
+		// For now disable batch gene sets
+	    //$("#select_gene_set").append("<optgroup label='Gene Sets'>");
 		jQuery.each(json.gene_sets,function(key,gene_set){
 			if(key == "user-defined-list") return;
 			// For now disable batch gene sets
