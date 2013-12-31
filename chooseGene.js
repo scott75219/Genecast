@@ -192,7 +192,7 @@ function loadMetaData(){
 			});
 		});  //  end for each gene set loop
 		
-		$("#select_gene_set").append("/<optgroup>");
+		//$("#select_gene_set").append("/<optgroup>");
 		// Add individual genes to list
 		$("#select_gene_set").append("<optgroup label='Individual Genes'>");
 		gene_array.sort();
