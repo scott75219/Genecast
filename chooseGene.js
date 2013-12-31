@@ -180,8 +180,9 @@ function loadMetaData(){
 	    $("#select_gene_set").append("<optgroup label='Gene Sets'>");
 		jQuery.each(json.gene_sets,function(key,gene_set){
 			if(key == "user-defined-list") return;
-			$("#select_gene_set").append("<option value='" + gene_set.gene_list.replace(",","") + "'>"
-	        	+ gene_set.name + "</option>");
+			// For now disable batch gene sets
+			//$("#select_gene_set").append("<option value='" + gene_set.gene_list.replace(",","") + "'>"
+	        //	+ gene_set.name + "</option>");
 			
 			// Add individual genes to a list
 			var temp = gene_set.gene_list.split(/\s+/);
