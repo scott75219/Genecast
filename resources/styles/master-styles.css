@@ -8,9 +8,10 @@
 	border: none;
 	color: #000;
 	text-shadow: 0;
-	height: 42px;
+	/*height: 42px;*/
 }
 
+/*
 .ui-header .ui-title {
 	font-size: 20px;
 	text-overflow: clip;
@@ -18,7 +19,7 @@
 	margin: 5px;
 	width: 130px;
 }
-
+*/
 #textarea_gene_set {
 	width: 175px !important;
 	height: 100px !important;
@@ -26,12 +27,31 @@
 }
 
 h2 {
-	margin-top: 4px !important;
-	margin-bottom: 4px !important;
+	/*margin-top: 4px !important;*/
+	/*margin-bottom: 4px !important;*/
 }
+
 .reconnoiter-screen-btn {
 	float: right !important;
 	width: 150px !important;
+}
+
+.defaultText { width: 150px; }
+
+.defaultTextActive { 
+	color: #a1a1a1; 
+	font-style: italic; 
+}
+    
+
+/* Add alternating row stripes */
+.table-stripe tbody tr:nth-child(odd) td {
+  background-color: rgba(0,0,0,0.04);
+}
+
+/* Add stroke to the header and last item */
+.table-stripe thead th {
+ 	border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
 #homemenu {

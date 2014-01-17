@@ -21,20 +21,73 @@
 
   </head>
   <body onload="onLoad()">
-  	<div data-role="header" data-position="fixed">
-  		<img src="resources/icons/hive_logo.png" width="109" height="35" id="hivelogo-backbtn"/>
-  		<span id="screen-title">HIVE Mobile</span>
-  		
-	</div>
-	<br />
-	<div class="controls" id="homemenu">
-		<img src="resources/images/reconnoiter-button.png" class="homemenu-buttons" id="reconnoiter-button"/>
-		<img src="resources/images/pubcast-button.png" class="homemenu-buttons" id="pubcast-button"/>
-
-	</div>
-	<div class="controls">
+  	<div id="home" data-role="page">
+  		<div data-role="header">
+	  		<img src="resources/icons/hive_logo.png" width="109" height="35" id="hivelogo-backbtn"/>
+			<span id="screen-title">HIVE Reconnoiter</span>
+  		</div>
+  		<div data-role="content">
+			<a href="#biomuta"><img src="resources/images/reconnoiter-button.png" class="homemenu-buttons" id="reconnoiter-button"/></a>
+			<a href="#pubcast"><img src="resources/images/pubcast-button.png" class="homemenu-buttons" id="pubcast-button"/></a>
+		</div>
+  	</div> <!-- div home page -->
   	
-	  	<div id="reconnoiter-screen">
+  	<div id="biomuta" data-role="page">
+  		<div data-role="header" data-position="fixed">
+	  		<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>
+			<span id="screen-title">HIVE GeneVar</span>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
+					<li><a href="#cbioportal" data-role="tab" data-prefetch>cBioPortal</a></li>
+					<li><a href="#nci-60" data-role="tab"  data-prefetch>NCI-60</a></li>
+				</ul>
+			</div><!-- navbar -->
+		</div> <!-- header -->
+		
+		<div data-role="content">
+			<h2>BioMuta Viewer</h2>
+			<div id="controls">
+				<input class="defaultText geneInputBtn"  type="text" title="Enter a valid HUGO symbol" size="10" maxlength="10" id="txt_biomuta"/>
+				<a data-role="button" class="reconnoiter-screen-btn" id="btn_biomuta_sbt">Submit</a>
+				<br/><br/>
+			</div>
+			<div id="biomuta-results" style="display: none;">
+				<hr style="width: 90%;"/>
+				<div id="debug-area"> </div>
+				<table data-role="table" id="biomuta-table" class="ui-responsive table-stroke table-stripe">
+					<thead>
+						<tr>
+							<th scope="col">UniProt AC</th>
+							<th scope="col">Gene</th>
+							<th scope="col">AA pos</th>
+							<th scope="col">P>A</th>
+							<th scope="col">PMID</th>
+							<th scope="col">Disease</th>
+							<th scope="col">Source</th>
+						</tr>
+					</thead>
+					<tbody> </tbody>
+				</table><!-- table -->
+			</div>
+		</div> <!-- content -->
+	</div>
+		
+		
+	<div id="cbioportal" data-role="page">
+  		<div data-role="header" data-position="fixed">
+	  		<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>
+			<span id="screen-title">HIVE GeneVar</span>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
+					<li><a href="#cbioportal" data-role="tab" data-prefetch>cBioPortal</a></li>
+					<li><a href="#nci-60" data-role="tab" data-prefetch>NCI-60</a></li>
+				</ul>
+			</div><!-- navbar -->
+		</div> <!-- header -->
+  		
+  		<div data-role="content">
 	  		<form class="form-vertical" id="form_gene_set" class="gene_set">
 	  			<h2>Cross-cancer Mutation Data</h2>
 				<select name="select_gene_set" id="select_gene_set" tabindex="1">
@@ -50,28 +103,6 @@
   				
   				<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen horizontally for best viewing.</p></div>
   			</form>
-  			
-  			<!--
-			 
-		  	<form class="form-vertical" id="form_operation" disabled>
-					Choose operation:
-					<select name="cBioCommandSelect" id="cBioCommandSelect" tabindex="2">
-						<option value="">-- Select query --</option>
-						<option value="getTypesOfCancer">All Types of Cancer</option>
-						<option value="getCancerStudies">All Cancer Studies</option>
-						<option value="getGeneticProfiles">All Genetic Profiles for Specific Study</option>
-						<option value="getCaseLists">All Case Lists for Specific Study</option>
-						<option value="getProfileData">Profile Data</option>
-						<option value="getMutationData">Extended Mutation Data</option>
-						<option value="getClinicalData">Clinical Data</option>
-						<option value="getProteinArrayInfo">Protein/Phosphoprotein Antibody Information</option>
-						<option value="getProteinArrayData">RPPA-based Proteomics Data</option>
-					</select>
-		
-			  	<div id="queryCriteriaArea">
-		  		</div>
-
-		  	</form>-->
 		  	
 		  	<div id="resultsArea" style="clear: both; padding-top: 10px;">
 		  		<hr style="width: 90%;"/>
@@ -83,15 +114,30 @@
 						
 						<div id="studies-with-no-data"> </div>
 					</div>
-        </div>
+        		</div>
 		  	
 		  	</div>
 		  	
-		  	
-
-	  	</div>
-	</div>
+		  </div> <!-- div content -->
+	</div> <!-- page cbioportal -->
 	
+	<div id="nci-60" data-role="page">
+  		<div data-role="header" data-position="fixed">
+	  		<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>
+			<span id="screen-title">HIVE GeneVar</span>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
+					<li><a href="#cbioportal" data-role="tab" data-prefetch>cBioPortal</a></li>
+					<li><a href="#nci-60" data-role="tab" data-prefetch>NCI-60</a></li>
+				</ul>
+			</div><!-- navbar -->
+		</div> <!-- header -->
+		
+		<div data-role="content">
+			NCI-60
+		</div><!-- NCI-60-->		
+	</div> <!-- page nci-60 -->
 <!-- dawdw -->
 <script id="cross-cancer-main-tmpl" type="text/template">
     <div id="tabs">
