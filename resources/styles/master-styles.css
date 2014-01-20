@@ -22,6 +22,10 @@ h2 {
 	width: 100px;
 }
 
+table #biomuta-table {
+	background: #EEEEEE !important;
+}
+
 #textarea_gene_set {
 	width: 175px !important;
 	height: 100px !important;
@@ -47,7 +51,8 @@ table {
 
 /* Add stroke to the header and last item */
 .table-stripe thead th {
- 	border-bottom: 1px solid rgba(0, 0, 0, .1);
+ 	border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+ 	background-color: rgba(225,225,225,1); 
 }
 
 #homemenu {
