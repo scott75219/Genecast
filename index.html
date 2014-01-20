@@ -21,6 +21,7 @@
 
   </head>
   <body onload="onLoad()">
+  	<!--  FOR NOW SKIP MULTI-APP HOMEPAGE... GO DIRECTLY TO GeneCast Biomuta
   	<div id="home" data-role="page">
   		<div data-role="header">
 	  		<img src="resources/icons/hive_logo.png" width="109" height="35" id="hivelogo-backbtn"/>
@@ -32,57 +33,87 @@
 		</div>
   	</div> <!-- div home page -->
   	
-  	<div id="biomuta" data-role="page">
-  		<div data-role="header" data-position="fixed">
-	  		<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>
-			<span id="screen-title">HIVE GeneVar</span>
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
-					<li><a href="#cbioportal" data-role="tab" data-prefetch>cBioPortal</a></li>
-					<li><a href="#nci-60" data-role="tab"  data-prefetch>NCI-60</a></li>
-				</ul>
-			</div><!-- navbar -->
-		</div> <!-- header -->
+		<div id="biomuta" data-role="page">
+			<div data-role="header" data-theme="c"> 
+		  		<!--<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>-->
+				<h1>HIVE Genecast</h1>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
+						<li><a href="#bioexpress" data-role="tab"  data-prefetch>BioExpress</a></li>
+					</ul>
+				</div><!-- navbar -->
+			</div> <!-- header -->
+		
+			<div data-role="content">
+				<div id="controls">
+					<h2>View mutation profile of your gene</h2>
+					<table style="width:100%">
+						<tr>
+							<td>
+								<p>Enter a valid HGNC gene symbol: </p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input class="defaultText geneInputBtn"  type="text" title="ANXA1" maxlength="15" id="txt_biomuta"/>
+							</td>
+							<td	style='width:70em'>
+								<a data-role="button" id="btn_biomuta_sbt">Submit</a>
+							</td>
+						</tr>
+					</table>
+					<br/><br/>
+				</div>
+				<div id="biomuta-results" style="display: none;">
+					<hr style="width: 90%;"/>
+					<div id="debug-area"> </div>
+					<table data-role="table" id="biomuta-table" class="ui-responsive table-stroke table-stripe">
+						<thead>
+							<tr>
+								<th scope="col">UniProt AC</th>
+								<th scope="col">Gene</th>
+								<th scope="col">AA pos</th>
+								<th scope="col">P>A</th>
+								<th scope="col">PMID</th>
+								<th scope="col">Disease</th>
+								<th scope="col">Source</th>
+							</tr>
+						</thead>
+						<tbody> </tbody>
+					</table><!-- table -->
+				</div>
+			</div> <!-- content -->
+	</div>
+	
+		
+	<div id="bioexpress" data-role="page">
+			<div data-role="header" data-theme="c"> 
+		  		<!--<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>-->
+				<h1>HIVE Genecast</h1>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
+						<li><a href="#bioexpress" data-role="tab"  data-prefetch>BioExpress</a></li>
+					</ul>
+				</div><!-- navbar -->
+			</div> <!-- header -->
 		
 		<div data-role="content">
-			<h2>BioMuta Viewer</h2>
-			<div id="controls">
-				<input class="defaultText geneInputBtn"  type="text" title="Enter a valid HUGO symbol" size="10" maxlength="10" id="txt_biomuta"/>
-				<a data-role="button" class="reconnoiter-screen-btn" id="btn_biomuta_sbt">Submit</a>
-				<br/><br/>
-			</div>
-			<div id="biomuta-results" style="display: none;">
-				<hr style="width: 90%;"/>
-				<div id="debug-area"> </div>
-				<table data-role="table" id="biomuta-table" class="ui-responsive table-stroke table-stripe">
-					<thead>
-						<tr>
-							<th scope="col">UniProt AC</th>
-							<th scope="col">Gene</th>
-							<th scope="col">AA pos</th>
-							<th scope="col">P>A</th>
-							<th scope="col">PMID</th>
-							<th scope="col">Disease</th>
-							<th scope="col">Source</th>
-						</tr>
-					</thead>
-					<tbody> </tbody>
-				</table><!-- table -->
-			</div>
-		</div> <!-- content -->
-	</div>
-		
-		
+			BioExpress is Under Construction.
+		</div><!-- content BioExpress -->		
+	</div> <!-- page BioExpress -->
+	
+			
 	<div id="cbioportal" data-role="page">
   		<div data-role="header" data-position="fixed">
 	  		<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>
-			<span id="screen-title">HIVE GeneVar</span>
+			<span id="screen-title">HIVE Genecast</span>
 			<div data-role="navbar">
 				<ul>
 					<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
-					<li><a href="#cbioportal" data-role="tab" data-prefetch>cBioPortal</a></li>
-					<li><a href="#nci-60" data-role="tab" data-prefetch>NCI-60</a></li>
+					<!--<li><a href="#cbioportal" data-role="tab" data-prefetch>cBioPortal</a></li>-->
+					<li><a href="#nci-60" data-role="tab" data-prefetch>BioExpress</a></li>
 				</ul>
 			</div><!-- navbar -->
 		</div> <!-- header -->
@@ -121,24 +152,9 @@
 		  </div> <!-- div content -->
 	</div> <!-- page cbioportal -->
 	
-	<div id="nci-60" data-role="page">
-  		<div data-role="header" data-position="fixed">
-	  		<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>
-			<span id="screen-title">HIVE GeneVar</span>
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
-					<li><a href="#cbioportal" data-role="tab" data-prefetch>cBioPortal</a></li>
-					<li><a href="#nci-60" data-role="tab" data-prefetch>NCI-60</a></li>
-				</ul>
-			</div><!-- navbar -->
-		</div> <!-- header -->
-		
-		<div data-role="content">
-			NCI-60
-		</div><!-- NCI-60-->		
-	</div> <!-- page nci-60 -->
-<!-- dawdw -->
+
+	
+<!-- Template-->
 <script id="cross-cancer-main-tmpl" type="text/template">
     <div id="tabs">
         <ul>

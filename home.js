@@ -13,9 +13,10 @@ function home() {
 	$('#queryResultsArea').hide();
 	$('#textarea_gene_set').val('');
 	$("#select_gene_set option:first").attr('selected','selected');
-	$('#homemenu').show();
+	// $('#homemenu').show();
 	
 	// Initialize input buttons
+	
 	$(".defaultText").focus(function(srcc) {
         if ($(this).val() == $(this)[0].title) {
             $(this).removeClass("defaultTextActive");
@@ -58,108 +59,38 @@ function home() {
  	});
  	
  	// menu buttons
- 	$(document).on('click', '#reconnoiter-button', function(e){
- 		$('#hivelogo-backbtn').attr("src",img_logoback);
- 		$('#homemenu').hide();
- 		$('#screen-title').text('HIVE Reconnoiter');
- 		
- 		// BIOMUTA
- 		
- 		$(document).on('click', '#btn_biomuta_sbt', function(e){
- 		
- 			$('#debug-area').html('<p>Debug: Using preloaded demo data. User submitted: ' + $('#txt_biomuta').val().toUpperCase() + '</p>');
- 			
- 			// load preloaded data
- 			for(var i = 0; i < 20; i++) { 
-	 			$('#biomuta-table tbody').append('<tr> \
-								<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:P04083">P04083</a></th> \
-								<td>ANXA1</a></td> \
-								<td>241</td> \
-								<td>TA</td> \
-								<td>22941189</td> \
-								<td>Lung adenocarcinoma [LUAD]</td> \
-								<td>COSMIC</td> \
-							</tr> \
-							<tr> \
-								<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:P04083">P04083</a></th> \
-								<td>ANXA1</td> \
-								<td>139</td> \
-								<td>ED</td> \
-								<td>22980975</td> \
-								<td>Lung adenocarcinoma [LUAD]</td> \
-								<td>COSMIC</td> \
-							</tr>');
-				}
- 			$('#biomuta-results').show();
- 		});
- 		
- 		
- 		
- 		// END -- BIOMUTA
- 		
- 		loadMetaData();
- 		
- 		// Event handler to reset input form when Reset button clicked
- 		$(document).on('click', '#btn_gene_set_rst', function(e){
- 			event.preventDefault();
- 			$("#select_gene_set option:first").attr('selected','selected');
- 			$('#select_gene_set').selectmenu('refresh', true);
- 			$('#textarea_gene_set').val('');
- 		});
- 		
-		// Event handler to add gene to text area when Add button clicked
- 		$(document).on('change', '#select_gene_set', function(e){
- 			event.preventDefault();
- 			//$('#textarea_gene_set').val();
- 			//$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + window.metaDataJson.gene_sets[$('#select_gene_set option:selected').val()].gene_list);
-			//$('#textarea_gene_set').val($('#textarea_gene_set').val() + ' ' + $('#select_gene_set option:selected').val());
-			// For now disable batch gene sets. So on select change, only allow one gene at a time
-			$('#textarea_gene_set').val($('#select_gene_set option:selected').val());
-
- 		});
-
-		// Event handler to run query when submit button clicked
- 		$(document).on('click', '#btn_gene_set_sbt', function(e){
- 			console.log('eclipse :: submit button clicked');
- 			var gene_list = $('#textarea_gene_set').val().split(/[ ,]+/).filter(function(v){return v!=='';}).join(',');
- 			var data_priority = 1;
-			$('#crosscancer-container').show();
-			$('#cctitlecontainer').html('');
-			$('#cchistogram').html('Loading...');
- 			// do query
- 			//var apiURL = 'http://www.cbioportal.org/public-portal/crosscancerquery.json?';
- 			//var parameters = "gene_list=" + gene_list + "&data_priority=" + data_priority;
- 			crosscancer({title: "Cross-cancer Alteration Summary for " + gene_list.split(/[ ,]+/).join(', ') + ' (All Studies)', g: gene_list, d:data_priority});
- 			/*$.ajax( {
-				type:'get', //Could be 'get' depending on your needs
-		 		url: apiURL + parameters,
-		  		dataType: 'text',
-		  		success:function(data) { 
-		  			
-					//$('#resultsArea').append("<h3>Cross-cancer Alteration Summary for " + gene_list.split(/[ ,]+/).join(', ') + "</h3><br />" + data);
-					console.log('eclipse :: submit ajax data loaded');
-					
-		  		},
-		  		error: function(jqXHR, textStatus, errorThrown) {
-		  			console.log('eclipse :: ajax error');
-		  			processCBioResults(textStatus + ' ' + errorThrown);
-		  		}
-			});*/
-			
-			
-			
- 		});
- 		 	
-        $('#reconnoiter-screen').show();    
-        $('#navbar-reconnoiter').show();    
-    });
-    
-    /*
-	$('#cBioCommandSelect').change(function(){
-		console.log('eclipse :: cBioCommandSelect selection = ' + $('#cBioCommandSelect option:selected').val());
-		doCBioQuery($('#cBioCommandSelect option:selected').val());
+	// BIOMUTA
+	
+	$(document).on('click', '#btn_biomuta_sbt', function(e){
+	
+		$('#debug-area').html('<p>Debug: Using preloaded demo data. User submitted: ' + $('#txt_biomuta').val().toUpperCase() + '</p>');
+		
+		// load preloaded data
+		for(var i = 0; i < 20; i++) { 
+ 			$('#biomuta-table tbody').append('<tr> \
+							<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:P04083">P04083</a></th> \
+							<td>ANXA1</a></td> \
+							<td>241</td> \
+							<td>TA</td> \
+							<td>22941189</td> \
+							<td>Lung adenocarcinoma [LUAD]</td> \
+							<td>COSMIC</td> \
+						</tr> \
+						<tr> \
+							<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:P04083">P04083</a></th> \
+							<td>ANXA1</td> \
+							<td>139</td> \
+							<td>ED</td> \
+							<td>22980975</td> \
+							<td>Lung adenocarcinoma [LUAD]</td> \
+							<td>COSMIC</td> \
+						</tr>');
+			}
+		$('#biomuta-results').show();
 	});
-	*/
+	
+	// END -- BIOMUTA
+
 		
 	console.log("eclipse :: end home()");
 }

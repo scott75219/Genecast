@@ -7,10 +7,10 @@
 
     <!-- versionCode is optional and Android only -->
 	
-    <name>HIVE Reconnoiter</name>
+    <name>HIVE Genecast</name>
 
     <description>
-        Query Cancer Genomic Data Server (CGDS).
+        Query HIVE cancer gene data.
     </description>
 
     <author href="https://j-mal.com" email="github.congos@xoxy.net">
