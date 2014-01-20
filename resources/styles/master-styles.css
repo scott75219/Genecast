@@ -22,6 +22,13 @@ h2 {
 	width: 100px;
 }
 
+#biomuta-table thead { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+}
+
 #textarea_gene_set {
 	width: 175px !important;
 	height: 100px !important;
