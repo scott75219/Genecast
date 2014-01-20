@@ -14,7 +14,7 @@ function home() {
 	$('#textarea_gene_set').val('');
 	$("#select_gene_set option:first").attr('selected','selected');
 	// $('#homemenu').show();
-	
+	$('#biomuta-table').freezeHeader();
 	// Initialize input buttons
 	
 	$(".defaultText").focus(function(srcc) {
