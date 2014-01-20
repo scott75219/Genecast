@@ -15,24 +15,6 @@ function home() {
 	$("#select_gene_set option:first").attr('selected','selected');
 	// $('#homemenu').show();
 	
-	// Navbar controls
-	$(document).on('pagebeforeshow', '#biomuta', function(){ 
-	    $(document).off('click', '#custom-navbar li').on('click', '#custom-navbar li', function(e){ 
-	        var selectedLi = $(this);
-	        $('#custom-navbar li').each(function( index ) {   
-	            var loopLi = $(this);
-	            if(loopLi.find('a').hasClass('ui-btn-active') || loopLi.find('a').hasClass('ui-state-persist')) { 
-	                loopLi.find('a').removeClass('ui-btn-active').removeClass('ui-state-persist');
-	            }
-	            if(loopLi.attr('id') == selectedLi.attr('id')) {
-	                loopLi.find('a').addClass('ui-state-persist');   
-	            }
-	        });              
-	       setTimeout(function(){
-	            $.mobile.changePage( selectedLi.find('a').attr('data-href'), { transition: "slide"});
-	        },100);
-	    });       
-	});
 	// Initialize input buttons
 	
 	$(".defaultText").focus(function(srcc) {
