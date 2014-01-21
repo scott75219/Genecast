@@ -59,21 +59,25 @@
 					<table style="width:100%">
 						<tr>
 							<td>
-								<input class="defaultText geneInputBtn"  type="text" title="BRCA2" maxlength="12" id="txt_biomuta"/>
+								<input class="defaultText geneInputBtn"  type="text" title="SLC18A1" maxlength="12" id="txt_biomuta"/>
 							</td>
 							<td	style='width:80em'>
 								<a data-role="button" id="btn_biomuta_sbt">Submit</a>
 							</td>
 						</tr>
 					</table>
-					<br/><br/>
-				</div>
+					<div id="debug-area">
+						<p style="color: red;">Note!! Using preloaded static demo data. Only genes related Breast invasive carninoma are loaded until API is available! </p>
+					</div>
+					<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen horizontally for best viewing.</p></div>
+				</div> <!-- content -->
+				
 				<div id="biomuta-results" style="display: none;">
 					<hr style="width: 90%;"/>
-					<div id="debug-area"> </div>
+					
 
 					<div id="results-msg">	
-						<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen horizontally for best viewing.</p></div>
+						
 					</div>
 					<table data-role="table" id="biomuta-table" class="ui-responsive table-stroke table-stripe">
 						<thead>

@@ -64,7 +64,7 @@ function home(data) {
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		var querygene = $('#txt_biomuta').val().toUpperCase();
-		$('#debug-area').html('<p style="color: red;">Debug: Using preloaded static demo data.</p>');
+		//$('#debug-area').html('<p style="color: red;">Debug: Using preloaded static demo data.</p>');
 		
 		// load preloaded data
 		//console.log("eclipse :: length: " + data.length);
@@ -79,15 +79,14 @@ function home(data) {
 								<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + data[i][0] + '">' + data[i][0] + '</a></th> \
 								<td>' + data[i][1] + '</a></td> \
 								<td>' + data[i][2] + '</td> \
-								<td>?</td> \
+								<td>??</td> \
 								<td>' + data[i][5] + '</td> \
 								<td>' + data[i][6] + '</td> \
 								<td>' + data[i][7] + '</td> \
 							</tr>');
 				}
 			}
-		$("#results-msg").html('<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen \
-		horizontally for best viewing.</p></div>  '); //<h2>' + resultscnt + ' results found for ' + data[i][1] + '.</h2>');
+		$("#results-msg").append('<h2>Results found for ' + querygene + '.</h2>');
 
 		$('#biomuta-results').show();
 	});
@@ -105,13 +104,15 @@ function onLoad(){
 	    console.log('eclipse :: device is ready');
 		
 		// Temporary load of hardcoded data
+	    var dataurl = "resources/data/BioMuta-short.csv";
 	    var genehash = {};
 	    var lines = [];
-		$.ajax({
+		/*$.ajax({
 	        type: "GET",
-	        url: "resources/data/BioMuta-short.csv",
+	        url: dataurl,
 	        dataType: "text",
-	        success: function(data) {
+	        success: function(data) {*/
+	     $.get(dataurl, function(data) {
 	        	console.log("opened file");
 				var allTextLines = data.split(/\r\n|\n/);
 			    var headers = allTextLines[0].split(',');
@@ -128,7 +129,7 @@ function onLoad(){
 			    console.log("eclipse :: " + lines.length);
 
 			    console.log("file read in");
-			}
+			//}
      	});
      	
     	home(lines);
