@@ -3,7 +3,7 @@
 
 // Home screen of app
 //
-function home() {
+function home(data) {
 	console.log("eclipse :: inside home()");
 	var img_logoonly = "resources/icons/hive_logo.png";
 	var img_logoback = "resources/icons/hive_logo-backbutton.png";
@@ -63,30 +63,29 @@ function home() {
 	// BIOMUTA
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
-	
-		$('#debug-area').html('<p>Debug: Using preloaded demo data. User submitted: ' + $('#txt_biomuta').val().toUpperCase() + '</p>');
+		var querygene = $('#txt_biomuta').val().toUpperCase();
+		$('#debug-area').html('<p>Debug: Using preloaded demo data. User submitted: ' + querygene + '</p>');
 		
 		// load preloaded data
-		for(var i = 0; i < 20; i++) { 
- 			$('#biomuta-table tbody').append('<tr> \
-							<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:P04083">P04083</a></th> \
-							<td>ANXA1</a></td> \
-							<td>241</td> \
-							<td>TA</td> \
-							<td>22941189</td> \
-							<td>Lung adenocarcinoma [LUAD]</td> \
-							<td>COSMIC</td> \
-						</tr> \
-						<tr> \
-							<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:P04083">P04083</a></th> \
-							<td>ANXA1</td> \
-							<td>139</td> \
-							<td>ED</td> \
-							<td>22980975</td> \
-							<td>Lung adenocarcinoma [LUAD]</td> \
-							<td>COSMIC</td> \
-						</tr>');
+		$("#results-msg").append('fetching....');
+		console.log("eclipse :: length: " + data.length);
+		
+		for(var i = 0; i < data.length; i++) { 
+			if (data[i][1] == querygene) { 
+				console.log("eclipse :: hit " + i );
+	 			$('#biomuta-table tbody').append('<tr> \
+								<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + data[i][0] + '">' + data[i][0] + '</a></th> \
+								<td>' + data[i][1] + '</a></td> \
+								<td>' + data[i][2] + '</td> \
+								<td>?</td> \
+								<td>' + data[i][5] + '</td> \
+								<td>' + data[i][6] + '</td> \
+								<td>' + data[i][7] + '</td> \
+							</tr>');
+				}
 			}
+		$("#results-msg").html('');
+
 		$('#biomuta-results').show();
 	});
 	
@@ -101,8 +100,48 @@ function home() {
 function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
+		
+		// Temporary load of hardcoded data
+	    var genehash = {};
+	    var lines = [];
+		$.ajax({
+	        type: "GET",
+	        url: "resources/data/BioMuta.csv",
+	        dataType: "text",
+	        success: function(data) {
+	        	console.log("opened file");
+				var allTextLines = data.split(/\r\n|\n/);
+			    var headers = allTextLines[0].split(',');
+			   // var lines = [];
+			    var genecnt = 0;
+			    console.log(lines.length);
+				var oldGene = '';
+			    for (var i=1; i<allTextLines.length; i++) {
+			    	
+			        var data = allTextLines[i].split(',');
+			        lines.push(data);
+			        
+			        /*
+			        if(gene != oldGene) {
+			        	if(oldGene != '') {  // skip initial empty line
+			        		if(oldGene in genehash){ genehash[oldGene][i] = push(lines); }
+			        		else { genehash[oldGene] = lines; } 
+			        	}	
+			        	
+			        }
 
-    	home();
+			        oldGene = gene;
+			        */
+			       
+			    }		
+			    //console.log("eclipse :: " + Object.keys(genehash));
+			    console.log("eclipse :: " + lines.length);
+
+			    console.log("file read in");
+			}
+     	});
+     	
+    	home(lines);
     }, false);
 }
 
