@@ -112,13 +112,7 @@ function home(data) {
 
 		// Print out results
 		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
-		if(biomutaresults.length>0) { populateBiomutaTable(); }
-				
-		
-		
-
-		
-		$('#biomuta-results').show();
+		if(biomutaresults.length > 0) { populateBiomutaTable(); $('#biomuta-results').show(); }	
 	});
 	
 	// END -- BIOMUTA
