@@ -95,6 +95,7 @@ function home(data) {
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		var querygene = $('#txt_biomuta').val().toUpperCase();
+		$('#div_loadmore').show(); 
 		biomutaresults = [];
 		bookmark = 0;
 		$('#biomuta-table tbody').html('');
