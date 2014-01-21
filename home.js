@@ -103,9 +103,10 @@ function home(data) {
 		$('#biomuta-table tbody').html('');
 		// load preloaded data
 		//console.log("eclipse :: length: " + data.length);
-		
+		var foundflag = false;
 		for(var i = 0; i < data.length; i++) { 
 			if (data[i][1] == querygene) {
+				foundflag = true;
 				biomutaresults.push(data[i]);
 			}
 		}
@@ -113,7 +114,7 @@ function home(data) {
 		// Print out results
 		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
 		if(biomutaresults.length > 0) { populateBiomutaTable(); $('biomuta-table').show(); $('#biomuta-results').show();}
-		else { $('debug-area').html('<p>Gene not found! Please enter a valid HUGO gene symbol.</p>'); }
+		if (foundflag = false) { $('debug-area').html('<p>Gene not found! Please enter a valid HUGO gene symbol.</p>'); }
 	
 	});
 	
