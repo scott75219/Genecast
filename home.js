@@ -69,7 +69,8 @@ function home(data) {
 	// BIOMUTA
 	function populateBiomutaTable () {
 		// Load only 25 results at a time
-		var paging = 25;
+		var paging = 50;
+		$('btn_biomuta_loadmore').val('Load next 50 results');
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
 			$('#biomuta-table tbody').append('<tr> \
 				<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[i][0] + '">' + 
@@ -85,7 +86,7 @@ function home(data) {
 		
 		bookmark = bookmark + paging;
 		
-		if(bookmark > biomutaresults.length  ) { console.log('length is shorter than 25'); $('#div_loadmore').hide(); }
+		if(bookmark > biomutaresults.length  ) { $('#div_loadmore').hide(); }
 	}
 	
 	$(document).on('click', '#btn_biomuta_loadmore', function(e){
