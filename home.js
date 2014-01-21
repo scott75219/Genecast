@@ -72,13 +72,14 @@ function home(data) {
 		var paging = 50;
 		$('btn_biomuta_loadmore').text('Load next 50 results');
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
+			var pmid = biomutaresults[i][5].split(/;/);
 			$('#biomuta-table tbody').append('<tr> \
 				<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[i][0] + '">' + 
 				biomutaresults[i][0] + '</a></th> \
 				<td>' + biomutaresults[i][1] + '</a></td> \
 				<td>' + biomutaresults[i][2] + '</td> \
 				<td>??</td> \
-				<td>' + biomutaresults[i][5] + '</td> \
+				<td><a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid[0] + '">' + pmid[0]+ '</a></td> \
 				<td>' + biomutaresults[i][6] + '</td> \
 				<td>' + biomutaresults[i][7] + '</td> \
 				</tr>');
