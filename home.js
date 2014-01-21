@@ -70,7 +70,7 @@ function home(data) {
 	function populateBiomutaTable () {
 		// Load only 25 results at a time
 		var paging = 50;
-		$('btn_biomuta_loadmore').val('Load next 50 results');
+		$('btn_biomuta_loadmore').text('Load next 50 results');
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
 			$('#biomuta-table tbody').append('<tr> \
 				<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[i][0] + '">' + 
