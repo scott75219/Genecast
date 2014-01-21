@@ -99,6 +99,7 @@ function home(data) {
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		var querygene = $('#txt_biomuta').val().toUpperCase();
 		$('#div_loadmore').hide();
+		$("#biomuta-table").hide();
 		biomutaresults = [];
 		bookmark = 0;
 		$('#biomuta-table tbody').html('');
@@ -114,8 +115,9 @@ function home(data) {
 
 		// Print out results
 		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
-		if(biomutaresults.length > 0) { populateBiomutaTable(); $('biomuta-table').show(); $('#biomuta-results').show();}
+		if(biomutaresults.length > 0) { populateBiomutaTable(); $('biomuta-table').show();  $("#biomuta-table").show();}
 	
+		$('#biomuta-results').show();
 	});
 	
 	// END -- BIOMUTA
