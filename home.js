@@ -68,6 +68,7 @@ function home(data) {
 		
 		// load preloaded data
 		//console.log("eclipse :: length: " + data.length);
+		$('#biomuta-table tbody').html('');
 		var resultscnt = 0; 
 		
 		for(var i = 0; i < data.length; i++) { 
@@ -86,7 +87,7 @@ function home(data) {
 							</tr>');
 				}
 			}
-		$("#results-msg").append('<h2>Results found for ' + querygene + '.</h2>');
+		$("#results-msg").html('<h2>' + resultscnt + ' results found for ' + querygene + '.</h2>');
 
 		$('#biomuta-results').show();
 	});
