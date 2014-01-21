@@ -68,6 +68,33 @@ function home(data) {
 		
 		// load preloaded data
 		$("#results-msg").append('fetching....');
+		
+	    var lines = [];
+		$.ajax({
+	        type: "GET",
+	        url: "http://doitwithsass.com/jamal/BioMuta.csv",
+	        dataType: "text",
+	        success: function(data) {
+	        	console.log("opened file");
+				var allTextLines = data.split(/\r\n|\n/);
+			    var headers = allTextLines[0].split(',');
+			   // var lines = [];
+			    var genecnt = 0;
+			    console.log(lines.length);
+				var oldGene = '';
+			    for (var i=1; i<allTextLines.length; i++) {
+			    	
+			        var data = allTextLines[i].split(',');
+			        lines.push(data);
+			       
+			    }		
+			    //console.log("eclipse :: " + Object.keys(genehash));
+			    console.log("eclipse :: " + lines.length);
+
+			    console.log("file read in");
+			}
+     	});
+     	var data = lines;
 		console.log("eclipse :: length: " + data.length);
 		
 		for(var i = 0; i < data.length; i++) { 
@@ -102,11 +129,12 @@ function onLoad(){
 	    console.log('eclipse :: device is ready');
 		
 		// Temporary load of hardcoded data
+	    /*
 	    var genehash = {};
 	    var lines = [];
 		$.ajax({
 	        type: "GET",
-	        url: "resources/data/BioMuta.csv",
+	        url: "http://doitwithsass.com/jamal/BioMuta.csv",
 	        dataType: "text",
 	        success: function(data) {
 	        	console.log("opened file");
@@ -120,18 +148,6 @@ function onLoad(){
 			    	
 			        var data = allTextLines[i].split(',');
 			        lines.push(data);
-			        
-			        /*
-			        if(gene != oldGene) {
-			        	if(oldGene != '') {  // skip initial empty line
-			        		if(oldGene in genehash){ genehash[oldGene][i] = push(lines); }
-			        		else { genehash[oldGene] = lines; } 
-			        	}	
-			        	
-			        }
-
-			        oldGene = gene;
-			        */
 			       
 			    }		
 			    //console.log("eclipse :: " + Object.keys(genehash));
@@ -140,8 +156,8 @@ function onLoad(){
 			    console.log("file read in");
 			}
      	});
-     	
-    	home(lines);
+     	*/
+    	home();
     }, false);
 }
 
