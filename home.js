@@ -67,14 +67,14 @@ function home(data) {
 		$('#debug-area').html('<p style="color: red;">Debug: Using preloaded static demo data.</p>');
 		
 		// load preloaded data
-		console.log("eclipse :: length: " + data.length);
+		//console.log("eclipse :: length: " + data.length);
 		var resultscnt = 0; 
 		
 		for(var i = 0; i < data.length; i++) { 
 			if (data[i][1] == querygene) { 
 				resultscnt++;
 				
-				console.log("eclipse :: hit " + i  + " gene: " + data[i][1]);
+				//console.log("eclipse :: hit " + i  + " gene: " + data[i][1]);
 	 			$('#biomuta-table tbody').append('<tr> \
 								<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + data[i][0] + '">' + data[i][0] + '</a></th> \
 								<td>' + data[i][1] + '</a></td> \
@@ -87,8 +87,7 @@ function home(data) {
 				}
 			}
 		$("#results-msg").html('<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen \
-		horizontally for best viewing.</p></div>  \
-		<h2>' + resultscnt + ' results found for ' + data[i][1] + '.</h2>');
+		horizontally for best viewing.</p></div>  '); //<h2>' + resultscnt + ' results found for ' + data[i][1] + '.</h2>');
 
 		$('#biomuta-results').show();
 	});
@@ -123,18 +122,6 @@ function onLoad(){
 			    	
 			        var data = allTextLines[i].split(',');
 			        lines.push(data);
-			        
-			        /*
-			        if(gene != oldGene) {
-			        	if(oldGene != '') {  // skip initial empty line
-			        		if(oldGene in genehash){ genehash[oldGene][i] = push(lines); }
-			        		else { genehash[oldGene] = lines; } 
-			        	}	
-			        	
-			        }
-
-			        oldGene = gene;
-			        */
 			       
 			    }		
 			    //console.log("eclipse :: " + Object.keys(genehash));
