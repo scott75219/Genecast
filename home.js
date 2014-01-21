@@ -69,6 +69,7 @@ function home(data) {
 	// BIOMUTA
 	function populateBiomutaTable () {
 		// Load only 25 results at a time
+		
 		var paging = 50;
 		$('btn_biomuta_loadmore').text('Load next 50 results');
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
@@ -87,7 +88,7 @@ function home(data) {
 		
 		bookmark = bookmark + paging;
 		
-		if(bookmark > biomutaresults.length  ) { $('#div_loadmore').hide(); }
+		if(bookmark <= biomutaresults.length  ) { $('#div_loadmore').show(); }
 	}
 	
 	$(document).on('click', '#btn_biomuta_loadmore', function(e){
@@ -97,7 +98,7 @@ function home(data) {
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		var querygene = $('#txt_biomuta').val().toUpperCase();
-		$('#div_loadmore').show(); 
+		$('#div_loadmore').hide();
 		biomutaresults = [];
 		bookmark = 0;
 		$('#biomuta-table tbody').html('');
@@ -114,7 +115,6 @@ function home(data) {
 		// Print out results
 		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
 		if(biomutaresults.length > 0) { populateBiomutaTable(); $('biomuta-table').show(); $('#biomuta-results').show();}
-		if (foundflag = false) { $('debug-area').html('<p>Gene not found! Please enter a valid HUGO gene symbol.</p>'); }
 	
 	});
 	
