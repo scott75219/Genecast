@@ -64,14 +64,16 @@ function home(data) {
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		var querygene = $('#txt_biomuta').val().toUpperCase();
-		$('#debug-area').html('<p>Debug: Using preloaded demo data. User submitted: ' + querygene + '</p>');
+		$('#debug-area').html('<p style="color: red;">Debug: Using preloaded static demo data.</p>');
 		
 		// load preloaded data
-		$("#results-msg").append('fetching....');
 		console.log("eclipse :: length: " + data.length);
+		var resultscnt = 0; 
 		
 		for(var i = 0; i < data.length; i++) { 
 			if (data[i][1] == querygene) { 
+				resultscnt++;
+				
 				console.log("eclipse :: hit " + i  + " gene: " + data[i][1]);
 	 			$('#biomuta-table tbody').append('<tr> \
 								<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + data[i][0] + '">' + data[i][0] + '</a></th> \
@@ -84,7 +86,9 @@ function home(data) {
 							</tr>');
 				}
 			}
-		$("#results-msg").html('');
+		$("#results-msg").html('<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen \
+		horizontally for best viewing.</p></div>  \
+		<h2>' + resultscnt + ' results found for ' + data[i][1] + '.</h2>');
 
 		$('#biomuta-results').show();
 	});
