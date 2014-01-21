@@ -101,6 +101,10 @@ function home() {
 function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
+	    // hide status bar
+	    if (parseFloat(window.device.version) === 7.0) {
+          document.body.style.marginTop = "20px";
+    	}
     	home();
     }, false);
 }
