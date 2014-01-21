@@ -17,6 +17,12 @@ function home(data) {
 	$('#biomuta-table').freezeHeader();
 	// Initialize input buttons
 	
+	
+	// biomuta global variables
+	var biomutaresults = [];
+	var bookmark = 0;
+	
+	
 	$(".defaultText").focus(function(srcc) {
         if ($(this).val() == $(this)[0].title) {
             $(this).removeClass("defaultTextActive");
@@ -61,34 +67,53 @@ function home(data) {
  	
  	// menu buttons
 	// BIOMUTA
+	function populateBiomutaTable () {
+		// Load only 25 results at a time
+		for(var i = bookmark; i < bookmark+25 && i < biomutaresults.length; i++) { 
+			$('#biomuta-table tbody').append('<tr> \
+				<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[i][0] + '">' + 
+				biomutaresults[i][0] + '</a></th> \
+				<td>' + biomutaresults[i][1] + '</a></td> \
+				<td>' + biomutaresults[i][2] + '</td> \
+				<td>??</td> \
+				<td>' + biomutaresults[i][5] + '</td> \
+				<td>' + biomutaresults[i][6] + '</td> \
+				<td>' + biomutaresults[i][7] + '</td> \
+				</tr>');
+		}
+		
+		bookmark = bookmark + 25;
+		
+		if(biomutaresults.length < bookmark ) { console.log('length is shorter than 25'); $('#div_loadmore').hide(); }
+	}
+	
+	$(document).on('click', '#btn_biomuta_loadmore', function(e){
+		populateBiomutaTable();	
+		
+	});
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		var querygene = $('#txt_biomuta').val().toUpperCase();
-		//$('#debug-area').html('<p style="color: red;">Debug: Using preloaded static demo data.</p>');
-		
+		biomutaresults = [];
+		bookmark = 0;
+		$('#biomuta-table tbody').html('');
 		// load preloaded data
 		//console.log("eclipse :: length: " + data.length);
-		$('#biomuta-table tbody').html('');
-		var resultscnt = 0; 
 		
 		for(var i = 0; i < data.length; i++) { 
-			if (data[i][1] == querygene) { 
-				resultscnt++;
-				
-				//console.log("eclipse :: hit " + i  + " gene: " + data[i][1]);
-	 			$('#biomuta-table tbody').append('<tr> \
-								<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + data[i][0] + '">' + data[i][0] + '</a></th> \
-								<td>' + data[i][1] + '</a></td> \
-								<td>' + data[i][2] + '</td> \
-								<td>??</td> \
-								<td>' + data[i][5] + '</td> \
-								<td>' + data[i][6] + '</td> \
-								<td>' + data[i][7] + '</td> \
-							</tr>');
-				}
+			if (data[i][1] == querygene) {
+				biomutaresults.push(data[i]);
 			}
-		$("#results-msg").html('<h2>' + resultscnt + ' results found for ' + querygene + '.</h2>');
+		}
 
+		// Print out results
+		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
+		if(biomutaresults.length>0) { populateBiomutaTable(); }
+				
+		
+		
+
+		
 		$('#biomuta-results').show();
 	});
 	
