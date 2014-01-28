@@ -140,7 +140,7 @@ function home(data) {
 
 		// Print out results
 		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
-		$('#biomuta-header-table tbody').append(
+		$('#biomuta-header-table tbody').html(
 			'<tr><td>Gene:</td><td>'      + biomutaresults[1][2] + '</td></tr>\
 			 <tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[1][0] + '">' +  biomutaresults[1][0] + '</td></tr>\
 			 <tr><td>RefSeq:</td><td>'    + biomutaresults[1][4] + '</td></tr>'
