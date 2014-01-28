@@ -95,8 +95,8 @@ function home(data) {
 			// Text manipulations to fit data into table
 			var pmid = biomutaresults[i][12].split(/;/)[0];
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
-			var cancerType = truncate(biomutaresults[i][13],5,true);
 			var polyphen   = polyphenNumeric(biomutaresults[i][11]); //truncate(biomutaresults[i][11],8,false);
+			var cancerType = truncate(biomutaresults[i][13],5,true);
 			var sourceType = truncate(biomutaresults[i][14],5,true);
 			
 			// print out table row
@@ -106,8 +106,8 @@ function home(data) {
 				<td>' + biomutaresults[i][10] + '</td> \
 				<td><a href="#" data-role="button" data-inline="true" onClick="alert(\'' + biomutaresults[i][11] + '\')">' + polyphen + '</a></td> \
 				<td>' + '<a href="' + pmidlink + '" style="font-size: 10px;">' + pmid + '</a></td> \
-				<td>' + cancerType + '</td> \
-				<td>' + sourceType + '</td> \
+				<td><a href="#" data-role="button" data-inline="true" onClick="alert(\'' + biomutaresults[i][13] + '\')">' + cancerType + '</td> \
+				<td><a href="#" data-role="button" data-inline="true" onClick="alert(\'' + biomutaresults[i][14] + '\')">' + sourceType + '</td> \
 				</tr>');
 		}
 		
