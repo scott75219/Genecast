@@ -145,7 +145,7 @@ function home(data) {
 			 <tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[1][0] + '">' +  biomutaresults[1][0] + '</td></tr>\
 			 <tr><td>RefSeq:</td><td>'    + biomutaresults[1][4] + '</td></tr>'
 			);
-		if(biomutaresults.length > 0) { populateBiomutaTable(); $('biomuta-table').show();  $("#biomuta-table").show();}
+		if(biomutaresults.length > 0) { $('#biomuta-table tbody').html(''); populateBiomutaTable(); $('biomuta-table').show();  $("#biomuta-table").show();}
 	
 		$('#biomuta-results').show();
 	});
