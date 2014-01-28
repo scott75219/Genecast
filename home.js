@@ -12,6 +12,15 @@ function truncate(string,len,showEllipsis){
       return string;
 };
 
+function polyphenNumeric(pred){
+	switch(pred.toLowerCase()){
+		case 'benign': return '1';
+		case 'possibly damaging': return '2';
+		case 'probably damaging': return '3';
+		case 'unknown': return 'unk';
+		default: return '-';
+	};
+}
 
 function home(data) {
 	console.log("eclipse :: inside home()");
@@ -87,15 +96,13 @@ function home(data) {
 			var pmid = biomutaresults[i][12].split(/;/)[0];
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
 			var cancerType = truncate(biomutaresults[i][13],6,true);
-			var polyphen   = truncate(biomutaresults[i][11],8,false);
+			var polyphen   = polyphenNumeric(biomutaresults[i][11]); //truncate(biomutaresults[i][11],8,false);
 			
 			$('#biomuta-table tbody').append('<tr> \
-				<!--<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[i][0] + '">' + 
-				biomutaresults[i][0] + '</a></th>--> \
-				<td>' + biomutaresults[i][8] + '</a></td> \
+				<td>' + biomutaresults[i][8] + '</td> \
 				<td>' + biomutaresults[i][9] + '</td> \
 				<td>' + biomutaresults[i][10] + '</td> \
-				<td>' + polyphen + '</td> \
+				<td><a href="#" onClick="alert(\'' + biomutaresults[i][11] + '\')">' + polyphen + '</a></td> \
 				<td>' + '<a href="' + pmidlink + '">' + pmid + '</a></td> \
 				<td>' + cancerType + '</td> \
 				<td>' + biomutaresults[i][14] + '</td> \
@@ -132,9 +139,9 @@ function home(data) {
 		// Print out results
 		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
 		$('#biomuta-header-table tbody').append(
-			'<tr><td>Gene:</td><td>'      + biomutaresults[1][2] + '<td></tr>\
-			 <tr><td>UniProtKB:</td><td>' + biomutaresults[1][0] + '<td></tr>\
-			 <tr><td>RefSeq:</td><td>'    + biomutaresults[1][4] + '<td></tr>'
+			'<tr><td>Gene:</td><td>'      + biomutaresults[1][2] + '</td></tr>\
+			 <tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[1][0] + '">' +  biomutaresults[1][0] + '</td></tr>\
+			 <tr><td>RefSeq:</td><td>'    + biomutaresults[1][4] + '</td></tr>'
 			);
 		if(biomutaresults.length > 0) { populateBiomutaTable(); $('biomuta-table').show();  $("#biomuta-table").show();}
 	
