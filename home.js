@@ -95,17 +95,19 @@ function home(data) {
 			// Text manipulations to fit data into table
 			var pmid = biomutaresults[i][12].split(/;/)[0];
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
-			var cancerType = truncate(biomutaresults[i][13],6,true);
+			var cancerType = truncate(biomutaresults[i][13],5,true);
 			var polyphen   = polyphenNumeric(biomutaresults[i][11]); //truncate(biomutaresults[i][11],8,false);
+			var sourceType = truncate(biomutaresults[i][14],5,true);
 			
+			// print out table row
 			$('#biomuta-table tbody').append('<tr> \
 				<td>' + biomutaresults[i][8] + '</td> \
 				<td>' + biomutaresults[i][9] + '</td> \
 				<td>' + biomutaresults[i][10] + '</td> \
-				<td><a href="#" onClick="alert(\'' + biomutaresults[i][11] + '\')">' + polyphen + '</a></td> \
-				<td>' + '<a href="' + pmidlink + '">' + pmid + '</a></td> \
+				<td><a href="#" data-role="button" data-inline="true" onClick="alert(\'' + biomutaresults[i][11] + '\')">' + polyphen + '</a></td> \
+				<td>' + '<a href="' + pmidlink + '" style="font-size: 10px;">' + pmid + '</a></td> \
 				<td>' + cancerType + '</td> \
-				<td>' + biomutaresults[i][14] + '</td> \
+				<td>' + sourceType + '</td> \
 				</tr>');
 		}
 		
