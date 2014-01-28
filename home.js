@@ -3,6 +3,16 @@
 
 // Home screen of app
 //
+
+function truncate(string,len,showEllipsis){
+	if (string.length > len)
+		if (showEllipsis == false) return string.substring(0,len);
+		else return string.substring(0,len) +'...';
+   else
+      return string;
+};
+
+
 function home(data) {
 	console.log("eclipse :: inside home()");
 	var img_logoonly = "resources/icons/hive_logo.png";
@@ -73,16 +83,22 @@ function home(data) {
 		var paging = 50;
 		$('btn_biomuta_loadmore').text('Load next 50 results');
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
-			var pmid = biomutaresults[i][5].split(/;/);
+			// Text manipulations to fit data into table
+			var pmid = biomutaresults[i][12].split(/;/)[0];
+			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
+			var cancerType = truncate(biomutaresults[i][13],6,true);
+			var polyphen   = truncate(biomutaresults[i][11],8,false);
+			
 			$('#biomuta-table tbody').append('<tr> \
-				<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[i][0] + '">' + 
-				biomutaresults[i][0] + '</a></th> \
-				<td>' + biomutaresults[i][1] + '</a></td> \
-				<td>' + biomutaresults[i][2] + '</td> \
-				<td>??</td> \
-				<td><a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid[0] + '">' + pmid[0]+ '</a></td> \
-				<td>' + biomutaresults[i][6] + '</td> \
-				<td>' + biomutaresults[i][7] + '</td> \
+				<!--<th scope="row"><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[i][0] + '">' + 
+				biomutaresults[i][0] + '</a></th>--> \
+				<td>' + biomutaresults[i][8] + '</a></td> \
+				<td>' + biomutaresults[i][9] + '</td> \
+				<td>' + biomutaresults[i][10] + '</td> \
+				<td>' + polyphen + '</td> \
+				<td>' + '<a href="' + pmidlink + '">' + pmid + '</a></td> \
+				<td>' + cancerType + '</td> \
+				<td>' + biomutaresults[i][14] + '</td> \
 				</tr>');
 		}
 		
@@ -107,7 +123,7 @@ function home(data) {
 		//console.log("eclipse :: length: " + data.length);
 		var foundflag = false;
 		for(var i = 0; i < data.length; i++) { 
-			if (data[i][1] == querygene) {
+			if (data[i][2] == querygene) {
 				foundflag = true;
 				biomutaresults.push(data[i]);
 			}
@@ -115,6 +131,11 @@ function home(data) {
 
 		// Print out results
 		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
+		$('#biomuta-header-table tbody').append(
+			'<tr><td>Gene:</td><td>'      + biomutaresults[1][2] + '<td></tr>\
+			 <tr><td>UniProtKB:</td><td>' + biomutaresults[1][0] + '<td></tr>\
+			 <tr><td>RefSeq:</td><td>'    + biomutaresults[1][4] + '<td></tr>'
+			);
 		if(biomutaresults.length > 0) { populateBiomutaTable(); $('biomuta-table').show();  $("#biomuta-table").show();}
 	
 		$('#biomuta-results').show();
