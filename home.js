@@ -129,9 +129,10 @@ function home(data) {
 		console.log(dataurl + "MUC16");
 
 	    $.getJSON(dataurl + querygene, null, function(data) {
+	    	$('#debug-area').append(data + '<br/>------<br/>');
          	$.each(data, function(p, post) {
-         	  $('#debug-area').append(post.genes);
-              console.log(post.genes); //Or whatever JSON keys you get back in return
+         	  $('#debug-area').append(post.Gene_Name);
+              console.log(post.Gene_Name); //Or whatever JSON keys you get back in return
               //Add them to a listview, or whatever you need to do.
          	});
      	});
