@@ -126,11 +126,14 @@ function home(data) {
 		$('#div_loadmore').hide();
 		$("#biomuta-table").hide();
 		var dataurl = "http://doitwithsass.com/jamal/genes/";
-console.log(dataurl + "MUC16");
-$.get( dataurl + "MUC16", function( data ) {
-  $( "#debug-area" ).html( data );
-  alert( "Load was performed." );
-});
+		console.log(dataurl + "MUC16");
+
+	    $.getJSON(dataurl + querygene, null, function(data) {
+         	$.each(data, function(p, post) {
+              console.log(post.genes); //Or whatever JSON keys you get back in return
+              //Add them to a listview, or whatever you need to do.
+         	});
+     	});
 
 		biomutaresults = [];
 		bookmark = 0;
