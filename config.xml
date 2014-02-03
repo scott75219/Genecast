@@ -28,6 +28,8 @@
     
 	<access origin="http://cbioportal.org" />
 	<access origin="http://uniprot.org" />
+	<access origin="http://doitwithsass.com" />
+
 	<content src="index.html" />
 	<preference name="Fullscreen" value="true" />
 	<preference name="WebViewBounce" value="true" />

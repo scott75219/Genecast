@@ -125,6 +125,13 @@ function home(data) {
 		var querygene = $('#txt_biomuta').val().toUpperCase();
 		$('#div_loadmore').hide();
 		$("#biomuta-table").hide();
+		var dataurl = "http://doitwithsass.com/jamal/genes/";
+console.log(dataurl + "MUC16");
+$.get( dataurl + "MUC16", function( data ) {
+  $( "#debug-area" ).html( data );
+  alert( "Load was performed." );
+});
+
 		biomutaresults = [];
 		bookmark = 0;
 		$('#biomuta-table tbody').html('');
@@ -184,7 +191,6 @@ function onLoad(){
 			        lines.push(data);
 			       
 			    }		
-			    //console.log("eclipse :: " + Object.keys(genehash));
 			    console.log("eclipse :: " + lines.length);
 
 			    console.log("file read in");
