@@ -17,6 +17,10 @@ h2 {
 	margin: 2px !important;
 }
 
+a {
+	color: black !important;	
+}
+
 #biomuta #controls .ui-input-text  {
 	width: 100px !important;
 	margin-right: 4x !important;

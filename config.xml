@@ -26,9 +26,10 @@
 	<icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="icons/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
     
-	<access origin="http://cbioportal.org" />
+    <access origin="*" />
+	<!--<access origin="http://cbioportal.org" />
 	<access origin="http://uniprot.org" />
-	<access origin="http://doitwithsass.com" />
+	<access origin="http://doitwithsass.com" />-->
 
 	<content src="index.html" />
 	<preference name="Fullscreen" value="true" />
