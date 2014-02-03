@@ -130,7 +130,7 @@ function home(data) {
 
 	    $.getJSON(dataurl + querygene, null, function(data) {
          	$.each(data, function(p, post) {
-         	  ('#debug-area').append(post.genes);
+         	  $('#debug-area').append(post.genes);
               console.log(post.genes); //Or whatever JSON keys you get back in return
               //Add them to a listview, or whatever you need to do.
          	});
