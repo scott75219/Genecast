@@ -126,6 +126,8 @@ function home() {
 	});
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
+		// Loading data notification
+		$.mobile.loading( 'show', {});
 		var querygene = $('#txt_biomuta').val().toUpperCase();
 		$('#div_loadmore').hide();
 		$("#biomuta-table").hide();
@@ -190,7 +192,7 @@ function home() {
 		    });
 			
 			$('#biomuta-results').show();
-
+			$.mobile.loading("hide");
 		});
 
 	});
