@@ -207,31 +207,6 @@ function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
 		
-		// Temporary load of hardcoded data
-	/*    var dataurl = "resources/data/BioMuta-short.csv";
-	    var genehash = {};
-	    var lines = [];
-
-	     $.get(dataurl, function(data) {
-	        	console.log("opened file");
-				var allTextLines = data.split(/\r\n|\n/);
-			    var headers = allTextLines[0].split(',');
-			    var genecnt = 0;
-			    console.log(lines.length);
-				var oldGene = '';
-			    for (var i=1; i<allTextLines.length; i++) {
-			    	
-			        var data = allTextLines[i].split(',');
-			        lines.push(data);
-			       
-			    }		
-			    console.log("eclipse :: " + lines.length);
-
-			    console.log("file read in");
-			//}
-     	});
-     	
-    	home(lines); */
     	home();
     }, false);
 }
