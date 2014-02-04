@@ -30,24 +30,22 @@
 
   </head>
   <body onload="onLoad()">
-  	<!--  FOR NOW SKIP MULTI-APP HOMEPAGE... GO DIRECTLY TO GeneCast Biomuta
-  	<div id="home" data-role="page">
-  		<div data-role="header">
-	  		<img src="resources/icons/hive_logo.png" width="109" height="35" id="hivelogo-backbtn"/>
-			<span id="screen-title">HIVE Reconnoiter</span>
-  		</div>
-  		<div data-role="content">
-			<a href="#biomuta"><img src="resources/images/reconnoiter-button.png" class="homemenu-buttons" id="reconnoiter-button"/></a>
-			<a href="#pubcast"><img src="resources/images/pubcast-button.png" class="homemenu-buttons" id="pubcast-button"/></a>
-		</div>
-  	</div> <!-- div home page -->
-  	
+		<!--  FOR NOW SKIP MULTI-APP HOMEPAGE... GO DIRECTLY TO GeneCast Biomuta
+		<div id="home" data-role="page">
+			<div data-role="header">
+		  		<img src="resources/icons/hive_logo.png" width="109" height="45" class="header-hivelogo"/>
+				<span id="screen-title">HIVE Reconnoiter</span>
+			</div>
+			<div data-role="content">
+				<a href="#biomuta"><img src="resources/images/reconnoiter-button.png" class="homemenu-buttons" id="reconnoiter-button"/></a>
+				<a href="#pubcast"><img src="resources/images/pubcast-button.png" class="homemenu-buttons" id="pubcast-button"/></a>
+			</div>
+		</div> <!-- div home page -->
+
 		<div id="biomuta" data-role="page">
 			<div data-role="header" data-theme="c"> 
-				<div>
-					<img src="resources/icons/hive_logo.png" width="100px" height="30px" id="hivelogo-backbtn" class="ui-btn-left" style="margin-left: -25px !important;"/>
-				</div>				
-					<h1>HIVE Genecast</h1>
+				<img src="resources/icons/hive_logo.png" width="110px" height="40px" class="ui-btn-left header-hivelogo"/>			
+				<h1>HIVE Genecast</h1>
 
 				<div data-role="navbar">
 					<ul>
@@ -110,10 +108,8 @@
 	<!-- Detail Page of BioMuta Gene's Selected Row -->
 	<div id="biomuta-detail" data-role="page" data-dialog="true">
 			<div data-role="header" data-theme="c"> 
-				<div>
-					<img src="resources/icons/hive_logo.png" width="100px" height="30px" id="hivelogo-backbtn" class="ui-btn-left" style="margin-left: -25px !important;"/>
-				</div>				
-					<h1>HIVE Genecast</h1>
+				<img src="resources/icons/hive_logo-back.png" width="110px" height="40px" class="ui-btn-left header-hivelogo"/>		
+				<h1>HIVE Genecast</h1>
 
 				<div data-role="navbar">
 					<ul>
@@ -135,10 +131,9 @@
 	
 	<div id="bioexpress" data-role="page">
 			<div data-role="header" data-theme="c"> 
-				<div>
-					<img src="resources/icons/hive_logo.png" width="100px" height="30px" id="hivelogo-backbtn" class="ui-btn-left" style="margin-left: -25px !important;"/>
-				</div>				
+				<img src="resources/icons/hive_logo.png" width="110px" height="40px" class="ui-btn-left header-hivelogo"/>		
 				<h1>HIVE Genecast</h1>
+
 				<div data-role="navbar">
 					<ul>
 						<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
@@ -154,17 +149,17 @@
 	
 			
 	<div id="cbioportal" data-role="page">
-  		<div data-role="header" data-position="fixed">
-	  		<img src="resources/icons/hive_logo-backbutton.png" width="109" height="35" id="hivelogo-backbtn"/>
-			<span id="screen-title">HIVE Genecast</span>
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
-					<!--<li><a href="#cbioportal" data-role="tab" data-prefetch>cBioPortal</a></li>-->
-					<li><a href="#nci-60" data-role="tab" data-prefetch>BioExpress</a></li>
-				</ul>
-			</div><!-- navbar -->
-		</div> <!-- header -->
+			<div data-role="header" data-theme="c"> 
+				<img src="resources/icons/hive_logo.png" width="110px" height="40px" class="ui-btn-left header-hivelogo"/>		
+				<h1>HIVE Genecast</h1>
+
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#biomuta" class="ui-btn-active ui-state-persist" data-role="tab" data-prefetch>BioMuta</a></li>
+						<li><a href="#bioexpress" data-role="tab"  data-prefetch>BioExpress</a></li>
+					</ul>
+				</div><!-- navbar -->
+			</div> <!-- header -->
   		
   		<div data-role="content">
 	  		<form class="form-vertical" id="form_gene_set" class="gene_set">
