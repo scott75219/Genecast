@@ -95,9 +95,12 @@ function home() {
 			// Text manipulations to fit data into table
 			var pmid = biomutaresults[i]['PMID'].split(";")[0];
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[i]['PMID'];
-			var polyphen   = polyphenNumeric(biomutaresults[i]['Polyphen_Pred']);
-			var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
-			var sourceType = truncate(biomutaresults[i]['Source'],5,true);
+			//var polyphen   = polyphenNumeric(biomutaresults[i]['Polyphen_Pred']);
+			//var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
+			//var sourceType = truncate(biomutaresults[i]['Source'],5,true);
+			var polyphen   = biomutaresults[i]['Polyphen_Pred'];
+			var cancerType = biomutaresults[i]['Cancer_Type'];
+			var sourceType = biomutaresults[i]['Source'];
 			
 			// print out table row
 			$('#biomuta-table tbody').append('<tr> \
