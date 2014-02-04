@@ -93,7 +93,7 @@ function home() {
 		$('btn_biomuta_loadmore').text('Load next 50 results');
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
 			// Text manipulations to fit data into table
-			var pmid = biomutaresults[i]['PMID'];
+			var pmid = biomutaresults[i]['PMID'].split(";")[0];
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[i]['PMID'];
 			var polyphen   = polyphenNumeric(biomutaresults[i]['Polyphen_Pred']);
 			var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
@@ -101,13 +101,13 @@ function home() {
 			
 			// print out table row
 			$('#biomuta-table tbody').append('<tr> \
-				<td>' + biomutaresults[i]['Position_A'] + '</td> \
+				<td><a href="#biomuta-detail" >' + biomutaresults[i]['Position_A'] + '</a></td> \
 				<td>' + biomutaresults[i]['Ref_A'] + '</td> \
 				<td>' + biomutaresults[i]['Var_A'] + '</td> \
-				<td><a href="#" data-role="button" data-inline="true" onClick="alert(\'' + biomutaresults[i][11] + '\')">' + polyphen + '</a></td> \
-				<td><a href="' + pmidlink + '" style="font-size: 10px;">' + pmid + '</a></td> \
-				<td><a href="#" data-role="button" data-inline="true" onClick="alert(\'' + biomutaresults[i]['Cancer_Type'] + '\')">' + cancerType + '</td> \
-				<td><a href="#" data-role="button" data-inline="true" onClick="alert(\'' + biomutaresults[i]['Source'] + '\')">' + sourceType + '</td> \
+				<td>' + polyphen + '</td> \
+				<td>' + pmid + '</td> \
+				<td>' + cancerType + '</td> \
+				<td>' + sourceType + '</td> \
 				</tr>');
 		}
 		
@@ -124,8 +124,9 @@ function home() {
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		var querygene = $('#txt_biomuta').val().toUpperCase();
-		//$('#div_loadmore').hide();
+		$('#div_loadmore').hide();
 		$("#biomuta-table").hide();
+		$('#biomuta-header-table tbody').html('');
 		bookmark = 0;
 		var dataurl = "http://doitwithsass.com/jamal/genes/";
 		console.log("eclipse :: requesting " + dataurl + "MUC16");
@@ -138,21 +139,53 @@ function home() {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
 		    });			
 			
-			$.each( data, function( key, val ) {
-			    console.log(key + " " + val['Gene_Name'] + " " + val['Accession'] + " " + val['Position_A']);
-			 });
 			  
 			$('#biomuta-table tbody').html('');
 	
 			// Print out results
 			$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
-			$('#biomuta-header-table tbody').html(
-				'<tr><td>Gene:</td><td>'      + biomutaresults[0]['Gene_Name'] + '</td></tr>\
-				 <tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt_AC'] + '">' +  biomutaresults[0]['UniProt_AC'] + '</td></tr>\
-				 <tr><td>RefSeq:</td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
+
+			if(biomutaresults.length > 0) { 
+				$('#biomuta-header-table tbody').html(
+					'<tr><td>Gene:</td><td>'      + biomutaresults[0]['Gene_Name'] + '</td></tr>\
+				 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt_AC'] + '">' +  biomutaresults[0]['UniProt_AC'] + '</td></tr>\
+				 	<tr><td>RefSeq:</td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
 				);
-			if(biomutaresults.length > 0) { $('#biomuta-table tbody').html(''); populateBiomutaTable(); $('biomuta-table').show();  $("#biomuta-table").show();}
-		
+				$('#biomuta-table tbody').html(''); 
+				populateBiomutaTable();  
+				$("#biomuta-table").show();
+			};
+			
+			// When click on a row show full detail page
+		    $('#biomuta-table tbody').on('click', 'tr', function() {
+		        var href = $(this).find("a").attr("href");
+		        if(href) {  
+		        	var idx = $(this).parent().children().index($(this));
+		        	//alert(idx);
+		        	$.mobile.navigate( href );
+					$('#biomuta-detail-table tbody').html(
+						'<tr><td>Gene:</td><td>'      + biomutaresults[idx]['Gene_Name'] + '</td></tr> \
+					 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[idx]['UniProt_AC'] + '">' +  biomutaresults[idx]['UniProt_AC'] + '</td></tr>\
+					 	<tr><td>RefSeq:</td><td>'    + biomutaresults[idx]['Accession'] + '</td></tr> \
+					 	<tr><td>SNV Position:</td><td>'    + biomutaresults[idx]['Genome_Position'] + '</td></tr> \
+					 	<tr><td>Pos(N):</td><td>'    + biomutaresults[idx]['Position_N'] + '</td></tr> \
+					 	<tr><td>Ref(N):</td><td>'    + biomutaresults[idx]['Ref_N'] + '</td></tr> \
+					 	<tr><td>Var(N):</td><td>'    + biomutaresults[idx]['Var_N'] + '</td></tr> \
+					 	<tr><td>Pos(A):</td><td>'    + biomutaresults[idx]['Position_A'] + '</td></tr> \
+					 	<tr><td>Ref(A):</td><td>'    + biomutaresults[idx]['Ref_A'] + '</td></tr> \
+					 	<tr><td>Var(A):</td><td>'    + biomutaresults[idx]['Var_A'] + '</td></tr> \
+					 	<tr><td>Polyphen Pred.:</td><td>'    + biomutaresults[idx]['Polyphen_Pred'] + '</td></tr> \
+					 	<tr><td>PMID:</td><td>'    + biomutaresults[idx]['PMID'] + '</td></tr> \
+					 	<tr><td>Cancer Type:</td><td>'    + biomutaresults[idx]['Cancer_Type'] + '</td></tr> \
+					 	<tr><td>Source:</td><td>'    + biomutaresults[idx]['Source'] + '</td></tr> \
+					 	<tr><td>Status:</td><td>'    + biomutaresults[idx]['Status'] + '</td></tr>'				 	
+					);
+					
+					// change to biomuta-detail page
+
+	        	};	
+		    });
+			
 			$('#biomuta-results').show();
 
 		});
