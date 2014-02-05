@@ -73,6 +73,9 @@ table {
  	background-color: rgba(225,225,225,1); 
 }
 
+#biomuta-table tbody tr {
+	font-size: 11px;
+}
 
 #homemenu {
 	position: absolute;
