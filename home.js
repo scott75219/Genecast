@@ -96,21 +96,22 @@ function home() {
 			var pmid = biomutaresults[i]['PMID'].split(";")[0];
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[i]['PMID'];
 			var polyphen   = polyphenNumeric(biomutaresults[i]['Polyphen_Pred']);
-			var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
+			//var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
 			var sourceType = truncate(biomutaresults[i]['Source'],5,true);
+			
+			var cancerType = biomutaresults[i]['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
 			//var polyphen   = biomutaresults[i]['Polyphen_Pred'];
-			//var cancerType = biomutaresults[i]['Cancer_Type'];
 			//var sourceType = biomutaresults[i]['Source'];
 			
 			// print out table row
-			$('#biomuta-table tbody').append('<tr> \
+			$('#biomuta-table tbody').append('<tr  style="font-size: 9px;"> \
 				<td><a href="#biomuta-detail" >' + biomutaresults[i]['Position_A'] + '</a></td> \
 				<td>' + biomutaresults[i]['Ref_A'] + '</td> \
 				<td>' + biomutaresults[i]['Var_A'] + '</td> \
 				<td>' + polyphen + '</td> \
-				<td style="font-size: 9px;">' + pmid + '</td> \
-				<td>' + cancerType + '</td> \
-				<td>' + sourceType + '</td> \
+				<td style="font-size: 10px;">' + pmid + '</td> \
+				<td style="font-size: 10px;">' + cancerType + '</td> \
+				<td style="font-size: 10px;">' + sourceType + '</td> \
 				</tr>');
 		}
 		
