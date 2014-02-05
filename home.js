@@ -32,9 +32,21 @@ function home() {
 	$('#queryResultsArea').hide();
 	$('#textarea_gene_set').val('');
 	$("#select_gene_set option:first").attr('selected','selected');
+	
 	// $('#homemenu').show();
 	$('#biomuta-table').freezeHeader();
-	// Initialize input buttons
+/*	var oTable = $('#biomuta-table').dataTable( {
+	    "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bSort": false,
+        "bInfo": false,
+ 		"sScrollX": "100%",
+ 		//"sScrollXInner": "150%",
+ 		"bScrollCollapse": false
+ 	} );
+ 	new FixedColumns( oTable);
+	// Initialize input buttons*/
 	
 	
 	// biomuta global variables
@@ -97,8 +109,8 @@ function home() {
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[i]['PMID'];
 			var polyphen   = polyphenNumeric(biomutaresults[i]['Polyphen_Pred']);
 			//var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
-			var sourceType = truncate(biomutaresults[i]['Source'],5,true);
-			
+			var sourceType = truncate(biomutaresults[i]['Source'],8,true);
+			//var cancerType = biomutaresults[i]['Cancer_Type'];
 			var cancerType = biomutaresults[i]['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
 			//var polyphen   = biomutaresults[i]['Polyphen_Pred'];
 			//var sourceType = biomutaresults[i]['Source'];

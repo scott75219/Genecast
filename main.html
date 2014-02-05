@@ -11,6 +11,9 @@
 	<script type="text/javascript" charset="utf-8" src="resources/js/jquery.mobile-1.3.2.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="resources/js/json2.js"></script>
 	<script type="text/javascript" charset="utf-8" src="resources/js/jquery.freezeheader.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/dataTables/FixedHeader.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/dataTables/FixedColumns.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/dataTables/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="resources/js/d3.min.js"></script>
 
   	<script type="text/javascript" charset="utf-8" src="crosscancer.js"></script>
@@ -78,14 +81,16 @@
 				<div id="biomuta-results" style="display: none;">
 					<hr style="width.result: 90%;"/>
 					
-
-					<div id="results-msg">	
-						
-					</div>
+					<div id="results-msg"></div>
+					<!-- Displays the common fields of the gene -->
 					<table id="biomuta-header-table" class="ui-table ui-responsive table-stroke table-stripe">
 						<tbody>
 						</tbody>
 					</table>
+					<!-- Graph and Analytics-->
+					<div class="graphs-area"></div>
+					
+					<!-- Table of results -->
 					<div><p style="color: #818181; font-size: 10px; font-weight: bold;">Tip: Tap on a row for detailed information.</p></div>
 					<table id="biomuta-table" class="ui-table ui-responsive table-stroke table-stripe responsive">
 						<thead>
