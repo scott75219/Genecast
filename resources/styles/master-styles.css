@@ -7,6 +7,10 @@
 	background: #FFF0C5;
 }
 
+.ui-content {
+	padding-top: 5px !important;	
+}
+
 h1 {
 	color: #000 !important;
 	/*font-size: 1.3em !important;*/
@@ -15,10 +19,15 @@ h1 {
 h2 {
 	font-size: 1.2em !important;
 	margin: 2px !important;
+	padding-top: 5px !important;
 }
 
 a {
 	color: black !important;	
+}
+
+#controls {
+	padding-left: 20px;	
 }
 
 #biomuta #controls .ui-input-text  {

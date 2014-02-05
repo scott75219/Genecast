@@ -128,7 +128,7 @@ function home() {
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
-		var querygene = $('#txt_biomuta').val().toUpperCase();
+		var querygene = $('#txt_biomuta').val().trim().toUpperCase();
 		$('#div_loadmore').hide();
 		$("#biomuta-table").hide();
 		$('#biomuta-header-table tbody').html('');

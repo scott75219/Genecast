@@ -464,15 +464,7 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                 .attr("text-anchor", "middle")
                                 .attr("font-weight", "bold")
                                 .attr("font-size", "10px")
-                                .attr("class", function(d, i) { return d.studyId + " annotation-cna"; })
-                                /*.each(function(d) {
-                                    var qOpts = _.extend(defaultQTipOptions, {
-                                        content: metaData.cancer_studies[d.studyId].has_cna_data
-                                            ? "CNA data available"
-                                            : "CNA data not available"
-                                    });
-                                    $(this).qtip(qOpts);
-                                })*/;
+                                .attr("class", function(d, i) { return d.studyId + " annotation-cna"; });
 
 
                             var abbrGroups = histogram.append("g");
@@ -493,13 +485,7 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                     var yLoc = histBottom + verticalCirclePadding*4;
                                     return "rotate(-60, " + xLoc + ", " + yLoc +  ")";
                                 })
-                                .attr("class", function(d, i) { return d.studyId + " annotation-abbr"; })
-                                /*.each(function(d, i) {
-                                    var qOpts = _.extend(defaultQTipOptions, {
-                                        content: metaData.cancer_studies[d.studyId].name
-                                    });
-                                    $(this).qtip(qOpts);
-                                })*/ ;
+                                .attr("class", function(d, i) { return d.studyId + " annotation-abbr"; });
 
                             var yAxisEl = histogram.append("g")
                                 .attr("class", "axis")
