@@ -232,7 +232,6 @@ function home() {
 			$('#biomuta-results').show();
 			$.mobile.loading("hide");
 		});
-
 	});
 	
 	// END -- BIOMUTA

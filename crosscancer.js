@@ -533,6 +533,7 @@ console.log('eclipse :: histData.length: ' + + histData.length);
                                     break;
                             }
 
+
                             var legendWidth = 125;
                             var numOfLegends = legendData.length;
                             var legBegPoint = (width-paddingLeft-paddingRight-(numOfLegends*legendWidth))/2;
