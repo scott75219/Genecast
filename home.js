@@ -104,14 +104,14 @@ function home() {
 			//var sourceType = biomutaresults[i]['Source'];
 			
 			// print out table row
-			$('#biomuta-table tbody').append('<tr  style="font-size: 9px;"> \
+			$('#biomuta-table tbody').append('<tr  style="font-size: 10px;"> \
 				<td><a href="#biomuta-detail" >' + biomutaresults[i]['Position_A'] + '</a></td> \
 				<td>' + biomutaresults[i]['Ref_A'] + '</td> \
 				<td>' + biomutaresults[i]['Var_A'] + '</td> \
 				<td>' + polyphen + '</td> \
-				<td style="font-size: 10px;">' + pmid + '</td> \
-				<td style="font-size: 10px;">' + cancerType + '</td> \
-				<td style="font-size: 10px;">' + sourceType + '</td> \
+				<td>' + pmid + '</td> \
+				<td>' + cancerType + '</td> \
+				<td>' + sourceType + '</td> \
 				</tr>');
 		}
 		
@@ -165,6 +165,8 @@ function home() {
 			
 			// When click on a row show full detail page
 		    $('#biomuta-table tbody').on('click', 'tr', function() {
+		    	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
+		    	$('#biomuta-results').hide();
 		        var href = $(this).find("a").attr("href");
 		        if(href) {  
 		        	var idx = $(this).parent().children().index($(this));
@@ -191,6 +193,8 @@ function home() {
 					// change to biomuta-detail page
 
 	        	};	
+	        	$.mobile.loading("hide");
+
 		    });
 			
 			$('#biomuta-results').show();
