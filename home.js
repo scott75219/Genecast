@@ -119,7 +119,8 @@ function home() {
 		if(bookmark <= biomutaresults.length  ) { $('#div_loadmore').show(); }
 		else { $('#div_loadmore').hide(); }
 	}
-	
+	        	
+		        	
 	$(document).on('click', '#btn_biomuta_loadmore', function(e){
 		populateBiomutaTable();	
 		
