@@ -77,6 +77,11 @@ table {
 	font-size: 11px;
 }
 
+
+#biomuta-detail-table a {
+	color: #0000FF !important;
+}
+
 #homemenu {
 	position: absolute;
 	top: 40%;
