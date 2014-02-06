@@ -52,19 +52,7 @@ function home() {
 	
 	// $('#homemenu').show();
 	$('#biomuta-table').freezeHeader();
-/*	var oTable = $('#biomuta-table').dataTable( {
-	    "bPaginate": false,
-        "bLengthChange": false,
-        "bFilter": false,
-        "bSort": false,
-        "bInfo": false,
- 		"sScrollX": "100%",
- 		//"sScrollXInner": "150%",
- 		"bScrollCollapse": false
- 	} );
- 	new FixedColumns( oTable);
-	// Initialize input buttons*/
-	
+
 	
 	// biomuta global variables
 	var biomutaresults = [];
@@ -216,7 +204,7 @@ function home() {
 					var snvlink = biomutaresults[idx]['Genome_Position'].indexOf(':')>=0 ? '<a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=human&position='+biomutaresults[idx]['Genome_Position']+'">'+biomutaresults[idx]['Genome_Position']+'</a>' : biomutaresults[idx]['Genome_Position'];
 
 					// PMID link
-					var pmidlink = '<a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[idx]['PMID']+'">'+biomutaresults[idx]['PMID']+'</a>';
+					var pmidlink = biomutaresults[idx]['PMID']!='-' ? '<a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[idx]['PMID']+'">'+biomutaresults[idx]['PMID']+'</a>' : biomutaresults[idx]['PMID']; 
 					
 					// PolyPhen color code
 					var polyphen   = polyphenConvert(biomutaresults[idx]['Polyphen_Pred'],'colors');
