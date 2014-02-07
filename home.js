@@ -170,7 +170,7 @@ function home() {
 	});
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
-		if(checkInternetConn() == false) { device.exitApp(); return 0;}
+		if(checkInternetConn() == false) { return 0;}
 		
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
@@ -271,7 +271,7 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-	if(checkInternetConn() == false) { device.exitApp(); return 0;}
+	if(checkInternetConn() == false) { navigator.app.exitApp(); return 0;}
 	else {
  
 	    document.addEventListener('deviceready', function(){
