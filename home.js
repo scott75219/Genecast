@@ -8,7 +8,7 @@
 function checkInternetConn(){
 		$.ajax({url: "http://doitwithsass.com/jamal",
 	        type: "HEAD",
-	        timeout:2000,
+	        timeout:3000,
 	        statusCode: {
 	            200: function (response) {
 	                return true;

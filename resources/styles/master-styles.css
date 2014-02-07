@@ -71,12 +71,17 @@ table {
 .table-stripe thead th {
  	border-bottom: 3px solid rgba(0, 0, 0, 0.1);
  	background-color: rgba(225,225,225,1); 
+ 		text-align:center;
+
 }
 
 #biomuta-table tbody tr {
 	font-size: 11px;
 }
 
+#biomuta-table tbody td {
+	text-align:center;
+}
 
 #biomuta-detail-table a {
 	color: #0000FF !important;
