@@ -275,9 +275,10 @@ function onLoad(){
 	else {
  
  		document.addEventListener('backbutton', function(){
+ 				history.back(); 
  				$('#biomuta-results').show();	
-	$(document).live('pagebeforeshow', function() {
-    	alert($.mobile.activePage.attr('id'));
+				$(document).live('pagebeforeshow', function() {
+			    	alert($.mobile.activePage.attr('id'));
 	});
  			
  		}, false);
