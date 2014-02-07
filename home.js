@@ -251,11 +251,11 @@ function onLoad(){
 		// Check internet connection availability
 var networkState = navigator.connection.type;
     if (networkState == Connection.NONE){
-                alert('No Internet');
+              //  alert('No Internet');
 
     }else{
 
-                   alert('Internet Connection there');
+                 //  alert('Internet Connection there');
                 }		 
     	home();
     }, false);
