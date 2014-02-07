@@ -15,16 +15,18 @@ function checkInternetConn(){
 	            },
 	            400: function (response) {
 	                alert('Unable to connect to server. Check Internet connection.');
+					 return false;	
 	            },
 	            404: function (response) {
 	                alert('Unable to connect to server. Server may be down temporarily.');
+	            	 return false;	
 	            },
 	            0: function (response) {
 	                alert('Unable to connect to server. Check Internet connection.');
+	               	return false;	
 	            }              
 	        }
 	 });
-	 return false;	
 }
 
 function truncate(string,len,showEllipsis){
@@ -168,7 +170,7 @@ function home() {
 	});
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
-		if(checkInternetConn() == false) return 0;
+		if(checkInternetConn() == false) { device.exitApp(); return 0;}
 		
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
@@ -178,7 +180,6 @@ function home() {
 		$('#biomuta-header-table tbody').html('');
 		bookmark = 0;
 		var dataurl = "http://doitwithsass.com/jamal/genes/";
-		console.log("eclipse :: requesting " + dataurl + "MUC16");
 
 	    $.getJSON(dataurl + querygene, null, function(data) {
 	    	biomutaresults = data;
@@ -270,13 +271,15 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-	if(checkInternetConn() == false) return 0;
+	if(checkInternetConn() == false) { device.exitApp(); return 0;}
+	else {
  
-    document.addEventListener('deviceready', function(){
-	    console.log('eclipse :: device is ready');
-		// Check internet connection availability
-    	home();
-    }, false);
+	    document.addEventListener('deviceready', function(){
+		    console.log('eclipse :: device is ready');
+			// Check internet connection availability
+	    	home();
+	    }, false);
+	 }
 }
 
 
