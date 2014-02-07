@@ -249,14 +249,7 @@ function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
 		// Check internet connection availability
-var networkState = navigator.connection.type;
-    if (networkState == Connection.NONE){
-              //  alert('No Internet');
-
-    }else{
-
-                 //  alert('Internet Connection there');
-                }		 
+	 
     	home();
     }, false);
 }
