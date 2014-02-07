@@ -249,7 +249,16 @@ function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
 		// Check internet connection availability
-	 
+	 var connectionStatus = false;
+
+$(document).on('pagebeforeshow', '#biomuta', function () {
+    setInterval(function () {
+        connectionStatus = navigator.onLine ? 'online' : 'offline';
+    }, 100);
+    $(document).on('click', '#check-connection', function () {
+        alert(connectionStatus);
+    });
+});
     	home();
     }, false);
 }
