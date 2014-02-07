@@ -4,6 +4,29 @@
 // Home screen of app
 //
 
+// Check connectivity
+function checkInternetConn(){
+		$.ajax({url: "http://doitwithsass.com/jamal",
+	        type: "HEAD",
+	        timeout:2000,
+	        statusCode: {
+	            200: function (response) {
+	                return true;
+	            },
+	            400: function (response) {
+	                alert('Unable to connect to server. Check Internet connection.');
+	            },
+	            404: function (response) {
+	                alert('Unable to connect to server. Server may be down temporarily.');
+	            },
+	            0: function (response) {
+	                alert('Unable to connect to server. Check Internet connection.');
+	            }              
+	        }
+	 });
+	 return false;	
+}
+
 function truncate(string,len,showEllipsis){
 	if (string.length > len)
 		if (showEllipsis == false) return string.substring(0,len);
@@ -145,6 +168,8 @@ function home() {
 	});
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
+		if(checkInternetConn() == false) return 0;
+		
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		var querygene = $('#txt_biomuta').val().trim().toUpperCase();
@@ -157,7 +182,6 @@ function home() {
 
 	    $.getJSON(dataurl + querygene, null, function(data) {
 	    	biomutaresults = data;
-			//console.log("eclipse :: " + data.length + " elements. JSON: " + JSON.stringify(data[0]) + ", GeneName: " + data[0]['Gene_Name']);
 		   
 		   data = data.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
@@ -246,21 +270,7 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-	$.ajax({url: "http://doitwithsass.com/jamal",
-	        type: "HEAD",
-	        timeout:1000,
-	        statusCode: {
-	            200: function (response) {
-	                alert('Working!');
-	            },
-	            400: function (response) {
-	                alert('Unable to connect to server. Check Internet connection.');
-	            },
-	            0: function (response) {
-	                alert('Not working! 0');
-	            }              
-	        }
-	 });
+	if(checkInternetConn() == false) return 0;
  
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
