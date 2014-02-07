@@ -246,19 +246,25 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
+	$.ajax({url: "http://doitwithsass.com/jamal",
+	        type: "HEAD",
+	        timeout:1000,
+	        statusCode: {
+	            200: function (response) {
+	                alert('Working!');
+	            },
+	            400: function (response) {
+	                alert('Unable to connect to server. Check Internet connection.');
+	            },
+	            0: function (response) {
+	                alert('Not working! 0');
+	            }              
+	        }
+	 });
+ 
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
 		// Check internet connection availability
-	 var connectionStatus = false;
-
-$(document).on('pagebeforeshow', '#biomuta', function () {
-    setInterval(function () {
-        connectionStatus = navigator.onLine ? 'online' : 'offline';
-    }, 100);
-    $(document).on('click', '#check-connection', function () {
-        alert(connectionStatus);
-    });
-});
     	home();
     }, false);
 }
