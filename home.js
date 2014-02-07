@@ -274,6 +274,14 @@ function onLoad(){
 	if(checkInternetConn() == false) { navigator.app.exitApp(); return 0;}
 	else {
  
+ 		document.addEventListener('backbutton', function(){
+ 				$('#biomuta-results').show();	
+	$(document).live('pagebeforeshow', function() {
+    	alert($.mobile.activePage.attr('id'));
+	});
+ 			
+ 		}, false);
+ 		
 	    document.addEventListener('deviceready', function(){
 		    console.log('eclipse :: device is ready');
 			// Check internet connection availability
