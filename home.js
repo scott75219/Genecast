@@ -271,7 +271,7 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-	if(checkInternetConn() == false) { onLoad(); }
+	if(checkInternetConn() == true) {
  
  		/*		document.addEventListener('backbutton', function(){
  				history.back(); 
@@ -286,6 +286,7 @@ function onLoad(){
 		// Check Internet connection availability
     	home();
     }, false);
+    }
 }
 
 
