@@ -182,6 +182,8 @@ function home() {
 		var dataurl = "http://doitwithsass.com/jamal/genes/";
 
 	    $.getJSON(dataurl + querygene, null, function(data) {
+	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); return; }
+	    	
 	    	biomutaresults = data;
 		   
 		   data = data.sort(function(a, b) {
@@ -195,6 +197,7 @@ function home() {
 			$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
 
 			if(biomutaresults.length > 0) { 
+				$('#biomuta-invalid-msg').hide(); 
 				$('#biomuta-header-table tbody').html(
 					'<tr><td>Gene:</td><td>'      + biomutaresults[0]['Gene_Name'] + '</td></tr>\
 				 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt_AC'] + '">' +  biomutaresults[0]['UniProt_AC'] + '</td></tr>\

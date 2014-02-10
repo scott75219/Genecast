@@ -87,6 +87,11 @@ table {
 	color: #0000FF !important;
 }
 
+#biomuta-invalid-msg {
+	display: none;
+	color: red;	
+}
+
 #homemenu {
 	position: absolute;
 	top: 40%;
