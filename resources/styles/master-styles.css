@@ -89,6 +89,7 @@ table {
 
 #biomuta-invalid-msg {
 	display: none;
+	font-size: 11px;
 	color: red;	
 }
 

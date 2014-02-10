@@ -176,23 +176,25 @@ function home() {
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		var querygene = $('#txt_biomuta').val().trim().toUpperCase();
 		$('#div_loadmore').hide();
+    	$('#biomuta-results').hide();
+		$("#results-msg").html('');
 		$("#biomuta-table").hide();
 		$('#biomuta-header-table tbody').html('');
+		$('#biomuta-table tbody').html('');
+
 		bookmark = 0;
 		var dataurl = "http://doitwithsass.com/jamal/genes/";
 
 	    $.getJSON(dataurl + querygene, null, function(data) {
-	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); return; }
-	    	
+
 	    	biomutaresults = data;
-		   
-		   data = data.sort(function(a, b) {
+	    	console.log('eclipse :: datalength: ' + biomutaresults.length);
+	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); $.mobile.loading("hide"); return; }	   
+		   	data = data.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
 		    });			
 			
-			  
-			$('#biomuta-table tbody').html('');
-	
+			  	
 			// Print out results
 			$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
 
@@ -274,7 +276,8 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-	if(checkInternetConn() == true) {
+	if(checkInternetConn() == false) { navigator.app.exitApp(); return 0;}
+	else {
  
  		/*		document.addEventListener('backbutton', function(){
  				history.back(); 
@@ -284,12 +287,12 @@ function onLoad(){
 			});
  			}, false);*/
  		
-    document.addEventListener('deviceready', function(){
-	    console.log('eclipse :: device is ready');
-		// Check Internet connection availability
-    	home();
-    }, false);
-    }
+	    document.addEventListener('deviceready', function(){
+		    console.log('eclipse :: device is ready');
+			// Check Internet connection availability
+	    	home();
+	    }, false);
+	 }
 }
 
 
