@@ -271,7 +271,7 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-	while (checkInternetConn() == false) { 1 = 1 }
+	if(checkInternetConn() == false) { onLoad(); }
  
  		/*		document.addEventListener('backbutton', function(){
  				history.back(); 
