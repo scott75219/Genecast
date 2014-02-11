@@ -5,12 +5,13 @@
 //
 
 // Check connectivity
-function checkInternetConn(){
+function checkInternetConn(dest){
 		$.ajax({url: "http://doitwithsass.com/jamal",
 	        type: "HEAD",
 	        timeout:3000,
 	        statusCode: {
 	            200: function (response) {
+	            	if(dest == 'home') { home(); }
 	                return true;
 	            },
 	            400: function (response) {
@@ -23,7 +24,6 @@ function checkInternetConn(){
 	            },
 	            0: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again.');
-	                onLoad();
 	               	return false;	
 	            }              
 	        }
@@ -281,7 +281,7 @@ function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
 		// Check Internet connection availability
-    	if(checkInternetConn() == true) { home(); }
+    	checkInternetConn('home');
     }, false);
 
 }
