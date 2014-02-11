@@ -215,6 +215,7 @@ function home() {
 			
 			// When click on a row show full detail page
 		    $('#biomuta-table tbody').on('click', 'tr', function() {
+		    	alert('clicked row');
 		    	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		    	$('#biomuta-results').hide();
 		        var href = $(this).find("a").attr("href");
