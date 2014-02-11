@@ -1,4 +1,32 @@
-phonegap_tutorial
+HIVE GeneCast
 =================
 
-Experimenting with phonegap app development
+Contributors: Jamal Theodore and the HIVE team.
+Project lead: Raja Mazumder and Vahan Simonyan
+
+Contact: http://hive.biochemistry.gwu.edu/dna.cgi?cmd=contact
+
+Requirements:
+- Android mobile phone with SDK version of at least 2.2
+- SDK versions 2.2 and lower: Native browser will not work to download .apk file, Mozilla Firefox will be needed until application is on Google Play
+- Wifi connection or active cellphone signal
+
+
+What is HIVE GeneCast?
+---------------------
+HIVE GeneCast enables users to browse human disease associated single-nucleotide variations (SNVs).  This will allow researches to quickly look up mutation data on-the-go as well as view graphical analytics.
+
+
+Troubeshooting guide
+--------------------
+If Unknown Source warning is displayed on device then:
+	go to Settings -> Security -> Unknown sources -> Allow installation of apps from unknown sources
+
+If file is renamed as .txt file by your browser then
+	rename file as .apk extension
+
+If download HIVE GeneCast cannot be found then
+	go to the screen where all your apps are shown -> click on the Downloads icon to see the app
+	
+If clicking on link from email does not work
+	copy link http://hive.biochemistry.gwu.edu/tools/HivePubcast/HIVE_GeneCast.apk and paste URL in browser -> Enter -> Download in desired location.

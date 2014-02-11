@@ -23,6 +23,7 @@ function checkInternetConn(){
 	            },
 	            0: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again.');
+	                onLoad();
 	               	return false;	
 	            }              
 	        }
@@ -276,23 +277,13 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-	if(checkInternetConn() == false) { navigator.app.exitApp(); return 0;}
-	else {
- 
- 		/*		document.addEventListener('backbutton', function(){
- 				history.back(); 
- 				$('#biomuta-results').show();	
-				$(document).live('pagebeforeshow', function() {
-			    	alert($.mobile.activePage.attr('id'));
-			});
- 			}, false);*/
- 		
-	    document.addEventListener('deviceready', function(){
-		    console.log('eclipse :: device is ready');
-			// Check Internet connection availability
-	    	home();
-	    }, false);
-	 }
+
+    document.addEventListener('deviceready', function(){
+	    console.log('eclipse :: device is ready');
+		// Check Internet connection availability
+    	if(checkInternetConn() == true) { home(); }
+    }, false);
+
 }
 
 
