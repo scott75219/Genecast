@@ -125,8 +125,8 @@ function home() {
 	
 	// UI event listeners
 	$("#hivelogo-backbtn").on("touchend", function() {
-		 history.go(-1);
-    	 //navigator.app.backHistory();
+		 $.mobile.navigate('#biomuta');
+		 $('#queryResultsArea').show();
  	});
  	
  	// menu buttons
