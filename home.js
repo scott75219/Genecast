@@ -72,7 +72,7 @@ function home() {
 	console.log("eclipse :: inside home()");
 	var img_logoonly = "resources/icons/hive_logo.png";
 	var img_logoback = "resources/icons/hive_logo-backbutton.png";
-	$('#hivelogo-backbtn').attr("src",img_logoonly);
+	//$('#hivelogo-backbtn').attr("src",img_logoonly);
     $('#reconnoiter-screen').hide();
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
@@ -126,7 +126,7 @@ function home() {
 	// UI event listeners
 	$("#hivelogo-backbtn").on("touchend", function() {
 		 history.go(-1);
-    	navigator.app.backHistory();
+    	 //navigator.app.backHistory();
  	});
  	
  	// menu buttons
@@ -173,7 +173,7 @@ function home() {
 	});
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
-		if(checkInternetConn() == false) { return 0;}
+		checkInternetConn();
 		
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
@@ -271,7 +271,6 @@ function home() {
 	});
 	
 	// END -- BIOMUTA
-
 		
 	console.log("eclipse :: end home()");
 }
