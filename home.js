@@ -220,7 +220,7 @@ function home() {
 		        var href = $(this).find("a").attr("href");
 		        if(href) {  
 		        	var idx = $(this).parent().children().index($(this));
-		        	//alert(idx);
+		        	alert(idx);
 		        	$.mobile.navigate( href );
 		        	// Convert status to a symbol and description (Silver, Gold)
 		        	var statussymbol = statusConvert(biomutaresults[idx]['Status']);
