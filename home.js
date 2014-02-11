@@ -11,7 +11,7 @@ function checkInternetConn(dest){
 	        timeout:8000,
 	        statusCode: {
 	            200: function (response) {
-	            	//if(dest == 'home') { home(); }
+	            	if(dest == 'home') { home(); }
 	                return true;
 	            }, 
 	            400: function (response) {
