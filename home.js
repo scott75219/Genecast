@@ -8,25 +8,25 @@
 function checkInternetConn(dest){
 		$.ajax({url: "http://doitwithsass.com/jamal",
 	        type: "HEAD",
-	        timeout:8000,
+	        timeout:4000,
 	        statusCode: {
 	            200: function (response) {
 	            	if(dest == 'home') { home(); }
 	                return true;
 	            }, 
 	            400: function (response) {
-	                alert('Unable to connect to server. Check Internet connection and try again. (400)');
+	                alert('Unable to connect to server. Check Internet connection and try again. (Code 400)');
 	                checkInternetConn('home');
 					return false;	
 	            },
 	            404: function (response) {
-	                alert('Unable to connect to server. Server may be down temporarily. (404)');
+	                alert('Unable to connect to server. Server may be down temporarily. (Code 404)');
 	                checkInternetConn('home');
 	            	 return false;	
 	            },
 	            0: function (response) {
 	 	           checkInternetConn('home');
-	                alert('Unable to connect to server. Check Internet connection and try again. (0)');
+	                alert('Unable to connect to server. Check Internet connection and try again. (Code 0)');
 	               	return false;	
 	            }              
 	        }
