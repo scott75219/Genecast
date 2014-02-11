@@ -15,15 +15,18 @@ function checkInternetConn(dest){
 	                return true;
 	            }, 
 	            400: function (response) {
-	                alert('Unable to connect to server. Check Internet connection and try again.');
-					 return false;	
+	                alert('Unable to connect to server. Check Internet connection and try again. (400)');
+	                checkInternetConn('home');
+					return false;	
 	            },
 	            404: function (response) {
-	                alert('Unable to connect to server. Server may be down temporarily.');
+	                alert('Unable to connect to server. Server may be down temporarily. (404)');
+	                checkInternetConn('home');
 	            	 return false;	
 	            },
 	            0: function (response) {
-	                alert('Unable to connect to server. Check Internet connection and try again.');
+	 	           checkInternetConn('home');
+	                alert('Unable to connect to server. Check Internet connection and try again. (0)');
 	               	return false;	
 	            }              
 	        }
