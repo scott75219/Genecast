@@ -67,12 +67,8 @@ function polyphenConvert(pred, mode){
 	return mode == 'colors' ? colorsymbol : numbrsymbol;
 }
 
-// UI event listeners
-$("#hivelogo-backbtn").on("touchend", function() {
-	 $('#queryResultsArea').show();
-	 $.mobile.navigate('#biomuta');
-});
- 	
+
+
 function home() {
 	console.log("eclipse :: inside home()");
 	var img_logoonly = "resources/icons/hive_logo.png";
@@ -108,7 +104,18 @@ function home() {
     });
     
     $(".defaultText").blur();
-    
+
+	// UI event listeners
+	$("#hivelogo-backbtn").on("touchend", function() {
+    	$('#biomuta-results').show();
+		$.mobile.navigate('#biomuta');
+	});
+
+/*	document.addEventListener("backbutton", function(){
+    	$('#biomuta-results').show();
+		$.mobile.navigate('#biomuta');
+	}, false);
+ */	
 	// Page event listeners
 	$("div[data-role=page]").bind("pagebeforeshow", function (e, data) {
     	$.mobile.silentScroll(0);
@@ -229,7 +236,7 @@ function home() {
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		var querygene = $('#txt_biomuta').val().trim().toUpperCase();
 		//$('#div_loadmore').hide();
-    	//$('#biomuta-results').hide();
+    	$('#biomuta-results').hide();
 		$("#results-msg").html('');
 		//$("#biomuta-table").hide();
 		$('#biomuta-header-table tbody').html('');
@@ -239,14 +246,12 @@ function home() {
 		var dataurl = "http://doitwithsass.com/jamal/genes/";
 
 	    $.getJSON(dataurl + querygene, null, function(data) {
-
 	    	biomutaresults = data;
 	    	console.log('eclipse :: datalength: ' + biomutaresults.length);
 	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); $.mobile.loading("hide"); return; }	   
 		   	data = data.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
 		    });			
-			
 			  	
 			// Print out results
 			$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
