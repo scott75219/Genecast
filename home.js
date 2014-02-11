@@ -8,12 +8,12 @@
 function checkInternetConn(dest){
 		$.ajax({url: "http://doitwithsass.com/jamal",
 	        type: "HEAD",
-	        timeout:3000,
+	        timeout:8000,
 	        statusCode: {
 	            200: function (response) {
 	            	if(dest == 'home') { home(); }
 	                return true;
-	            },
+	            }, 
 	            400: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again.');
 					 return false;	
@@ -121,10 +121,9 @@ function home() {
 	});
 	
 	// UI event listeners
-	$("#hivelogo-backbtn").click(function() {
-		home();
-		
-		return false;
+	$("#hivelogo-backbtn").on("touchend", function() {
+		 history.go(-1);
+    	navigator.app.backHistory();
  	});
  	
  	// menu buttons
