@@ -68,6 +68,12 @@ function polyphenConvert(pred, mode){
 	return mode == 'colors' ? colorsymbol : numbrsymbol;
 }
 
+// UI event listeners
+$("#hivelogo-backbtn").on("touchend", function() {
+	 $('#queryResultsArea').show();
+	 $.mobile.navigate('#biomuta');
+});
+ 	
 function home() {
 	console.log("eclipse :: inside home()");
 	var img_logoonly = "resources/icons/hive_logo.png";
@@ -122,12 +128,6 @@ function home() {
         return false;
     	});
 	});
-	
-	// UI event listeners
-	$("#hivelogo-backbtn").on("touchend", function() {
-		 $.mobile.navigate('#biomuta');
-		 $('#queryResultsArea').show();
- 	});
  	
  	// menu buttons
 	// BIOMUTA
