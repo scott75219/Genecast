@@ -11,7 +11,7 @@ function checkInternetConn(dest){
 	        timeout:8000,
 	        statusCode: {
 	            200: function (response) {
-	            	if(dest == 'home') { home(); }
+	            	//if(dest == 'home') { home(); }
 	                return true;
 	            }, 
 	            400: function (response) {
@@ -276,11 +276,10 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad(){
-
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
 		// Check Internet connection availability
-    	checkInternetConn('home');
+		checkInternetConn('home');
     }, false);
 
 }
