@@ -111,11 +111,12 @@ function home() {
 		$.mobile.navigate('#biomuta');
 	});
 
-/*	document.addEventListener("backbutton", function(){
+	document.addEventListener("backbutton", function(){
     	$('#biomuta-results').show();
-		$.mobile.navigate('#biomuta');
+		history.go(-1);
+    	navigator.app.backHistory();
 	}, false);
- */	
+ 	
 	// Page event listeners
 	$("div[data-role=page]").bind("pagebeforeshow", function (e, data) {
     	$.mobile.silentScroll(0);
