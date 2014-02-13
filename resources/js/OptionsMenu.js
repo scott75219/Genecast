@@ -2,9 +2,9 @@ var OptionsMenu = function(menu) {
     var detectIconSize = function() {
         var width = screen.width;
         if (width >= 640) {
-            return 72;
+            return 54;
         } else if (width >= 470) {
-            return 48;
+            return 35;
         } else {
             return 24;
         }
