@@ -4,9 +4,9 @@ var OptionsMenu = function(menu) {
         if (width >= 640) {
             return 36;
         } else if (width >= 470) {
-            return 24;
+            return 54;
         } else {
-            return 14;
+            return 38;
         }
     };
 
@@ -40,8 +40,10 @@ var OptionsMenu = function(menu) {
             if (item.image) {
                 var imgItem = document.createElement("img");
                 imgItem.setAttribute("src", item.image);
-                imgItem.setAttribute("width", iconSize);
-                imgItem.setAttribute("height", iconSize);
+                if(item.image != "resources/images/drawable-hdpi/stat_sys_upload_anim0.png")  {
+                	imgItem.setAttribute("width", iconSize);
+                	imgItem.setAttribute("height", iconSize);
+                }
                 menuItem.appendChild(imgItem);
             }
             menuItem.appendChild(document.createElement("br"));
