@@ -63,4 +63,5 @@ var OptionsMenu = function(menu) {
             menuDiv.style.display = 'none';
         }
     }, false);
+        
 };

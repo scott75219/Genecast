@@ -298,7 +298,7 @@ function onLoad(){
 	
 	    var onUpdate = function() {
 	        console.log("update");
-	        alert("Update");
+	        alert("No new update available.");
 	    };
 	
 	    var optionsmenu = new OptionsMenu({
