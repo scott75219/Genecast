@@ -71,6 +71,36 @@ function polyphenConvert(pred, mode){
 
 function home() {
 	console.log("eclipse :: inside home()");
+	
+	
+	    var onSettings = function() {
+	        console.log("settings");
+	        alert("settings");
+	    };
+	
+	    var onHelp = function() {
+	        console.log("help");
+	        alert("help");
+	    };
+	
+	    var optionsmenu = new OptionsMenu({
+	        id: "optionsmenu",
+	        items: [ 
+	            [ {
+	                label: "Settings",
+	                image: "/resources/images/drawable-hdpi/settings.png",
+	                action: onSettings
+	            }, 
+	            {
+	                label: "Help",
+	                image: "resources/images/drawable-hdpi/help.png",
+	                action: onHelp
+	            } ]
+	        ]
+	    });
+	    }, false);
+	    	
+	
 	var img_logoonly = "resources/icons/hive_logo.png";
 	var img_logoback = "resources/icons/hive_logo-backbutton.png";
 	//$('#hivelogo-backbtn').attr("src",img_logoonly);
@@ -286,34 +316,6 @@ function home() {
 function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
-
-		
-	    var onSettings = function() {
-	        console.log("settings");
-	        alert("settings");
-	    };
-	
-	    var onHelp = function() {
-	        console.log("help");
-	        alert("help");
-	    };
-	
-	    var optionsmenu = new OptionsMenu({
-	        id: "optionsmenu",
-	        items: [ 
-	            [ {
-	                label: "Settings",
-	                image: "/resources/images/drawable-hdpi/settings.png",
-	                action: onSettings
-	            }, 
-	            {
-	                label: "Help",
-	                image: "resources/images/drawable-hdpi/help.png",
-	                action: onHelp
-	            } ]
-	        ]
-	    });
-	    }, false);
 
 		// Check Internet connection availability
 		checkInternetConn('home');
