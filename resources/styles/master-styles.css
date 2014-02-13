@@ -75,12 +75,21 @@ table {
 
 }
 
+#biomuta-header-table tbody tr {
+	font-size: 11px;	
+}
+
 #biomuta-table tbody tr {
 	font-size: 11px;
 }
 
-#biomuta-table tbody td {
+#biomuta-table tbody  {
 	text-align:center;
+}
+
+#biomuta-detail-table #td-status {
+	height: 30px;
+  	line-height: 30px;
 }
 
 #biomuta-detail-table a {

@@ -224,7 +224,7 @@ function home() {
 			 	<tr><td>PMID:</td><td>'    + pmidlink + '</td></tr> \
 			 	<tr><td>Cancer Type:</td><td>'    + biomutaresults[idx]['Cancer_Type'] + '</td></tr> \
 			 	<tr><td>Source:</td><td>'    + biomutaresults[idx]['Source'] + '</td></tr> \
-			 	<tr><td>Status:</td><td>'    + statussymbol + '</td></tr>'				 	
+			 	<tr><td>Status:</td><td id="td-status">'    + statussymbol + '</td></tr>'				 	
 			);
 			// change to biomuta-detail page
     	};	
@@ -262,9 +262,9 @@ function home() {
 			if(biomutaresults.length > 0) { 
 				$('#biomuta-invalid-msg').hide(); 
 				$('#biomuta-header-table tbody').html(
-					'<tr><td>Gene:</td><td>'      + biomutaresults[0]['Gene_Name'] + '</td></tr>\
-				 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt_AC'] + '">' +  biomutaresults[0]['UniProt_AC'] + '</td></tr>\
-				 	<tr><td>RefSeq:</td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
+					//'<tr><td>Gene:</td><td>'      + biomutaresults[0]['Gene_Name'] + '</td>\
+				 	'<tr><td><b>UniProtKB:<b/></td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt_AC'] + '">' +  biomutaresults[0]['UniProt_AC'] + '</td>\
+				 	<td><b>RefSeq:</b></td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
 				);
 				$('#biomuta-table tbody').html(''); 
 				populateBiomutaTable();  

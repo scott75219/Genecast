@@ -2,9 +2,9 @@ var OptionsMenu = function(menu) {
     var detectIconSize = function() {
         var width = screen.width;
         if (width >= 640) {
-            return 54;
+            return 36;
         } else if (width >= 470) {
-            return 25;
+            return 24;
         } else {
             return 14;
         }
@@ -32,7 +32,7 @@ var OptionsMenu = function(menu) {
             var menuItem = document.createElement("td");
             menuItem.setAttribute("align", "center");
             menuItem.setAttribute("width", width);
-            menuItem.setAttribute("style", "font-size: 11px; color: white; border-top: 1px solid grey; border-right: 1px solid grey; background-color: black");
+            menuItem.setAttribute("style", "padding: 5px; font-size: 11px; color: white; border-top: 1px solid grey; border-right: 1px solid grey; background-color: black");
             menuItem.addEventListener("click", item.action, false);
             menuItem.addEventListener("click", function() {
                     document.getElementById(menu.id).style.display = 'none';
