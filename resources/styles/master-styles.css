@@ -8,6 +8,7 @@
 }
 
 .ui-content {
+	font-size: 0.95em !important;
 	padding: 5px !important;	
 }
 
@@ -20,6 +21,11 @@ h2 {
 	font-size: 1.2em !important;
 	margin: 2px !important;
 	padding-top: 5px !important;
+}
+
+h3 {
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
 }
 
 a {

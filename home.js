@@ -286,11 +286,14 @@ function home() {
 function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
-
+		// Check Internet connection availability
+		// then go to home screen
+		checkInternetConn('home');
 		
+		// Options menu
 	    var onAbout = function() {
 	        console.log("about");
-	        alert("About");
+			$.mobile.navigate('#about');
 	    };
 	
 	    var onUpdate = function() {
@@ -315,8 +318,7 @@ function onLoad(){
 	    });
 	    }, false);
 
-		// Check Internet connection availability
-		checkInternetConn('home');
+
 }
 
 

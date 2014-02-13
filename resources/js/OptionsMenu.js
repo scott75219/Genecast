@@ -32,7 +32,7 @@ var OptionsMenu = function(menu) {
             var menuItem = document.createElement("td");
             menuItem.setAttribute("align", "center");
             menuItem.setAttribute("width", width);
-            menuItem.setAttribute("style", "padding: 5px; font-size: 11px; color: white; border-top: 1px solid grey; border-right: 1px solid grey; background-color: black");
+            menuItem.setAttribute("style", "padding: 5px; font-size: 11px; color: white; border-top: 2px solid grey; border-right: 0.1em solid grey; background-color: black");
             menuItem.addEventListener("click", item.action, false);
             menuItem.addEventListener("click", function() {
                     document.getElementById(menu.id).style.display = 'none';
