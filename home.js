@@ -303,7 +303,7 @@ function onLoad(){
 	        items: [ 
 	            [ {
 	                label: "Settings",
-	                image: "/resources/images/drawable-hdpi/settings.png",
+	                image: "resources/images/drawable-hdpi/settings.png",
 	                action: onSettings
 	            }, 
 	            {
