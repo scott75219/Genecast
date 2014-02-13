@@ -286,15 +286,16 @@ function home() {
 function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
-		// Check Internet connection availability
-		checkInternetConn('home');
+
 		
 	    var onSettings = function() {
 	        console.log("settings");
+	        alert("settings");
 	    };
 	
 	    var onHelp = function() {
 	        console.log("help");
+	        alert("help");
 	    };
 	
 	    var optionsmenu = new OptionsMenu({
@@ -302,7 +303,7 @@ function onLoad(){
 	        items: [ 
 	            [ {
 	                label: "Settings",
-	                image: "resources/images/drawable-hdpi/settings.png",
+	                image: "/resources/images/drawable-hdpi/settings.png",
 	                action: onSettings
 	            }, 
 	            {
@@ -314,6 +315,8 @@ function onLoad(){
 	    });
 	    }, false);
 
+		// Check Internet connection availability
+		checkInternetConn('home');
 }
 
 
