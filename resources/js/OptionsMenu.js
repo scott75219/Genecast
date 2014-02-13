@@ -4,9 +4,9 @@ var OptionsMenu = function(menu) {
         if (width >= 640) {
             return 54;
         } else if (width >= 470) {
-            return 35;
+            return 25;
         } else {
-            return 24;
+            return 14;
         }
     };
 
@@ -23,7 +23,7 @@ var OptionsMenu = function(menu) {
         var menuTableRowData = menuTableRow.appendChild(document.createElement("td"));
         var rowTable = document.createElement("table");
         rowTable.setAttribute("style", "width: 100%;");
-        rowTable.setAttribute("cellpadding", "0");
+        rowTable.setAttribute("cellpadding", "15");
         rowTable.setAttribute("cellspacing", "0");
         var rowTableRow = rowTable.appendChild(document.createElement("tr"));
         var width = Math.ceil(100 / menu.items[i].length) + "%";
@@ -32,7 +32,7 @@ var OptionsMenu = function(menu) {
             var menuItem = document.createElement("td");
             menuItem.setAttribute("align", "center");
             menuItem.setAttribute("width", width);
-            menuItem.setAttribute("style", "padding: 5px; font-size: 11px; color: white; border-top: 1px solid grey; border-right: 1px solid grey; background-color: black");
+            menuItem.setAttribute("style", "font-size: 11px; color: white; border-top: 1px solid grey; border-right: 1px solid grey; background-color: black");
             menuItem.addEventListener("click", item.action, false);
             menuItem.addEventListener("click", function() {
                     document.getElementById(menu.id).style.display = 'none';
