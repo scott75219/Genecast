@@ -288,28 +288,28 @@ function onLoad(){
 	    console.log('eclipse :: device is ready');
 
 		
-	    var onSettings = function() {
-	        console.log("settings");
-	        alert("settings");
+	    var onAbout = function() {
+	        console.log("about");
+	        alert("About");
 	    };
 	
-	    var onHelp = function() {
-	        console.log("help");
-	        alert("help");
+	    var onUpdate = function() {
+	        console.log("update");
+	        alert("Update");
 	    };
 	
 	    var optionsmenu = new OptionsMenu({
 	        id: "optionsmenu",
 	        items: [ 
 	            [ {
-	                label: "Settings",
-	                image: "resources/images/drawable-hdpi/settings.png",
-	                action: onSettings
+	                label: "About",
+	                image: "resources/images/drawable-hdpi/ic_dialog_info.png",
+	                action: onAbout
 	            }, 
 	            {
-	                label: "Help",
-	                image: "resources/images/drawable-hdpi/help.png",
-	                action: onHelp
+	                label: "Update",
+	                image: "resources/images/drawable-hdpi/stat_sys_upload_anim0.png",
+	                action: onUpdate
 	            } ]
 	        ]
 	    });
