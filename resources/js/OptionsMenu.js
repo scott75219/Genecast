@@ -6,7 +6,7 @@ var OptionsMenu = function(menu) {
         } else if (width >= 470) {
             return 48;
         } else {
-            return 36;
+            return 24;
         }
     };
 
@@ -32,7 +32,7 @@ var OptionsMenu = function(menu) {
             var menuItem = document.createElement("td");
             menuItem.setAttribute("align", "center");
             menuItem.setAttribute("width", width);
-            menuItem.setAttribute("style", "color: white; font-weight: bold; border-top: 1px solid grey; border-right: 1px solid grey; background-color: black");
+            menuItem.setAttribute("style", "padding: 5px; font-size: 11px; color: white; border-top: 1px solid grey; border-right: 1px solid grey; background-color: black");
             menuItem.addEventListener("click", item.action, false);
             menuItem.addEventListener("click", function() {
                     document.getElementById(menu.id).style.display = 'none';

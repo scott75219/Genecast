@@ -43,7 +43,7 @@ function truncate(string,len,showEllipsis){
 
 // Takes the status description and replaces with the appropriate symbol image
 function statusConvert(status) {
-	var stat = status == 'Silver' ? '<img src="resources/images/Silver.png" height="30px" width="30px"/> ' : '<img src="resources/images/gold.png" height="30px" width="30px"/> ';
+	var stat = status == 'Silver' ? '<img src="resources/images/Silver.png" height="30px" width="30px"/>  Small Study' : '<img src="resources/images/gold.png" height="30px" width="30px"/>  Large Study';
 	return stat;  	
 }
 
