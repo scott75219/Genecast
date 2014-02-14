@@ -107,14 +107,14 @@ function home() {
 
 	// UI event listeners
 	$("#hivelogo-backbtn").on("touchend", function() {
-    	$('#biomuta-results').toggle();
+    	$('#biomuta-results').show();
 		$.mobile.navigate('#biomuta');
 	});
 
 	document.addEventListener("backbutton", onBackKeyDown,true);
 	
 	function onBackKeyDown(){
-    	$('#biomuta-results').show();
+    	$('#biomuta-results').toggle();
 		history.go(-1);
     	navigator.app.backHistory();
 	}
