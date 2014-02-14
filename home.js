@@ -107,7 +107,7 @@ function home() {
 
 	// UI event listeners
 	$("#hivelogo-backbtn").on("touchend", function() {
-    	$('#biomuta-results').show();
+    	$('#biomuta-results').toggle();
 		$.mobile.navigate('#biomuta');
 	});
 
