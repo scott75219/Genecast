@@ -114,7 +114,7 @@ function home() {
 	document.addEventListener("backbutton", onBackKeyDown,true);
 	
 	function onBackKeyDown(){
-    	//$('#biomuta-results').toggle();
+    	if(biomutaresults.length>0) { $('#biomuta-results').show(); }
 		history.go(-1);
     	navigator.app.backHistory();
 	}
