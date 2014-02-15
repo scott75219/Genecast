@@ -138,8 +138,34 @@ function home() {
     	});
 	});
  	
- 	// menu buttons
 	// BIOMUTA
+	
+	// generate biomuta graph
+	function generateBiomutaGraph() {
+		// categorize frequencies per cancer type
+		var frequencies = [];
+		var freq = {};
+		$.each(biomutaresults, function(indx, obj){
+				var cancertype = obj['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
+				console.log(obj['Gene_Name'] + " " + cancertype);
+				if(!(cancertype in freq)) {freq[cancertype] = 0; }
+				else {freq[cancertype]++; }
+		});
+		
+		// sort
+	 /*  	frequencies.push(freq.sort(function(a, b) {
+	        return (parseInt(a[cancertype],10) > parseInt(b[cancertype],10)) ? 1 : ((parseInt(a[cancertype],10) < parseInt(b[cancertype],10)) ? -1 : 0);
+	    }));			
+		*/	  	
+		for (var key in freq) {
+	 		if (freq.hasOwnProperty(key)) {
+	    		console.log(key + " -> " + freq[key]);
+	  		}
+		}
+		
+	}
+	
+	// generate biomuta table
 	function populateBiomutaTable () {
 		// Load only 25 results at a time
 		
@@ -269,6 +295,9 @@ function home() {
 				$('#biomuta-table tbody').html(''); 
 				populateBiomutaTable();  
 				$("#biomuta-table").show();
+				
+				// Construct graph
+				generateBiomutaGraph();
 			};
 			
 			$('#biomuta-results').show();
