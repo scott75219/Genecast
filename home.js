@@ -148,10 +148,17 @@ function home() {
 		
 		// organize data into javascript object
 		$.each(biomutaresults, function(indx, obj){
-				var cancertype = obj['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
-				//console.log(obj['Gene_Name'] + " " + cancertype);
-				if(!(cancertype in freq)) {freq[cancertype] = 1; }
-				else {freq[cancertype]++; }
+			var cancertype = obj['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
+			if(cancertype == 'OTHERS' && obj['Cancer_Type'].match(/^[Cc]ancer(.*)/) == null) {
+				//console.log('eclipse :: cancer? ' + obj['Cancer_Type'] + ' - ' + obj['Cancer_Type'].match(/^[Cc]ancer(.*)/));
+				cancertype = truncate(obj['Cancer_Type'].substr(0,obj['Cancer_Type'].indexOf(' ')),8,false);
+				/*if(obj['Cancer_Type'] == 'Unknown Cancer Type [OTHERS]') { cancertype = 'Unk.'; }
+				if else (obj['Cancer_Type'] == 'Cancer[OTHERS]' || obj['Cancer_Type'] == 'Cancer [OTHERS]')
+				else {cancertype = truncate(obj['Cancer_Type'],7,true); }*/
+			}
+			//console.log(obj['Gene_Name'] + " " + obj['Cancer_Type']);
+			if(!(cancertype in freq)) {freq[cancertype] = 1; }
+			else {freq[cancertype]++; }
 		});
   	
 		for (var key in freq) {
