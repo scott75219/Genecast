@@ -34,6 +34,7 @@
 
 	<content src="index.html" />
 	<preference name="WebViewBounce" value="true" />
+	< preference name="orientation" value="portrait" />
 	
 	<preference name="BackgroundColor" value="0xEE00FF"/>
 	<preference name="LoadingDialog" value="Loading. Please wait..."/>
