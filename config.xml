@@ -3,14 +3,14 @@
         xmlns:gap = "http://phonegap.com/ns/2.0"
         id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
-        version   = "0.4.0">
+        version   = "0.5.0">
 
     <!-- versionCode is optional and Android only -->
 	
     <name>HIVE Genecast</name>
 
     <description>
-        Query HIVE cancer gene data.
+        Human gene variation information for mobile devices.
     </description>
 
     <author href="https://j-mal.com" email="github.congos@xoxy.net">
