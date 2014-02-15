@@ -183,7 +183,8 @@ function home() {
 			// accessor functions 
 			var barLabel = function(d) { return d['Cancer Type']; };
 			var barValue = function(d) { return parseFloat(d['Frequency']); };
-			 
+			window.onorientationchange = function() { setTimeout(functionName, 0); var maxBarWidth = $(window).width()- (barLabelWidth*2); redraw();};
+
 			// sorting
 			var sortedData = data.sort(function(a, b) {
 			 return d3.descending(barValue(a), barValue(b));
