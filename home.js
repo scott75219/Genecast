@@ -163,7 +163,7 @@ function home() {
   	
 		for (var key in freq) {
 	 		if (freq.hasOwnProperty(key)) {
-	    		console.log(key + " -> " + freq[key]);
+	    		//console.log(key + " -> " + freq[key]);
 	    		frequencies.push({'Cancer Type': key, 'Frequency': freq[key]});
 	  		}
 		}
@@ -372,7 +372,7 @@ function home() {
 
 	    $.getJSON(dataurl + querygene, null, function(data) {
 	    	biomutaresults = data;
-	    	console.log('eclipse :: datalength: ' + biomutaresults.length);
+	    	//console.log('eclipse :: datalength: ' + biomutaresults.length);
 	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); $.mobile.loading("hide"); return; }	   
 		   	data = data.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
