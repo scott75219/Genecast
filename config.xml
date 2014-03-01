@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/2.0"
         id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
-        version   = "0.5.0">
+        version   = "0.7.0">
 
     <!-- versionCode is optional and Android only -->
 	
@@ -27,10 +27,10 @@
 	<icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="icons/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
     
-    <access origin="*" />
-	<!--<access origin="http://cbioportal.org" />-->
+    <access origin="http://hive.biochemistry.gwu.edu" />
+	<!--<access origin="http://cbioportal.org" />
 	<access origin="http://gwu.edu" />
-	<access origin="http://doitwithsass.com" />
+	<access origin="http://doitwithsass.com" />-->
 
 	<content src="index.html" />
 	<preference name="WebViewBounce" value="true" />
