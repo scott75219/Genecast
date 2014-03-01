@@ -334,7 +334,7 @@ function home() {
 			var polyphen   = polyphenConvert(biomutaresults[idx]['Polyphen_Pred'],'colors');
 			
 			$('#biomuta-detail-table tbody').html(
-				'<tr><td>Gene:</td><td>'     + biomutaresults[idx]['Gene_Name'] + '</td></tr> \
+				'<tr><td>Gene:</td><td>'     + biomutaresults[idx]['Gene_Name '] + '</td></tr> \
 			 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/blast/?about=' + biomutaresults[idx]['UniProt AC'] + '">' +  biomutaresults[idx]['UniProt AC'] + '</a></td></tr>\
 			 	<tr><td>RefSeq:</td><td>'    + accessionlink + '</td></tr> \
 			 	<tr><td>SNV Position:</td><td>'    + snvlink + '</td></tr> \
