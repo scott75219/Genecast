@@ -54,7 +54,7 @@ var OptionsMenu = function(menu) {
     }
     menuDiv.appendChild(menuTable);
     document.body.appendChild(menuDiv);
-    
+    alert('loaded menuDiv');
     // Listen for the menubutton event to hide/show the menu
     document.addEventListener("menubutton", function() {
     	console.log('eclipse:: clicked menu button');
