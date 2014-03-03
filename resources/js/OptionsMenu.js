@@ -54,9 +54,8 @@ var OptionsMenu = function(menu) {
     }
     menuDiv.appendChild(menuTable);
     document.body.appendChild(menuDiv);
-    alert('loaded menuDiv');
-    // Listen for the menubutton event to hide/show the menu
-    document.addEventListener("menubutton", function() {
+    
+function onMenuKeyDown() {
     	console.log('eclipse:: clicked menu button');
     	alert('menu button clicked! display from ' +  menuDiv.style.display);
         if (menuDiv.style.display != 'none') {
@@ -64,6 +63,9 @@ var OptionsMenu = function(menu) {
         } else {
             menuDiv.style.display = 'block';
         }
-    }, false);
+};
+    alert('loaded menuDiv2');
+    // Listen for the menubutton event to hide/show the menu
+    document.addEventListener("menubutton", onMenuKeyDown, false);
         
 };
