@@ -2,7 +2,7 @@
 //
 
 function doMenu() {
-	alert('hit menu');	
+	alert('hit menu2');	
 }
 
 // Check connectivity
