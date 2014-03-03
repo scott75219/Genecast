@@ -420,7 +420,7 @@ function home() {
 
 // Wait for device API libraries to load
 //
-function onLoad(){
+function onLoad() {
 	// Options menu
     var onAbout = function() {
         console.log("eclipse:: clicked About menu option");
@@ -449,20 +449,22 @@ function onLoad(){
         ]
     });*/
 
-    
-	function onDeviceReady() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+	
+	}
+
+function onDeviceReady() {
 		console.log('eclipse :: device is ready');
 		document.addEventListener('menubutton', doMenu, false);
 		// Check Internet connection availability
 		// then go to home screen
 		checkInternetConn('home');
-
-		function doMenu() {
-			alert('hit menu3');	
-		}
-	}
-
-
 }
+
+
+function doMenu() {
+	alert('hit menu3');	
+}
+
 
 
