@@ -1,10 +1,6 @@
 // Home screen of app
 //
 
-function doMenu() {
-	alert('hit menu2');	
-}
-
 // Check connectivity
 function checkInternetConn(dest){
 		$.ajax({url: "http://hive.biochemistry.gwu.edu",
@@ -452,14 +448,19 @@ function onLoad(){
             } ]
         ]
     });*/
-    document.addEventListener('deviceready', function(){
-	    console.log('eclipse :: device is ready');
-	    
-	    
+
+    
+	function onDeviceReady() {
+		console.log('eclipse :: device is ready');
+		document.addEventListener('menubutton', doMenu, false);
 		// Check Internet connection availability
 		// then go to home screen
 		checkInternetConn('home');
-	    }, false);
+
+		function doMenu() {
+			alert('hit menu3');	
+		}
+	}
 
 
 }
