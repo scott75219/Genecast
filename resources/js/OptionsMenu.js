@@ -54,6 +54,6 @@ var OptionsMenu = function(menu) {
     }
     menuDiv.appendChild(menuTable);
     document.body.appendChild(menuDiv);
-    alert('loaded menuDiv');
-	alert('current menu display: ' + menuDiv.style.display);
+    alert('loaded menuDiv2');
+	
 };
