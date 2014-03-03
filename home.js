@@ -3,6 +3,7 @@
 
 // Home screen of app
 //
+var menuDiv;
 function onMenuKeyDown() {
     	console.log('eclipse:: clicked menu button');
     	alert('menu button clicked! display from ' +  menuDiv.style.display);
@@ -26,7 +27,7 @@ function optionsMenu(menu) {
     };
 
     var iconSize = detectIconSize();
-    var menuDiv = document.createElement("div");
+    menuDiv = document.createElement("div");
     menuDiv.setAttribute("id", menu.id);
     menuDiv.setAttribute("style", "display: none; position: fixed; bottom: 0; width: 100%; z-index: 1000;");
     var menuTable = document.createElement("table");
