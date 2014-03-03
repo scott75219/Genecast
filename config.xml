@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/2.0"
         id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
-        version   = "0.7.0">
+        version   = "0.8.0">
 
     <!-- versionCode is optional and Android only -->
 	

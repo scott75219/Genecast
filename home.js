@@ -431,13 +431,14 @@ function onLoad(){
 		
 		// Options menu
 	    var onAbout = function() {
-	        console.log("about");
+	        console.log("eclipse:: clicked About menu option");
 			$.mobile.navigate('#about');
 	    };
 	
 	    var onUpdate = function() {
-	        console.log("update");
-	        alert("No new update available.");
+	        console.log("eclipse:: clicked Update menu option");
+	        window.open('https://hive.biochemistry.gwu.edu/tools/HiveGenecast/HIVEGenecast.apk','_system');
+	        //alert("No new update available.");
 	    };
 	
 	    var optionsmenu = new OptionsMenu({
