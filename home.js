@@ -452,7 +452,17 @@ function home() {
 function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
-	    
+	        // Listen for the menubutton event to hide/show the menu
+    document.addEventListener("menubutton", function() {
+    	console.log('eclipse:: clicked menu button');
+    	alert('menu button clicked! display from ' +  menuDiv.style.display);
+        if (menuDiv.style.display != 'none') {
+            menuDiv.style.display = 'none';
+        } else {
+            menuDiv.style.display = 'block';
+        }
+    }, false);
+        alert('event listener created');
 		// Check Internet connection availability
 		// then go to home screen
 		checkInternetConn('home');
