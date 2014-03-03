@@ -74,6 +74,8 @@ function polyphenConvert(pred, mode){
 
 function home() {
 	console.log("eclipse :: inside home()");
+	document.addEventListener('menubutton',doMenu,false);
+	
 	var img_logoonly = "resources/icons/hive_logo.png";
 	var img_logoback = "resources/icons/hive_logo-backbutton.png";
 	//$('#hivelogo-backbtn').attr("src",img_logoonly);
@@ -452,7 +454,7 @@ function onLoad(){
     });*/
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
-	    document.addEventListener('menubutton',doMenu,false);
+	    
 	    
 		// Check Internet connection availability
 		// then go to home screen
