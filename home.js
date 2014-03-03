@@ -421,6 +421,14 @@ function home() {
 // Wait for device API libraries to load
 //
 function onLoad() {
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+	
+	}
+
+function onDeviceReady() {
+	console.log('eclipse :: device is ready');
+	
 	// Options menu
     var onAbout = function() {
         console.log("eclipse:: clicked About menu option");
@@ -433,7 +441,7 @@ function onLoad() {
         //alert("No new update available.");
     };
 
- /*   var optionsmenu = new OptionsMenu({
+    var optionsmenu = new OptionsMenu({
         id: "optionsmenu",
         items: [ 
             [ {
@@ -447,15 +455,8 @@ function onLoad() {
                 action: onUpdate
             } ]
         ]
-    });*/
+    });
 
-    document.addEventListener("deviceready", onDeviceReady, false);
-	
-	}
-
-function onDeviceReady() {
-		console.log('eclipse :: device is ready');
-		document.addEventListener('menubutton', doMenu, false);
 		// Check Internet connection availability
 		// then go to home screen
 		checkInternetConn('home');

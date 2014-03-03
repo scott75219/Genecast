@@ -53,11 +53,11 @@ var OptionsMenu = function(menu) {
         menuTableRowData.appendChild(rowTable);
     }
     menuDiv.appendChild(menuTable);
-   // document.body.appendChild(menuDiv);
+   document.body.appendChild(menuDiv);
     
 function onMenuKeyDown() {
     	console.log('eclipse:: clicked menu button');
-    	alert('menu button clicked! display from ' +  menuDiv.style.display);
+    	//alert('menu button clicked! display from ' +  menuDiv.style.display);
         if (menuDiv.style.display != 'none') {
             menuDiv.style.display = 'none';
         } else {
