@@ -71,7 +71,6 @@ function polyphenConvert(pred, mode){
 }
 
 
-
 function home() {
 	console.log("eclipse :: inside home()");
 	var img_logoonly = "resources/icons/hive_logo.png";
