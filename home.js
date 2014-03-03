@@ -90,7 +90,34 @@ function home() {
 	var biomutaresults = [];
 	var bookmark = 0;
 	
-	
+	// Options menu
+    var onAbout = function() {
+        console.log("eclipse:: clicked About menu option");
+		$.mobile.navigate('#about');
+    };
+
+    var onUpdate = function() {
+        console.log("eclipse:: clicked Update menu option");
+        window.open('https://hive.biochemistry.gwu.edu/tools/HiveGenecast/HIVEGenecast.apk','_system');
+        //alert("No new update available.");
+    };
+
+    var optionsmenu = new OptionsMenu({
+        id: "optionsmenu",
+        items: [ 
+            [ {
+                label: "About",
+                image: "resources/images/drawable-hdpi/ic_dialog_info.png",
+                action: onAbout
+            }, 
+            {
+                label: "Update",
+                image: "resources/images/drawable-hdpi/stat_sys_upload_anim0.png",
+                action: onUpdate
+            } ]
+        ]
+    });
+	    	
 	$(".defaultText").focus(function(srcc) {
         if ($(this).val() == $(this)[0].title) {
             $(this).removeClass("defaultTextActive");
@@ -425,37 +452,10 @@ function home() {
 function onLoad(){
     document.addEventListener('deviceready', function(){
 	    console.log('eclipse :: device is ready');
+	    
 		// Check Internet connection availability
 		// then go to home screen
 		checkInternetConn('home');
-		
-		// Options menu
-	    var onAbout = function() {
-	        console.log("eclipse:: clicked About menu option");
-			$.mobile.navigate('#about');
-	    };
-	
-	    var onUpdate = function() {
-	        console.log("eclipse:: clicked Update menu option");
-	        window.open('https://hive.biochemistry.gwu.edu/tools/HiveGenecast/HIVEGenecast.apk','_system');
-	        //alert("No new update available.");
-	    };
-	
-	    var optionsmenu = new OptionsMenu({
-	        id: "optionsmenu",
-	        items: [ 
-	            [ {
-	                label: "About",
-	                image: "resources/images/drawable-hdpi/ic_dialog_info.png",
-	                action: onAbout
-	            }, 
-	            {
-	                label: "Update",
-	                image: "resources/images/drawable-hdpi/stat_sys_upload_anim0.png",
-	                action: onUpdate
-	            } ]
-	        ]
-	    });
 	    }, false);
 
 
