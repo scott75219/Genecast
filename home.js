@@ -70,7 +70,7 @@ function polyphenConvert(pred, mode){
 
 function home() {
 	console.log("eclipse :: inside home()");
-	document.addEventListener('menubutton',doMenu,false);
+	//document.addEventListener('menubutton',doMenu,false);
 	
 	var img_logoonly = "resources/icons/hive_logo.png";
 	var img_logoback = "resources/icons/hive_logo-backbutton.png";
@@ -418,17 +418,9 @@ function home() {
 	console.log("eclipse :: end home()");
 }
 
-// Wait for device API libraries to load
-//
-function onLoad() {
-
-    document.addEventListener("deviceready", onDeviceReady, false);
-	
-	}
 
 function onDeviceReady() {
 	console.log('eclipse :: device is ready');
-	
 	// Options menu
     var onAbout = function() {
         console.log("eclipse:: clicked About menu option");
@@ -457,14 +449,21 @@ function onDeviceReady() {
         ]
     });
 
-		// Check Internet connection availability
-		// then go to home screen
-		checkInternetConn('home');
+	// Check Internet connection availability
+	// then go to home screen
+	checkInternetConn('home');
 }
 
 
 function doMenu() {
 	alert('hit menu3');	
+}
+
+// Wait for device API libraries to load
+//
+function onLoad() {
+	console.log('eclipse:: onLoad called');
+    document.addEventListener("deviceready", onDeviceReady, false);
 }
 
 
