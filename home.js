@@ -270,7 +270,7 @@ function home() {
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
 			// Text manipulations to fit data into table
 			var pmid = biomutaresults[i]['PMID'].split(";")[0];// AMIR
-			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[i]['PMID'];
+			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
 			var polyphen   = polyphenConvert(biomutaresults[i]['Polyphen_Pred'],'colors');
 			//var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
 			var sourceType = truncate(biomutaresults[i]['Source'],8,true);
@@ -326,7 +326,8 @@ function home() {
 			var snvlink = biomutaresults[idx]['Genome_Position'].indexOf(':')>=0 ? '<a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=human&position='+biomutaresults[idx]['Genome_Position']+'">'+biomutaresults[idx]['Genome_Position']+'</a>' : biomutaresults[idx]['Genome_Position'];
 
 			// PMID link
-			var pmidlink = biomutaresults[idx]['PMID']!='-' ? '<a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[idx]['PMID']+'">'+biomutaresults[idx]['PMID']+'</a>' : biomutaresults[idx]['PMID']; 
+			var pmid = biomutaresults[idx]['PMID'].split(";")[0];
+			var pmidlink = pmid!='-' ? '<a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid+'">'+pmid+'</a>' : pmid; 
 			
 			// PolyPhen color code
 			var polyphen   = polyphenConvert(biomutaresults[idx]['Polyphen_Pred'],'colors');
