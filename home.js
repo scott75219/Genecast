@@ -269,7 +269,7 @@ function home() {
 		$('btn_biomuta_loadmore').text('Load next 50 results');
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
 			// Text manipulations to fit data into table
-			var pmid = biomutaresults[i]['PMID'] //.split(";")[0]; AMIR
+			var pmid = biomutaresults[i]['PMID'].split(";")[0];// AMIR
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[i]['PMID'];
 			var polyphen   = polyphenConvert(biomutaresults[i]['Polyphen_Pred'],'colors');
 			//var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
