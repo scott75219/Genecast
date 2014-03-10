@@ -317,7 +317,7 @@ function home() {
         	var accessionlink;
 			if(biomutaresults[idx]['Accession'].indexOf('ENST')>=0){accessionlink='<a href="http://useast.ensembl.org/Homo_sapiens/Transcript/Transcript?t='+biomutaresults[idx]['Accession']+'">'+ biomutaresults[idx]['Accession'] + '</a>';}
 	        else if(biomutaresults[idx]['Accession'].indexOf('XM_')>=0 || biomutaresults[idx]['Accession'].indexOf('NM_')>=0 || biomutaresults[idx]['Accession'].indexOf('AC_')>=0) {
-	        	acTitle = "RefSeq:";
+	        	acTitle = "RefSeq AC:";
 	        	accessionlink='<a href="http://www.ncbi.nlm.nih.gov/nuccore/'+biomutaresults[idx]['Accession']+'">'+biomutaresults[idx]['Accession']+'</a>'; 
 	        	}
 	        else if(biomutaresults[idx]['Accession'].indexOf('VAR')>=0){accessionlink='<a href="http://web.expasy.org/variant_pages/'+biomutaresults[idx]['Accession']+'.html">'+biomutaresults[idx]['Accession']+'</a>';}
