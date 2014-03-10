@@ -337,7 +337,7 @@ function home() {
 				'<tr><td>Gene:</td><td>'     + biomutaresults[idx]['Gene_Name '] + '</td></tr> \
 			 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/blast/?about=' + biomutaresults[idx]['UniProt AC'] + '">' +  biomutaresults[idx]['UniProt AC'] + '</a></td></tr>\
 			 	<tr><td>' + acTitle + '</td><td>'    + accessionlink + '</td></tr> \
-			 	<tr><td>Other AC:</td><td>'    + accessionOther + '</td></tr> \
+			 	<tr><td>Other AC:</td><td>'    + accessionlink+ '</td></tr> \
 			 	<tr><td>SNV Position:</td><td>'    + snvlink + '</td></tr> \
 			 	<tr><td>Pos(N):</td><td>'    + biomutaresults[idx]['Position_N'] + '</td></tr> \
 			 	<tr><td>Ref(N):</td><td>'    + biomutaresults[idx]['Ref_N'] + '</td></tr> \
