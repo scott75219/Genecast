@@ -13,7 +13,7 @@ var OptionsMenu = function(menu) {
     var iconSize = detectIconSize();
     var menuDiv = document.createElement("div");
     menuDiv.setAttribute("id", menu.id);
-    menuDiv.setAttribute("style", "display: none; position: fixed; bottom: 0; width: 100%");
+    menuDiv.setAttribute("style", "display: none; position: fixed; bottom: 0; width: 100%; z-index: 1000;");
     var menuTable = document.createElement("table");
     menuTable.setAttribute("style", "width: 100%;");
     menuTable.setAttribute("cellpadding", "0");
@@ -53,15 +53,19 @@ var OptionsMenu = function(menu) {
         menuTableRowData.appendChild(rowTable);
     }
     menuDiv.appendChild(menuTable);
-    document.body.appendChild(menuDiv);
+   document.body.appendChild(menuDiv);
     
-    // Listen for the menubutton event to hide/show the menu
-    document.addEventListener("menubutton", function() {
-        if (menuDiv.style.display == 'none') {
-            menuDiv.style.display = 'block';
-        } else {
+function onMenuKeyDown() {
+    	console.log('eclipse:: clicked menu button');
+    	//alert('menu button clicked! display from ' +  menuDiv.style.display);
+        if (menuDiv.style.display != 'none') {
             menuDiv.style.display = 'none';
+        } else {
+            menuDiv.style.display = 'block';
         }
-    }, false);
+};
+
+    // Listen for the menubutton event to hide/show the menu
+    document.addEventListener("menubutton", onMenuKeyDown, false);
         
 };

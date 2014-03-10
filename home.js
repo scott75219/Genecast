@@ -1,6 +1,3 @@
-// Now can do stuff
-//
-
 // Home screen of app
 //
 
@@ -71,6 +68,8 @@ function polyphenConvert(pred, mode){
 
 function home() {
 	console.log("eclipse :: inside home()");
+	//document.addEventListener('menubutton',doMenu,false);
+	
 	var img_logoonly = "resources/icons/hive_logo.png";
 	var img_logoback = "resources/icons/hive_logo-backbutton.png";
 	//$('#hivelogo-backbtn').attr("src",img_logoonly);
@@ -87,8 +86,7 @@ function home() {
 	// biomuta global variables
 	var biomutaresults = [];
 	var bookmark = 0;
-	
-	
+	    	
 	$(".defaultText").focus(function(srcc) {
         if ($(this).val() == $(this)[0].title) {
             $(this).removeClass("defaultTextActive");
@@ -269,8 +267,8 @@ function home() {
 		$('btn_biomuta_loadmore').text('Load next 50 results');
 		for(var i = bookmark; i < bookmark+paging && i < biomutaresults.length; i++) { 
 			// Text manipulations to fit data into table
-			var pmid = biomutaresults[i]['PMID'] //.split(";")[0]; AMIR
-			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[i]['PMID'];
+			var pmid = biomutaresults[i]['PMID'].split(";")[0];// AMIR
+			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
 			var polyphen   = polyphenConvert(biomutaresults[i]['Polyphen_Pred'],'colors');
 			//var cancerType = truncate(biomutaresults[i]['Cancer_Type'],5,true);
 			var sourceType = truncate(biomutaresults[i]['Source'],8,true);
@@ -326,7 +324,8 @@ function home() {
 			var snvlink = biomutaresults[idx]['Genome_Position'].indexOf(':')>=0 ? '<a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=human&position='+biomutaresults[idx]['Genome_Position']+'">'+biomutaresults[idx]['Genome_Position']+'</a>' : biomutaresults[idx]['Genome_Position'];
 
 			// PMID link
-			var pmidlink = biomutaresults[idx]['PMID']!='-' ? '<a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ biomutaresults[idx]['PMID']+'">'+biomutaresults[idx]['PMID']+'</a>' : biomutaresults[idx]['PMID']; 
+			var pmid = biomutaresults[idx]['PMID'].split(";")[0];
+			var pmidlink = pmid!='-' ? '<a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid+'">'+pmid+'</a>' : pmid; 
 			
 			// PolyPhen color code
 			var polyphen   = polyphenConvert(biomutaresults[idx]['Polyphen_Pred'],'colors');
@@ -418,44 +417,53 @@ function home() {
 	console.log("eclipse :: end home()");
 }
 
+
+function onDeviceReady() {
+	console.log('eclipse :: device is ready');
+	// Options menu
+    var onAbout = function() {
+        console.log("eclipse:: clicked About menu option");
+		$.mobile.navigate('#about');
+    };
+
+    var onUpdate = function() {
+        console.log("eclipse:: clicked Update menu option");
+        window.open('https://hive.biochemistry.gwu.edu/tools/HiveGenecast/HIVEGenecast.apk','_system');
+        //alert("No new update available.");
+    };
+
+    var optionsmenu = new OptionsMenu({
+        id: "optionsmenu",
+        items: [ 
+            [ {
+                label: "About",
+                image: "resources/images/drawable-hdpi/ic_dialog_info.png",
+                action: onAbout
+            }, 
+            {
+                label: "Update",
+                image: "resources/images/drawable-hdpi/stat_sys_upload_anim0.png",
+                action: onUpdate
+            } ]
+        ]
+    });
+
+	// Check Internet connection availability
+	// then go to home screen
+	checkInternetConn('home');
+}
+
+
+function doMenu() {
+	alert('hit menu3');	
+}
+
 // Wait for device API libraries to load
 //
-function onLoad(){
-    document.addEventListener('deviceready', function(){
-	    console.log('eclipse :: device is ready');
-		// Check Internet connection availability
-		// then go to home screen
-		checkInternetConn('home');
-		
-		// Options menu
-	    var onAbout = function() {
-	        console.log("about");
-			$.mobile.navigate('#about');
-	    };
-	
-	    var onUpdate = function() {
-	        console.log("update");
-	        alert("No new update available.");
-	    };
-	
-	    var optionsmenu = new OptionsMenu({
-	        id: "optionsmenu",
-	        items: [ 
-	            [ {
-	                label: "About",
-	                image: "resources/images/drawable-hdpi/ic_dialog_info.png",
-	                action: onAbout
-	            }, 
-	            {
-	                label: "Update",
-	                image: "resources/images/drawable-hdpi/stat_sys_upload_anim0.png",
-	                action: onUpdate
-	            } ]
-	        ]
-	    });
-	    }, false);
-
-
+function onLoad() {
+	console.log('eclipse:: onLoad called');
+    document.addEventListener("deviceready", onDeviceReady, false);
 }
+
 
 
