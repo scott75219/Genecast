@@ -43,9 +43,7 @@ function truncate(string,len,showEllipsis){
 
 // Takes the status description and replaces with the appropriate symbol image
 function statusConvert(status) {
-// Get rid of star images
-//	var stat = status == 'Silver' ? '<img src="resources/images/Silver.png" height="30px" width="30px"/>  Small Study' : '<img src="resources/images/gold.png" height="30px" width="30px"/>  Large Study';
-	var stat = status == 'Silver' ? 'Small-Scale Study' : 'Large-Scale Study';
+	var stat = status == 'SM' ? 'Small-Scale Study' : 'Large-Scale Study';
 	return stat;  	
 }
 
