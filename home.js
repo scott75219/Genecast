@@ -313,10 +313,13 @@ function home() {
         	var statussymbol = statusConvert(biomutaresults[idx]['Status']);
         	
         	// Determine Accession link:
+        	var acTitle = "Other AC:";
         	var accessionlink;
 			if(biomutaresults[idx]['Accession'].indexOf('ENST')>=0){accessionlink='<a href="http://useast.ensembl.org/Homo_sapiens/Transcript/Transcript?t='+biomutaresults[idx]['Accession']+'">'+ biomutaresults[idx]['Accession'] + '</a>';}
-	        else if(biomutaresults[idx]['Accession'].indexOf('XM')>=0){accessionlink='<a href="http://www.ncbi.nlm.nih.gov/nuccore/'+biomutaresults[idx]['Accession']+'">'+biomutaresults[idx]['Accession']+'</a>';}
-	        else if(biomutaresults[idx]['Accession'].indexOf('NM')>=0){accessionlink='<a href="http://www.ncbi.nlm.nih.gov/nuccore/'+biomutaresults[idx]['Accession']+'">'+biomutaresults[idx]['Accession']+'</a>';}
+	        else if(biomutaresults[idx]['Accession'].indexOf('XM_')>=0 || biomutaresults[idx]['Accession'].indexOf('NM_')>=0 || biomutaresults[idx]['Accession'].indexOf('AC_')>=0) {'
+	        	acTitle = "RefSeq:";
+	        	accessionlink='<a href="http://www.ncbi.nlm.nih.gov/nuccore/'+biomutaresults[idx]['Accession']+'">'+biomutaresults[idx]['Accession']+'</a>'; 
+	        	}
 	        else if(biomutaresults[idx]['Accession'].indexOf('VAR')>=0){accessionlink='<a href="http://web.expasy.org/variant_pages/'+biomutaresults[idx]['Accession']+'.html">'+biomutaresults[idx]['Accession']+'</a>';}
 	        else {accessionlink='<a href="http://www.ncbi.nlm.nih.gov/gene/?term='.biomutaresults[idx]['Accession']+'">';}
 			
@@ -333,7 +336,8 @@ function home() {
 			$('#biomuta-detail-table tbody').html(
 				'<tr><td>Gene:</td><td>'     + biomutaresults[idx]['Gene_Name '] + '</td></tr> \
 			 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/blast/?about=' + biomutaresults[idx]['UniProt AC'] + '">' +  biomutaresults[idx]['UniProt AC'] + '</a></td></tr>\
-			 	<tr><td>RefSeq:</td><td>'    + accessionlink + '</td></tr> \
+			 	<tr><td>' + acTitle + '</td><td>'    + accessionlink + '</td></tr> \
+			 	<tr><td>Other AC:</td><td>'    + accessionOther + '</td></tr> \
 			 	<tr><td>SNV Position:</td><td>'    + snvlink + '</td></tr> \
 			 	<tr><td>Pos(N):</td><td>'    + biomutaresults[idx]['Position_N'] + '</td></tr> \
 			 	<tr><td>Ref(N):</td><td>'    + biomutaresults[idx]['Ref_N'] + '</td></tr> \
