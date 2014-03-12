@@ -444,7 +444,7 @@ function onDeviceReady() {
                 action: onAbout
             }, 
             {
-                label: "Update",
+                label: "HIVE Apps",
                 image: "resources/images/drawable-hdpi/stat_sys_upload_anim0.png",
                 action: onUpdate
             } ]
