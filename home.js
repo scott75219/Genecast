@@ -366,10 +366,7 @@ function home() {
 		    
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
-		if (checkInternetConn() == false) {
-			$('#biomuta-invalid-msg').show();
-			$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
-		}
+
 			
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
@@ -384,49 +381,55 @@ function home() {
 		bookmark = 0;
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
-	    $.getJSON(dataurl + querygene, null, function(data) {
-
-	    	console.log('eclipse: data returned');
-	    	biomutaresults = data;
-	    	if (biomutaresults.length == 0) {
-	    		$('#biomuta-invalid-msg').show();
-	    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
-	    		$.mobile.loading("hide"); 
-	    		return; 
-	    	}	   
-		   	data = data.sort(function(a, b) {
-		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
-		    });			
-			  	
-			// Print out results
-			$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
-
-			if(biomutaresults.length > 0) { 
-				$('#biomuta-invalid-msg').hide(); 
-				$('#biomuta-header-table tbody').html(
-					//'<tr><td>Gene:</td><td>'      + biomutaresults[0]['Gene_Name'] + '</td>\
-				 	'<tr><td><b>UniProtKB:<b/></td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt AC'] + '">' +  biomutaresults[0]['UniProt AC'] + '</td>\
-				 	<td><b>RefSeq:</b></td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
-				);
-				$('#biomuta-table tbody').html(''); 
-				populateBiomutaTable();  
-				$("#biomuta-table").show();
+	    if (checkInternetConn() == false) {
+			$('#biomuta-invalid-msg').show();
+			$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
+		}
+		else {
+		    $.getJSON(dataurl + querygene, null, function(data) {
+	
+		    	console.log('eclipse: data returned');
+		    	biomutaresults = data;
+		    	if (biomutaresults.length == 0) {
+		    		$('#biomuta-invalid-msg').show();
+		    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
+		    		$.mobile.loading("hide"); 
+		    		return; 
+		    	}	   
+			   	data = data.sort(function(a, b) {
+			        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
+			    });			
+				  	
+				// Print out results
+				$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
+	
+				if(biomutaresults.length > 0) { 
+					$('#biomuta-invalid-msg').hide(); 
+					$('#biomuta-header-table tbody').html(
+						//'<tr><td>Gene:</td><td>'      + biomutaresults[0]['Gene_Name'] + '</td>\
+					 	'<tr><td><b>UniProtKB:<b/></td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt AC'] + '">' +  biomutaresults[0]['UniProt AC'] + '</td>\
+					 	<td><b>RefSeq:</b></td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
+					);
+					$('#biomuta-table tbody').html(''); 
+					populateBiomutaTable();  
+					$("#biomuta-table").show();
+					
+					// Construct graph. 
+					// 1 = cancer type frequency bar graph 
+					generateBiomutaGraph(1);
+				};
 				
-				// Construct graph. 
-				// 1 = cancer type frequency bar graph 
-				generateBiomutaGraph(1);
-			};
-			
-			$('#biomuta-results').show();
-			$.mobile.loading("hide");
-		})
-		.error(function(jqXHR, textStatus, errorThrown) {
-        	console.log("Error! " + textStatus);
-        	console.log("Incoming Text: " + jqXHR.responseText);
-        	$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING);
-        	$('#biomuta-invalid-msg').show();
-			$.mobile.loading("hide");
-    	});
+				$('#biomuta-results').show();
+				$.mobile.loading("hide");
+			})
+			.error(function(jqXHR, textStatus, errorThrown) {
+	        	console.log("Error! " + textStatus);
+	        	console.log("Incoming Text: " + jqXHR.responseText);
+	        	$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING);
+	        	$('#biomuta-invalid-msg').show();
+				$.mobile.loading("hide");
+	    	}); // end ajax query
+    	}  // end connection check
 	});
 	
 	// END -- BIOMUTA
