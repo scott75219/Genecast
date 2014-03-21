@@ -16,19 +16,19 @@ function checkInternetConn(){
 	        timeout:4000,
 	        statusCode: {
 	            200: function (response) {
-	                return true;
+	                return 1;
 	            }, 
 	            400: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again. (Code 400)');
-					return false;	
+					return 0;	
 	            },
 	            404: function (response) {
 	                alert('Unable to connect to server. Server may be down temporarily. (Code 404)');
-	            	 return false;	
+	            	 return 0;	
 	            },
 	            0: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again. (Code 0)');
-	               	return false;	
+	               	return 0;	
 	            }              
 	        }
 	 });
@@ -83,7 +83,7 @@ function home() {
 	$('#textarea_gene_set').val('');
 	$('#select_gene_set option:first').attr('selected','selected');
 	
-	if (checkInternetConn() == false) {
+	if (checkInternetConn() == 0) {
 		console.log('eclipse :: no Internet detected.');
 		$('#biomuta-invalid-msg').show();
 		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
@@ -382,7 +382,7 @@ function home() {
 		bookmark = 0;
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
-	    if (checkInternetConn() == false) {
+	    if (checkInternetConn() == 0) {
 			$('#biomuta-invalid-msg').show();
 			$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
 		}
