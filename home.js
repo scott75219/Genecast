@@ -2,9 +2,9 @@
 //
 
 // GLOBAL ERROR MESSAGES
-var ERROR_MSG_INVALID_GENE = '<p><strong>* Please enter a valid HUGO gene symbol.</strong></p>',
-    ERROR_MSG_NO_CONN_SUBMIT = '<p><strong>* Error: No Internet detected. Make sure there is a connection before submitting.</strong></p>',
-    ERROR_MSG_PARSING = '<p><strong>* PARSING ERROR! Please try another gene.</strong></p>';
+var window.window.ERROR_MSG_INVALID_GENE = '<p><strong>* Please enter a valid HUGO gene symbol.</strong></p>';
+var window.window.ERROR_MSG_NO_CONN_SUBMIT = '<p><strong>* Error: No Internet detected. Make sure there is a connection before submitting.</strong></p>';
+var window.window.ERROR_MSG_PARSING = '<p><strong>* PARSING ERROR! Please try another gene.</strong></p>';
     
 // Check connectivity
 function checkInternetConn(){
@@ -81,7 +81,7 @@ function home() {
 	$('#select_gene_set option:first').attr('selected','selected');
 	if (checkInternetConn() == false) {
 		$('#biomuta-invalid-msg').show();
-		$('#biomuta-invalid-msg').html(ERROR_MSG_NO_CONN_SUBMIT);
+		$('#biomuta-invalid-msg').html(window.ERROR_MSG_NO_CONN_SUBMIT);
 	}
 	
 	// $('#homemenu').show();
@@ -364,7 +364,7 @@ function home() {
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 		if (checkInternetConn() == false) {
 			$('#biomuta-invalid-msg').show();
-			$('#biomuta-invalid-msg').html(ERROR_MSG_NO_CONN_SUBMIT);
+			$('#biomuta-invalid-msg').html(window.ERROR_MSG_NO_CONN_SUBMIT);
 		}
 			
 		// Loading data notification
@@ -384,7 +384,7 @@ function home() {
 
 	    	console.log('eclipse: data returned');
 	    	biomutaresults = data;
-	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); $('#biomuta-invalid-msg').html(ERROR_MSG_INVALID_GENE); $.mobile.loading("hide"); return; }	   
+	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); $('#biomuta-invalid-msg').html(window.ERROR_MSG_INVALID_GENE); $.mobile.loading("hide"); return; }	   
 		   	data = data.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
 		    });			
@@ -414,7 +414,7 @@ function home() {
 		.error(function(jqXHR, textStatus, errorThrown) {
         	console.log("Error! " + textStatus);
         	console.log("Incoming Text: " + jqXHR.responseText);
-        	$('#biomuta-invalid-msg').html(ERROR_MSG_PARSING);
+        	$('#biomuta-invalid-msg').html(window.ERROR_MSG_PARSING);
         	$('#biomuta-invalid-msg').show();
 			$.mobile.loading("hide");
     	});
