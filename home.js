@@ -423,7 +423,7 @@ function home() {
         	console.log("Error! " + textStatus);
         	console.log("Incoming Text: " + jqXHR.responseText);
 			// UNTIL AMIR FIXES BAD JSON	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>'+ window.error_msg.ERROR_MSG_PARSING); }
-        	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.ERROR_MSG_INVALID_GENE); }
+        	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.error_msg.ERROR_MSG_INVALID_GENE); }
         	$('#biomuta-invalid-msg').show();
 			$.mobile.loading("hide");
     	}); // end ajax query
