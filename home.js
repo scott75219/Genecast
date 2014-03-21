@@ -1,28 +1,29 @@
 // Home screen of app
 //
 
+// GLOBAL ERROR MESSAGES
+var ERROR_MSG_INVALID_GENE = '<p><strong>* Please enter a valid HUGO gene symbol.</strong></p>',
+    ERROR_MSG_NO_CONN_SUBMIT = '<p><strong>* Error: No Internet detected. Make sure there is a connection before submitting.</strong></p>',
+    ERROR_MSG_PARSING = '<p><strong>* PARSING ERROR! Please try another gene.</strong></p>';
+    
 // Check connectivity
-function checkInternetConn(dest){
+function checkInternetConn(){
 		$.ajax({url: "http://hive.biochemistry.gwu.edu",
 	        type: "HEAD",
 	        timeout:4000,
 	        statusCode: {
 	            200: function (response) {
-	            	if(dest == 'home') { home(); }
 	                return true;
 	            }, 
 	            400: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again. (Code 400)');
-	                checkInternetConn('home');
 					return false;	
 	            },
 	            404: function (response) {
 	                alert('Unable to connect to server. Server may be down temporarily. (Code 404)');
-	                checkInternetConn('home');
 	            	 return false;	
 	            },
 	            0: function (response) {
-	 	           checkInternetConn('home');
 	                alert('Unable to connect to server. Check Internet connection and try again. (Code 0)');
 	               	return false;	
 	            }              
@@ -77,7 +78,11 @@ function home() {
 	$('#queryCriteriaArea').hide();
 	$('#queryResultsArea').hide();
 	$('#textarea_gene_set').val('');
-	$("#select_gene_set option:first").attr('selected','selected');
+	$('#select_gene_set option:first').attr('selected','selected');
+	if (checkInternetConn() == false) {
+		$('#biomuta-invalid-msg').show();
+		$('#biomuta-invalid-msg').html(ERROR_MSG_NO_CONN_SUBMIT);
+	}
 	
 	// $('#homemenu').show();
 	$('#biomuta-table').freezeHeader();
@@ -357,8 +362,11 @@ function home() {
 		    
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
-		checkInternetConn();
-		
+		if (checkInternetConn() == false) {
+			$('#biomuta-invalid-msg').show();
+			$('#biomuta-invalid-msg').html(ERROR_MSG_NO_CONN_SUBMIT);
+		}
+			
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		var querygene = $('#txt_biomuta').val().trim().toUpperCase();
@@ -373,13 +381,10 @@ function home() {
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
 	    $.getJSON(dataurl + querygene, null, function(data) {
-	    	//var jsontext = '[{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69732794-69732794","Position_N":2681,"Ref_N":"C","Var_N":"T","Position_A":726,"Ref_A":"E","Var_A":"K","Polyphen_Pred":"possibly damaging","PMID":22810696,"Cancer_Type":"Rectum adenocarcinoma [READ]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69734681-69734681","Position_N":2541,"Ref_N":"G","Var_N":"C","Position_A":679,"Ref_A":"P","Var_A":"R","Polyphen_Pred":"probably damaging","PMID":22722201,"Cancer_Type":"Unknown Cancer Type [OTHERS]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69736376-69736376","Position_N":2498,"Ref_N":"G","Var_N":"T","Position_A":665,"Ref_A":"L","Var_A":"I","Polyphen_Pred":"benign","PMID":22895193,"Cancer_Type":"Colon adenocarcinoma [COAD]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69736424-69736424","Position_N":2450,"Ref_N":"C","Var_N":"T","Position_A":649,"Ref_A":"A","Var_A":"T","Polyphen_Pred":"benign","PMID":22610119,"Cancer_Type":"Prostate adenocarcinoma [PRAD]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69741604-69741604","Position_N":2280,"Ref_N":"G","Var_N":"A","Position_A":592,"Ref_A":"A","Var_A":"V","Polyphen_Pred":"benign","PMID":22895193,"Cancer_Type":"Colon adenocarcinoma [COAD]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69754416-69754416","Position_N":1412,"Ref_N":"C","Var_N":"A","Position_A":303,"Ref_A":"D","Var_A":"Y","Polyphen_Pred":"probably damaging","PMID":22980975,"Cancer_Type":"Lung adenocarcinoma [LUAD]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69769702-69769702","Position_N":992,"Ref_N":"C","Var_N":"A","Position_A":163,"Ref_A":"A","Var_A":"S","Polyphen_Pred":"benign","PMID":23033341,"Cancer_Type":"Lung adenocarcinoma [LUAD]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69769767-69769767","Position_N":927,"Ref_N":"C","Var_N":"T","Position_A":141,"Ref_A":"R","Var_A":"H","Polyphen_Pred":"probably damaging","PMID":22895193,"Cancer_Type":"Colon adenocarcinoma [COAD]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69784099-69784099","Position_N":680,"Ref_N":"T","Var_N":"C","Position_A":59,"Ref_A":"I","Var_A":"V","Polyphen_Pred":"benign","PMID":22980975,"Cancer_Type":"Lung adenocarcinoma [LUAD]","Source":"COSMIC","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69736561-69736561","Position_N":2313,"Ref_N":"A","Var_N":"G","Position_A":603,"Ref_A":"V","Var_A":"A","Polyphen_Pred":"benign","PMID":24467687,"Cancer_Type":"Breast invasive carcinoma [BRCA]","Source":"CSR-TCGA","Status":"LG"},{"UniProt AC":"Q2M2I8","UniProt ID ":"AAK1_HUMAN","Gene_Name ":"AAK1","Accession":"NM_014911.3","Genome_Position":"chr2:69741854-69741854","Position_N":2030,"Ref_N":"T","Var_N":"G","Position_A":509,"Ref_A":"K","Var_A":"Q","Polyphen_Pred":"benign","PMID":24467687,"Cancer_Type":"Breast invasive carcinoma [BRCA]","Source":"CSR-TCGA","Status":"LG"}]';
-	    	//console.log(jsontext);
-	    	//data = JSON.parse(jsontext);
+
 	    	console.log('eclipse: data returned');
 	    	biomutaresults = data;
-	    	//console.log('eclipse :: datalength: ' + biomutaresults.length);
-	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); $('#biomuta-invalid-msg').html('<p>* Please enter a valid HUGO gene symbol.</p>'); $.mobile.loading("hide"); return; }	   
+	    	if(biomutaresults.length == 0) { $('#biomuta-invalid-msg').show(); $('#biomuta-invalid-msg').html(ERROR_MSG_INVALID_GENE); $.mobile.loading("hide"); return; }	   
 		   	data = data.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
 		    });			
@@ -409,7 +414,7 @@ function home() {
 		.error(function(jqXHR, textStatus, errorThrown) {
         	console.log("Error! " + textStatus);
         	console.log("Incoming Text: " + jqXHR.responseText);
-        	$('#biomuta-invalid-msg').html('<p>PARSING ERROR! Please try another gene.');
+        	$('#biomuta-invalid-msg').html(ERROR_MSG_PARSING);
         	$('#biomuta-invalid-msg').show();
 			$.mobile.loading("hide");
     	});
@@ -453,7 +458,7 @@ function onDeviceReady() {
 
 	// Check Internet connection availability
 	// then go to home screen
-	checkInternetConn('home');
+	checkInternetConn();
 }
 
 
