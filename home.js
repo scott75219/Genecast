@@ -84,6 +84,7 @@ function home() {
 	$('#select_gene_set option:first').attr('selected','selected');
 	
 	if (checkInternetConn() == false) {
+		console.log('eclipse :: no Internet detected.');
 		$('#biomuta-invalid-msg').show();
 		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
 	}
