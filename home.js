@@ -387,7 +387,7 @@ function home() {
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
 		checkInternetConn('#biomuta-invalid-msg');
-
+		$('#biomuta-invalid-msg').append('before process');
 		function processResults (data)
 		{
 	    	if (biomutaresults.length == 0) {
