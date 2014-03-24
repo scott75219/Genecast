@@ -16,6 +16,7 @@ window.defaults =
 
 // Check connectivity
 function checkInternetConn(errormsg_container){
+		var result;
 		$.ajax({url: "http://hive.biochemistry.gwu.edu",
 	        type: "HEAD",
 	        timeout:4000,
@@ -24,28 +25,29 @@ function checkInternetConn(errormsg_container){
 	        statusCode: {
 	            200: function (response) {
 	            	$(errormsg_container).hide();
-	            	return true;
+	            	result = true;
 	            }, 
 	            400: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again. (Code 400)');
 	                $(errormsg_container).show();
 					$(errormsg_container).html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
-					return false;
+					result = false;
 	            },
 	            404: function (response) {
 	                alert('Unable to connect to server. Server may be down temporarily. (Code 404)');
 	                $(errormsg_container).show();
 					$(errormsg_container).html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
-					return false;
+					result = false;
 	            },
 	            0: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again. (Code 0)');
 	                $(errormsg_container).show();
 					$(errormsg_container).html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
-					return false;
+					result = false;
 	            }              
 	        }
 	 });
+	 return result;
 }
 
 function truncate(string,len,showEllipsis){
@@ -396,7 +398,7 @@ function home() {
 			 
 			console.log('eclipse :: Using cached results for MUC16.');
 			//processResults();
-			alert('fale MUC16'); 
+			alert('false MUC16'); 
 		}
 		
 		function processResults(temp)
