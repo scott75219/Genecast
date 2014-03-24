@@ -395,18 +395,10 @@ function home() {
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
 		
-		// For demo purposes, still show cached results for MUC16 if no Internet available
-		if(checkInternetConn('#biomuta-invalid-msg') == false && querygene == 'MUC16') { 			 
-			console.log('eclipse :: Using cached results for MUC16.');
-			$('#biomuta-invalid-msg').hide();
-			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
-			$('#biomuta-invalid-msg').hide();
-		}
-		
 		function processResults(temp, demo)
 		{
 			biomutaresults = temp;
-	    	if (biomutaresults.length == 0 && typeof demo !== 'undefined') {
+	    	if (biomutaresults.length == 0) {
 	    		$('#biomuta-invalid-msg').show();
 	    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
 	    		$.mobile.loading("hide"); 
@@ -438,7 +430,14 @@ function home() {
 			$('#biomuta-results').show();
 			$.mobile.loading("hide");			
 		} // end processResults()
-		
+				// For demo purposes, still show cached results for MUC16 if no Internet available
+		if(checkInternetConn('#biomuta-invalid-msg') == false && querygene == 'MUC16') { 			 
+			console.log('eclipse :: Using cached results for MUC16.');
+			$('#biomuta-invalid-msg').hide();
+			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
+			$('#biomuta-invalid-msg').hide();
+		}
+		else {
 	    $.getJSON(dataurl + querygene, null, function(data) {
 	    	console.log('eclipse:: data returned');
 	    	//biomutaresults = data;
@@ -453,7 +452,7 @@ function home() {
 			$.mobile.loading("hide");
     	}); // end ajax query
 	});
-	
+	}
 	// END -- BIOMUTA
 		
 	console.log("eclipse :: end home()");
