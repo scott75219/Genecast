@@ -395,6 +395,7 @@ function home() {
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
 		
+		// process the JSON results
 		function processResults(temp, demo)
 		{
 			biomutaresults = temp;
@@ -430,29 +431,32 @@ function home() {
 			$('#biomuta-results').show();
 			$.mobile.loading("hide");			
 		} // end processResults()
-				// For demo purposes, still show cached results for MUC16 if no Internet available
+		
+		// For demo purposes, still show cached results for MUC16 if no Internet available
 		if(checkInternetConn('#biomuta-invalid-msg') == false && querygene == 'MUC16') { 			 
 			console.log('eclipse :: Using cached results for MUC16.');
 			$('#biomuta-invalid-msg').hide();
 			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
 			$('#biomuta-invalid-msg').hide();
 		}
+		// retrieve results from server
 		else {
-	    $.getJSON(dataurl + querygene, null, function(data) {
-	    	console.log('eclipse:: data returned');
-	    	//biomutaresults = data;
-	    	processResults(data);
-		})
-		.error(function(jqXHR, textStatus, errorThrown) {
-        	console.log("Error! " + textStatus);
-        	console.log("Incoming Text: " + jqXHR.responseText);
-			// UNTIL AMIR FIXES BAD JSON	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>'+ window.error_msg.ERROR_MSG_PARSING); }
-        	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.error_msg.ERROR_MSG_INVALID_GENE); }
-        	$('#biomuta-invalid-msg').show(); 
-			$.mobile.loading("hide");
-    	}); // end ajax query
+		    $.getJSON(dataurl + querygene, null, function(data) {
+		    	console.log('eclipse:: data returned');
+		    	//biomutaresults = data;
+		    	processResults(data);
+			})
+			.error(function(jqXHR, textStatus, errorThrown) {
+	        	console.log("Error! " + textStatus);
+	        	console.log("Incoming Text: " + jqXHR.responseText);
+				// UNTIL AMIR FIXES BAD JSON	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>'+ window.error_msg.ERROR_MSG_PARSING); }
+	        	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.error_msg.ERROR_MSG_INVALID_GENE); }
+	        	$('#biomuta-invalid-msg').show(); 
+				$.mobile.loading("hide");
+	    	}); // end ajax query
+   		}
 	});
-	}
+	
 	// END -- BIOMUTA
 		
 	console.log("eclipse :: end home()");
