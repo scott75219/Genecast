@@ -388,9 +388,9 @@ function home() {
 		console.log('eclipse: fetching ' + dataurl + querygene);
 		checkInternetConn('#biomuta-invalid-msg');
 		$('#biomuta-invalid-msg').append('before process');
-		function processResults (biomutaresults)
+		function processResults (temp)
 		{
-			var temp = biomutaresults;
+			biomutaresults = temp;
 	    	if (biomutaresults.length == 0) {
 	    		$('#biomuta-invalid-msg').show();
 	    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
