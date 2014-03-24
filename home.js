@@ -91,7 +91,7 @@ function home() {
 	$('#textarea_gene_set').val('');
 	$('#select_gene_set option:first').attr('selected','selected');
 	console.log('eclipse :: Internet: ' + checkInternetConn());
-	checkInternetConn('#biomuta-invalid-msg');
+	checkInternetConn('#biomuta-invalid-msg'); $('#biomuta-invalid-msg').append('before process2');
 	
 	// $('#homemenu').show();
 	$('#biomuta-table').freezeHeader();
@@ -388,6 +388,7 @@ function home() {
 		console.log('eclipse: fetching ' + dataurl + querygene);
 		checkInternetConn('#biomuta-invalid-msg');
 		$('#biomuta-invalid-msg').append('before process');
+		
 		function processResults (temp)
 		{
 			biomutaresults = temp;
