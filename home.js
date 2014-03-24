@@ -396,7 +396,7 @@ function home() {
 	    		$.mobile.loading("hide"); 
 	    		return; 
 	    	}	   
-		   	data = data.sort(function(a, b) {
+		   	biomutaresults = biomutaresults.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
 		    });			
 			  	
