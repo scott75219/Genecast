@@ -376,11 +376,44 @@ function home() {
     	};	
     	$.mobile.loading("hide");
     });
-		    
+
+	function processResults(temp)
+	{
+		biomutaresults = temp;
+    	if (biomutaresults.length == 0) {
+    		$('#biomuta-invalid-msg').show();
+    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
+    		$.mobile.loading("hide"); 
+    		return; 
+    	}	   
+	   	temp = temp.sort(function(a, b) {
+	        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
+	    });			
+		  	
+		// Print out results
+		$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
+
+		if(biomutaresults.length > 0) { 
+			$('#biomuta-invalid-msg').hide(); 
+			$('#biomuta-header-table tbody').html(
+			 	'<tr><td><b>UniProtKB:<b/></td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt AC'] + '">' +  biomutaresults[0]['UniProt AC'] + '</td>\
+			 	<td><b>RefSeq:</b></td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
+			);
+			$('#biomuta-table tbody').html(''); 
+			populateBiomutaTable();  
+			$("#biomuta-table").show();
+			
+			// Construct graph. 
+			// 1 = cancer type frequency bar graph 
+			generateBiomutaGraph(1);
+		};
+		
+		$('#biomuta-results').show();
+		$.mobile.loading("hide");			
+	} // end processResults()		    
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
 
-			
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		var querygene = $('#txt_biomuta').val().trim().toUpperCase();
@@ -394,46 +427,11 @@ function home() {
 		bookmark = 0;
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
-		if(checkInternetConn('#biomuta-invalid-msg') == false && querygene == 'MUC16') { 
-			 
-			console.log('eclipse :: Using cached results for MUC16.');
-			//processResults();
-			alert('false MUC16'); 
-		}
 		
-		function processResults(temp)
-		{
-			biomutaresults = temp;
-	    	if (biomutaresults.length == 0) {
-	    		$('#biomuta-invalid-msg').show();
-	    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
-	    		$.mobile.loading("hide"); 
-	    		return; 
-	    	}	   
-		   	temp = temp.sort(function(a, b) {
-		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
-		    });			
-			  	
-			// Print out results
-			$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
-
-			if(biomutaresults.length > 0) { 
-				$('#biomuta-invalid-msg').hide(); 
-				$('#biomuta-header-table tbody').html(
-				 	'<tr><td><b>UniProtKB:<b/></td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt AC'] + '">' +  biomutaresults[0]['UniProt AC'] + '</td>\
-				 	<td><b>RefSeq:</b></td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
-				);
-				$('#biomuta-table tbody').html(''); 
-				populateBiomutaTable();  
-				$("#biomuta-table").show();
-				
-				// Construct graph. 
-				// 1 = cancer type frequency bar graph 
-				generateBiomutaGraph(1);
-			};
-			
-			$('#biomuta-results').show();
-			$.mobile.loading("hide");			
+		// function to display results of MUC16 for demo purposes if no Internet connection
+		if(checkInternetConn('#biomuta-invalid-msg') == false && querygene == 'MUC16') { 			 
+			console.log('eclipse :: Using cached results for MUC16.');
+			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16)); 
 		}
 		
 	    $.getJSON(dataurl + querygene, null, function(data) {
