@@ -388,7 +388,7 @@ function home() {
 		console.log('eclipse: fetching ' + dataurl + querygene);
 		checkInternetConn('#biomuta-invalid-msg');
 		$('#biomuta-invalid-msg').append('before process');
-		function processResults (data)
+		function processResults (biomutaresults)
 		{
 	    	if (biomutaresults.length == 0) {
 	    		$('#biomuta-invalid-msg').show();
@@ -424,7 +424,7 @@ function home() {
 		}
 		
 	    $.getJSON(dataurl + querygene, null, function(data) {
-	    	console.log('eclipse: data returned');
+	    	console.log('eclipse:: data returned');
 	    	//biomutaresults = data;
 	    	processResults(data);
 		})
