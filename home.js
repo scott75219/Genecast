@@ -390,13 +390,14 @@ function home() {
 		$('#biomuta-invalid-msg').append('before process');
 		function processResults (biomutaresults)
 		{
+			var temp = biomutaresults;
 	    	if (biomutaresults.length == 0) {
 	    		$('#biomuta-invalid-msg').show();
 	    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
 	    		$.mobile.loading("hide"); 
 	    		return; 
 	    	}	   
-		   	biomutaresults = biomutaresults.sort(function(a, b) {
+		   	temp = temp.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
 		    });			
 			  	
@@ -406,7 +407,6 @@ function home() {
 			if(biomutaresults.length > 0) { 
 				$('#biomuta-invalid-msg').hide(); 
 				$('#biomuta-header-table tbody').html(
-					//'<tr><td>Gene:</td><td>'      + biomutaresults[0]['Gene_Name'] + '</td>\
 				 	'<tr><td><b>UniProtKB:<b/></td><td><a href="http://www.uniprot.org/uniprot/?query=accession:' + biomutaresults[0]['UniProt AC'] + '">' +  biomutaresults[0]['UniProt AC'] + '</td>\
 				 	<td><b>RefSeq:</b></td><td>'    + biomutaresults[0]['Accession'] + '</td></tr>'
 				);
