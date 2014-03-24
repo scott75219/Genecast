@@ -395,9 +395,12 @@ function home() {
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
 		
+		// For demo purposes, still show cached results for MUC16 if no Internet available
 		if(checkInternetConn('#biomuta-invalid-msg') == false && querygene == 'MUC16') { 			 
 			console.log('eclipse :: Using cached results for MUC16.');
+			$('#biomuta-invalid-msg').hide();
 			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16)); 
+			$('#biomuta-invalid-msg').hide();
 		}
 		
 		function processResults(temp)
@@ -409,6 +412,7 @@ function home() {
 	    		$.mobile.loading("hide"); 
 	    		return; 
 	    	}	   
+	    	
 		   	temp = temp.sort(function(a, b) {
 		        return (parseInt(a['Position_A'],10) > parseInt(b['Position_A'],10)) ? 1 : ((parseInt(a['Position_A'],10) < parseInt(b['Position_A'],10)) ? -1 : 0);
 		    });			
