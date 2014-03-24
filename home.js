@@ -19,24 +19,30 @@ function checkInternetConn(errormsg_container){
 		$.ajax({url: "http://hive.biochemistry.gwu.edu",
 	        type: "HEAD",
 	        timeout:4000,
+	        cache: true,
+	        async: false,
 	        statusCode: {
 	            200: function (response) {
 	            	$(errormsg_container).hide();
+	            	return true;
 	            }, 
 	            400: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again. (Code 400)');
 	                $(errormsg_container).show();
 					$(errormsg_container).html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
+					return false;
 	            },
 	            404: function (response) {
 	                alert('Unable to connect to server. Server may be down temporarily. (Code 404)');
 	                $(errormsg_container).show();
 					$(errormsg_container).html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
+					return false;
 	            },
 	            0: function (response) {
 	                alert('Unable to connect to server. Check Internet connection and try again. (Code 0)');
 	                $(errormsg_container).show();
 					$(errormsg_container).html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
+					return false;
 	            }              
 	        }
 	 });
@@ -91,7 +97,7 @@ function home() {
 	$('#textarea_gene_set').val('');
 	$('#select_gene_set option:first').attr('selected','selected');
 	console.log('eclipse :: Internet: ' + checkInternetConn());
-	checkInternetConn('#biomuta-invalid-msg'); $('#biomuta-invalid-msg').append('before process2');
+	checkInternetConn('#biomuta-invalid-msg'); 
 	
 	// $('#homemenu').show();
 	$('#biomuta-table').freezeHeader();
@@ -386,10 +392,14 @@ function home() {
 		bookmark = 0;
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
 		console.log('eclipse: fetching ' + dataurl + querygene);
-		checkInternetConn('#biomuta-invalid-msg');
-		$('#biomuta-invalid-msg').append('before process');
+		if(checkInternetConn('#biomuta-invalid-msg') == false && querygene == 'MUC16') { 
+			 
+			console.log('eclipse :: Using cached results for MUC16.');
+			//processResults();
+			alert('fale MUC16'); 
+		}
 		
-		function processResults (temp)
+		function processResults(temp)
 		{
 			biomutaresults = temp;
 	    	if (biomutaresults.length == 0) {
