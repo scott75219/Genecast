@@ -366,12 +366,12 @@ function home() {
 
 		bookmark = 0;
 		var dataurl = "http://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=";
-		console.log('eclipse: fetching ' + dataurl + querygene);
+		console.log('eclipse :: fetching ' + dataurl + querygene);
 		
 		// process the JSON results
 		function processResults(temp, demo)
 		{
-			biomutaresults = temp;
+		/*	biomutaresults = temp;
 	    	if (biomutaresults.length == 0) {
 	    		$('#biomuta-invalid-msg').show();
 	    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
@@ -401,9 +401,9 @@ function home() {
 			};
 			
 			$('#biomuta-results').show();
-			$.mobile.loading("hide");			
+			*/		
 		} // end processResults()
-		
+		alert('checking online status');
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkInternetConn();
 		console.log('eclipse :: online = ' + online);
