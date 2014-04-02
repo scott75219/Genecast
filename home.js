@@ -25,9 +25,10 @@ function checkInternetConn(){
 		{
 			return false;
 		} 
-	}, 800);
+		else { return true; }
+		alert(networkState + " " + Connection.NONE);
+	}, 1000);
 	
-	return true;
 }
 
 function truncate(string,len,showEllipsis){
