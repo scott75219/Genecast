@@ -17,12 +17,13 @@ window.defaults =
 // Check online connectivity
 function checkInternetConn(){
 	var networkState;
+	$.ajax({async: false});
     var test = cordova.exec(
-            function(winParam) {networkState = winParam;},
-            function(error) {alert("Network Manager error: "+error);},
-            "NetworkStatus",
-            "getConnectionInfo",
-            []
+        function(winParam) {networkState = winParam;},
+        function(error) {alert("Network Manager error: "+error);},
+        "NetworkStatus",
+        "getConnectionInfo",
+        []
     );
 	alert(networkState);
     return networkState;
