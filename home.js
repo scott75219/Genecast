@@ -15,13 +15,15 @@ window.defaults =
 };   
 
 // Check connectivity
+
 function checkInternetConn(errormsg_container){
-		var result;
+
+		/*
 		$.ajax({url: "http://hive.biochemistry.gwu.edu",
 	        type: "HEAD",
 	        timeout:4000,
-	        cache: true,
-	        async: false,
+	        cache: false,
+	        async: true,
 	        statusCode: {
 	            200: function (response) {
 	            	$(errormsg_container).hide();
@@ -47,7 +49,10 @@ function checkInternetConn(errormsg_container){
 	            }              
 	        }
 	 });
-	 return result;
+	 */
+	/*ajaxresults;
+	 console.log('eclipse :: checkInternet result:' + result);
+	 return result;*/
 }
 
 function truncate(string,len,showEllipsis){
@@ -98,8 +103,7 @@ function home() {
 	$('#queryResultsArea').hide();
 	$('#textarea_gene_set').val('');
 	$('#select_gene_set option:first').attr('selected','selected');
-	console.log('eclipse :: Internet: ' + checkInternetConn());
-	checkInternetConn('#biomuta-invalid-msg'); 
+	console.log('eclipse :: -' + checkInternetConn('#biomuta-invalid-msg')); 
 	
 	// $('#homemenu').show();
 	$('#biomuta-table').freezeHeader();
@@ -448,7 +452,7 @@ function home() {
 			})
 			.error(function(jqXHR, textStatus, errorThrown) {
 	        	console.log("Error! " + textStatus);
-	        	console.log("Incoming Text: " + jqXHR.responseText);
+	        	console.log("Incoming Text: ." + jqXHR.responseText + ".");
 				// UNTIL AMIR FIXES BAD JSON	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>'+ window.error_msg.ERROR_MSG_PARSING); }
 	        	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.error_msg.ERROR_MSG_INVALID_GENE); }
 	        	$('#biomuta-invalid-msg').show(); 
@@ -465,6 +469,11 @@ function home() {
 
 function onDeviceReady() {
 	console.log('eclipse :: device is ready');
+networkState = navigator.network.connection.type; 
+if (networkState == Connection.NONE)
+{
+  alert('No internet connection ');
+} else {alert('internet connection '); }
 	// Options menu
     var onAbout = function() {
         console.log("eclipse:: clicked About menu option");
