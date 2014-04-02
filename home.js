@@ -25,8 +25,8 @@ function checkInternetConn(){
         "getConnectionInfo",
         []
     );
-	//alert(networkState);
-    return networkState == 'none' ? false : true;
+	alert("networkState: " + networkState + " Connection: " + Connection.NONE);
+    return networkState != 'none' ? true : false;
 
 }
 
@@ -412,13 +412,13 @@ function home() {
 		var online = checkInternetConn();
 		console.log('eclipse :: online = ' + online);
 		alert('eclipse :: online = ' + online);
-		if( !online && querygene == 'MUC16') { 			 
+		if( online == false && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
 			$('#biomuta-invalid-msg').show();
 			$('#biomuta-invalid-msg').html('<p><strong>Demo: No Internet connection detected. Using cached MUC16 results.</strong></p>');
 			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
 		}
-		else if (!online) {
+		else if (online == false) {
 			$('#biomuta-invalid-msg').show();
 			$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
 		}
