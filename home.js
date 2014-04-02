@@ -505,21 +505,16 @@ function doMenu() {
 function onLoad() {
 	console.log('eclipse:: onLoad called');
     document.addEventListener("deviceready", onDeviceReady, false);
-}
-
-
-function init() {
-	document.addEventListener("online", toggleCon, false);
+    document.addEventListener("online", toggleCon, false);
 	document.addEventListener("offline", toggleCon, false);
- 
-	if(navigator.connection.type == Connection.NONE) {
+	
+		if(navigator.connection.type == Connection.NONE) {
 		navigator.notification.alert("Sorry, you are offline.", function() {}, "Offline!");
 	} else {
 		1=1;
 	}
- 
 }
- 
+
 function toggleCon(e) {
 	console.log("Called",e.type);
 	if(e.type == "offline") {
