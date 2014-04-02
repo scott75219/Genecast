@@ -31,6 +31,7 @@
 	<icon src="res/drawable-xdpi/hiveicon.png" gap:platform="android" gap:density="xhdpi" />
     <icon src="res/drawable-xxdpi/hiveicon.png" gap:platform="android" gap:density="xxhdpi" />
 	
+	
 	<gap:splash src="splash.png" />
     
     <access origin="http://hive.biochemistry.gwu.edu" />
