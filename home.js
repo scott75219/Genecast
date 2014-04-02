@@ -19,11 +19,11 @@ function checkInternetConn(){
 	var networkState = navigator.connection.type; 	
 	setTimeout(function() {
 		networkState = navigator.connection.type;
-		if (networkState == 0)
-		{ alert('network state is false');
+		if (networkState == Connection.NONE)
+		{
 			return false;
 		} 
-	}, 750);
+	}, 4000);
 	
 	return true;
 }
@@ -421,13 +421,13 @@ function home() {
 		}
 		// retrieve results from server
 		else {
-			alert('trying data call');
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 4000,
 		    	url: dataurl + querygene,
 		    	success: function(data) {
 		    		console.log('eclipse:: data returned');
+		    		alert('data returned');
 		    		biomutaresults = data;
 		    		processResults(data);
 					},
