@@ -22,7 +22,7 @@ function checkInternetConn(){
 
     var networkState = navigator.connection.type;
     alert('checking network states...');
-    var states = {};
+    /*var states = {};
     states[Connection.UNKNOWN]  = 'Unknown connection';
     states[Connection.ETHERNET] = 'Ethernet connection';
     states[Connection.WIFI]     = 'WiFi connection';
@@ -30,9 +30,10 @@ function checkInternetConn(){
     states[Connection.CELL_3G]  = 'Cell 3G connection';
     states[Connection.CELL_4G]  = 'Cell 4G connection';
     states[Connection.CELL]     = 'Cell generic connection';
-    states[Connection.NONE]     = 'No network connection';
+    states[Connection.NONE]     = 'No network connection';*/
 
-    alert('Connection type: ' + states[networkState]);
+    alert('finished checking network states');
+    alert('networkState: ' + networkState);
     return networkState == 'none' || networkState == 0 ? false : true;
 
 }
