@@ -1,12 +1,230 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>HIVE Genecast</title>
-        <script>
-            window.location='./main.html';
-        </script>
-    </head>
-    <body>      
-    </body>
+  <head>
+    <title>HIVE Reconnoiter (beta)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Uncommet cordova.js below when testing locally -->
+  	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/jquery.mobile-1.3.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/json2.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/jquery.freezeheader.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/dataTables/FixedHeader.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/dataTables/FixedColumns.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/dataTables/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/d3.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="resources/js/OptionsMenu.js"></script>
+	<script type="text/javascript" charset="utf-8" src="crosscancer.js"></script>
+  	<script type="text/javascript" charset="utf-8" src="chooseGene.js"></script>
+    <script type="text/javascript" charset="utf-8" src="queryCBio.js"></script>
+    <script type="text/javascript" charset="utf-8" src="home.js"></script>
+
+	<link rel="stylesheet" href="resources/styles/jquery.mobile-1.3.2.min.css" />
+	<link rel="stylesheet" href="resources/styles/jquery.freezeheader.css" />
+	<link rel="stylesheet" href="resources/styles/master-styles.css" />
+
+	<!--<script type="text/javascript" charset="utf-8" src="resources/js/underscore-min.js"></script>-->
+	<!--<script type="text/javascript" charset="utf-8" src="resources/js/backbone-min.js"></script>-->
+
+
+
+
+  </head>
+  <body onload="onLoad()">
+		<!--  FOR NOW SKIP MULTI-APP HOMEPAGE... GO DIRECTLY TO GeneCast Biomuta
+		<div id="home" data-role="page">
+			<div data-role="header">
+		  		<img src="resources/icons/hive_logo.png" width="109" height="45" class="header-hivelogo"/>
+				<span id="screen-title">HIVE Reconnoiter</span>
+			</div>
+			<div data-role="content">
+				<a href="#biomuta"><img src="resources/images/reconnoiter-button.png" class="homemenu-buttons" id="reconnoiter-button"/></a>
+				<a href="#pubcast"><img src="resources/images/pubcast-button.png" class="homemenu-buttons" id="pubcast-button"/></a>
+			</div>
+		</div> <!-- div home page -->
+
+		<div id="biomuta" data-role="page">
+			<div data-role="header" data-theme="c"> 
+				<img src="resources/icons/hive_logo.png" width="110px" height="36px" class="ui-btn-left header-hivelogo"/>			
+				<h1>HIVE Genecast (beta)</h1>
+
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" class="ui-btn-active ui-state-persist" data-role="tab" data-prefetch>BioMuta</a></li>
+						<li><a href="#bioexpress" data-role="tab"  data-prefetch>BioExpress</a></li>
+					</ul>
+				</div><!-- navbar -->
+			</div> <!-- header -->
+		
+			<div data-role="content">
+				<h2>View mutation profile of your gene</h2>
+				<div id="controls">
+					<p>Enter a valid HGNC gene symbol: </p>
+					<p id="biomuta-invalid-msg">* Please enter a valid HUGO gene symbol.</p>
+					<table style="width:100%">
+						<tr>
+							<td>
+								<input class="defaultText geneInputBtn"  type="text" title="MUC16" maxlength="12" id="txt_biomuta"/>
+							</td>
+							<td	style='width:80em'>
+								<a href="#" data-role="button" data-inline="true" id="btn_biomuta_sbt">Submit</a>
+							</td>
+						</tr>
+					</table>
+					<div id="debug-area"  style="color: red;">
+						<!--<p>Note!! Using preloaded static demo data. Only genes related Breast invasive carninoma are loaded until API is available! (ie, STRA6, BRCA1, PROP1) </p>-->
+					</div>
+					<!--<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen horizontally for best viewing.</p></div>-->
+				</div> <!-- content -->
+				
+				<div id="biomuta-results" style="display: none;">
+					<hr style="width.result: 90%;"/>
+					
+					<div id="results-msg"></div>
+					<!-- Graph and Analytics-->
+					<div id="biomuta-chart"></div>
+					
+					<!-- Displays the common fields of the gene -->
+					<table id="biomuta-header-table" class="ui-table ui-responsive table-stroke table-stripe">
+						<tbody>
+						</tbody>
+					</table>
+
+				
+					<!-- Table of results -->
+					<div><p style="color: #818181; font-size: 11px; font-weight: bold;">Tip: Tap on a row for detailed information.</p></div>
+					<table id="biomuta-table" class="ui-table ui-responsive table-stroke table-stripe responsive">
+						<thead>
+							<tr>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Pos(A)</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Ref(A)</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Var(A)</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Damaging</text></svg></th>
+								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,10)">PMID</text></svg></th>
+								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Cancer</text></svg></th>
+								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,10)">Source</text></svg></th>
+							</tr>
+						</thead>
+						<tbody> </tbody>
+					</table><!-- table -->
+					<div id="div_loadmore"><a data-role="button" id="btn_biomuta_loadmore">Load more results</a></div>
+				</div>
+			</div> <!-- content -->
+	</div>  <!-- biomuta page -->
+
+	<!-- Detail Page of BioMuta Gene's Selected Row -->
+	<div id="biomuta-detail" data-role="page" data-dialog="true">
+			<div data-role="header" data-theme="c">
+				<img id="hivelogo-backbtn" src="resources/icons/hive_logo-back.png" width="110px" height="36px" class="ui-btn-left header-hivelogo" />		
+				<h1>HIVE Genecast</h1>
+
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#biomuta" class="ui-btn-active ui-state-persist" data-role="tab" data-prefetch>BioMuta</a></li>
+						<li><a href="#bioexpress" data-role="tab"  data-prefetch>BioExpress</a></li>
+					</ul>
+				</div><!-- navbar -->
+			</div> <!-- header -->
+
+		<div data-role="content" role="main">
+			<!--<h2>Row Details</h2>-->
+			<table id="biomuta-detail-table" class="ui-table ui-responsive table-stroke table-stripe">
+				<tbody>
+				</tbody>
+			</table>			
+		</div> <!-- content -->
+	</div> <!-- biomuta-detail dialog page -->
+	
+	
+	<div id="bioexpress" data-role="page">
+			<div data-role="header" data-theme="c"> 
+				<img src="resources/icons/hive_logo.png" width="110px" height="36px" class="ui-btn-left header-hivelogo"/>		
+				<h1>HIVE Genecast (beta)</h1>
+
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#biomuta" data-role="tab" data-prefetch>BioMuta</a></li>
+						<li><a href="#bioexpress" class="ui-btn-active" data-role="tab"  data-prefetch>BioExpress</a></li>
+					</ul>
+				</div><!-- navbar -->
+			</div> <!-- header -->
+		
+		<div data-role="content">
+			BioExpress is Under Construction.
+		</div><!-- content BioExpress -->		
+	</div> <!-- page BioExpress -->
+	
+	<div id="cbioportal" data-role="page">
+			<div data-role="header" data-theme="c"> 
+				<img src="resources/icons/hive_logo.png" width="110px" height="36px" class="ui-btn-left header-hivelogo"/>		
+				<h1>HIVE Genecast</h1>
+
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#biomuta" class="ui-btn-active ui-state-persist" data-role="tab" data-prefetch>BioMuta</a></li>
+						<li><a href="#bioexpress" data-role="tab"  data-prefetch>BioExpress</a></li>
+					</ul>
+				</div><!-- navbar -->
+			</div> <!-- header -->
+  		
+  		<div data-role="content">
+	  		<form class="form-vertical" id="form_gene_set" class="gene_set">
+	  			<h2>Cross-cancer Mutation Data</h2>
+				<select name="select_gene_set" id="select_gene_set" tabindex="1">
+					<option>Select HUGO Gene Symbol</option>
+				</select>
+				<span>
+					<!-- For now only allow one gene for operation. Therefore, this textarea is disabled. -->
+					<textarea name="textarea_gene_set" id="textarea_gene_set" readonly style="display: none;"> </textarea>	
+					<!--<button type="button" id="btn_gene_set_add" >Add</button>--> 
+	  				<a data-role="button" class="reconnoiter-screen-btn" id="btn_gene_set_rst">Reset</a>
+	  				<a data-role="button" data-inline="true" class="reconnoiter-screen-btn" id="btn_gene_set_sbt">Submit</a>
+  				</span>
+  				
+  				<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen horizontally for best viewing.</p></div>
+  			</form>
+		  	
+		  	<div id="resultsArea" style="clear: both; padding-top: 10px;">
+		  		<hr style="width: 90%;"/>
+		  		<div id="crosscancer-container" style="display: none;"> 
+		  			<div class="section" id="cc-overview">
+
+					<div id="cctitlecontainer"> </div>
+						<div id="cchistogram">Loading...</div>
+						
+						<div id="studies-with-no-data"> </div>
+					</div>
+        		</div>
+		  	
+		  	</div>
+		  </div> <!-- div content -->
+	</div> <!-- page cbioportal -->
+	
+	<div id="about" data-role="page">
+  		<div data-role="content">
+  			<p>Version 0.8.8 - beta - This app is in beta testing.</p>
+  			<h3>License</h3>
+  			<p>We have chosen to apply the Creative Commons Attribution-NonCommercial-NoDerivs (http://creativecommons.org/licenses/by-nd/3.0/)
+  				License to all parts ( http://wiki.creativecommons.org/Data) of our databases, datasets and tools. This means that you are free
+  				to copy, distribute, display non-access controlled databases, datasets and tools in all legislations, provided you give us credit.
+  				If you wish to use this work for commercial purposes please contact us. If you intend to distribute a modified version of one
+  				of our databases, datasets or tools you must ask us for permission first.</p>
+  			<h3>Privacy</h3>
+  			<p>Data submitted through this website will never be shared with any third parties. We reserve the right to use information about visitors
+  				(IP addresses), date/time visited, page visited, referring website, etc. for usage statistics and to improve our services.</p>
+  			<h3>Disclaimer</h3>
+  			<p>We make no warranties regarding the correctness of the data, and disclaim liability for damages resulting from its use. We cannot
+  				provide unrestricted permission regarding the use of the data, as some data may be covered by patents or other rights.</p>
+  			<h3>Acknowledgements</h3>
+			<p>Charts and graphs leverage D3.js (<a href="http://d3js.org/">d3js.org/</a>)</p>
+			<p>Bar chart uses template from <a href="http://d3-generator.com">d3-generator.com</a></p>
+			<p>Original web version of Biomuta can be found at <a href="https://hive.biochemistry.gwu.edu/tools/biomuta/biomuta.php">HIVE website</a><br/></p>
+  			<p><a href="http://hive.biochemistry.gwu.edu/dna.cgi?cmd=contact">Send feedback to HIVE team</a></p>
+  			<p>HIVE Genecast &copy;2013-2015</p>
+		</div> <!-- content -->
+	</div> <!-- about page -->
+  </body>
+  	
 </html>
+
