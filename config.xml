@@ -17,9 +17,9 @@
         Jamal Theodore (GWU)
     </author>
     
-    <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.network-information" />
+    <gap:plugin name="org.apache.cordova.network-information" version="0.2.7" />
 	<gap:plugin name="NetworkStatus" value="org.apache.cordova.core.NetworkManager" />
+	<gap:plugin name="org.apache.cordova.splashscreen" version="0.2.7" />
 	
     <preference name="permissions" value="none"/>
     <preference name="fullscreen" value="false" />

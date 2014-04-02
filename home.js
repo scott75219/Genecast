@@ -18,16 +18,19 @@ window.defaults =
 
 // Check online connectivity
 function checkInternetConn(){
-	/*var networkState;
-    var test = cordova.exec(
-        function(winParam) {networkState = winParam;},
-        function(error) {alert("Network Manager error: "+error);},
-        "NetworkStatus",
-        "getConnectionInfo",
-        []
-    );*/ 
     var networkState = navigator.connection.type;
-	alert("networkState: " + networkState );
+
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.CELL]     = 'Cell generic connection';
+    states[Connection.NONE]     = 'No network connection';
+
+    alert('Connection type: ' + states[networkState]);
     return networkState == 'none' || networkState == 0 ? false : true;
 
 }
