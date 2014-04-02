@@ -405,6 +405,7 @@ function home() {
 		} // end processResults()
 		
 		// For demo purposes, still show cached results for MUC16 if no Internet available
+		alert('checking internets...');
 		var online = checkInternetConn();
 		alert(online);
 		console.log('eclipse :: online = ' + online);
