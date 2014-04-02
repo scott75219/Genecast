@@ -22,7 +22,11 @@
 	<gap:platform name="android" />
 	
     <preference name="permissions" value="none"/>
+    <preference name="fullscreen" value="false" />
     <feature name="http://api.phonegap.com/1.0/network"/>
+    
+    <!-- Android specific settings -->
+    <preference name="android-minSdkVersion" value="8" />
     
     <!--<icon src="icon.png" />-->
 	<icon src="res/drawable-hdpi/hiveicon.png" gap:platform="android" gap:density="ldpi" />
@@ -31,6 +35,7 @@
 	<icon src="res/drawable-xhdpi/hiveicon.png" gap:platform="android" gap:density="xhdpi" />
     <icon src="res/drawable-xxhdpi/hiveicon.png" gap:platform="android" gap:density="xxhdpi" />
 	
+	<preference name="splash-screen-duration" value="3000"/>
 	<gap:splash src="splash.png" />
 	<gap:splash src="res/drawable-hdpi/hivelogodec0213_transparent.png" gap:platform="android" gap:density="ldpi" />
 	<gap:splash src="res/drawable-ldpi/hivelogodec0213_transparent.png" gap:platform="android" gap:density="mdpi" />
