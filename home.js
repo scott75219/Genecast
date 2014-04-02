@@ -20,7 +20,7 @@ function checkInternetConn(){
 	
 	setTimeout(function() {
 		networkState = navigator.connection.type;
-		alert(networkState);
+		alert(networkState + " " + Connection.NONE);
 		if (networkState == Connection.NONE)
 		{
 			return false;
