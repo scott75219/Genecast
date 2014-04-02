@@ -430,6 +430,7 @@ function home() {
 		    		alert('data returned');
 		    		biomutaresults = data;
 		    		processResults(data);
+		    		alert(data); 
 					},
 				error: function(data) { alert(data); }
 				});
