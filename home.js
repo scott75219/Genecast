@@ -25,7 +25,7 @@ function checkInternetConn(){
 		{
 			return false;
 		} 
-	}, 4000);
+	}, 800);
 	
 	return true;
 }
