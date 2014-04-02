@@ -424,6 +424,7 @@ function home() {
 		    	url: dataurl + querygene,
 		    	success: function(data) {
 		    		console.log('eclipse:: data returned');
+		    		alert('data returned!');
 		    	//biomutaresults = data;
 		    	//processResults(data);
 					}
