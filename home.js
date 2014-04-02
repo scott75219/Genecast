@@ -18,7 +18,6 @@ window.defaults =
 // Check online connectivity
 function checkInternetConn(){
 	var networkState;
-	$.ajax({async: false});
     var test = cordova.exec(
         function(winParam) {networkState = winParam;},
         function(error) {alert("Network Manager error: "+error);},
@@ -437,16 +436,11 @@ function home() {
 					},
 				error: function(data) {
 					$('#biomuta-invalid-msg').show();
-					$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING);
+					//$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING)
+					$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
+
 					}
 				});
-			/*.error(function(jqXHR, textStatus, errorThrown) {
-	        	console.log("Error! " + textStatus);
-	        	console.log("Incoming Text: ." + jqXHR.responseText + ".");
-				if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>'+ window.error_msg.ERROR_MSG_PARSING); }
-	        	//if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.error_msg.ERROR_MSG_INVALID_GENE); }
-	        	$('#biomuta-invalid-msg').show(); 
-	    	})*/ // end ajax query
    		}
    		$.mobile.loading("hide");
 	});
@@ -505,23 +499,5 @@ function doMenu() {
 function onLoad() {
 	console.log('eclipse:: onLoad called');
     document.addEventListener("deviceready", onDeviceReady, false);
-    document.addEventListener("online", toggleCon, false);
-	document.addEventListener("offline", toggleCon, false);
-	
-		if(navigator.connection.type == Connection.NONE) {
-		navigator.notification.alert("Sorry, you are offline.", function() {}, "Offline!");
-	} else {
-		1=1;
-	}
 }
 
-function toggleCon(e) {
-	console.log("Called",e.type);
-	if(e.type == "offline") {
-		alert('ONLINE = false');
-		window.defaults.ONLINE = false;
-	} else {
-		alert('ONLINE = true');
-		window.defaults.ONLINE = true;
-	}
-}
