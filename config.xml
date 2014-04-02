@@ -9,7 +9,6 @@
     <!-- versionCode is optional and Android only -->
 	
     <name>HIVE Genecast</name>
-
     <description>
         Human gene variation information for mobile devices.
     </description>
