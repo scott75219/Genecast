@@ -16,7 +16,7 @@ window.defaults =
 
 // Check online connectivity
 function checkInternetConn(){
-	console.log('eclipse :: checkInternetConn() networkState = ' + navigator.connection.type);
+	//console.log('eclipse :: checkInternetConn() networkState = ' + navigator.connection.type);
 	alert('checking connection....');
 	var networkState = navigator.network.connection.type; 
 	alert('net state' + networkState);
