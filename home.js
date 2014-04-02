@@ -16,20 +16,14 @@ window.defaults =
 
 // Check online connectivity
 function checkInternetConn(){
-	//console.log('eclipse :: checkInternetConn() networkState = ' + navigator.connection.type);
-	alert('checking connection....');
-	var networkState = navigator.connection.type; 
-	alert('net state: ' + networkState);
-	
+	var networkState = navigator.connection.type; 	
 	setTimeout(function() {
 		networkState = navigator.connection.type;
 		if (networkState == 0)
 		{ alert('network state is false');
 			return false;
 		} 
-	
 	}, 750);
-	alert('network state is true');
 	
 	return true;
 }
@@ -380,7 +374,7 @@ function home() {
 		// process the JSON results
 		function processResults(temp, demo)
 		{
-		/*	biomutaresults = temp;
+			biomutaresults = temp;
 	    	if (biomutaresults.length == 0) {
 	    		$('#biomuta-invalid-msg').show();
 	    		$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_INVALID_GENE);
@@ -409,14 +403,11 @@ function home() {
 				generateBiomutaGraph(1);
 			};
 			
-			$('#biomuta-results').show();
-			*/		
+			$('#biomuta-results').show();	
 		} // end processResults()
 		
 		// For demo purposes, still show cached results for MUC16 if no Internet available
-		alert('checking internets...');
 		var online = checkInternetConn();
-		alert(online);
 		console.log('eclipse :: online = ' + online);
 		if( !online && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
@@ -437,9 +428,8 @@ function home() {
 		    	url: dataurl + querygene,
 		    	success: function(data) {
 		    		console.log('eclipse:: data returned');
-		    		alert('data returned!');
-		    	//biomutaresults = data;
-		    	//processResults(data);
+		    		biomutaresults = data;
+		    		processResults(data);
 					},
 				error: function(data) { alert(data); }
 				});
@@ -449,7 +439,7 @@ function home() {
 				if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>'+ window.error_msg.ERROR_MSG_PARSING); }
 	        	//if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.error_msg.ERROR_MSG_INVALID_GENE); }
 	        	$('#biomuta-invalid-msg').show(); 
-	    	})*/; // end ajax query
+	    	})*/ // end ajax query
    		}
    		$.mobile.loading("hide");
 	});

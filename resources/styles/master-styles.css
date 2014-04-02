@@ -12,6 +12,10 @@
 	padding: 5px !important;	
 }
 
+.ui-title {
+	margin-right: 10% !important;
+}
+
 h1 {
 	color: #000 !important;
 	/*font-size: 1.3em !important;*/
