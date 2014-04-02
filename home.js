@@ -403,7 +403,7 @@ function home() {
 			$('#biomuta-results').show();
 			*/		
 		} // end processResults()
-		alert('checking online status');
+		
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkInternetConn();
 		console.log('eclipse :: online = ' + online);
@@ -419,19 +419,22 @@ function home() {
 		}
 		// retrieve results from server
 		else {
-		    $.getJSON(dataurl + querygene, null, function(data) {
-		    	console.log('eclipse:: data returned');
+		    $.ajax({ 
+		    	type: "GET",
+		    	url: dataurl + querygene,
+		    	success: function(data) {
+		    		console.log('eclipse:: data returned');
 		    	//biomutaresults = data;
-		    	processResults(data);
-			})
-			.error(function(jqXHR, textStatus, errorThrown) {
+		    	//processResults(data);
+					}
+				});
+			/*.error(function(jqXHR, textStatus, errorThrown) {
 	        	console.log("Error! " + textStatus);
 	        	console.log("Incoming Text: ." + jqXHR.responseText + ".");
-				// UNTIL AMIR FIXES BAD JSON	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>'+ window.error_msg.ERROR_MSG_PARSING); }
-	        	if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.error_msg.ERROR_MSG_INVALID_GENE); }
+				if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>'+ window.error_msg.ERROR_MSG_PARSING); }
+	        	//if(!$('#biomuta-invalid-msg').is(":visible")) { $('#biomuta-invalid-msg').html('<br/>' + window.error_msg.ERROR_MSG_INVALID_GENE); }
 	        	$('#biomuta-invalid-msg').show(); 
-				$.mobile.loading("hide");
-	    	}); // end ajax query
+	    	})*/; // end ajax query
    		}
    		$.mobile.loading("hide");
 	});
