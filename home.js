@@ -19,10 +19,12 @@ function checkInternetConn(){
 	console.log('eclipse :: checkInternetConn() networkState = ' + navigator.connection.type);
 	alert('checking connection....');
 	var networkState = navigator.connection.type; 
+	alert(networkState);
 	if (networkState == Connection.NONE)
-	{
+	{ alert('network state is false');
 		return false;
 	} 
+	alert('network state is true');
 	return true;
 }
 
