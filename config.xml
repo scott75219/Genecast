@@ -25,11 +25,11 @@
     <feature name="http://api.phonegap.com/1.0/network"/>
     
     <icon src="icon.png" />
-	<icon src="res/drawable-hdpi/hiveicon.png" gap:platform="android" gap:density="ldpi" />
+	<!--<icon src="res/drawable-hdpi/hiveicon.png" gap:platform="android" gap:density="ldpi" />
 	<icon src="res/drawable-ldpi/hiveicon.png" gap:platform="android" gap:density="mdpi" />
 	<icon src="res/drawable-mdpi/hiveicon.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="res/drawable-xdpi/hiveicon.png" gap:platform="android" gap:density="xhdpi" />
-    <icon src="res/drawable-xxdpi/hiveicon.png" gap:platform="android" gap:density="xxhdpi" />
+    <icon src="res/drawable-xxdpi/hiveicon.png" gap:platform="android" gap:density="xxhdpi" />-->
 	
 	
 	<gap:splash src="splash.png" />
