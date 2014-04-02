@@ -424,13 +424,13 @@ function home() {
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 4000,
+		    	dataType: "json",
 		    	url: dataurl + querygene,
 		    	success: function(data) {
 		    		console.log('eclipse:: data returned');
-		    		alert('data returned');
+		    		alert('data returned: '  + data);
 		    		biomutaresults = data;
 		    		processResults(data);
-		    		alert(data); 
 					},
 				error: function(data) { alert(data); }
 				});
