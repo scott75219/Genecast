@@ -16,19 +16,17 @@ window.defaults =
 
 // Check online connectivity
 function checkInternetConn(){
-	var networkState = navigator.connection.type; 	
-	
-	setTimeout(function() {
-		networkState = navigator.connection.type;
-		alert(networkState + " " + Connection.NONE);
-		if (networkState == Connection.NONE)
-		{
-			return false;
-		} 
-		else { return true; }
-		alert(networkState + " " + Connection.NONE);
-	}, 1000);
-	
+	var networkState;
+    var test = cordova.exec(
+            function(winParam) {networkState = winParam;},
+            function(error) {alert("Network Manager error: "+error);},
+            "NetworkStatus",
+            "getConnectionInfo",
+            []
+    );
+	alert(networkState);
+    return networkState;
+
 }
 
 function truncate(string,len,showEllipsis){
