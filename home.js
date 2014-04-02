@@ -406,6 +406,7 @@ function home() {
 		
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkInternetConn();
+		alert(online);
 		console.log('eclipse :: online = ' + online);
 		if( !online && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
@@ -419,6 +420,7 @@ function home() {
 		}
 		// retrieve results from server
 		else {
+			alert('trying data call');
 		    $.ajax({ 
 		    	type: "GET",
 		    	url: dataurl + querygene,
