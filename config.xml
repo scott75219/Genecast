@@ -31,9 +31,13 @@
 	<icon src="res/drawable-xhdpi/hiveicon.png" gap:platform="android" gap:density="xhdpi" />
     <icon src="res/drawable-xxhdpi/hiveicon.png" gap:platform="android" gap:density="xxhdpi" />
 	
-	
-	<!--<gap:splash src="splash.png" />-->
-    
+	<gap:splash src="splash.png" />
+	<gap:splash src="res/drawable-hdpi/hivelogodec0213_transparent.png" gap:platform="android" gap:density="ldpi" />
+	<gap:splash src="res/drawable-ldpi/hivelogodec0213_transparent.png" gap:platform="android" gap:density="mdpi" />
+	<gap:splash src="res/drawable-mdpi/hivelogodec0213_transparent.png" gap:platform="android" gap:density="hdpi" />
+	<gap:splash src="res/drawable-xhdpi/hivelogodec0213_transparent.png" gap:platform="android" gap:density="xhdpi" />
+	<gap:splash src="res/drawable-xxhdpi/hivelogodec0213_transparent.png" gap:platform="android" gap:density="xxhdpi" /> 
+	   
     <access origin="http://hive.biochemistry.gwu.edu" />
     <access origin="http://*.gwu.edu" />
 
