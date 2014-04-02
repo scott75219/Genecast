@@ -17,9 +17,10 @@ window.defaults =
 // Check online connectivity
 function checkInternetConn(){
 	var networkState = navigator.connection.type; 	
-	alert(networkState);
+	
 	setTimeout(function() {
 		networkState = navigator.connection.type;
+		alert(networkState);
 		if (networkState == Connection.NONE)
 		{
 			return false;
