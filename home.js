@@ -18,8 +18,10 @@ window.defaults =
 
 // Check online connectivity
 function checkInternetConn(){
-    var networkState = navigator.connection.type;
+		alert('starting connection test...');
 
+    var networkState = navigator.connection.type;
+    alert('checking network states...');
     var states = {};
     states[Connection.UNKNOWN]  = 'Unknown connection';
     states[Connection.ETHERNET] = 'Ethernet connection';
