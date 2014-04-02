@@ -26,8 +26,8 @@ function checkInternetConn(){
         "getConnectionInfo",
         []
     );
-	alert("networkState: " + networkState + " Connection: " + Connection.NONE);
-    return networkState == Connection.NONE ? false : true;
+	alert("networkState: " + networkState );
+    return networkState == 'none' ? false : true;
 
 }
 
