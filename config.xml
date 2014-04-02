@@ -29,6 +29,7 @@
 	<icon src="icons/android/launcher/hdpi.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="icons/android/launcher/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
     
+    
     <access origin="http://hive.biochemistry.gwu.edu" />
     <access origin="http://*.gwu.edu" />
 
