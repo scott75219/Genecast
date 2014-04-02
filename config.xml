@@ -4,7 +4,7 @@
         xmlns:android   = "http://schemas.android.com/apk/res/android"
         id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
-        version   = "0.8.8">
+        version   = "0.8.9">
 	<preference name="phonegap-version" value="3.3.0" />
     <!-- versionCode is optional and Android only -->
 	
@@ -24,6 +24,13 @@
     <preference name="fullscreen" value="false" />
     <feature name="http://api.phonegap.com/1.0/network"/>
     
+	<content src="index.html" />
+	<preference name="WebViewBounce" value="true" />
+	<preference name="orientation" value="portrait" />
+    <access origin="http://gwu.edu"  subdomains="true"/>
+	<preference name="BackgroundColor" value="0xEE00FF"/>
+	<!--<preference name="LoadingDialog" value="Loading. Please wait..."/>-->
+	<preference name="LoadUrlTimeoutValue" value="30000"/>        
     <!-- Android specific settings -->
     <preference name="android-minSdkVersion" value="8" />
     
@@ -42,13 +49,4 @@
 	<gap:splash src="res/drawable-xhdpi/splash.png" gap:platform="android" gap:density="xhdpi" />
 	<gap:splash src="res/drawable-xxhdpi/splash.png" gap:platform="android" gap:density="xxhdpi" /> 
 	   
-    <access origin="http://gwu.edu"  subdomains="true"/>
-
-	<content src="index.html" />
-	<preference name="WebViewBounce" value="true" />
-	<preference name="orientation" value="portrait" />
-	
-	<preference name="BackgroundColor" value="0xEE00FF"/>
-	<preference name="LoadingDialog" value="Loading. Please wait..."/>
-	<preference name="LoadUrlTimeoutValue" value="20000"/>
 </widget>
