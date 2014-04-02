@@ -25,8 +25,8 @@ function checkInternetConn(){
         "getConnectionInfo",
         []
     );
-	alert(networkState);
-    return networkState;
+	//alert(networkState);
+    return networkState == 'none' ? false : true;
 
 }
 

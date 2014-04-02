@@ -43,8 +43,7 @@
 	<gap:splash src="res/drawable-xhdpi/splash.png" gap:platform="android" gap:density="xhdpi" />
 	<gap:splash src="res/drawable-xxhdpi/splash.png" gap:platform="android" gap:density="xxhdpi" /> 
 	   
-    <access origin="http://hive.biochemistry.gwu.edu" />
-    <access origin="http://*.gwu.edu" />
+    <access origin="http://gwu.edu"  subdomains="true"/>
 
 	<content src="index.html" />
 	<preference name="WebViewBounce" value="true" />
