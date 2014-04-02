@@ -18,13 +18,19 @@ window.defaults =
 function checkInternetConn(){
 	//console.log('eclipse :: checkInternetConn() networkState = ' + navigator.connection.type);
 	alert('checking connection....');
-	var networkState = navigator.network.type; 
+	var networkState = navigator.connection.type; 
 	alert('net state: ' + networkState);
-	if (networkState == 0)
-	{ alert('network state is false');
-		return false;
-	} 
+	
+	setTimeout(function() {
+		networkState = navigator.connection.type;
+		if (networkState == 0)
+		{ alert('network state is false');
+			return false;
+		} 
+	
+	}, 750);
 	alert('network state is true');
+	
 	return true;
 }
 
