@@ -29,9 +29,8 @@
 	<icon src="icons/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
     
     <access origin="http://hive.biochemistry.gwu.edu" />
-	<!--<access origin="http://cbioportal.org" />
-	<access origin="http://gwu.edu" />
-	<access origin="http://doitwithsass.com" />-->
+    <access origin="http://*.gwu.edu" />
+	<!--<access origin="http://cbioportal.org" /> -->
 
 	<content src="index.html" />
 	<preference name="WebViewBounce" value="true" />
