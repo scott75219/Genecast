@@ -28,7 +28,7 @@ function checkInternetConn(){
     );*/ 
     var networkState = navigator.connection.type;
 	alert("networkState: " + networkState );
-    return networkState == 'none' ? false : true;
+    return networkState == 'none' || networkState == 0 ? false : true;
 
 }
 
