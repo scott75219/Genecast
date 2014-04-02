@@ -21,6 +21,8 @@ function checkInternetConn(){
 		alert('starting connection test...');
 
     var networkState = navigator.connection.type;
+        var networkState2 = navigator.network.connection.type;
+
     alert('checking network states...');
     /*var states = {};
     states[Connection.UNKNOWN]  = 'Unknown connection';
@@ -33,7 +35,7 @@ function checkInternetConn(){
     states[Connection.NONE]     = 'No network connection';*/
 
     alert('finished checking network states');
-    alert('networkState: ' + networkState);
+    alert('networkState: ' + networkState + " networkstate2: " + networkState2);
     return networkState == 'none' || networkState == 0 ? false : true;
 
 }
@@ -491,6 +493,7 @@ function onDeviceReady() {
         ]
     });
 
+document.addEventListener("online", function(data) { alert('network back online'); }, false);
 	// Check Internet connection availability
 	// then go to home screen
 	home();
