@@ -428,11 +428,13 @@ function home() {
 		    	url: dataurl + querygene,
 		    	success: function(data) {
 		    		console.log('eclipse:: data returned');
-		    		alert('data returned: '  + data);
 		    		biomutaresults = data;
 		    		processResults(data);
 					},
-				error: function(data) { alert(data); }
+				error: function(data) {
+					$('#biomuta-invalid-msg').show();
+					$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING);
+					}
 				});
 			/*.error(function(jqXHR, textStatus, errorThrown) {
 	        	console.log("Error! " + textStatus);
