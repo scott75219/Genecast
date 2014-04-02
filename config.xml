@@ -5,7 +5,7 @@
         id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
         version   = "0.8.9">
-	<preference name="phonegap-version" value="3.1.0" />
+	<preference name="phonegap-version" value="3.3.0" />
     <!-- versionCode is optional and Android only -->
 	
     <name>HIVE Genecast</name>
@@ -18,7 +18,8 @@
     </author>
     
     <gap:plugin name="org.apache.cordova.device" />
-	<gap:platform name="android" />
+    <gap:plugin name="org.apache.cordova.network-information" />
+	<plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
 	
     <preference name="permissions" value="none"/>
     <preference name="fullscreen" value="false" />
@@ -31,9 +32,13 @@
 	<preference name="BackgroundColor" value="0xEE00FF"/>
 	<!--<preference name="LoadingDialog" value="Loading. Please wait..."/>-->
 	<preference name="LoadUrlTimeoutValue" value="30000"/>        
+
     <!-- Android specific settings -->
+    <gap:platform name="android" />
     <preference name="android-minSdkVersion" value="8" />
-    
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--<icon src="icon.png" />-->
 	<icon src="res/drawable-hdpi/hiveicon.png" gap:platform="android" gap:density="ldpi" />
 	<icon src="res/drawable-ldpi/hiveicon.png" gap:platform="android" gap:density="mdpi" />
@@ -41,7 +46,7 @@
 	<icon src="res/drawable-xhdpi/hiveicon.png" gap:platform="android" gap:density="xhdpi" />
     <icon src="res/drawable-xxhdpi/hiveicon.png" gap:platform="android" gap:density="xxhdpi" />
 	
-	<preference name="splash-screen-duration" value="10000"/>
+	<preference name="splash-screen-duration" value="30000"/>
 	<gap:splash src="splash.png" />
 	<gap:splash src="res/drawable-hdpi/splash.png" gap:platform="android" gap:density="ldpi" />
 	<gap:splash src="res/drawable-ldpi/splash.png" gap:platform="android" gap:density="mdpi" />
