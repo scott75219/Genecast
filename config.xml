@@ -19,7 +19,7 @@
     
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.network-information" />
-	<plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
+	<gap:plugin name="NetworkStatus" value="org.apache.cordova.core.NetworkManager" />
 	
     <preference name="permissions" value="none"/>
     <preference name="fullscreen" value="false" />
