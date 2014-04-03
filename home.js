@@ -29,7 +29,7 @@ function checkConnection() {
     states[Connection.CELL_4G]  = 'Cell 4G connection';
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
-
+	alert('states[networkState]: ' + states[networkState]);
     return states[networkState] == 'none' ? false : true;
 }
 
@@ -413,7 +413,7 @@ function home() {
 		
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkConnection();
-		console.log('eclipse :: online = ' + online);
+		console.log('online: ' + online);
 		alert('eclipse :: online: ' + online);
 		if( online == false && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
@@ -428,6 +428,7 @@ function home() {
 		}
 		// retrieve results from server
 		else {
+			alert('getting data... ' + window.defaults.REMOTE_URL + querygene);
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 4000,
@@ -484,8 +485,7 @@ function onDeviceReady() {
         ]
     });
 
-	// Check Internet connection availability
-	// then go to home screen
+	// go to home screen
 	home();
 }
 
