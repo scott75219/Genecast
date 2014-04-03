@@ -440,7 +440,7 @@ function home() {
 		    		processResults(data);
 					},
 				error: function (xhr, ajaxOptions, thrownError) {
-        alert(xhr.status);
+        alert(xhr.status + ': ' + xhr.responseText);
         alert(thrownError);
 					console.log('eclipse :: data error: ' + data);
 					alert('data error: ' + data);
