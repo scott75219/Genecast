@@ -5,7 +5,7 @@
         id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
         version   = "0.8.9">
-	<preference name="phonegap-version" value="3.2.0" />
+	<preference name="phonegap-version" value="3.3.0" />
 	
     <name>HIVE Genecast</name>
     <description>

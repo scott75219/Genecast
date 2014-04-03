@@ -468,10 +468,8 @@ function home() {
 
 function onDeviceReady() {
 	console.log('eclipse :: device is ready');
-	// fire if phone is offline
-	//document.addEventListener("offline", function () { alert('No Internet connection detected. MUC16 is cached.');}, false);
-	
-	
+
+	/*
 	function checkConnection() {
 	    var networkState = navigator.connection.type;
 	
@@ -487,7 +485,7 @@ function onDeviceReady() {
 	
 	    alert('Connection type: ' + states[networkState]);
 	}
-	checkConnection();
+	checkConnection();*/
 	
 	// Options menu
     var onAbout = function() {
