@@ -17,14 +17,10 @@ window.defaults =
 };   
 
 // Check online connectivity
-/*
-function checkInternetConn(){
-		alert('starting connection test...');
+function checkConnection() {
+    var networkState = navigator.connection.type;
 
-    "use strict";
-    var online = navigator.network.connection.type,
-        states = {};
-
+    var states = {};
     states[Connection.UNKNOWN]  = 'Unknown connection';
     states[Connection.ETHERNET] = 'Ethernet connection';
     states[Connection.WIFI]     = 'WiFi connection';
@@ -34,17 +30,8 @@ function checkInternetConn(){
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
 
-    if (states[online] === "No network connection") {
-        alert('Please check your internet connection and try again.');
-    }else{
-        alert('Connection Type is: ' + states[online]);
-    }
-
-    alert('finished checking network states');
-    //alert('networkState: ' + networkState + " networkstate2: " + networkState2);
-    return networkState == 'none' || networkState == 0 ? false : true;
-
-}*/
+    return states[networkState] == 'none' ? false : true;
+}
 
 function truncate(string,len,showEllipsis){
 	if (string.length > len)
@@ -425,7 +412,7 @@ function home() {
 		} // end processResults()
 		
 		// For demo purposes, still show cached results for MUC16 if no Internet available
-		var online = false;//checkInternetConn();
+		var online = checkConnection();
 		console.log('eclipse :: online = ' + online);
 		alert('eclipse :: online: ' + online);
 		if( online == false && querygene == 'MUC16') { 			 
@@ -468,24 +455,6 @@ function home() {
 
 function onDeviceReady() {
 	console.log('eclipse :: device is ready');
-
-	
-	function checkConnection() {
-	    var networkState = navigator.connection.type;
-	
-	    var states = {};
-	    states[Connection.UNKNOWN]  = 'Unknown connection';
-	    states[Connection.ETHERNET] = 'Ethernet connection';
-	    states[Connection.WIFI]     = 'WiFi connection';
-	    states[Connection.CELL_2G]  = 'Cell 2G connection';
-	    states[Connection.CELL_3G]  = 'Cell 3G connection';
-	    states[Connection.CELL_4G]  = 'Cell 4G connection';
-	    states[Connection.CELL]     = 'Cell generic connection';
-	    states[Connection.NONE]     = 'No network connection';
-	
-	    alert('Connection type: ' + states[networkState]);
-	}
-	checkConnection();
 	
 	// Options menu
     var onAbout = function() {
