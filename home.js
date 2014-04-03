@@ -29,7 +29,7 @@ function checkConnection() {
     states[Connection.CELL_4G]  = 'Cell 4G connection';
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
-	alert('networkState: ' + networkState + ', states[networkState]: ' + states[networkState] + ', Connection.NONE: ' + Connection.NONE);
+	//alert('networkState: ' + networkState + ', states[networkState]: ' + states[networkState] + ', Connection.NONE: ' + Connection.NONE);
     return networkState == Connection.NONE ? false : true;
 }
 
@@ -414,11 +414,10 @@ function home() {
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkConnection();
 		console.log('online: ' + online);
-		alert('online: ' + online);
 		if( online == false && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
 			$('#biomuta-invalid-msg').show();
-			$('#biomuta-invalid-msg').html('<p><strong>Demo: No Internet connection detected. Using cached MUC16 results.</strong></p>');
+			$('#biomuta-invalid-msg').html('<p style="color: blue;"><strong>DEMO Mode: No Internet detected. Displaying cached results.</strong></p>');
 			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
 		}
 		else if (online == false) {
@@ -440,10 +439,9 @@ function home() {
 		    		processResults(data);
 					},
 				error: function (xhr, ajaxOptions, thrownError) {
-        alert(xhr.status + ': ' + xhr.responseText);
-        alert(thrownError);
+        			//alert(xhr.status + ': ' + xhr.responseText);
+        			//alert(thrownError);
 					console.log('eclipse :: data error: ' + data);
-					alert('data error: ' + data);
 					$('#biomuta-invalid-msg').show();
 					$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING);
 					//$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
