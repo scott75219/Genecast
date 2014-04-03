@@ -72,10 +72,7 @@
 							</td>
 						</tr>
 					</table>
-					<div id="debug-area"  style="color: red;">
-						<!--<p>Note!! Using preloaded static demo data. Only genes related Breast invasive carninoma are loaded until API is available! (ie, STRA6, BRCA1, PROP1) </p>-->
-					</div>
-					<!--<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen horizontally for best viewing.</p></div>-->
+					<div id="debug-area"  style="color: red;"> 					</div>
 				</div> <!-- content -->
 				
 				<div id="biomuta-results" style="display: none;">
@@ -203,7 +200,7 @@
 	
 	<div id="about" data-role="page">
   		<div data-role="content">
-  			<p>Version 0.8.8 - beta - This app is in beta testing.</p>
+  			<p>Version 0.8.9 - beta - This app is in beta testing.</p>
   			<h3>License</h3>
   			<p>We have chosen to apply the Creative Commons Attribution-NonCommercial-NoDerivs (http://creativecommons.org/licenses/by-nd/3.0/)
   				License to all parts ( http://wiki.creativecommons.org/Data) of our databases, datasets and tools. This means that you are free
@@ -224,7 +221,25 @@
   			<p>HIVE Genecast &copy;2013-2015</p>
 		</div> <!-- content -->
 	</div> <!-- about page -->
+  
+	<div id="update" data-role="page">
+  		<div data-role="content">
+  			<div style="margin-top: 50px;">
+				<table style="width:100%">
+					<tr>
+						<td>
+							<input class="defaultText updateBtn"  type="text" title="Download HIVE Pubcast" maxlength="25" id="btn_update_pubcast"/>
+						</td>
+					</tr>
+					<tr style="margin-top: 5px;">
+						<td>
+							<input class="defaultText updateBtn"  type="text" title="Download HIVE Genecast" maxlength="25" id="btn_update_genecast"/>
+						</td>
+					</tr>
+				</table> 				
+  			</div>
+		</div> <!-- content -->
+	</div> <!-- about page -->
   </body>
   	
 </html>
-

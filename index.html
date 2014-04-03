@@ -72,10 +72,7 @@
 							</td>
 						</tr>
 					</table>
-					<div id="debug-area"  style="color: red;">
-						<!--<p>Note!! Using preloaded static demo data. Only genes related Breast invasive carninoma are loaded until API is available! (ie, STRA6, BRCA1, PROP1) </p>-->
-					</div>
-					<!--<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen horizontally for best viewing.</p></div>-->
+					<div id="debug-area"  style="color: red;"> 					</div>
 				</div> <!-- content -->
 				
 				<div id="biomuta-results" style="display: none;">
@@ -155,52 +152,6 @@
 		</div><!-- content BioExpress -->		
 	</div> <!-- page BioExpress -->
 	
-	<div id="cbioportal" data-role="page">
-			<div data-role="header" data-theme="c"> 
-				<img src="resources/icons/hive_logo.png" width="110px" height="36px" class="ui-btn-left header-hivelogo"/>		
-				<h1>HIVE Genecast</h1>
-
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#biomuta" class="ui-btn-active ui-state-persist" data-role="tab" data-prefetch>BioMuta</a></li>
-						<li><a href="#bioexpress" data-role="tab"  data-prefetch>BioExpress</a></li>
-					</ul>
-				</div><!-- navbar -->
-			</div> <!-- header -->
-  		
-  		<div data-role="content">
-	  		<form class="form-vertical" id="form_gene_set" class="gene_set">
-	  			<h2>Cross-cancer Mutation Data</h2>
-				<select name="select_gene_set" id="select_gene_set" tabindex="1">
-					<option>Select HUGO Gene Symbol</option>
-				</select>
-				<span>
-					<!-- For now only allow one gene for operation. Therefore, this textarea is disabled. -->
-					<textarea name="textarea_gene_set" id="textarea_gene_set" readonly style="display: none;"> </textarea>	
-					<!--<button type="button" id="btn_gene_set_add" >Add</button>--> 
-	  				<a data-role="button" class="reconnoiter-screen-btn" id="btn_gene_set_rst">Reset</a>
-	  				<a data-role="button" data-inline="true" class="reconnoiter-screen-btn" id="btn_gene_set_sbt">Submit</a>
-  				</span>
-  				
-  				<div style="clear: both;"><p style="font-size: 0.65em; color: #6c6c6c;">Tip: Rotate screen horizontally for best viewing.</p></div>
-  			</form>
-		  	
-		  	<div id="resultsArea" style="clear: both; padding-top: 10px;">
-		  		<hr style="width: 90%;"/>
-		  		<div id="crosscancer-container" style="display: none;"> 
-		  			<div class="section" id="cc-overview">
-
-					<div id="cctitlecontainer"> </div>
-						<div id="cchistogram">Loading...</div>
-						
-						<div id="studies-with-no-data"> </div>
-					</div>
-        		</div>
-		  	
-		  	</div>
-		  </div> <!-- div content -->
-	</div> <!-- page cbioportal -->
-	
 	<div id="about" data-role="page">
   		<div data-role="content">
   			<p>Version 0.8.9 - beta - This app is in beta testing.</p>
@@ -222,6 +173,29 @@
 			<p>Original web version of Biomuta can be found at <a href="https://hive.biochemistry.gwu.edu/tools/biomuta/biomuta.php">HIVE website</a><br/></p>
   			<p><a href="http://hive.biochemistry.gwu.edu/dna.cgi?cmd=contact">Send feedback to HIVE team</a></p>
   			<p>HIVE Genecast &copy;2013-2015</p>
+		</div> <!-- content -->
+	</div> <!-- about page -->
+  
+	<div id="update" data-role="page">
+		<div data-role="header" data-theme="c"> 
+			<img src="resources/icons/hive_logo.png" width="110px" height="36px" class="ui-btn-left header-hivelogo"/>		
+			<h1>HIVE Genecast (beta)</h1>
+		</div> <!-- header -->
+  		<div data-role="content">
+  			<div style="margin-top: 30px;">
+				<table style="width:100%; text-align: center;">
+					<tr>
+						<td>
+							<a href="#" data-role="button" data-inline="true" id="btn_update_pubcast">Download HIVE Pubcast</a>
+						</td>
+					</tr>
+					<tr style="margin-top: 2px;">
+						<td>
+							<a href="#" data-role="button" data-inline="true" id="btn_update_genecast">Download HIVE Genecast</a>
+						</td>
+					</tr>
+				</table> 				
+  			</div>
 		</div> <!-- content -->
 	</div> <!-- about page -->
   </body>

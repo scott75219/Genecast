@@ -427,7 +427,6 @@ function home() {
 		}
 		// retrieve results from server
 		else {
-			alert('getting data... ' + window.defaults.REMOTE_URL + querygene);
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 6000,
@@ -467,8 +466,9 @@ function onDeviceReady() {
 
     var onUpdate = function() {
         console.log("eclipse:: clicked Update menu option");
-        window.open('https://hive.biochemistry.gwu.edu/tools/HiveGenecast/HIVEGenecast.apk','_system');
-        //alert("No new update available.");
+        $.mobile.navigate('#update');
+        $('#btn_update_pubcast').click(function(){window.open('https://hive.biochemistry.gwu.edu/tools/HivePubcast/HIVE_Pubcast.apk','_system');});
+        $('#btn_update_genecast').click(function(){window.open('https://hive.biochemistry.gwu.edu/tools/HiveGenecast/HIVEGenecast.apk','_system');});
     };
 
     var optionsmenu = new OptionsMenu({
@@ -493,7 +493,7 @@ function onDeviceReady() {
 
 
 function doMenu() {
-	alert('hit menu3');	
+	//alert('hit menu3');	
 }
 
 // Wait for device API libraries to load
