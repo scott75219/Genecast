@@ -20,7 +20,7 @@
     <gap:plugin name="org.apache.cordova.device" version="0.2.8" />
     <gap:plugin name="org.apache.cordova.network-information" version="0.2.7" />
 	<gap:plugin name="org.apache.cordova.network-information" version="0.2.7" />
-	<gap:plugin name="SplashScreen" value="org.apache.cordova.core.SplashScreen" />
+	<gap:plugin name="org.apache.cordova.splashscreen" version="0.2.7" />
 	
     <preference name="fullscreen" value="false" />
     
