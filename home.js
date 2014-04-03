@@ -469,7 +469,7 @@ function home() {
 function onDeviceReady() {
 	console.log('eclipse :: device is ready');
 
-	/*
+	
 	function checkConnection() {
 	    var networkState = navigator.connection.type;
 	
@@ -485,7 +485,7 @@ function onDeviceReady() {
 	
 	    alert('Connection type: ' + states[networkState]);
 	}
-	checkConnection();*/
+	checkConnection();
 	
 	// Options menu
     var onAbout = function() {
