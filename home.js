@@ -17,6 +17,7 @@ window.defaults =
 };   
 
 // Check online connectivity
+/*
 function checkInternetConn(){
 		alert('starting connection test...');
 
@@ -43,7 +44,7 @@ function checkInternetConn(){
     //alert('networkState: ' + networkState + " networkstate2: " + networkState2);
     return networkState == 'none' || networkState == 0 ? false : true;
 
-}
+}*/
 
 function truncate(string,len,showEllipsis){
 	if (string.length > len)
@@ -424,7 +425,7 @@ function home() {
 		} // end processResults()
 		
 		// For demo purposes, still show cached results for MUC16 if no Internet available
-		var online = checkInternetConn();
+		var online = false;//checkInternetConn();
 		console.log('eclipse :: online = ' + online);
 		alert('eclipse :: online: ' + online);
 		if( online == false && querygene == 'MUC16') { 			 
@@ -470,6 +471,24 @@ function onDeviceReady() {
 	// fire if phone is offline
 	//document.addEventListener("offline", function () { alert('No Internet connection detected. MUC16 is cached.');}, false);
 	
+	
+	function checkConnection() {
+	    var networkState = navigator.connection.type;
+	
+	    var states = {};
+	    states[Connection.UNKNOWN]  = 'Unknown connection';
+	    states[Connection.ETHERNET] = 'Ethernet connection';
+	    states[Connection.WIFI]     = 'WiFi connection';
+	    states[Connection.CELL_2G]  = 'Cell 2G connection';
+	    states[Connection.CELL_3G]  = 'Cell 3G connection';
+	    states[Connection.CELL_4G]  = 'Cell 4G connection';
+	    states[Connection.CELL]     = 'Cell generic connection';
+	    states[Connection.NONE]     = 'No network connection';
+	
+	    alert('Connection type: ' + states[networkState]);
+	}
+	checkConnection();
+	
 	// Options menu
     var onAbout = function() {
         console.log("eclipse:: clicked About menu option");
@@ -498,7 +517,6 @@ function onDeviceReady() {
         ]
     });
 
-document.addEventListener("online", function(data) { alert('network back online'); }, false);
 	// Check Internet connection availability
 	// then go to home screen
 	home();
