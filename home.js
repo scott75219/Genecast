@@ -21,7 +21,6 @@ function checkInternetConn(){
 		alert('starting connection test...');
 
     var networkState = navigator.connection.type;
-        var networkState2 = navigator.network.connection.type;
 
     alert('checking network states...');
     /*var states = {};
@@ -35,7 +34,7 @@ function checkInternetConn(){
     states[Connection.NONE]     = 'No network connection';*/
 
     alert('finished checking network states');
-    alert('networkState: ' + networkState + " networkstate2: " + networkState2);
+    alert('networkState: ' + networkState );
     return networkState == 'none' || networkState == 0 ? false : true;
 
 }
