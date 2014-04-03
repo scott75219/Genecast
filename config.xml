@@ -34,7 +34,6 @@
     <preference name="android-minSdkVersion" value="8" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.NETWORK_STATE_PERMISSION" /> 
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 	<icon src="res/drawable-hdpi/hiveicon.png" gap:platform="android" gap:density="ldpi" />
@@ -43,7 +42,7 @@
 	<icon src="res/drawable-xhdpi/hiveicon.png" gap:platform="android" gap:density="xhdpi" />
     <icon src="res/drawable-xxhdpi/hiveicon.png" gap:platform="android" gap:density="xxhdpi" />
 	
-	<preference name="splash-screen-duration" value="90000"/>
+	<preference name="splash-screen-duration" value="60000"/>
 	<gap:splash src="splash.png" />
 	<gap:splash src="res/drawable-hdpi/splash.png" gap:platform="android" gap:density="ldpi" />
 	<gap:splash src="res/drawable-ldpi/splash.png" gap:platform="android" gap:density="mdpi" />

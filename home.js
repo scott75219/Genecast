@@ -29,8 +29,8 @@ function checkConnection() {
     states[Connection.CELL_4G]  = 'Cell 4G connection';
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
-	alert('states[networkState]: ' + states[networkState] + ', Connection.NONE: ' + Connection.NONE);
-    return states[networkState] == 'none' ? false : true;
+	alert('networkState: ' + networkState + ', states[networkState]: ' + states[networkState] + ', Connection.NONE: ' + Connection.NONE);
+    return networkState == Connection.NONE ? false : true;
 }
 
 function truncate(string,len,showEllipsis){
