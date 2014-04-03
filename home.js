@@ -431,7 +431,7 @@ function home() {
 			alert('getting data... ' + window.defaults.REMOTE_URL + querygene);
 		    $.ajax({ 
 		    	type: "GET",
-		    	timeout: 4000,
+		    	timeout: 6000,
 		    	dataType: "json",
 		    	url: window.defaults.REMOTE_URL + querygene,
 		    	success: function(data) {
@@ -440,6 +440,7 @@ function home() {
 		    		processResults(data);
 					},
 				error: function(data) {
+					alert('data error: ' + data);
 					$('#biomuta-invalid-msg').show();
 					$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING);
 					//$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
