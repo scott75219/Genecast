@@ -439,7 +439,9 @@ function home() {
 		    		biomutaresults = data;
 		    		processResults(data);
 					},
-				error: function(data) {
+				error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
 					console.log('eclipse :: data error: ' + data);
 					alert('data error: ' + data);
 					$('#biomuta-invalid-msg').show();
