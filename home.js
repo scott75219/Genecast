@@ -440,6 +440,7 @@ function home() {
 		    		processResults(data);
 					},
 				error: function(data) {
+					console.log('eclipse :: data error: ' + data);
 					alert('data error: ' + data);
 					$('#biomuta-invalid-msg').show();
 					$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING);
