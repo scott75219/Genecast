@@ -21,7 +21,7 @@ function checkInternetConn(){
 		alert('starting connection test...');
 
     "use strict";
-    var online = navigator.connection.type,
+    var online = navigator.network.connection.type,
         states = {};
 
     states[Connection.UNKNOWN]  = 'Unknown connection';
