@@ -26,7 +26,7 @@
 	<content src="index.html" />
 	<preference name="WebViewBounce" value="true" />
 	<preference name="orientation" value="portrait" />
-    <access origin="http://gwu.edu"  subdomains="true"/>
+    <access origin="http://*.gwu.edu" />
 	<preference name="BackgroundColor" value="0xEE00FF"/>
 	<preference name="LoadUrlTimeoutValue" value="30000"/>        
 
