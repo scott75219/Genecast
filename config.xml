@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns = "http://www.w3.org/ns/widgets"
-        xmlns:gap = "http://phonegap.com/ns/2.0"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android   = "http://schemas.android.com/apk/res/android"
         id        = "com.tickTackHack.HIVE-Reconnoiter"
         versionCode="1" 
@@ -17,7 +17,7 @@
     </author>
     
     <feature name="http://api.phonegap.com/1.0/network"/>
-    <gap:plugin name="Device" value="org.apache.cordova.core.Device"/>
+    <gap:plugin name="org.apache.cordova.device" version="0.2.8" />
     <gap:plugin name="org.apache.cordova.network-information" version="0.2.7" />
 	<gap:plugin name="NetworkStatus" value="org.apache.cordova.core.NetworkManager" />
 	<gap:plugin name="SplashScreen" value="org.apache.cordova.core.SplashScreen" />
