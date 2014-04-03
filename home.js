@@ -29,7 +29,7 @@ function checkConnection() {
     states[Connection.CELL_4G]  = 'Cell 4G connection';
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
-	alert('states[networkState]: ' + states[networkState]);
+	alert('states[networkState]: ' + states[networkState] + ', Connection.NONE: ' + Connection.NONE);
     return states[networkState] == 'none' ? false : true;
 }
 
@@ -414,7 +414,7 @@ function home() {
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkConnection();
 		console.log('online: ' + online);
-		alert('eclipse :: online: ' + online);
+		alert('online: ' + online);
 		if( online == false && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
 			$('#biomuta-invalid-msg').show();
