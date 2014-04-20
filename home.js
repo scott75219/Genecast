@@ -90,7 +90,9 @@ function fetchData(page, querygene) {
 		    		console.log('eclipse :: data: ' + data);
 					},
 				error: function (xhr, ajaxOptions, thrownError) {
-					alert('errror found in fetching data' + thrownError);
+					alert('errror found in fetching data! ' + eval("(" + xhr.responseText + ")").Message);
+										alert('errror found in fetching data! ' + JSON.parse(xhr.responseText));
+
 					console.log('eclipse :: data error: ' + data);
 					page.invalid_msgs.show();
 					page.invalid_msgs.html(window.error_msg.ERROR_MSG_PARSING);
