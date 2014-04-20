@@ -22,7 +22,7 @@ h1 {
 }
 
 h2 {
-	font-size: 1.2em !important;
+	font-size: 1.1em !important;
 	margin: 2px !important;
 	padding-top: 5px !important;
 	padding-bottom: 2px !important;
@@ -38,11 +38,11 @@ a {
 	color: black !important;	
 }
 
-#controls {
+#controls, .controls-container {
 	padding-left: 20px;	
 }
 
-#biomuta #controls .ui-input-text  {
+#controls .geneInputBtn, .queryInputField  {
 	width: 100px !important;
 	margin-right: 4x !important;
 }
@@ -87,12 +87,12 @@ table {
 
 }
 
-#biomuta-header-table tbody tr {
-	font-size: 11px;	
+#biomuta-header-table tbody tr, .header-table tbody tr {
+	font-size: 12px;	
 }
 
-#biomuta-table tbody tr {
-	font-size: 11px;
+#biomuta-table tbody tr, .results-table {
+	font-size: 0.75em;
 }
 
 #biomuta-table tbody  {
@@ -108,7 +108,7 @@ table {
 	color: #0000FF !important;
 }
 
-#biomuta-invalid-msg {
+.invalid-msgs {
 	display: none;
 	font-size: 11 px;
 	color: red;	
@@ -128,6 +128,14 @@ table {
 #goBackButton {
 	float: left;
 	maring-left: 5px;
+}
+
+.results-container {
+	display: none;
+}
+
+.btn_loadmore {
+	display: none;
 }
 
 #btn_update_genecast, #btn_update_pubcast {
