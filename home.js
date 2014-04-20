@@ -571,13 +571,18 @@ function home() {
     $(".defaultText").blur();
 
 	// UI event listeners
-	$("#hivelogo-backbtn").on("touchend", function() {
+	$("#btn-biomuta-hivelogo").on("touchend", function() {
     	$('#biomuta-results').show();
 		$.mobile.navigate('#biomuta');
 		biomuta();
 	});
 	
- 	
+	$("#btn-bioexp-hivelogo").on("touchend", function() {
+    	$('#bioexpress .results-container').show();
+		$.mobile.navigate('#bioexpress');
+		biomuta();
+	});
+	 	
 	// Page event listeners
 	$("div[data-role=page]").bind("pagebeforeshow", function (e, data) {
     	$.mobile.silentScroll(0);
