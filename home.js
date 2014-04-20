@@ -507,17 +507,15 @@ function biomuta() {
 		    		console.log('eclipse:: data returned');
 		    		biomutaresults = data;
 		    		processResults(data);
+		    		$.mobile.loading("hide");
 					},
 				error: function (xhr, ajaxOptions, thrownError) {
-        			//alert(xhr.status + ': ' + xhr.responseText);
-        			//alert(thrownError);
 					console.log('eclipse :: data error: ' + data);
 					$('#biomuta-invalid-msg').show();
 					$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_PARSING);
 					$.mobile.loading("hide");
 					}
-				});
-			$.mobile.loading("hide");
+				});	
    		}
 	});
 	
@@ -527,10 +525,12 @@ function biomuta() {
 // Initialize BioExpress page
 function bioexpress() {
 	// load specific reusable variables and elements for this page
+	alert('entered bioexp initializer');
 	var curr_page = loadPageElements('#bioexpress', $('#bioexpress'), window.defaults.BIOEXPRESS_DATA_URL, 'log2FoldChange', 'UniProtKB_AC', 'RefSeq ', 0);
 
 	$(document).on('click', '#bioexpress .btn-submit', function(e){
 		// Loading data notification
+		alert('clicked bioexp submit!');
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		var querygene = curr_page.input_field.val().trim().toUpperCase();
     	curr_page.results_area.hide();
