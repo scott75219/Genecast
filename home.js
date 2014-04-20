@@ -59,7 +59,6 @@ function polyphenConvert(pred, mode){
 // Fetch the data and pass to appropriate window
 function fetchData(page, querygene) {
 		// For demo purposes, still show cached results for MUC16 if no Internet available
-		alert('entered fetchData()! ' + page.name);
 		var results = [];
 		var online = checkConnection();
 		console.log('online: ' + online);
@@ -76,16 +75,18 @@ function fetchData(page, querygene) {
 		}
 		// retrieve results from server
 		else {
+		alert('online and fetching data!');
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 6000,
 		    	dataType: "json",
 		    	url: page.dataurl + querygene,
 		    	success: function(data) {
+		    		alert( 'data returned');
 		    		console.log('eclipse:: data returned');
 		    		results = data;
 		    		processData(page, querygene, data);
-		    		return querygene;
+		    		
 		    		console.log('eclipse :: data: ' + data);
 					},
 				error: function (xhr, ajaxOptions, thrownError) {
