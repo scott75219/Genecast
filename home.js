@@ -59,6 +59,7 @@ function polyphenConvert(pred, mode){
 // Fetch the data and pass to appropriate window
 function fetchData(page, querygene) {
 		// For demo purposes, still show cached results for MUC16 if no Internet available
+		alert('entered fetchData()! ' + page.name);
 		var results = [];
 		var online = checkConnection();
 		console.log('online: ' + online);
@@ -525,12 +526,10 @@ function biomuta() {
 // Initialize BioExpress page
 function bioexpress() {
 	// load specific reusable variables and elements for this page
-	alert('entered bioexp initializer');
 	var curr_page = loadPageElements('#bioexpress', $('#bioexpress'), window.defaults.BIOEXPRESS_DATA_URL, 'log2FoldChange', 'UniProtKB_AC', 'RefSeq ', 0);
 
 	$(document).on('click', '#bioexpress .btn-submit', function(e){
 		// Loading data notification
-		alert('clicked bioexp submit!');
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		var querygene = curr_page.input_field.val().trim().toUpperCase();
     	curr_page.results_area.hide();
