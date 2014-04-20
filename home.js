@@ -75,7 +75,7 @@ function fetchData(page, querygene) {
 		}
 		// retrieve results from server
 		else {
-		alert('online and fetching data! ' + page.dataurl + querygene);
+		alert('online and fetching data!... ' + page.dataurl + querygene);
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 6000,
