@@ -75,7 +75,7 @@ function fetchData(page, querygene) {
 		}
 		// retrieve results from server
 		else {
-		alert('online and fetching data!');
+		alert('online and fetching data! ' + page.dataurl + querygene);
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 6000,
@@ -90,6 +90,7 @@ function fetchData(page, querygene) {
 		    		console.log('eclipse :: data: ' + data);
 					},
 				error: function (xhr, ajaxOptions, thrownError) {
+					alert('errror found in fetching data');
 					console.log('eclipse :: data error: ' + data);
 					page.invalid_msgs.show();
 					page.invalid_msgs.html(window.error_msg.ERROR_MSG_PARSING);
