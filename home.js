@@ -75,29 +75,12 @@ function fetchData(page, querygene) {
 		}
 		// retrieve results from server
 		else {
-		alert('online and fetching data!... ' + page.dataurl + querygene);
-				    $.ajax({ 
-		    	type: "GET",
-		    	timeout: 6000,
-		    	dataType: "json",
-		    	url: window.defaults.BIOMUTA_DATA_URL + querygene,
-		    	success: function(data) {
-		    		alert( 'data returned 2');
-		    		console.log('eclipse:: data returned2');
-		    		
-
-					},
-				error: function (xhr, ajaxOptions, thrownError) {
-					alert('errror found in fetching data! ' + eval("(" + xhr.responseText + ")").Message);
-					}
-				});
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 6000,
 		    	dataType: "json",
 		    	url: page.dataurl + querygene,
 		    	success: function(data) {
-		    		alert( 'data returned');
 		    		console.log('eclipse:: data returned');
 		    		results = data;
 		    		processData(page, querygene, data);
@@ -105,9 +88,6 @@ function fetchData(page, querygene) {
 		    		console.log('eclipse :: data: ' + data);
 					},
 				error: function (xhr, ajaxOptions, thrownError) {
-					alert('errror found in fetching data! ' + eval("(" + xhr.responseText + ")").Message);
-										alert('errror found in fetching data! ' + JSON.parse(xhr.responseText));
-
 					console.log('eclipse :: data error: ' + data);
 					page.invalid_msgs.show();
 					page.invalid_msgs.html(window.error_msg.ERROR_MSG_PARSING);
@@ -190,20 +170,20 @@ function displayBioexpressResults(page, querygene, results) {
 		var bookmark = page.results_table_tbody.find('tr').length;
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
 			// Text manipulations to fit data into table
-			var pmid = results[i]['PMID'].split(";")[0];// AMIR
-			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
+			//var pmid = results[i]['PMID'].split(";")[0];// AMIR
+			//var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
+			var foldchange = (isNaN(results[i]['log2FoldChange']) ? (results[i]['log2FoldChange'].toLowerCase() == '-inf' ? '- &#8734;' : '&#8734;') : parseFloat(results[i]['log2FoldChange']).toFixed(3));
 			var sourceType = truncate(results[i]['Data_Source'],8,true);
 			//var cancerType = results[i]['Cancer_type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
-			
 			// print out table row
 			page.results_table_tbody.append('<tr> \
-				<td><a href="#bioexpress-detail" >' + parseFloat(results[i]['log2FoldChange']).toFixed(3) + '</a></td> \
-				<td>' + parseFloat(results[i]['p_value']).toFixed(3) + '</td> \
-				<td>' + results[i]['Significant'] + '</td> \
-				<td>' + results[i]['regulated'] + '</td> \
+				<td><a href="#bioexpress-detail" >' + foldchange + '</a></td> \
+				<td>' +  parseFloat(results[i]['p_value']).toFixed(3) + '</td> \
+				<td>' + (results[i]['Significant'].toLowerCase() == 'yes' ? 'Y' : 'N') + '</td> \
+				<td>' + (results[i]['regulated'].toLowerCase()== 'up' ? '<img src="resources/images/small-green_arrow_up-svg.png" width="12px" height="12px"/>' : '<img src="resources/images/small-red_arrow_down-svg.png" width="12px" height="12px"/>') + '</td> \
 				<td>' + results[i]['PMID'] + '</td> \
-				<td>' + parseFloat(results[i]['Freq_up_per']).toFixed(3) + '</td> \
-				<td>' + parseFloat(results[i]['Freq_Down_per']).toFixed(3) + '</td> \
+				<td>' + parseFloat(results[i]['Freq_up_per']).toFixed(2) + '</td> \
+				<td>' + parseFloat(results[i]['Freq_Down_per']).toFixed(2) + '</td> \
 				<td>' + results[i]['Cancer_type'] + '</td> \
 				</tr>');
 		}
