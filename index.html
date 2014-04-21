@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Uncommet cordova.js below when testing locally -->
-  	<!--<script type="text/javascript" charset="utf-8" src="cordova.js"></script>-->
+  	<!--<script type="text/javascript" charset="utf-8" src="cordova.js"> </script>-->
 	<script type="text/javascript" charset="utf-8" src="resources/js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="resources/js/jquery.mobile-1.3.2.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="resources/js/json2.js"></script>
@@ -23,12 +23,6 @@
 	<link rel="stylesheet" href="resources/styles/jquery.mobile-1.3.2.min.css" />
 	<link rel="stylesheet" href="resources/styles/jquery.freezeheader.css" />
 	<link rel="stylesheet" href="resources/styles/master-styles.css" />
-
-	<!--<script type="text/javascript" charset="utf-8" src="resources/js/underscore-min.js"></script>-->
-	<!--<script type="text/javascript" charset="utf-8" src="resources/js/backbone-min.js"></script>-->
-
-
-
 
   </head>
   <body onload="onLoad()">
@@ -94,13 +88,13 @@
 					<table id="biomuta-table" class="ui-table ui-responsive table-stroke table-stripe responsive">
 						<thead>
 							<tr>
-								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Pos(A)</text></svg></th>
-								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Ref(A)</text></svg></th>
-								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Var(A)</text></svg></th>
-								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Damaging</text></svg></th>
-								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,10)">PMID</text></svg></th>
-								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Cancer</text></svg></th>
-								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,10)">Source</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">Pos(A)</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">Ref(A)</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">Var(A)</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text ransform="rotate(270, 12, 0) translate(-55,0)">Damaging</text></svg></th>
+								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="70"><text transform="rotate(270, 12, 0) translate(-55,10)">PMID</text></svg></th>
+								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">Cancer</text></svg></th>
+								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="70"><text transform="rotate(270, 12, 0) translate(-55,10)">Source</text></svg></th>
 							</tr>
 						</thead>
 						<tbody> </tbody>
@@ -183,10 +177,10 @@
 					<table class="results-table ui-table ui-responsive table-stroke table-stripe responsive">
 						<thead>
 							<tr>
-								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">log2FoldChange</text></svg></th>
-								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">p_value</text></svg></th>
-								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Significant?</text></svg></th>
-								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text id="thetext" transform="rotate(270, 12, 0) translate(-55,0)">Regulated</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">log2FoldChange</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">p_value</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">Significant?</text></svg></th>
+								<th scope="col"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">Regulated</text></svg></th>
 								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="70"><text transform="rotate(270, 12, 0) translate(-55,10)">PMID</text></svg></th>
 								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="70"><text transform="rotate(270, 12, 0) translate(-55,0)">Freq (up%)</text></svg></th>
 								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="70"><text transform="rotate(270, 12, 0) translate(-55,10)">Freq (down%)</text></svg></th>
