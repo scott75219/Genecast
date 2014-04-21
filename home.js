@@ -174,6 +174,7 @@ function displayBioexpressResults(page, querygene, results) {
 			//var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
 			var foldchange = (isNaN(results[i]['log2FoldChange']) ? (results[i]['log2FoldChange'].toLowerCase() == '-inf' ? '- &#8734;' : '&#8734;') : parseFloat(results[i]['log2FoldChange']).toFixed(3));
 			var sourceType = truncate(results[i]['Data_Source'],8,true);
+console.log(i + ' ' + foldchange + ', length: ' + bookmark + ', results length: ' + results.length);
 			//var cancerType = results[i]['Cancer_type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
 			// print out table row
 			page.results_table_tbody.append('<tr> \
