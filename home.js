@@ -622,7 +622,7 @@ function home() {
  	
  	// fire up the tool pages since page is active on start
  	biomuta();
- 	//bioexpress();
+ 	bioexpress();
 	console.log("eclipse :: end home()");
 }
 
