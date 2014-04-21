@@ -76,6 +76,21 @@ function fetchData(page, querygene) {
 		// retrieve results from server
 		else {
 		alert('online and fetching data!... ' + page.dataurl + querygene);
+				    $.ajax({ 
+		    	type: "GET",
+		    	timeout: 6000,
+		    	dataType: "json",
+		    	url: window.defaults.BIOMUTA_DATA_URL + querygene,
+		    	success: function(data) {
+		    		alert( 'data returned 2');
+		    		console.log('eclipse:: data returned2');
+		    		
+
+					},
+				error: function (xhr, ajaxOptions, thrownError) {
+					alert('errror found in fetching data! ' + eval("(" + xhr.responseText + ")").Message);
+					}
+				});
 		    $.ajax({ 
 		    	type: "GET",
 		    	timeout: 6000,
