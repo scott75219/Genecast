@@ -172,7 +172,6 @@ function displayBioexpressResults(page, querygene, results) {
 			//var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
 			var foldchange = (isNaN(results[i]['log2FoldChange']) ? (results[i]['log2FoldChange'].toLowerCase() == '-inf' ? '- &#8734;' : '&#8734;') : parseFloat(results[i]['log2FoldChange']).toFixed(3));
 			var sourceType = truncate(results[i]['Data_Source'],8,true);
-console.log(i + ' ' + foldchange + ', length: ' + bookmark + ', results length: ' + results.length);
 			//var cancerType = results[i]['Cancer_type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
 			// print out table row
 			page.results_table_tbody.append('<tr> \
@@ -532,9 +531,62 @@ function bioexpress() {
 
 	// prevent double-triggering/initialization of button
 	$(document).off('click', '#bioexpress .btn-loadmore');	
-	
 		fetchData(curr_page, querygene);
 	});
+
+	// When click on a row show full detail page
+ /*   curr_page.results_table_tbody.on('click', 'tr', function() {
+    	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
+    	$('#biomuta-results').hide();
+        var href = $(this).find("a").attr("href");
+        if(href) {  
+        	var idx = $(this).parent().children().index($(this));
+        	$.mobile.navigate( href );
+        	// Convert status to a symbol and description (Silver, Gold)
+        	var statussymbol = statusConvert(biomutaresults[idx]['Status']);
+        	
+        	// Determine Accession link:
+        	var acTitle = "Other AC:";
+        	var accessionlink;
+			if(biomutaresults[idx]['Accession'].indexOf('ENST')>=0){accessionlink='<a href="http://useast.ensembl.org/Homo_sapiens/Transcript/Transcript?t='+biomutaresults[idx]['Accession']+'">'+ biomutaresults[idx]['Accession'] + '</a>';}
+	        else if(biomutaresults[idx]['Accession'].indexOf('XM_')>=0 || biomutaresults[idx]['Accession'].indexOf('NM_')>=0 || biomutaresults[idx]['Accession'].indexOf('AC_')>=0) {
+	        	acTitle = "RefSeq AC:";
+	        	accessionlink='<a href="http://www.ncbi.nlm.nih.gov/nuccore/'+biomutaresults[idx]['Accession']+'">'+biomutaresults[idx]['Accession']+'</a>'; 
+	        	}
+	        else if(biomutaresults[idx]['Accession'].indexOf('VAR')>=0){accessionlink='<a href="http://web.expasy.org/variant_pages/'+biomutaresults[idx]['Accession']+'.html">'+biomutaresults[idx]['Accession']+'</a>';}
+	        else {accessionlink='<a href="http://www.ncbi.nlm.nih.gov/gene/?term='.biomutaresults[idx]['Accession']+'">';}
+			
+			// SNV position link
+			var snvlink = biomutaresults[idx]['Genome_Position'].indexOf(':') >= 0 ? '<a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=human&position='+biomutaresults[idx]['Genome_Position']+'">'+biomutaresults[idx]['Genome_Position']+'</a>' : biomutaresults[idx]['Genome_Position'];
+
+			// PMID link
+			var pmid = biomutaresults[idx]['PMID'].split(";")[0];
+			var pmidlink = pmid!='-' ? '<a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid+'">'+pmid+'</a>' : pmid; 
+			
+			// PolyPhen color code
+			var polyphen   = polyphenConvert(biomutaresults[idx]['Polyphen_Pred'],'colors');
+			
+			$('#biomuta-detail-table tbody').html(
+				'<tr><td>Gene:</td><td>'     + biomutaresults[idx]['Gene_Name '] + '</td></tr> \
+			 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/blast/?about=' + biomutaresults[idx]['UniProt AC'] + '">' +  biomutaresults[idx]['UniProt AC'] + '</a></td></tr>\
+			 	<tr><td>' + acTitle + '</td><td>'    + accessionlink + '</td></tr> \
+			 	<tr><td>SNV Position:</td><td>'    + snvlink + '</td></tr> \
+			 	<tr><td>Pos(N):</td><td>'    + biomutaresults[idx]['Position_N'] + '</td></tr> \
+			 	<tr><td>Ref(N):</td><td>'    + biomutaresults[idx]['Ref_N'] + '</td></tr> \
+			 	<tr><td>Var(N):</td><td>'    + biomutaresults[idx]['Var_N'] + '</td></tr> \
+			 	<tr><td>Pos(A):</td><td>'    + biomutaresults[idx]['Position_A'] + '</td></tr> \
+			 	<tr><td>Ref(A):</td><td>'    + biomutaresults[idx]['Ref_A'] + '</td></tr> \
+			 	<tr><td>Var(A):</td><td>'    + biomutaresults[idx]['Var_A'] + '</td></tr> \
+			 	<tr><td>Polyphen Pred.:</td><td>' + polyphen + ' ' + biomutaresults[idx]['Polyphen_Pred'] + '</td></tr> \
+			 	<tr><td>PMID:</td><td>'    + pmidlink + '</td></tr> \
+			 	<tr><td>Cancer Type:</td><td>'    + biomutaresults[idx]['Cancer_Type'] + '</td></tr> \
+			 	<tr><td>Source:</td><td>'    + biomutaresults[idx]['Source'] + '</td></tr> \
+			 	<tr><td>Status:</td><td id="td-status">'    + statussymbol + '</td></tr>'				 	
+			);
+			// change to biomuta-detail page
+    	};
+    	$.mobile.loading("hide");
+    });*/
 } // END -- BIOEXPRESS
 
 function home() {

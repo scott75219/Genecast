@@ -91,6 +91,10 @@ table {
 	font-size: 12px;	
 }
 
+.results-table thead th{
+	padding-bottom: 0 !important;
+}
+
 #biomuta-table tbody tr, .results-table tbody tr {
 	font-size: 0.75em;
 	text-align: center;
