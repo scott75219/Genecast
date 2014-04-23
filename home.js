@@ -85,11 +85,12 @@ function loadPageElements(pageid, pageelem, url, sort_element, header_key1, head
 // Initialize BioMuta page
 function biomuta() {	
 	// BIOMUTA
+	console.log('switched to page: ' + $.mobile.activePage.attr('id'));
 	$('#biomuta-table').freezeHeader();
 	// biomuta global variables
 	var biomutaresults = [];
 	var biomuta_bookmark = 0;
-
+		
 	// the back button will return user to Biomuta front screen (may want to change this logic later)
 	document.addEventListener("backbutton", function() {
     	if(biomutaresults.length>0) { $('#biomuta-results').show(); }
@@ -311,7 +312,6 @@ function biomuta() {
 		    
 	
 	$(document).on('click', '#btn_biomuta_sbt', function(e){
-			
 		// Loading data notification
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		var querygene = $('#txt_biomuta').val().trim().toUpperCase();
@@ -404,7 +404,7 @@ function biomuta() {
 // Initialize BioExpress page
 function bioexpress() {
 	// ********** Page Variables
-	
+
 	// load specific reusable variables and elements for this page
 	var page = loadPageElements('#bioexpress', $('#bioexpress'), window.defaults.BIOEXPRESS_DATA_URL, 'log2FoldChange', 'UniProtKB_AC', 'RefSeq ', 0);
 	var querygene;
@@ -573,13 +573,14 @@ function bioexpress() {
 	 
 	$(document).on('click', '#bioexpress .btn-submit', function(e){
 		// Loading data notification
-		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
+		
 		querygene = page.input_field.val().trim().toUpperCase();
     	page.results_area.hide();
     	page.invalid_msgs.hide();
 		page.results_msgs.html('');
 		page.results_header_tbody.html('');
 		page.results_table_tbody.html('');
+		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		fetchData();
 	});
 
