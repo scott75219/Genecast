@@ -20,6 +20,7 @@ window.defaults =
 
 // Check online connectivity
 function checkConnection() {
+	alert(navigator.connection.type);
     return navigator.connection.type == Connection.NONE ? false : true;
 }
 
@@ -107,6 +108,7 @@ function biomuta() {
 	function fetchData() {
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkConnection();
+		console.log(online);
 		if( online == false && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
 			page.invalid_msgs.show();
