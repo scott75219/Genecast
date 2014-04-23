@@ -20,7 +20,8 @@ window.defaults =
 
 // Check online connectivity
 function checkConnection() {
-	alert(navigator.connection.type + ' ' + Connection.NONE + ' ' + navigator.connection.type == Connection.NONE);
+	var status = navigator.connection.type == Connection.NONE;
+	alert(navigator.connection.type + ' ' + Connection.NONE ); alert( status);
     return navigator.connection.type == Connection.NONE ? false : true;
 }
 
