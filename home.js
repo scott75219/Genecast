@@ -487,7 +487,7 @@ function bioexpress() {
 			var significant = results[i]['Significant'].toLowerCase() == 'yes' ? 'Y' : 'N';
 			var regulated = regulatedConvert(results[i]['regulated'], false);
 			var sourceType = truncate(results[i]['Data_Source'],8,true);
-			alert('in displayResults in bioexp 2';
+			alert('in displayResults in bioexp 2');
 			// print out table row
 			page.results_table_tbody.append('<tr> \
 				<td><a href="' + page.id + '-detail" >' + foldchange + '</a></td> \
