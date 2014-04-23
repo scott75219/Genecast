@@ -574,6 +574,7 @@ function bioexpress() {
 	$(document).on('click', '#bioexpress .btn-submit', function(e){
 		// Loading data notification
 		
+		
 		querygene = page.input_field.val().trim().toUpperCase();
     	page.results_area.hide();
     	page.invalid_msgs.hide();
