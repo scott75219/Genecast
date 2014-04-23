@@ -90,14 +90,7 @@ function biomuta() {
 	// biomuta global variables
 	var biomutaresults = [];
 	var biomuta_bookmark = 0;
-		
-	// the back button will return user to Biomuta front screen (may want to change this logic later)
-	document.addEventListener("backbutton", function() {
-    	if(biomutaresults.length>0) { $('#biomuta-results').show(); }
-		history.go(-1);
-    	navigator.app.backHistory();
-	},true);
-	
+
 	// generate biomuta graph
 	function generateBiomutaGraph(charttype) {
 		// categorize frequencies per cancer type
@@ -259,7 +252,7 @@ function biomuta() {
 	// When click on a row show full detail page
     $('#biomuta-table tbody').on('click', 'tr', function() {
     	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
-    	$('#biomuta-results').hide();
+    	//$('#biomuta-results').hide();
         var href = $(this).find("a").attr("href");
         if(href) {  
         	var idx = $(this).parent().children().index($(this));
@@ -589,13 +582,6 @@ function bioexpress() {
 	// When click on a row show full detail page
  	page.results_table_tbody.on('click', 'tr', showDetails);
 
-	// the back button will return user to Biomuta front screen (may want to change this logic later)
-/*	document.addEventListener("backbutton", function() { console.log('back button hit');
-    	if(results && results.length>0) { console.log('length>0'); page.results_area.show(); }
-		history.go(-1);
-    	navigator.app.backHistory();
-	},true);
-	*/
 } // END -- BIOEXPRESS
 
 function home() {
@@ -625,7 +611,7 @@ function home() {
     });
     
     $(".defaultText").blur();
-
+/*
 	// UI event listeners
 	$("#btn-biomuta-hivelogo").on("touchend", function() {
     	$('#biomuta-results').show();
@@ -638,21 +624,30 @@ function home() {
 		$.mobile.navigate('#bioexpress');
 		bioexpress();
 	});
-	 	
+	 	*/
+	$(".header-back-hivelogo").on("touchend", function() {
+    	history.go(-1);
+	});
+	
 	// Page event listeners
 	$("div[data-role=page]").bind("pagebeforeshow", function (e, data) {
     	$.mobile.silentScroll(0);
     	$.mobile.changePage.defaults.transition = 'slide';
     	
 	});
+
+	document.addEventListener("backbutton", function() {
+		//console.log($(document).pagecontainer( "getActivePage" ));
+		history.go(-1); 
+		 console.log( $.mobile.urlHistory.stack )
+	},true);
 	
 	// Tab event listeners
 	$("a[data-role=tab]").each(function () {
     	var anchor = $(this);
     	anchor.bind("click", function () {
         	$.mobile.changePage(anchor.attr("href"), {
-            	transition: "none",
-            	changeHash: false
+            	transition: "none"
         	});
         return false;
     	});
@@ -671,12 +666,16 @@ function onDeviceReady() {
 	// Options menu
     var onAbout = function() {
         console.log("eclipse:: clicked About menu option");
-		$.mobile.navigate('#about');
+		$.mobile.changePage('#about',{
+            	transition: 'slide'
+        	});
     };
 
     var onUpdate = function() {
         console.log("eclipse:: clicked Update menu option");
-        $.mobile.navigate('#update');
+		$.mobile.changePage('#update',{
+            	transition: 'slide'
+        	});
         $('#btn_update_pubcast').click(function(){window.open('https://hive.biochemistry.gwu.edu/tools/HivePubcast/HIVE_Pubcast.apk','_system');});
         $('#btn_update_genecast').click(function(){window.open('https://hive.biochemistry.gwu.edu/tools/HiveGenecast/HIVEGenecast.apk','_system');});
     };
