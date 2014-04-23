@@ -20,7 +20,7 @@ window.defaults =
 
 // Check online connectivity
 function checkConnection() {
-	alert(navigator.connection.type);
+	alert(navigator.connection.type + ' ' + Connection.NONE + ' ' + navigator.connection.type == Connection.NONE);
     return navigator.connection.type == Connection.NONE ? false : true;
 }
 
@@ -124,7 +124,7 @@ function biomuta() {
 		else {
 		    $.ajax({ 
 		    	type: "GET",
-		    	timeout: 6000,
+		    	timeout: 5000,
 		    	dataType: "json",
 		    	url: page.dataurl + querygene,
 		    	success: function(data) {
@@ -432,7 +432,7 @@ function bioexpress() {
 		else {
 		    $.ajax({ 
 		    	type: "GET",
-		    	timeout: 6000,
+		    	timeout: 5000,
 		    	dataType: "json",
 		    	url: page.dataurl + querygene,
 		    	success: function(data) {
