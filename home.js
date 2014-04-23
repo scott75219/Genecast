@@ -422,6 +422,7 @@ function bioexpress() {
 			page.invalid_msgs.html('<p style="color: blue;"><strong>DEMO Mode: No Internet detected. Displaying cached results.</strong></p>');
 			results = jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16);
 			processData(); 
+			alert('MUC16 no Internet in Bioexp');
 		}
 		else if (online == false) {
 			page.invalid_msgs.show();
@@ -452,6 +453,7 @@ function bioexpress() {
 
 	// Parse the results and output to the appropriate page
 	function processData() {
+		alert('in processData() bioexp');
 		console.log('eclipse :: ' + results.length + ' results returned for ' + querygene);
 		if (results.length == 0) {
 			page.invalid_msgs.html(window.error_msg.ERROR_MSG_INVALID_GENE);
@@ -476,6 +478,7 @@ function bioexpress() {
 
 	// Display the results to the user -- for Bioexpress
 	function displayResults() {
+		alert('in displayResults in bioexp');
 		var paging = 50;
 		var bookmark = page.results_table_tbody.find('tr').length;
 		
