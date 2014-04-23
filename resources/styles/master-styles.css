@@ -87,7 +87,7 @@ table {
 
 }
 
-#biomuta-header-table tbody tr, .header-table tbody tr {
+.header-table tbody tr {
 	font-size: 12px;	
 }
 
@@ -95,7 +95,7 @@ table {
 	padding-bottom: 0 !important;
 }
 
-#biomuta-table tbody tr, .results-table tbody tr {
+.results-table tbody tr {
 	font-size: 0.75em;
 	text-align: center;
 }
@@ -104,17 +104,14 @@ table {
 text-align: center;
 }
 
-#biomuta-table tbody  {
-	text-align:center;
-}
-
-#biomuta-detail-table #td-status {
+.detail-table #td-status {
 	height: 30px;
   	line-height: 30px;
 }
 
-#biomuta-detail-table a {
-	color: #0000FF !important;
+.detail-table a {
+	color: #0000EE !important;
+	/*text-decoration: underline;*/
 }
 
 .invalid-msgs {
