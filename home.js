@@ -479,7 +479,6 @@ function bioexpress() {
 	function displayResults() {
 		var paging = 50;
 		var bookmark = page.results_table_tbody.find('tr').length;
-				alert('in displayResults in bioexp' + bookmark + ' ' + results.length);
 
 		// Load a few results at a time based on 'paging' variable
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
