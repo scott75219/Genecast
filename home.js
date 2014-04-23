@@ -202,7 +202,7 @@ function biomuta() {
 	}	
 	
 	function showDetails() {
-		var href = $(this).find(".detail-table a").attr("href");
+		var href = $(this).find("a").attr("href");
         if(href) {  
         	var idx = $(this).parent().children().index($(this));
 
@@ -478,7 +478,7 @@ function bioexpress() {
 	function displayResults() {
 		var paging = 50;
 		var bookmark = page.results_table_tbody.find('tr').length;
-				alert('in displayResults in bioexp' + bookmark);
+				alert('in displayResults in bioexp' + bookmark + ' ' + results.length);
 
 		// Load a few results at a time based on 'paging' variable
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
@@ -487,7 +487,7 @@ function bioexpress() {
 			var significant = results[i]['Significant'].toLowerCase() == 'yes' ? 'Y' : 'N';
 			var regulated = regulatedConvert(results[i]['regulated'], false);
 			var sourceType = truncate(results[i]['Data_Source'],8,true);
-			
+			alert('in displayResults in bioexp 2';
 			// print out table row
 			page.results_table_tbody.append('<tr> \
 				<td><a href="' + page.id + '-detail" >' + foldchange + '</a></td> \
@@ -500,10 +500,11 @@ function bioexpress() {
 				<td>' + results[i]['Cancer_type'] + '</td> \
 				</tr>');
 		}
-
+		
+		alert('in displayResults in bioexp 2';
 		if(bookmark+paging <= results.length  ) { page.loadmore_btn.show(); }
 		else { page.loadmore_btn.hide(); }
-		
+		alert('in displayResults in bioexp 3';
 		page.results_table.show();
 		page.results_area.show();
 		$.mobile.loading("hide");	
@@ -512,7 +513,7 @@ function bioexpress() {
 	}
 
 	function showDetails() {
-		var href = $(this).find(".detail-table a").attr("href");
+		var href = $(this).find("a").attr("href");
         if(href) {  
         	var idx = $(this).parent().children().index($(this));
         	// Convert regulated status to symbol
