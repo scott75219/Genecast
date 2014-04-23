@@ -5,7 +5,7 @@
 window.error_msg =
 {
 	ERROR_MSG_INVALID_GENE: '<p><strong>* Please enter a valid HUGO gene symbol.</strong></p>',
-	ERROR_MSG_NO_CONN_SUBMIT: '<p><strong>* Error: No Internet detected. Make sure there is a connection before submitting.</strong></p>',
+	ERROR_MSG_NO_INTERNET_CONN: '<p><strong>* Error: No Internet detected. Make sure there is a connection before submitting.</strong></p>',
 	ERROR_MSG_PARSING: '<p><strong>* PARSING ERROR! Please try another gene.</strong></p>'
 };
 
@@ -56,144 +56,31 @@ function polyphenConvert(pred, mode){
 	return mode == 'colors' ? colorsymbol : numsymbol;
 }
 
-// Fetch the data and pass to appropriate window
-function fetchData(page, querygene) {
-		// For demo purposes, still show cached results for MUC16 if no Internet available
-		var results = [];
-		var online = checkConnection();
-		console.log('online: ' + online);
-		if( online == false && querygene == 'MUC16') { 			 
-			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
-			page.invalid_msgs.show();
-			page.invalid_msgs.html('<p style="color: blue;"><strong>DEMO Mode: No Internet detected. Displaying cached results.</strong></p>');
-			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
-		}
-		else if (online == false) {
-			page.invalid_msgs.show();
-			page.invalid_msgs.html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
-			$.mobile.loading("hide");
-		}
-		// retrieve results from server
-		else {
-		    $.ajax({ 
-		    	type: "GET",
-		    	timeout: 6000,
-		    	dataType: "json",
-		    	url: page.dataurl + querygene,
-		    	success: function(data) {
-		    		console.log('eclipse:: data returned');
-		    		results = data;
-		    		processData(page, querygene, data);
-					},
-				error: function (xhr, ajaxOptions, thrownError) {
-					console.log('eclipse :: data error: ' + data);
-					page.invalid_msgs.show();
-					page.invalid_msgs.html(window.error_msg.ERROR_MSG_PARSING);
-					$.mobile.loading("hide");
-					}
-				});
-			$.mobile.loading("hide");
-		}
-}
-
-// Parse the results and output to the appropriate page
-function processData(page, querygene, results) {
-	console.log('eclipse :: ' + results.length + ' results returned for ' + querygene);
-	if (results.length == 0) {
-		page.invalid_msgs.html(window.error_msg.ERROR_MSG_INVALID_GENE);
-		page.invalid_msgs.show();
-	}
-		   
-	if(results.length > 0) { 	
-		// sort the results
-	   	var temp = results.sort(function(a, b) {
-	        return (parseInt(a[page.sort_elem],10) > parseInt(b[page.sort_elem],10)) ? 1 : ((parseInt(a[page.sort_elem],10) < parseInt(b[page.sort_elem],10)) ? -1 : 0);
-	    });	
-		results = temp;
-		
-		switch (page.name) {
-			case '#biomuta': break;
-			case '#bioexpress': displayBioexpressResults(page, querygene, results); break;
-			default: console.log('eclipse :: Error! Unrecognized page passed.');
-		}
-	};
-	
-	$.mobile.loading("hide");	
-}
-
 	
 // Load specific reusable variables and elements for each page
-function loadPageElements(name, pageelem, url, sort_element, header_key1, header_key2, graph_type) {
+function loadPageElements(pageid, pageelem, url, sort_element, header_key1, header_key2, graph_type) {
 	return {
-		name: name,
+		id: pageid,
 		dataurl: url,
 		sort_elem: sort_element,
 		result_header_key1: header_key1,
 		result_header_key2: header_key2,
 		default_graph: graph_type,
 		
-		invalid_msgs: $(name + ' .invalid-msgs'),
-		input_field: $(name + ' .queryInputField'),
-		submit_btn: $(name + ' .btn-submit'),
-		results_area: $(name + ' .results-container'),
-		results_msgs: $(name + ' .results-msgs'),
-		results_header: $(name + ' .header-table'),
-		results_header_tbody: $(name + ' .header-table tbody'),
-		results_table: $(name + '.results-table'),
-		results_table_tbody: $(name + ' .results-table tbody'),
-		loadmore_btn: $(name + ' .btn-loadmore'),
-		debug_area: $(name + ' .debug-area')
+		invalid_msgs: $(pageid + ' .invalid-msgs'),
+		input_field: $(pageid + ' .queryInputField'),
+		submit_btn: $(pageid + ' .btn-submit'),
+		results_area: $(pageid + ' .results-container'),
+		results_msgs: $(pageid + ' .results-msgs'),
+		results_header: $(pageid + ' .header-table'),
+		results_header_tbody: $(pageid + ' .header-table tbody'),
+		results_table: $(pageid + '.results-table'),
+		results_table_tbody: $(pageid + ' .results-table tbody'),
+		loadmore_btn: $(pageid + ' .btn-loadmore'),
+		debug_area: $(pageid + ' .debug-area')
 		};
 }
 
-// Display the results of Bioexpress to the user
-function displayBioexpressResults(page, querygene, results) {
-	page.results_msgs.html('<h2>' + results.length + ' results found for ' + querygene + '.</h2>');
-	page.results_header_tbody.html(
-	 	'<tr><td><b>UniProtKB:<b/></td><td>'+  results[0][page.result_header_key1] + '</td>\
-	 	<td><b>RefSeq:</b></td><td>'    + results[0][page.result_header_key2] + '</td></tr>'
-	);
-	
-	page.results_table.freezeHeader();
-	page.results_table_tbody.html(''); 
-
-	populateBioexpressTable();	
-	page.results_table.show();
-	page.results_area.show();
-	
-	// Populate the results table
-	function populateBioexpressTable () {
-		// Load only 50 results at a time
-		var paging = 50;
-		var bookmark = page.results_table_tbody.find('tr').length;
-		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
-			// Text manipulations to fit data into table
-			//var pmid = results[i]['PMID'].split(";")[0];// AMIR
-			//var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
-			var foldchange = (isNaN(results[i]['log2FoldChange']) ? (results[i]['log2FoldChange'].toLowerCase() == '-inf' ? '- &#8734;' : '&#8734;') : parseFloat(results[i]['log2FoldChange']).toFixed(3));
-			var sourceType = truncate(results[i]['Data_Source'],8,true);
-			//var cancerType = results[i]['Cancer_type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
-			// print out table row
-			page.results_table_tbody.append('<tr> \
-				<td><a href="#bioexpress-detail" >' + foldchange + '</a></td> \
-				<td>' +  parseFloat(results[i]['p_value']).toFixed(3) + '</td> \
-				<td>' + (results[i]['Significant'].toLowerCase() == 'yes' ? 'Y' : 'N') + '</td> \
-				<td>' + (results[i]['regulated'].toLowerCase()== 'up' ? '<img src="resources/images/small-green_arrow_up-svg.png" width="12px" height="12px"/>' : '<img src="resources/images/small-red_arrow_down-svg.png" width="12px" height="12px"/>') + '</td> \
-				<td>' + results[i]['PMID'] + '</td> \
-				<td>' + parseFloat(results[i]['Freq_up_per']).toFixed(2) + '</td> \
-				<td>' + parseFloat(results[i]['Freq_Down_per']).toFixed(2) + '</td> \
-				<td>' + results[i]['Cancer_type'] + '</td> \
-				</tr>');
-		}
-
-		if(bookmark+paging <= results.length  ) { page.loadmore_btn.show(); }
-		else { page.loadmore_btn.hide(); }
-	}
-
-	$(document).on('click', page.loadmore_btn, populateBioexpressTable);	
-	
-
-}
 
 // Initialize BioMuta page
 function biomuta() {	
@@ -455,7 +342,7 @@ function biomuta() {
 		    });			
 			  	
 			// Print out results
-			$("#results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
+			$("#biomuta-results-msg").html('<h2>' + biomutaresults.length + ' results found for ' + querygene + '.</h2>');
 
 			if(biomutaresults.length > 0) { 
 				$('#biomuta-header-table tbody').html(
@@ -486,7 +373,7 @@ function biomuta() {
 		}
 		else if (online == false) {
 			$('#biomuta-invalid-msg').show();
-			$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_CONN_SUBMIT);
+			$('#biomuta-invalid-msg').html(window.error_msg.ERROR_MSG_NO_INTERNET_CONN);
 			$.mobile.loading("hide");
 		}
 		// retrieve results from server
@@ -516,37 +403,133 @@ function biomuta() {
 
 // Initialize BioExpress page
 function bioexpress() {
+	// ********** Page Variables
+	
 	// load specific reusable variables and elements for this page
-	var curr_page = loadPageElements('#bioexpress', $('#bioexpress'), window.defaults.BIOEXPRESS_DATA_URL, 'log2FoldChange', 'UniProtKB_AC', 'RefSeq ', 0);
+	var page = loadPageElements('#bioexpress', $('#bioexpress'), window.defaults.BIOEXPRESS_DATA_URL, 'log2FoldChange', 'UniProtKB_AC', 'RefSeq ', 0);
+	var querygene;
+	var results;
+	(page.results_table).freezeHeader();
+	
+	// ********** Page functions
+	
+	// Add up/down arrow symbol to regulation status
+	function regulatedConvert (status,full) { 
+		var symbol = status.toLowerCase()== 'up' ? '<img src="resources/images/small-green_arrow_up-svg.png" width="12px" height="12px"/>' : '<img src="resources/images/small-red_arrow_down-svg.png" width="12px" height="12px"/>'; 
+		return full == false ? symbol : symbol + ' ' + status;
+	}
+	
+	// Fetch the data and pass to appropriate window
+	function fetchData() {
+			// For demo purposes, still show cached results for MUC16 if no Internet available
+			var online = checkConnection();
+			if( online == false && querygene == 'MUC16') { 			 
+				console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
+				page.invalid_msgs.show();
+				page.invalid_msgs.html('<p style="color: blue;"><strong>DEMO Mode: No Internet detected. Displaying cached results.</strong></p>');
+				processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
+			}
+			else if (online == false) {
+				page.invalid_msgs.show();
+				page.invalid_msgs.html(window.error_msg.ERROR_MSG_NO_INTERNET_CONN);
+				$.mobile.loading("hide");
+			}
+			// retrieve results from server
+			else {
+			    $.ajax({ 
+			    	type: "GET",
+			    	timeout: 6000,
+			    	dataType: "json",
+			    	url: page.dataurl + querygene,
+			    	success: function(data) {
+			    		console.log('eclipse:: data returned');
+			    		results = data;
+			    		processData();
+						},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log('eclipse :: data error: ' + data);
+						page.invalid_msgs.show();
+						page.invalid_msgs.html(window.error_msg.ERROR_MSG_PARSING);
+						$.mobile.loading("hide");
+						}
+					});
+				$.mobile.loading("hide");
+			}
+	}
 
-	$(document).on('click', '#bioexpress .btn-submit', function(e){
-		// Loading data notification
-		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
-		var querygene = curr_page.input_field.val().trim().toUpperCase();
-    	curr_page.results_area.hide();
-    	curr_page.invalid_msgs.hide();
-		curr_page.results_msgs.html('');
-		curr_page.results_header_tbody.html('');
-		curr_page.results_table_tbody.html('');
+	// Parse the results and output to the appropriate page
+	function processData() {
+		console.log('eclipse :: ' + results.length + ' results returned for ' + querygene);
+		if (results.length == 0) {
+			page.invalid_msgs.html(window.error_msg.ERROR_MSG_INVALID_GENE);
+			page.invalid_msgs.show();
+		}
+			   
+		if(results.length > 0) { 	
+			// sort the results
+		   	var temp = results.sort(function(a, b) {
+		        return (parseInt(a[page.sort_elem],10) > parseInt(b[page.sort_elem],10)) ? 1 : ((parseInt(a[page.sort_elem],10) < parseInt(b[page.sort_elem],10)) ? -1 : 0);
+		    });	
+			results = temp;
 
-	// prevent double-triggering/initialization of button
-	$(document).off('click', '#bioexpress .btn-loadmore');	
-		fetchData(curr_page, querygene);
-	});
+			page.results_msgs.html('<h2>' + results.length + ' results found for ' + querygene + '.</h2>');
+			page.results_header_tbody.html(
+			 	'<tr><td><b>UniProtKB:<b/></td><td>'+  results[0][page.result_header_key1] + '</td>\
+			 	<td><b>RefSeq:</b></td><td>'    + results[0][page.result_header_key2] + '</td></tr>'
+			);
+			displayResults();
+		};
+	}
 
-	// When click on a row show full detail page
- /*   curr_page.results_table_tbody.on('click', 'tr', function() {
+	// Display the results to the user -- for Bioexpress
+	function displayResults() {
+		var paging = 50;
+		var bookmark = page.results_table_tbody.find('tr').length;
+		
+		// Load a few results at a time based on 'paging' variable
+		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
+			// Text manipulations to fit data into table
+			//var pmid = results[i]['PMID'].split(";")[0];// AMIR
+			//var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
+			var foldchange = isNaN(results[i]['log2FoldChange']) == true ? (results[i]['log2FoldChange'].toLowerCase() == '-inf' ? '- &#8734;' : '&#8734;') : parseFloat(results[i]['log2FoldChange']).toFixed(3);
+			var significant = results[i]['Significant'].toLowerCase() == 'yes' ? 'Y' : 'N';
+			var regulated = regulatedConvert(results[i]['regulated'], false);
+			var sourceType = truncate(results[i]['Data_Source'],8,true);
+			//var cancerType = results[i]['Cancer_type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
+			
+			// print out table row
+			page.results_table_tbody.append('<tr> \
+				<td><a href="' + page.id + '-detail" >' + foldchange + '</a></td> \
+				<td>' +  parseFloat(results[i]['p_value']).toFixed(3) + '</td> \
+				<td>' + significant + '</td> \
+				<td>' + regulated + '</td> \
+				<td>' + results[i]['PMID'] + '</td> \
+				<td>' + parseFloat(results[i]['Freq_up_per']).toFixed(2) + '</td> \
+				<td>' + parseFloat(results[i]['Freq_Down_per']).toFixed(2) + '</td> \
+				<td>' + results[i]['Cancer_type'] + '</td> \
+				</tr>');
+		}
+
+		if(bookmark+paging <= results.length  ) { page.loadmore_btn.show(); }
+		else { page.loadmore_btn.hide(); }
+		
+		page.results_table.show();
+		page.results_area.show();
+		$.mobile.loading("hide");	
+	}
+
+	function showDetails() {
     	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
-    	$('#biomuta-results').hide();
+    	$(page.id).hide();
         var href = $(this).find("a").attr("href");
         if(href) {  
         	var idx = $(this).parent().children().index($(this));
         	$.mobile.navigate( href );
-        	// Convert status to a symbol and description (Silver, Gold)
-        	var statussymbol = statusConvert(biomutaresults[idx]['Status']);
+        	// Convert regulated status to symbol
+        	var regulatedsymbol = regulatedConvert(results[idx]['regulated'],true);
         	
         	// Determine Accession link:
-        	var acTitle = "Other AC:";
+        /*	var acTitle = "Other AC:";
         	var accessionlink;
 			if(biomutaresults[idx]['Accession'].indexOf('ENST')>=0){accessionlink='<a href="http://useast.ensembl.org/Homo_sapiens/Transcript/Transcript?t='+biomutaresults[idx]['Accession']+'">'+ biomutaresults[idx]['Accession'] + '</a>';}
 	        else if(biomutaresults[idx]['Accession'].indexOf('XM_')>=0 || biomutaresults[idx]['Accession'].indexOf('NM_')>=0 || biomutaresults[idx]['Accession'].indexOf('AC_')>=0) {
@@ -558,35 +541,60 @@ function bioexpress() {
 			
 			// SNV position link
 			var snvlink = biomutaresults[idx]['Genome_Position'].indexOf(':') >= 0 ? '<a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=human&position='+biomutaresults[idx]['Genome_Position']+'">'+biomutaresults[idx]['Genome_Position']+'</a>' : biomutaresults[idx]['Genome_Position'];
-
+*/
 			// PMID link
-			var pmid = biomutaresults[idx]['PMID'].split(";")[0];
+			var pmid = results[idx]['PMID'].split(";")[0];
 			var pmidlink = pmid!='-' ? '<a href="http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid+'">'+pmid+'</a>' : pmid; 
 			
 			// PolyPhen color code
-			var polyphen   = polyphenConvert(biomutaresults[idx]['Polyphen_Pred'],'colors');
-			
-			$('#biomuta-detail-table tbody').html(
-				'<tr><td>Gene:</td><td>'     + biomutaresults[idx]['Gene_Name '] + '</td></tr> \
-			 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/blast/?about=' + biomutaresults[idx]['UniProt AC'] + '">' +  biomutaresults[idx]['UniProt AC'] + '</a></td></tr>\
-			 	<tr><td>' + acTitle + '</td><td>'    + accessionlink + '</td></tr> \
-			 	<tr><td>SNV Position:</td><td>'    + snvlink + '</td></tr> \
-			 	<tr><td>Pos(N):</td><td>'    + biomutaresults[idx]['Position_N'] + '</td></tr> \
-			 	<tr><td>Ref(N):</td><td>'    + biomutaresults[idx]['Ref_N'] + '</td></tr> \
-			 	<tr><td>Var(N):</td><td>'    + biomutaresults[idx]['Var_N'] + '</td></tr> \
-			 	<tr><td>Pos(A):</td><td>'    + biomutaresults[idx]['Position_A'] + '</td></tr> \
-			 	<tr><td>Ref(A):</td><td>'    + biomutaresults[idx]['Ref_A'] + '</td></tr> \
-			 	<tr><td>Var(A):</td><td>'    + biomutaresults[idx]['Var_A'] + '</td></tr> \
-			 	<tr><td>Polyphen Pred.:</td><td>' + polyphen + ' ' + biomutaresults[idx]['Polyphen_Pred'] + '</td></tr> \
+			//var polyphen   = polyphenConvert(results[idx]['Polyphen_Pred'],'colors');
+
+			$(page.id + '-detail .detail-table tbody').html(
+				'<tr><td>Gene:</td><td>'     + querygene + '</td></tr> \
+			 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/blast/?about=' + results[idx]['UniProtKB_AC'] + '">' +  results[idx]['UniProtKB_AC']  + '</a></td></tr>\
+			 	<tr><td>RefSeq</td><td>'    + results[idx]['RefSeq ']  + '</td></tr> \
+			 	<tr><td>log2 Fold Change:</td><td>'    + results[idx]['log2FoldChange'] + '</td></tr> \
+			 	<tr><td>p Value:</td><td>'    + results[idx]['p_value'] + '</td></tr> \
+			 	<tr><td>Significant?:</td><td>'    + (results[idx]['Significant'].toLowerCase() == 'yes' ? 'Yes' : 'No') + '</td></tr> \
+			 	<tr><td>Regulated:</td><td>'    + regulatedsymbol + '</td></tr> \
+			 	<tr><td>Cancer Type:</td><td>'    + results[idx]['Cancer_type'] + '</td></tr> \
+				<tr><td>Sample ID:</td><td>' + results[idx]['Sample_ID'] + '</td></tr> \
+				<tr><td>Data Source:</td><td>' + results[idx]['Data_Source'] + '</td></tr> \
 			 	<tr><td>PMID:</td><td>'    + pmidlink + '</td></tr> \
-			 	<tr><td>Cancer Type:</td><td>'    + biomutaresults[idx]['Cancer_Type'] + '</td></tr> \
-			 	<tr><td>Source:</td><td>'    + biomutaresults[idx]['Source'] + '</td></tr> \
-			 	<tr><td>Status:</td><td id="td-status">'    + statussymbol + '</td></tr>'				 	
+			 	<tr><td>Freq. Up%:</td><td>'    + results[idx]['Freq_up_per'] + '</td></tr> \
+			 	<tr><td>Freq. Down%:</td><td>'    + results[idx]['Freq_Down_per'] + '</td></tr>'		 	
 			);
 			// change to biomuta-detail page
     	};
     	$.mobile.loading("hide");
-    });*/
+    }
+    
+	// ********** Event listeners
+	 
+	$(document).on('click', '#bioexpress .btn-submit', function(e){
+		// Loading data notification
+		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
+		querygene = page.input_field.val().trim().toUpperCase();
+    	page.results_area.hide();
+    	page.invalid_msgs.hide();
+		page.results_msgs.html('');
+		page.results_header_tbody.html('');
+		page.results_table_tbody.html('');
+		fetchData();
+	});
+
+	$(document).on('click', '#bioexpress .btn-loadmore', displayResults);
+	
+	// When click on a row show full detail page
+ 	page.results_table_tbody.on('click', 'tr', showDetails);
+
+	// the back button will return user to Biomuta front screen (may want to change this logic later)
+/*	document.addEventListener("backbutton", function() { console.log('back button hit');
+    	if(results && results.length>0) { console.log('length>0'); page.results_area.show(); }
+		history.go(-1);
+    	navigator.app.backHistory();
+	},true);
+	*/
 } // END -- BIOEXPRESS
 
 function home() {
@@ -627,7 +635,7 @@ function home() {
 	$("#btn-bioexp-hivelogo").on("touchend", function() {
     	$('#bioexpress .results-container').show();
 		$.mobile.navigate('#bioexpress');
-		biomuta();
+		bioexpress();
 	});
 	 	
 	// Page event listeners
