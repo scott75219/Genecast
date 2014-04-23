@@ -148,6 +148,7 @@ function biomuta() {
 		if (results.length == 0) {
 			page.invalid_msgs.html(window.error_msg.ERROR_MSG_INVALID_GENE);
 			page.invalid_msgs.show();
+			$.mobile.loading("hide");
 		}
 			   
 		if(results.length > 0) { 	
@@ -457,6 +458,7 @@ function bioexpress() {
 		if (results.length == 0) {
 			page.invalid_msgs.html(window.error_msg.ERROR_MSG_INVALID_GENE);
 			page.invalid_msgs.show();
+			$.mobile.loading("hide");
 		}
 			   
 		if(results.length > 0) { 	
