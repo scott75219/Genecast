@@ -22,7 +22,7 @@ window.defaults =
 function checkConnection() {
 	var status = navigator.connection.type == Connection.NONE;
 	alert(navigator.connection.type + ' ' + Connection.NONE ); alert( status);
-    return navigator.connection.type == Connection.NONE ? false : true;
+    return (navigator.connection.type == Connection.NONE) == false ? 1 : 0;
 }
 
 function truncate(string,len,showEllipsis){
@@ -110,13 +110,13 @@ function biomuta() {
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkConnection();
 		console.log(online);
-		if( online == false && querygene == 'MUC16') { 			 
+		if( online == 0 && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
 			page.invalid_msgs.show();
 			page.invalid_msgs.html('<p style="color: blue;"><strong>DEMO Mode: No Internet detected. Displaying cached results.</strong></p>');
 			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
 		}
-		else if (online == false) {
+		else if (online == 0) {
 			page.invalid_msgs.show();
 			page.invalid_msgs.html(window.error_msg.ERROR_MSG_NO_INTERNET_CONN);
 			$.mobile.loading("hide");
