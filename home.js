@@ -501,10 +501,10 @@ function bioexpress() {
 				</tr>');
 		}
 		
-		alert('in displayResults in bioexp 2';
+		alert('in displayResults in bioexp 3');
 		if(bookmark+paging <= results.length  ) { page.loadmore_btn.show(); }
 		else { page.loadmore_btn.hide(); }
-		alert('in displayResults in bioexp 3';
+		alert('in displayResults in bioexp 4';
 		page.results_table.show();
 		page.results_area.show();
 		$.mobile.loading("hide");	
