@@ -20,9 +20,7 @@ window.defaults =
 
 // Check online connectivity
 function checkConnection() {
-	var status = navigator.connection.type == Connection.NONE;
-	alert(navigator.connection.type + ' ' + Connection.NONE ); alert( status);
-    return (navigator.connection.type == Connection.NONE) == false ? 1 : 0;
+    return navigator.connection.type == Connection.NONE ? false : true;
 }
 
 function truncate(string,len,showEllipsis){
@@ -109,14 +107,14 @@ function biomuta() {
 	function fetchData() {
 		// For demo purposes, still show cached results for MUC16 if no Internet available
 		var online = checkConnection();
-		console.log(online);
-		if( online == 0 && querygene == 'MUC16') { 			 
+		if( online == false && querygene == 'MUC16') { 			 
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
 			page.invalid_msgs.show();
 			page.invalid_msgs.html('<p style="color: blue;"><strong>DEMO Mode: No Internet detected. Displaying cached results.</strong></p>');
-			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
+			results = jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16);
+			processData(); 
 		}
-		else if (online == 0) {
+		else if (online == false) {
 			page.invalid_msgs.show();
 			page.invalid_msgs.html(window.error_msg.ERROR_MSG_NO_INTERNET_CONN);
 			$.mobile.loading("hide");
@@ -125,7 +123,7 @@ function biomuta() {
 		else {
 		    $.ajax({ 
 		    	type: "GET",
-		    	timeout: 5000,
+		    	timeout: 6000,
 		    	dataType: "json",
 		    	url: page.dataurl + querygene,
 		    	success: function(data) {
@@ -422,7 +420,8 @@ function bioexpress() {
 			console.log('eclipse :: No Internet and Gene = MUC16. Using cached results for MUC16.');
 			page.invalid_msgs.show();
 			page.invalid_msgs.html('<p style="color: blue;"><strong>DEMO Mode: No Internet detected. Displaying cached results.</strong></p>');
-			processResults(jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16), 'demo'); 
+			results = jQuery.parseJSON(window.defaults.OFFLINE_CACHE_MUC16);
+			processData(); 
 		}
 		else if (online == false) {
 			page.invalid_msgs.show();
@@ -433,7 +432,7 @@ function bioexpress() {
 		else {
 		    $.ajax({ 
 		    	type: "GET",
-		    	timeout: 5000,
+		    	timeout: 6000,
 		    	dataType: "json",
 		    	url: page.dataurl + querygene,
 		    	success: function(data) {
