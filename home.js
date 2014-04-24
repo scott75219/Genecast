@@ -398,7 +398,7 @@ function bioexpress() {
 	var querygene;
 	var results;
 	var pagediv = '#bioexpress'; 
-	var sortkey = 'log2FoldChange';
+	var sortkey = 'p_value';
 	var headerkey1 = { name: 'UniProt', jsonkey: 'UniProtKB_AC' };
 	var headerkey2 = { name: 'RefSeq', jsonkey: 'RefSeq ' };
 	var page = loadPageElements(pagediv, $(pagediv), window.defaults.BIOEXPRESS_DATA_URL, sortkey,headerkey1.jsonkey, headerkey2.jsonkey, 0);
@@ -464,9 +464,9 @@ function bioexpress() {
 		if(results.length > 0) { 	
 			// sort the results
 		   	var temp = results.sort(function(a, b) {
-		        return (parseInt(a[page.sort_elem],10) > parseInt(b[page.sort_elem],10)) ? 1 : ((parseInt(a[page.sort_elem],10) < parseInt(b[page.sort_elem],10)) ? -1 : 0);
+		        return parseFloat(a[page.sort_elem]) > parseFloat(b[page.sort_elem]) ? 1 : (parseFloat(a[page.sort_elem]) < parseFloat(b[page.sort_elem]) ? -1 : 0);
 		    });	
-			results = temp;
+			//results = temp;
 
 			page.results_msgs.html('<h2>' + results.length + ' results found for ' + querygene + '.</h2>');
 			page.results_header_tbody.html(
@@ -485,19 +485,20 @@ function bioexpress() {
 		// Load a few results at a time based on 'paging' variable
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
 			// Text manipulations to fit data into table
-			var foldchange = isNaN(results[i]['log2FoldChange']) == true ? (results[i]['log2FoldChange'].toLowerCase() == '-inf' ? '- &#8734;' : '&#8734;') : parseFloat(results[i]['log2FoldChange']).toFixed(3);
+			var pvalue = parseFloat(results[i]['p_value']) < 0.01 ? parseFloat(parseFloat(results[i]['p_value']).toPrecision(2)).toExponential() : parseFloat(results[i]['p_value']).toPrecision(3);
+			var foldchange = isNaN(results[i]['log2FoldChange']) == true ? (results[i]['log2FoldChange'].toLowerCase() == '-inf' ? '- &#8734;' : '&#8734;') : parseFloat(results[i]['log2FoldChange']).toFixed(2);
 			var significant = results[i]['Significant'].toLowerCase() == 'yes' ? 'Y' : 'N';
 			var regulated = regulatedConvert(results[i]['regulated'], false);
 			var sourceType = truncate(results[i]['Data_Source'],8,true);
 			// print out table row
 			page.results_table_tbody.append('<tr> \
-				<td><a href="' + page.id + '-detail" >' + foldchange + '</a></td> \
-				<td>' +  parseFloat(results[i]['p_value']).toFixed(3) + '</td> \
+				<td style="text-align: right !important;"><a href="' + page.id + '-detail" >' +  pvalue + '</a></td> \
+				<td>' + foldchange + '</td> \
 				<td>' + significant + '</td> \
 				<td>' + regulated + '</td> \
 				<td>' + results[i]['PMID'] + '</td> \
-				<td>' + parseFloat(results[i]['Freq_up_per']).toFixed(2) + '</td> \
-				<td>' + parseFloat(results[i]['Freq_Down_per']).toFixed(2) + '</td> \
+				<td>' + parseFloat(results[i]['Freq_up_per']).toFixed(1) + '</td> \
+				<td>' + parseFloat(results[i]['Freq_Down_per']).toFixed(1) + '</td> \
 				<td>' + results[i]['Cancer_type'] + '</td> \
 				</tr>');
 		}
