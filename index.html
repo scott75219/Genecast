@@ -24,6 +24,21 @@
 	<link rel="stylesheet" href="resources/styles/jquery.freezeheader.css" />
 	<link rel="stylesheet" href="resources/styles/master-styles.css" />
 
+ <script type="text/javascript">
+        _IS_RIPPLE_EMULATOR = $('#tinyhippos-injected').length > 0;
+
+        function deviceready() {
+            // Make ripple think that a back button handler has already been attached
+            if(_IS_RIPPLE_EMULATOR) cordova.addDocumentEventHandler('backbutton'); 
+
+            document.addEventListener("backbutton", function(){
+                alert("Pressed back");
+            });
+
+        }
+        document.addEventListener("deviceready", deviceready, true);        
+        </script>
+        
   </head>
   <body onload="onLoad()">
 		<!--  FOR NOW SKIP MULTI-APP HOMEPAGE... GO DIRECTLY TO GeneCast Biomuta
@@ -177,9 +192,9 @@
 					<table class="results-table ui-table ui-responsive table-stroke table-stripe responsive">
 						<thead>
 							<tr>
-								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="85"><text transform="rotate(270, 12, 0) translate(-70,0)">p Value</text></svg></th>
-								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="85"><text transform="rotate(270, 12, 0) translate(-70,0)">Fold Change</text></svg></th>
+								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="85"><text transform="rotate(270, 12, 0) translate(-70,0)">p-value</text></svg></th>
 								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="85"><text transform="rotate(270, 12, 0) translate(-70,0)">Significant?</text></svg></th>
+								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="85"><text transform="rotate(270, 12, 0) translate(-70,0)">Fold Change</text></svg></th>
 								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="85"><text transform="rotate(270, 12, 0) translate(-70,0)">Regulated</text></svg></th>
 								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="85"><text transform="rotate(270, 12, 0) translate(-70,10)">PMID</text></svg></th>
 								<th scope="col" style="vertical-align: bottom;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="85"><text transform="rotate(270, 12, 0) translate(-70,0)">Freq Up%</text></svg></th>
@@ -223,7 +238,7 @@
 			<h1>HIVE Genecast</h1>
 		</div> <!-- header -->
 		<div data-role="content">
-  			<p>Version 0.9.2 - beta - This app is in beta testing.</p>
+  			<p>Version 0.9.3 - beta - This app is in beta testing.</p>
   			<h3>License</h3>
   			<p>We have chosen to apply the Creative Commons Attribution-NonCommercial-NoDerivs (http://creativecommons.org/licenses/by-nd/3.0/)
   				License to all parts ( http://wiki.creativecommons.org/Data) of our databases, datasets and tools. This means that you are free

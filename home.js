@@ -169,7 +169,7 @@ function biomuta() {
 	
 	// Display the results to the user -- for Bioexpress
 	function displayResults() {
-		generateBiomutaGraph(1);
+		graphFrequencyCancerTypes();
 		
 		var paging = window.defaults.RESULTS_PAGING_SIZE;
 		var bookmark = page.results_table_tbody.find('tr').length;
@@ -253,7 +253,7 @@ function biomuta() {
 	}
 
 	// generate biomuta graph
-	function generateBiomutaGraph(charttype) {
+	function graphFrequencyCancerTypes() {
 		// categorize frequencies per cancer type
 		var frequencies = [];
 		var freq = {};
@@ -275,95 +275,94 @@ function biomuta() {
 	  		}
 		}
 
-		if(charttype == 1) {
-			/*****
-			 *  
-			 * Below d3js bar chart code template from http://d3-generator.com
-			 *
-			* *****/
-			// clear chart area and add header
-			$(pagediv + ' .chart').html('<h3 style="text-align: center;">Frequency of Cancer Types</h3>');
-			// render chart
-			var data = frequencies;
-			var valueLabelWidth = 40; // space reserved for value labels (right)
-			var barHeight = 15; // height of one bar
-			var barLabelWidth = 50; // space reserved for bar labels
-			var barLabelPadding = 5; // padding between bar and bar labels (left)
-			var gridLabelHeight = 18; // space reserved for gridline labels
-			var gridChartOffset = 3; // space between start of grid and first bar
-			var maxBarWidth = $(window).width()- (barLabelWidth*2); // width of the bar with the max value
-			// accessor functions 
-			var barLabel = function(d) { return d['Cancer Type']; };
-			var barValue = function(d) { return parseFloat(d['Frequency']); };
-			window.onorientationchange = function() { setTimeout(functionName, 0); var maxBarWidth = $(window).width()- (barLabelWidth*2); redraw();};
 
-			// sorting
-			var sortedData = data.sort(function(a, b) {
-			 return d3.descending(barValue(a), barValue(b));
-			}); 
-			
-			// scales
-			var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
-			var y = function(d, i) { return yScale(i); };
-			var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-			var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
-			// svg container element
-			var chart = d3.select(pagediv + ' .chart').append("svg")
-			  .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
-			  .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
-			// grid line labels
-			var gridContainer = chart.append('g')
-			  .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
-			gridContainer.selectAll("text").data(x.ticks(5)).enter().append("text")
-			  .attr("x", x)
-			  .attr("dy", -3)
-			  .attr("font-size", ".75em")
-			  .attr("text-anchor", "middle")
-			  .text(String);
-			// vertical grid lines
-			gridContainer.selectAll("line").data(x.ticks(5)).enter().append("line")
-			  .attr("x1", x)
-			  .attr("x2", x)
-			  .attr("y1", 0)
-			  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-			  .style("stroke", "#ccc");
-			// bar labels
-			var labelsContainer = chart.append('g')
-			  .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-			labelsContainer.selectAll('text').data(sortedData).enter().append('text')
-			  .attr('y', yText)
-			  .attr('stroke', 'none')
-			  .attr('fill', 'black')
-			  .attr("font-size", ".75em")
-			  .attr("dy", ".35em") // vertical-align: middle
-			  .attr('text-anchor', 'end')
-			  .text(barLabel);
-			// bars
-			var barsContainer = chart.append('g')
-			  .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-			barsContainer.selectAll("rect").data(sortedData).enter().append("rect")
-			  .attr('y', y)
-			  .attr('height', yScale.rangeBand())
-			  .attr('width', function(d) { return x(barValue(d)); })
-			  .attr('stroke', 'white')
-			  .attr('fill', 'steelblue');
-			// bar value labels
-			barsContainer.selectAll("text").data(sortedData).enter().append("text")
-			  .attr("x", function(d) { return x(barValue(d)); })
-			  .attr("y", yText)
-			  .attr("dx", 3) // padding-left
-			  .attr("dy", ".35em") // vertical-align: middle		  
-			  .attr("font-size", ".75em")
-			  .attr("text-anchor", "start") // text-align: right
-			  .attr("fill", "black")
-			  .attr("stroke", "none")
-			  .text(function(d) { return d3.round(barValue(d), 2); });
-			// start line
-			barsContainer.append("line")
-			  .attr("y1", -gridChartOffset)
-			  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-			  .style("stroke", "#000");
-		}
+		/*****
+		 *  
+		 * Below d3js bar chart code template from http://d3-generator.com
+		 *
+		* *****/
+		// clear chart area and add header
+		$(pagediv + ' .chart').html('<h3 style="text-align: center;">' + querygene + ' Frequency of Cancer Types</h3>');
+		// render chart
+		var data = frequencies;
+		var valueLabelWidth = 40; // space reserved for value labels (right)
+		var barHeight = 15; // height of one bar
+		var barLabelWidth = 50; // space reserved for bar labels
+		var barLabelPadding = 5; // padding between bar and bar labels (left)
+		var gridLabelHeight = 18; // space reserved for gridline labels
+		var gridChartOffset = 3; // space between start of grid and first bar
+		var maxBarWidth = $(window).width()- (barLabelWidth*2); // width of the bar with the max value
+		// accessor functions 
+		var barLabel = function(d) { return d['Cancer Type']; };
+		var barValue = function(d) { return parseFloat(d['Frequency']); };
+		window.onorientationchange = function() { setTimeout(functionName, 0); var maxBarWidth = $(window).width()- (barLabelWidth*2); redraw();};
+
+		// sorting
+		var sortedData = data.sort(function(a, b) {
+		 return d3.descending(barValue(a), barValue(b));
+		}); 
+		
+		// scales
+		var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
+		var y = function(d, i) { return yScale(i); };
+		var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
+		var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
+		// svg container element
+		var chart = d3.select(pagediv + ' .chart').append("svg")
+		  .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
+		  .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
+		// grid line labels
+		var gridContainer = chart.append('g')
+		  .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
+		gridContainer.selectAll("text").data(x.ticks(5)).enter().append("text")
+		  .attr("x", x)
+		  .attr("dy", -3)
+		  .attr("font-size", ".75em")
+		  .attr("text-anchor", "middle")
+		  .text(String);
+		// vertical grid lines
+		gridContainer.selectAll("line").data(x.ticks(5)).enter().append("line")
+		  .attr("x1", x)
+		  .attr("x2", x)
+		  .attr("y1", 0)
+		  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
+		  .style("stroke", "#ccc");
+		// bar labels
+		var labelsContainer = chart.append('g')
+		  .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
+		labelsContainer.selectAll('text').data(sortedData).enter().append('text')
+		  .attr('y', yText)
+		  .attr('stroke', 'none')
+		  .attr('fill', 'black')
+		  .attr("font-size", ".75em")
+		  .attr("dy", ".35em") // vertical-align: middle
+		  .attr('text-anchor', 'end')
+		  .text(barLabel);
+		// bars
+		var barsContainer = chart.append('g')
+		  .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
+		barsContainer.selectAll("rect").data(sortedData).enter().append("rect")
+		  .attr('y', y)
+		  .attr('height', yScale.rangeBand())
+		  .attr('width', function(d) { return x(barValue(d)); })
+		  .attr('stroke', 'white')
+		  .attr('fill', '#4682B4');
+		// bar value labels
+		barsContainer.selectAll("text").data(sortedData).enter().append("text")
+		  .attr("x", function(d) { return x(barValue(d)); })
+		  .attr("y", yText)
+		  .attr("dx", 3) // padding-left
+		  .attr("dy", ".35em") // vertical-align: middle		  
+		  .attr("font-size", ".75em")
+		  .attr("text-anchor", "start") // text-align: right
+		  .attr("fill", "black")
+		  .attr("stroke", "none")
+		  .text(function(d) { return d3.round(barValue(d), 2); });
+		// start line
+		barsContainer.append("line")
+		  .attr("y1", -gridChartOffset)
+		  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
+		  .style("stroke", "#000");
 	}  // end generateBiomutaGraph
 	
 	    
@@ -467,11 +466,10 @@ function bioexpress() {
 		        return parseFloat(a[page.sort_elem]) > parseFloat(b[page.sort_elem]) ? 1 : (parseFloat(a[page.sort_elem]) < parseFloat(b[page.sort_elem]) ? -1 : 0);
 		    });	
 			//results = temp;
-
 			page.results_msgs.html('<h2>' + results.length + ' results found for ' + querygene + '.</h2>');
 			page.results_header_tbody.html(
-			 	'<tr><td><b>' + headerkey1.name + '<b/></td><td>' + results[0][page.result_header_key1] + '</td>\
-			 	     <td><b>' + headerkey2.name + '</b></td><td>' + results[0][page.result_header_key2] + '</td></tr>'
+			 	'<tr><td><b>' + headerkey1.name + ':<b/></td><td>' + results[0][page.result_header_key1] + '</td>\
+			 	     <td><b>' + headerkey2.name + ':</b></td><td>' + results[0][page.result_header_key2].split(";")[0] + '</td></tr>'
 			);
 			displayResults();
 		};
@@ -481,7 +479,10 @@ function bioexpress() {
 	function displayResults() {
 		var paging = 50;
 		var bookmark = page.results_table_tbody.find('tr').length;
-
+		
+		// Display the Expression Regulation Profile stacked bar graph
+		graphExpressionRegulationProfile();
+		
 		// Load a few results at a time based on 'paging' variable
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
 			// Text manipulations to fit data into table
@@ -493,8 +494,8 @@ function bioexpress() {
 			// print out table row
 			page.results_table_tbody.append('<tr> \
 				<td style="text-align: right !important;"><a href="' + page.id + '-detail" >' +  pvalue + '</a></td> \
-				<td>' + foldchange + '</td> \
 				<td>' + significant + '</td> \
+				<td>' + foldchange + '</td> \
 				<td>' + regulated + '</td> \
 				<td>' + results[i]['PMID'] + '</td> \
 				<td>' + parseFloat(results[i]['Freq_up_per']).toFixed(1) + '</td> \
@@ -525,8 +526,8 @@ function bioexpress() {
 			 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/blast/?about=' + results[idx]['UniProtKB_AC'] + '" rel="external" target="_blank">' +  results[idx]['UniProtKB_AC']  + '</a></td></tr>\
 			 	<tr><td>RefSeq</td><td>'    + results[idx]['RefSeq ']  + '</td></tr> \
 			 	<tr><td>log2 Fold Change:</td><td>'    + results[idx]['log2FoldChange'] + '</td></tr> \
-			 	<tr><td>p Value:</td><td>'    + results[idx]['p_value'] + '</td></tr> \
-			 	<tr><td>Significant?:</td><td>'    + (results[idx]['Significant'].toLowerCase() == 'yes' ? 'Yes' : 'No') + '</td></tr> \
+			 	<tr><td>p-value:</td><td>'    + results[idx]['p_value'] + '</td></tr> \
+			 	<tr><td>Significant?</td><td>'    + (results[idx]['Significant'].toLowerCase() == 'yes' ? 'Yes' : 'No') + '</td></tr> \
 			 	<tr><td>Regulated:</td><td>'    + regulatedsymbol + '</td></tr> \
 			 	<tr><td>Cancer Type:</td><td>'    + results[idx]['Cancer_type'] + '</td></tr> \
 				<tr><td>Sample ID:</td><td>' + results[idx]['Sample_ID'] + '</td></tr> \
@@ -540,7 +541,187 @@ function bioexpress() {
     		$.mobile.navigate( href );	
     	};
     }
-    
+
+
+
+	// generate biomuta graph
+	function graphExpressionRegulationProfile() {
+		// categorize frequencies per cancer type
+		var data = [],  // Holds the array of filtered data to construct the graph
+			freq = {},         // Only need one example of each cancer type. Use freq hash to keep track
+			data1 = [],
+			j = 0,
+			prop = ['Cancer Type', 'Up-regulated','Down-regulated'];  // category, layer 1, layer 2, etc.
+		// organize data into javascript object
+		var arr1=[], arr2=[];
+		$.each(results, function(indx, obj){
+			var cancertype = obj['Cancer_type'];
+			if(!(cancertype in freq)) {
+				j++;
+				freq[cancertype] = 1; 
+				data.push({'Cancer Type': cancertype, 'Up Regulated': parseFloat(obj['Freq_up_per']), 'Down Regulated': parseFloat(obj['Freq_Down_per'])});
+				console.log(j + ': added ' + querygene + '/' + cancertype + ' [up: ' + obj['Freq_up_per'] + ', down: ' + obj['Freq_Down_per'] + ']');
+				
+				//arr1.push({x: cancertype, y: parseFloat(obj['Freq_up_per'])});
+				//arr2.push({x: cancertype, y: parseFloat(obj['Freq_Down_per'])});
+			}
+		});
+		//data1.push(arr1,arr2);*/
+		// clear chart area and add header
+		$(pagediv + ' .chart').html('<h3 style="text-align: center;">' + querygene + ' Expression Regulation Profile</h3>');
+		// render chart
+	/*	
+		 // Legend
+		var legend = $(pagediv + ' .chart')
+			.append('svg')
+			.attr("width", 100)
+ 	        .attr("height", 50);
+ 
+ 		var upLegend = legend.append("rect")
+		    .attr("y", 15)
+			.attr("x", 15)
+		    .attr("height", 15)
+		    .attr("width", 15);
+		    //.attr("fill", "#4682B4")
+		    //.attr("stroke", "#fff");
+		    */
+		/* stacked bar chart code modified from Mike Bostock at http://bl.ocks.org/3943967 */
+		var n = Object.keys(data[0]).length-1, // number of layers
+		    m = data.length, // number of samples per layer
+		    key = Object.keys(data[0])[0],
+		    stack = d3.layout.stack(),
+		    labels = data.map(function(d) {
+		      return d[key];
+		     }),
+		    //go through each layer 
+		    //then go through each object in data and pull out that objects's values
+		    //and put it into an array where x is the index and y is the number
+		    layers = stack(d3.range(n).map(function(d) { 
+	            var a = [];
+	  			for (var i = 0; i < m; ++i) {
+	              a[i] = {x: i, y: data[i][Object.keys(data[0])[d+1]]};  
+	  			}
+	            return a;
+	         }) ),
+			//the largest single layer
+		    yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
+		    //the largest stack
+		    yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); }),
+			// formatting chart area variables
+			margin = {top: 10, right: 25, bottom: 5, left: 50},
+			barHeight = 15,
+			barMargin = 3,
+			barPadding = 0.01,
+		    width = $(window).width() - margin.left - margin.right,
+		    height = (barHeight+barMargin)*m,
+		    legendHeight = 20;
+		
+		var xgrid = d3.scale.linear().domain([0, yStackMax]).range([0, yStackMax]);
+		var yScale = d3.scale.ordinal().domain(d3.range(0, m)).rangeBands([0, m * barHeight],0.2);
+		//var y = function(d, i) { return yScale(i); };
+		var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
+			
+		var gridLabelHeight = 18; // space reserved for gridline labels
+		var gridChartOffset = 3; // space between start of grid and first bar
+		var barLabelWidth = 50; // space reserved for bar labels
+	
+			  		
+		var y = d3.scale.ordinal()
+		    .domain(d3.range(m))
+		    .rangeRoundBands([2, height], barPadding);
+		
+		var x = d3.scale.linear()
+		    .domain([0, yStackMax])
+		    .range([0, width]);
+		
+		var color = d3.scale.linear()
+		    .domain([0, n - 1])
+		    .range(["#4682B4", "#CC3300"]);
+		
+		var chartContainer = d3.select(pagediv + ' .chart').append("svg")
+			.attr("width", width + margin.left + margin.right + legendHeight)
+		    .attr("height", height + margin.top + margin.bottom + legendHeight);
+		  	
+		var chart = chartContainer.append("g")		    
+		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		var gridContainer = chart.append('g');
+			gridContainer.selectAll("text").data(x.ticks(5)).enter().append("text")
+			  .attr("x", x)
+			  .attr("dy", 0)
+			  .attr("font-size", ".75em")
+			  .attr("text-anchor", "middle")
+			  .text(String);
+			// vertical grid lines
+			gridContainer.selectAll("line").data(x.ticks(10)).enter().append("line")
+			  .attr("x1", x)
+			  .attr("x2", x)
+			  .attr("y1", 0)
+			  .attr("y2", height)
+			  .style("stroke", "#ccc");
+	
+		var yAxis = d3.svg.axis()
+		    .scale(y)
+		    .tickSize(1)
+		    .tickPadding(10)
+			.tickFormat(function(d) { return data[d][key]; })
+		    .orient("left");		  	
+		var layer = chart.selectAll(".layer")
+		    .data(layers)
+		  	.enter().append("g")
+		    .attr("class", "layer")
+		    .style("fill", function(d, i) { return color(i); });
+		
+		layer.selectAll("rect")
+		    .data(function(d) { return d; })
+		  	.enter().append("rect")
+		    .attr("y", function(d) { return y(d.x); })
+			.attr("x", function(d) { return x(d.y0); })
+		    .attr("height", barHeight)
+		    .attr("width", function(d) { return x(d.y); });
+			  	
+		chart.append("g")
+		    .attr("class", "y axis")
+		    .style("font-size", ".75em")
+		    .call(yAxis);
+
+		var legendContainer = chartContainer.append("g")		    
+			.attr("width", width - margin.right)
+		    .attr("height", legendHeight)
+		  	.attr("fill", "#ccc")
+		  	//.attr("style","float: left;")
+		    .attr("transform", "translate(" + margin.left + "," + parseInt(height+legendHeight/2) + ")");
+		    
+			legendContainer.append("rect")
+				.attr("x",5)
+				.attr("y",5)
+				.attr("height",legendHeight-5)
+				.attr("width",legendHeight-5)
+				.attr("fill", "#4682B4")
+				.attr("stroke","#ccc");
+			legendContainer.append("text")
+			    .attr("x", 5*1.5+legendHeight)
+			    .attr("y",legendHeight/1.3)
+			    .attr("font-size", ".70em")
+			    .attr("fill","black")
+			    .attr("style","font-weight: bold;")
+			    .text(prop[1]);
+			legendContainer.append("rect")
+				.attr("x",width/2)
+				.attr("y",5)
+				.attr("height",legendHeight-5)
+				.attr("width",legendHeight-5)
+				.attr("fill", "#CC3300")
+				.attr("stroke","#ccc");
+			legendContainer.append("text")
+			    .attr("x", 5*1.5+legendHeight+width/2)
+			    .attr("y",legendHeight/1.3)
+			    .attr("font-size", ".70em")
+			    .attr("fill","black")
+			    .attr("style","font-weight: bold;")
+			    .text(prop[2]);						    
+	}  // end generateBiomutaGraph
+	    
 	// ********** Event listeners
 	 
 	$(document).on('click', pagediv + ' .btn-submit', function(e){ 
