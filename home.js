@@ -680,7 +680,7 @@ function bioexpress() {
 		    .attr("height", legendHeight)
 		  	.attr("fill", "#ccc")
 		  	//.attr("style","float: left;")
-		    .attr("transform", "translate(" + margin.left + "," + parseInt(height+legendHeight/2) + ")");
+		    .attr("transform", "translate(" + margin.left + "," + parseInt(height+legendHeight/2 + 5)  + ")");
 		    
 			legendContainer.append("rect")
 				.attr("x",5)
