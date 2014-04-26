@@ -561,30 +561,13 @@ function bioexpress() {
 				freq[cancertype] = 1; 
 				data.push({'Cancer Type': cancertype, 'Up Regulated': parseFloat(obj['Freq_up_per'])/100, 'Down Regulated': parseFloat(obj['Freq_Down_per'])/100});
 				console.log(j + ': added ' + querygene + '/' + cancertype + ' [up: ' + obj['Freq_up_per']/100 + ', down: ' + obj['Freq_Down_per']/100 + ']');
-				
-				//arr1.push({x: cancertype, y: parseFloat(obj['Freq_up_per'])});
-				//arr2.push({x: cancertype, y: parseFloat(obj['Freq_Down_per'])});
 			}
 		});
 		//data1.push(arr1,arr2);*/
 		// clear chart area and add header
 		$(pagediv + ' .chart').html('<h3 style="text-align: center;">' + querygene + ' Expression Regulation Profile</h3>');
 		// render chart
-	/*	
-		 // Legend
-		var legend = $(pagediv + ' .chart')
-			.append('svg')
-			.attr("width", 100)
- 	        .attr("height", 50);
- 
- 		var upLegend = legend.append("rect")
-		    .attr("y", 15)
-			.attr("x", 15)
-		    .attr("height", 15)
-		    .attr("width", 15);
-		    //.attr("fill", "#4682B4")
-		    //.attr("stroke", "#fff");
-		    */
+
 		/* stacked bar chart code modified from Mike Bostock at http://bl.ocks.org/3943967 */
 		var n = Object.keys(data[0]).length-1, // number of layers
 		    m = data.length, // number of samples per layer
@@ -608,7 +591,7 @@ function bioexpress() {
 		    //the largest stack
 		    yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); }),
 			// formatting chart area variables
-			margin = {top: 10, right: 25, bottom: 5, left: 50},
+			margin = {top: 15, right: 25, bottom: 5, left: 50},
 			barHeight = 15,
 			barMargin = 3,
 			barPadding = 0.01,
@@ -618,7 +601,6 @@ function bioexpress() {
 		
 		var xgrid = d3.scale.linear().domain([0, yStackMax]).range([0, yStackMax]);
 		var yScale = d3.scale.ordinal().domain(d3.range(0, m)).rangeBands([0, m * barHeight],0.2);
-		//var y = function(d, i) { return yScale(i); };
 		var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
 			
 		var gridLabelHeight = 18; // space reserved for gridline labels
