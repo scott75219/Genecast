@@ -565,7 +565,7 @@ function bioexpress() {
 		});
 		//data1.push(arr1,arr2);*/
 		// clear chart area and add header
-		$(pagediv + ' .chart').html('<h3 style="text-align: center;">' + querygene + ' Expression Regulation Profile</h3>');
+		$(pagediv + ' .chart').html('<h3 style="text-align: center; margin-bottom: 5px;">' + querygene + ' Expression Regulation Profile</h3>');
 		// render chart
 
 		/* stacked bar chart code modified from Mike Bostock at http://bl.ocks.org/3943967 */
@@ -591,7 +591,7 @@ function bioexpress() {
 		    //the largest stack
 		    yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); }),
 			// formatting chart area variables
-			margin = {top: 15, right: 25, bottom: 5, left: 50},
+			margin = {top: 17, right: 25, bottom: 5, left: 50},
 			barHeight = 15,
 			barMargin = 3,
 			barPadding = 0.01,
