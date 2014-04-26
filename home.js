@@ -409,7 +409,7 @@ function bioexpress() {
 		
 	// Add up/down arrow symbol to regulation status
 	function regulatedConvert (status,full) { 
-		var symbol = status.toLowerCase()== 'up' ? '<img src="resources/images/small-green_arrow_up-svg.png" width="12px" height="12px"/>' : '<img src="resources/images/small-red_arrow_down-svg.png" width="12px" height="12px"/>'; 
+		var symbol = status.toLowerCase()== 'up' ? '<img src="resources/images/small-blue_arrow_up-svg.png" width="12px" height="12px"/>' : '<img src="resources/images/small-red_arrow_down-svg.png" width="12px" height="12px"/>'; 
 		return full == false ? symbol : symbol + ' ' + status;
 	}
 	
@@ -559,8 +559,8 @@ function bioexpress() {
 			if(!(cancertype in freq)) {
 				j++;
 				freq[cancertype] = 1; 
-				data.push({'Cancer Type': cancertype, 'Up Regulated': parseFloat(obj['Freq_up_per']), 'Down Regulated': parseFloat(obj['Freq_Down_per'])});
-				console.log(j + ': added ' + querygene + '/' + cancertype + ' [up: ' + obj['Freq_up_per'] + ', down: ' + obj['Freq_Down_per'] + ']');
+				data.push({'Cancer Type': cancertype, 'Up Regulated': parseFloat(obj['Freq_up_per'])/100, 'Down Regulated': parseFloat(obj['Freq_Down_per'])/100});
+				console.log(j + ': added ' + querygene + '/' + cancertype + ' [up: ' + obj['Freq_up_per']/100 + ', down: ' + obj['Freq_Down_per']/100 + ']');
 				
 				//arr1.push({x: cancertype, y: parseFloat(obj['Freq_up_per'])});
 				//arr2.push({x: cancertype, y: parseFloat(obj['Freq_Down_per'])});
@@ -645,21 +645,29 @@ function bioexpress() {
 		var chart = chartContainer.append("g")		    
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		var gridContainer = chart.append('g');
-			gridContainer.selectAll("text").data(x.ticks(5)).enter().append("text")
-			  .attr("x", x)
-			  .attr("dy", 0)
-			  .attr("font-size", ".75em")
-			  .attr("text-anchor", "middle")
-			  .text(String);
-			// vertical grid lines
-			gridContainer.selectAll("line").data(x.ticks(10)).enter().append("line")
-			  .attr("x1", x)
-			  .attr("x2", x)
-			  .attr("y1", 0)
-			  .attr("y2", height)
-			  .style("stroke", "#ccc");
-	
+		// Draw X-axis grid lines
+		chart.selectAll("line.x")
+		  .data(x.ticks(5))
+		  .enter().append("line")
+		  .attr("class", "x")
+		  .attr("x1", x)
+		  .attr("x2", x)
+		  .attr("y1", 0)
+		  .attr("y2", height)
+		  .style("stroke", "#ccc");
+		  
+		var xAxis = d3.svg.axis()
+			.scale(x)
+			.tickValues([0,.2,.4,.6,.8,1])
+			.tickSize(0)
+			.tickFormat(d3.format(".0%"))
+			.orient('top');
+		
+		var gridContainer = chart.append('g')
+		  .attr("class", "axis")
+		  .style("font-size", ".75em")
+		  .call(xAxis);
+  
 		var yAxis = d3.svg.axis()
 		    .scale(y)
 		    .tickSize(1)
