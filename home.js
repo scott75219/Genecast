@@ -410,7 +410,7 @@ function bioexpress() {
 	// Add up/down arrow symbol to regulation status
 	function regulatedConvert (status,full) { 
 		var symbol = status.toLowerCase()== 'up' ? '<img src="resources/images/small-blue_arrow_up-svg.png" width="12px" height="12px"/>' : '<img src="resources/images/small-red_arrow_down-svg.png" width="12px" height="12px"/>'; 
-		return full == false ? symbol : symbol + '  ' + status + '-regulated';
+		return full == false ? symbol : symbol + ' ' + status + '-regulated';
 	}
 	
 	// Fetch the data and pass to appropriate window
