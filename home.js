@@ -410,7 +410,7 @@ function bioexpress() {
 	// Add up/down arrow symbol to regulation status
 	function regulatedConvert (status,full) { 
 		var symbol = status.toLowerCase()== 'up' ? '<img src="resources/images/small-blue_arrow_up-svg.png" width="12px" height="12px"/>' : '<img src="resources/images/small-red_arrow_down-svg.png" width="12px" height="12px"/>'; 
-		return full == false ? symbol : symbol + ' ' + status;
+		return full == false ? symbol : symbol + '  ' + status + '-regulated';
 	}
 	
 	// Fetch the data and pass to appropriate window
@@ -528,7 +528,7 @@ function bioexpress() {
 			 	<tr><td>log2 Fold Change:</td><td>'    + results[idx]['log2FoldChange'] + '</td></tr> \
 			 	<tr><td>p-value:</td><td>'    + results[idx]['p_value'] + '</td></tr> \
 			 	<tr><td>Significant?</td><td>'    + (results[idx]['Significant'].toLowerCase() == 'yes' ? 'Yes' : 'No') + '</td></tr> \
-			 	<tr><td>Regulated:</td><td>'    + regulatedsymbol + '</td></tr> \
+			 	<tr><td>Regulation:</td><td>'    + regulatedsymbol + '</td></tr> \
 			 	<tr><td>Cancer Type:</td><td>'    + results[idx]['Cancer_type'] + '</td></tr> \
 				<tr><td>Sample ID:</td><td>' + results[idx]['Sample_ID'] + '</td></tr> \
 				<tr><td>Data Source:</td><td>' + results[idx]['Data_Source'] + '</td></tr> \
