@@ -177,12 +177,12 @@ function biomuta() {
 		// Load a few results at a time based on 'paging' variable
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
 			// temp fix: a handful of genes have multiple UniProt KBs and Accession assigned, so note that in header...
-			if ($('#biomuta_hk1').html().toLowerCase().indexOf(results[i]['UniProt AC'].toLowerCase()) <= 1) { 
+			if (($('#biomuta_hk1').html().toLowerCase()).indexOf(results[i]['UniProt AC'].toLowerCase()) == 0) { 
 				$('#biomuta_hk1').html($('#biomuta_hk1').html() + ', ' + results[0][headerkey1.jsonkey]);
 				//$('#biomuta_hk1').html(results[0][headerkey1.jsonkey] + ', ...');
 				}
-			if ($('#biomuta_hk2').html().toLowerCase().indexOf(results[i]['Accession'].toLowerCase()) <= 1) {
-				$('#biomuta_hk2').html( $('#biomuta_hk2').html() + ', ' + results[0][headerkey2.jsonkey]);
+			if (($('#biomuta_hk2').html().toLowerCase()).indexOf(results[i]['Accession'].toLowerCase()) == 0) {
+				$('#biomuta_hk2').html( $('#biomuta_hk2').html() + ', ' + results[0][headerkey2.jsonkey] + ' ' + ($('#biomuta_hk2').html().toLowerCase()).indexOf(results[i]['Accession'].toLowerCase()));
  
 				//$('#biomuta_hk2').html(results[0][headerkey2.jsonkey] + ', ...');
 				}
