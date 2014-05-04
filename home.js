@@ -179,14 +179,14 @@ function biomuta() {
 			// temp fix: a handful of genes have multiple UniProt KBs and Accession assigned, so note that in header...
 			if (results[0][headerkey1.jsonkey] != results[i]['UniProt AC'] &&
 				new RegExp(results[0][headerkey1.jsonkey]).test(results[i]['UniProt AC']) == false ) { 
-				var re = $('#biomuta_hk1').html();
+				var temp = $('#biomuta_hk1').html();
 				$('#biomuta_hk1').html(temp + ', ' + results[0][headerkey1.jsonkey] );
 				//$('#biomuta_hk1').html(results[0][headerkey1.jsonkey] + ', ...');
 				}
 			if (results[0][headerkey2.jsonkey] != results[i]['Accession'] && 
 				new RegExp(results[0][headerkey2.jsonkey]).test(results[i]['Accession']) == false) {
-				var re = $('#biomuta_hk2').html();
-							$('#biomuta_hk2').html( temp + ', ' + results[0][headerkey2.jsonkey] );
+				var temp = $('#biomuta_hk2').html();
+				$('#biomuta_hk2').html( temp + ', ' + results[0][headerkey2.jsonkey] );
  
 				//$('#biomuta_hk2').html(results[0][headerkey2.jsonkey] + ', ...');
 				}
