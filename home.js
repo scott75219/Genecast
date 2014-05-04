@@ -160,7 +160,7 @@ function biomuta() {
 
 			page.results_msgs.html('<h2>' + results.length + ' results found for ' + querygene + '.</h2>');
 			page.results_header_tbody.html(
-			 	'<tr><td><b>' + headerkey1.name + ':<b/></td><td id="biomuta_hk2">' + results[0][headerkey1.jsonkey] + '</td>\
+			 	'<tr><td><b>' + headerkey1.name + ':<b/></td><td id="biomuta_hk1">' + results[0][headerkey1.jsonkey] + '</td>\
 			 	     <td><b>' + headerkey2.name + ':</b></td><td id="biomuta_hk2">' + results[0][headerkey2.jsonkey] + '</td></tr>'
 			);
 			displayResults();
