@@ -185,7 +185,7 @@ function biomuta() {
 				}
 			if (results[0][headerkey2.jsonkey] != results[i]['Accession'] && 
 				new RegExp(results[0][headerkey2.jsonkey]).test(results[i]['Accession']) == false) {
-				var temp = $('#biomuta_hk2').html();
+				var temp = new RegExp(results[0][headerkey2.jsonkey]).test(results[i]['Accession']); //$('#biomuta_hk2').html();
 				$('#biomuta_hk2').html( temp + ', ' + results[0][headerkey2.jsonkey] );
  
 				//$('#biomuta_hk2').html(results[0][headerkey2.jsonkey] + ', ...');
