@@ -95,7 +95,7 @@ function biomuta() {
 	var pagediv = '#biomuta'; 
 	var sortkey = 'Position_A';
 	var headerkey1 = { name: 'UniProt', jsonkey: 'UniProt AC' };
-	var headerkey2 = { name: 'RefSeq', jsonkey: 'RefSeq AC' };
+	var headerkey2 = { name: 'RefSeq', jsonkey: 'Accession' };
 	var page = loadPageElements(pagediv, $(pagediv), window.defaults.BIOMUTA_DATA_URL, sortkey, headerkey1.jsonkey, headerkey2.jsonkey, 0);
 
 
@@ -161,7 +161,7 @@ function biomuta() {
 			page.results_msgs.html('<h2>' + results.length + ' results found for ' + querygene + '.</h2>');
 			page.results_header_tbody.html(
 			 	'<tr><td><b>' + headerkey1.name + ':<b/></td><td>' + results[0][headerkey1.jsonkey] + '</td>\
-			 	     <td><b>' + headerkey2.name + ':</b></td><td>' + results[0][headerkey1.jsonkey] + '</td></tr>'
+			 	     <td><b>' + headerkey2.name + ':</b></td><td>' + results[0][headerkey2.jsonkey] + '</td></tr>'
 			);
 			displayResults();
 		};
@@ -371,6 +371,7 @@ function biomuta() {
 	$(document).on('click', pagediv + ' .btn-submit', function(e){
 		// Loading data notification
 		querygene = page.input_field.val().trim().toUpperCase();
+		page.input_field.css('color', 'black');
     	page.results_area.hide();
     	page.invalid_msgs.hide();
 		page.results_msgs.html('');
@@ -717,6 +718,7 @@ function bioexpress() {
 	$(document).on('click', pagediv + ' .btn-submit', function(e){ 
 		// Loading data notification
 		querygene = page.input_field.val().trim().toUpperCase();
+		page.input_field.css('color', 'black');
     	page.results_area.hide();
     	page.invalid_msgs.hide();
 		page.results_msgs.html('');
