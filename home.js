@@ -160,8 +160,8 @@ function biomuta() {
 
 			page.results_msgs.html('<h2>' + results.length + ' results found for ' + querygene + '.</h2>');
 			page.results_header_tbody.html(
-			 	'<tr><td><b>' + headerkey1.name + ':<b/></td><td>' + results[0][headerkey1.jsonkey] + '</td>\
-			 	     <td><b>' + headerkey2.name + ':</b></td><td>' + results[0][headerkey2.jsonkey] + '</td></tr>'
+			 	'<tr><td><b>' + headerkey1.name + ':<b/></td><td id="biomuta_hk2">' + results[0][headerkey1.jsonkey] + '</td>\
+			 	     <td><b>' + headerkey2.name + ':</b></td><td id="biomuta_hk2">' + results[0][headerkey2.jsonkey] + '</td></tr>'
 			);
 			displayResults();
 		};
@@ -176,6 +176,9 @@ function biomuta() {
 		
 		// Load a few results at a time based on 'paging' variable
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
+			// temp fix: a handful of genes have multiple UniProt KBs and Accession assigned, so note that in header...
+			if (results[0][headerkey1.jsonkey] != results[i]['UniProt AC']) { $('#biomuta_hk1').html(results[0][headerkey1.jsonkey] + ', ...');}
+			if (results[0][headerkey2.jsonkey] != results[i]['Accession']) { $('#biomuta_hk2').html(results[0][headerkey2.jsonkey] + ', ...');}
 			// Text manipulations to fit data into table
 			var pmid = results[i]['PMID'].split(";")[0];// AMIR
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
