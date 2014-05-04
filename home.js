@@ -182,7 +182,7 @@ function biomuta() {
 				$('#biomuta_hk1').html(re + ', ' + results[i]['UniProt AC']);
 				//$('#biomuta_hk1').html(results[0][headerkey1.jsonkey] + ', ...');
 				}
-			if (results[i]['Accession'] != results[0][headerkey2.jsonkey] && $('#biomuta_hk2').html().toLower().indexOf(results[i]['Accession']) < 0) {
+			if (results[i]['Accession'] != results[0][headerkey2.jsonkey] && $('#biomuta_hk2').html().indexOf(results[i]['Accession']) < 0) {
 				var re = $('#biomuta_hk2').html();
 				$('#biomuta_hk2').html( re + ', ' + results[i]['Accession']);
  
