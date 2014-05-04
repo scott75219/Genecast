@@ -183,7 +183,7 @@ function biomuta() {
 				//$('#biomuta_hk1').html(results[0][headerkey1.jsonkey] + ', ...');
 				}
 			if ($('#biomuta_hk2').html().toLowerCase().indexOf(results[i]['Accession']) == 0) {
-				$('#biomuta_hk2').html( $('#biomuta_hk2').html() + ', ' + results[0][headerkey2.jsonkey] + ' ' + ($('#biomuta_hk2').html().toLowerCase()).indexOf(results[i]['Accession'].toLowerCase()));
+				$('#biomuta_hk2').html( $('#biomuta_hk2').html() + ', ' + results[0][headerkey2.jsonkey] + ' ' + ($('#biomuta_hk2').html()).indexOf(results[i]['Accession']));
  
 				//$('#biomuta_hk2').html(results[0][headerkey2.jsonkey] + ', ...');
 				}
