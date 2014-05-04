@@ -178,13 +178,13 @@ function biomuta() {
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
 			// temp fix: a handful of genes have multiple UniProt KBs and Accession assigned, so note that in header...
 			if (results[0][headerkey1.jsonkey] != results[i]['UniProt AC']) { 
-				$('#biomuta_hk1').val($('#biomuta_hk1').val() + ', ' + results[0][headerkey1.jsonkey] );
-				$('#biomuta_hk1').html(results[0][headerkey1.jsonkey] + ', ...');
+				$('#biomuta_hk1').html($('#biomuta_hk1').val() + ', ' + results[0][headerkey1.jsonkey] );
+				//$('#biomuta_hk1').html(results[0][headerkey1.jsonkey] + ', ...');
 				}
 			if (results[0][headerkey2.jsonkey] != results[i]['Accession']) {
-							$('#biomuta_hk2').val($('#biomuta_hk2').val() + ', ' + results[0][headerkey2.jsonkey] );
+							$('#biomuta_hk2').html($('#biomuta_hk2').val() + ', ' + results[0][headerkey2.jsonkey] );
  
-				$('#biomuta_hk2').html(results[0][headerkey2.jsonkey] + ', ...');
+				//$('#biomuta_hk2').html(results[0][headerkey2.jsonkey] + ', ...');
 				}
 			// Text manipulations to fit data into table
 			var pmid = results[i]['PMID'].split(";")[0];// AMIR
