@@ -437,8 +437,8 @@ function biomuta() {
 	    if($(this).is(':checked')){
 	        console.log('checked');
 	        paging = 9999;
+	        $.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 	        displayResults();
-	       	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 	        $(pagediv + ' .results-table tbody tr').filter('.nonpriority').hide();
 	        $("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
 	        $.mobile.loading("hide");
