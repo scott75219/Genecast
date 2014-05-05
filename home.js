@@ -434,23 +434,19 @@ function biomuta() {
  	page.results_table_tbody.on('click', 'tr', showDetails);    
 
 	$(page.id + ' input:checkbox').live('change', function(){
+		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 	    if($(this).is(':checked')){
-	        console.log('checked');
 	        paging = 9999;
-	        $.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 	        displayResults();
 	        $(pagediv + ' .results-table tbody tr').filter('.nonpriority').hide();
 	        $("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
-	        $.mobile.loading("hide");
 	    } else {
-	    	console.log('unchecked');
 	    	paging = window.defaults.RESULTS_PAGING_SIZE;
-	    	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
-
 	        $(pagediv + ' .results-table tbody tr').filter('.nonpriority').show();
 	        $("input[type='checkbox']").attr("checked",false).checkboxradio("refresh");
 	        $(pagediv + ' .btn-submit').trigger('click');
 	    }
+	    $.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 	});
 
 	// END -- BIOMUTA
