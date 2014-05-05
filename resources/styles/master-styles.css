@@ -192,3 +192,7 @@ text-align: center;
   fill:white;
   stroke:black;
   opacity:0.8;}
+  
+.ui-fullsize .ui-btn-inner, .ui-fullsize .ui-btn-inner{
+ 	font-size: 11px !important;
+ }

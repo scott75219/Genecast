@@ -101,7 +101,7 @@ function biomuta() {
 	var page = loadPageElements(pagediv, $(pagediv), window.defaults.BIOMUTA_DATA_URL, sortkey, headerkey1.jsonkey, headerkey2.jsonkey, 0);
 	var prioritytargets = {};
 	var priorityexists = false;
-
+	var paging = window.defaults.RESULTS_PAGING_SIZE;
 	
 	// ********** Page functions
 
@@ -177,12 +177,12 @@ function biomuta() {
 				if(!prioritytargets.hasOwnProperty(val['Position_N'])) { 
 					prioritytargets[val['Position_N']] = {};
 					prioritytargets[val['Position_N']]['cancers'] = [val['Cancer_Type']];
-					console.log(i + ' added: ' + val['Position_N'] + ', priority: ' + prioritytargets[val['Position_N']]['cancers'].length + ', cancers: ' + prioritytargets[val['Position_N']]['cancers'][0]); 
+					//console.log(i + ' added: ' + val['Position_N'] + ', priority: ' + prioritytargets[val['Position_N']]['cancers'].length + ', cancers: ' + prioritytargets[val['Position_N']]['cancers'][0]); 
 				}
 				else {
 					
 					if($.inArray(val['Cancer_Type'],prioritytargets[val['Position_N']]['cancers']) == -1) {
-						console.log(i + ' key: ' + val['Position_N'] + ', adding: ' + val['Cancer_Type']);
+						//console.log(i + ' key: ' + val['Position_N'] + ', adding: ' + val['Cancer_Type']);
 						prioritytargets[val['Position_N']]['cancers'].push(val['Cancer_Type']);
 						
 						prioritytargets[val['Position_N']]['cancers'].length <3 ? 1 : priorityexists = true;
@@ -191,10 +191,9 @@ function biomuta() {
 				
 			});
 			
-			priorityexists == false ? $(page.id + ' .tips .prioritytips').remove() : $(page.id + ' .tips').append('<p class="prioritytip"><strong>&#8224;</strong> = priority targets</p>');
+			priorityexists == false ? $(page.id + ' .tips .prioritytip').hide() : $(page.id + ' .prioritytip').show();
 
-			
-			displayResults();
+			priorityexists == false ? $('#prioritydiv').hide() : $('#prioritydiv').show();			displayResults();
 		};
 	}	
 	
@@ -202,11 +201,13 @@ function biomuta() {
 	function displayResults() {
 		graphFrequencyCancerTypes();
 		
-		var paging = window.defaults.RESULTS_PAGING_SIZE;
+		
 		var bookmark = page.results_table_tbody.find('tr').length;
 		
 		// Load a few results at a time based on 'paging' variable
 		for(var i = bookmark; i < bookmark+paging && i < results.length; i++) { 
+			// check if record is considered a priority target:
+			var currpriority = prioritytargets[results[i]['Position_N']]['cancers'].length >= 3 ? true : false;
 			// temp fix: a handful of genes have multiple UniProt KBs and Accession assigned, so note that in header...
 			if (results[i]['UniProt AC'] != results[0][headerkey1.jsonkey] && $('#biomuta_hk1').html().indexOf(results[i]['UniProt AC']) < 0 ) { 
 				var re = $('#biomuta_hk1').html();
@@ -227,8 +228,8 @@ function biomuta() {
 			var cancerType = results[i]['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
 			
 			// print out table row
-			page.results_table_tbody.append('<tr> \
-				<td><a href="#biomuta-detail" >' + results[i]['Position_A'] + (prioritytargets[results[i]['Position_N']]['cancers'].length >= 3 ? window.defaults.SUPERSCRIPT_ABBR_MSG : '') + '</a></td> \
+			page.results_table_tbody.append('<tr' + (currpriority ? '' : ' class="nonpriority"') + '> \
+				<td><a href="#biomuta-detail" >' + results[i]['Position_A'] + (currpriority ? window.defaults.SUPERSCRIPT_ABBR_MSG : '') + '</a></td> \
 				<td>' + results[i]['Ref_A'] + '</td> \
 				<td>' + results[i]['Var_A'] + '</td> \
 				<td>' + polyphen + '</td> \
@@ -420,6 +421,9 @@ function biomuta() {
 		page.results_msgs.html('');
 		page.results_header_tbody.html('');
 		page.results_table_tbody.html('');
+		paging = window.defaults.RESULTS_PAGING_SIZE;
+        $(pagediv + ' .results-table tbody tr').filter('.nonpriority').show();
+        $("input[type='checkbox']").attr("checked",false).checkboxradio("refresh");
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 		fetchData();
 	});
@@ -428,6 +432,26 @@ function biomuta() {
 	
 	// When click on a row show full detail page
  	page.results_table_tbody.on('click', 'tr', showDetails);    
+
+	$(page.id + ' input:checkbox').live('change', function(){
+	    if($(this).is(':checked')){
+	        console.log('checked');
+	        paging = 9999;
+	        displayResults();
+	       	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
+	        $(pagediv + ' .results-table tbody tr').filter('.nonpriority').hide();
+	        $("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
+	        $.mobile.loading("hide");
+	    } else {
+	    	console.log('unchecked');
+	    	paging = window.defaults.RESULTS_PAGING_SIZE;
+	    	$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
+
+	        $(pagediv + ' .results-table tbody tr').filter('.nonpriority').show();
+	        $("input[type='checkbox']").attr("checked",false).checkboxradio("refresh");
+	        $(pagediv + ' .btn-submit').trigger('click');
+	    }
+	});
 
 	// END -- BIOMUTA
 }
