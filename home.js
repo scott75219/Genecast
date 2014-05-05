@@ -16,6 +16,8 @@ window.defaults =
 	ONLINE: true,
 	BIOMUTA_DATA_URL: "https://hive.biochemistry.gwu.edu/tools/biomuta/json.php?gene=",
 	BIOEXPRESS_DATA_URL: "https://hive.biochemistry.gwu.edu/tools/bioexpress/json.php?gene=",
+	SUPERSCRIPT_MSG: " <span class='superscript'><strong>&#8224;</strong> priority target</span>",
+	SUPERSCRIPT_ABBR_MSG: "<span class='superscript'><strong>&#8224;</strong></span>",
 	RESULTS_PAGING_SIZE: 50
 };   
 
@@ -97,7 +99,8 @@ function biomuta() {
 	var headerkey1 = { name: 'UniProt', jsonkey: 'UniProt AC' };
 	var headerkey2 = { name: 'RefSeq', jsonkey: 'Accession' };
 	var page = loadPageElements(pagediv, $(pagediv), window.defaults.BIOMUTA_DATA_URL, sortkey, headerkey1.jsonkey, headerkey2.jsonkey, 0);
-
+	var prioritytargets = {};
+	var priorityexists = false;
 
 	
 	// ********** Page functions
@@ -160,9 +163,37 @@ function biomuta() {
 
 			page.results_msgs.html('<h2>' + results.length + ' results found for ' + querygene + '.</h2>');
 			page.results_header_tbody.html(
-			 	'<tr><td><b>' + headerkey1.name + ':<b/></td><td id="biomuta_hk1">' + results[0][headerkey1.jsonkey] + '</td>\
+			 	'<tr style="margin-top:5px;"><td><b>' + headerkey1.name + ':<b/></td><td id="biomuta_hk1">' + results[0][headerkey1.jsonkey] + '</td>\
 			 	     <td><b>' + headerkey2.name + ':</b></td><td id="biomuta_hk2">' + results[0][headerkey2.jsonkey] + '</td></tr>'
 			);
+			
+			// look for priority targets: 
+			// ... look for driver genes (pos(n) has 3 or more cancer types)
+			prioritytargets = {};
+			priorityexists = false;
+			var i = 0;
+			$.each(results, function(idx,val) {
+				i++;
+				if(!prioritytargets.hasOwnProperty(val['Position_N'])) { 
+					prioritytargets[val['Position_N']] = {};
+					prioritytargets[val['Position_N']]['cancers'] = [val['Cancer_Type']];
+					console.log(i + ' added: ' + val['Position_N'] + ', priority: ' + prioritytargets[val['Position_N']]['cancers'].length + ', cancers: ' + prioritytargets[val['Position_N']]['cancers'][0]); 
+				}
+				else {
+					
+					if($.inArray(val['Cancer_Type'],prioritytargets[val['Position_N']]['cancers']) == -1) {
+						console.log(i + ' key: ' + val['Position_N'] + ', adding: ' + val['Cancer_Type']);
+						prioritytargets[val['Position_N']]['cancers'].push(val['Cancer_Type']);
+						
+						prioritytargets[val['Position_N']]['cancers'].length <3 ? 1 : priorityexists = true;
+					}
+				}
+				
+			});
+			
+			priorityexists == false ? $(page.id + ' .tips .prioritytips').remove() : $(page.id + ' .tips').append('<p class="prioritytip"><strong>&#8224;</strong> = priority targets</p>');
+
+			
 			displayResults();
 		};
 	}	
@@ -197,7 +228,7 @@ function biomuta() {
 			
 			// print out table row
 			page.results_table_tbody.append('<tr> \
-				<td><a href="#biomuta-detail" >' + results[i]['Position_A'] + '</a></td> \
+				<td><a href="#biomuta-detail" >' + results[i]['Position_A'] + (prioritytargets[results[i]['Position_N']]['cancers'].length >= 3 ? window.defaults.SUPERSCRIPT_ABBR_MSG : '') + '</a></td> \
 				<td>' + results[i]['Ref_A'] + '</td> \
 				<td>' + results[i]['Var_A'] + '</td> \
 				<td>' + polyphen + '</td> \
@@ -246,7 +277,7 @@ function biomuta() {
 			 	<tr><td>UniProtKB:</td><td><a href="http://www.uniprot.org/blast/?about=' + results[idx]['UniProt AC'] + '" rel="external" target="_blank">' +  results[idx]['UniProt AC'] + '</a></td></tr>\
 			 	<tr><td>' + acTitle + '</td><td>'    + accessionlink + '</td></tr> \
 			 	<tr><td>SNV Position:</td><td>'    + snvlink + '</td></tr> \
-			 	<tr><td>Pos(N):</td><td>'    + results[idx]['Position_N'] + '</td></tr> \
+			 	<tr><td>Pos(N):</td><td>'    + results[idx]['Position_N']  +  (prioritytargets[results[idx]['Position_N']]['cancers'].length >= 3 ? window.defaults.SUPERSCRIPT_MSG : '') + '</td></tr> \
 			 	<tr><td>Ref(N):</td><td>'    + results[idx]['Ref_N'] + '</td></tr> \
 			 	<tr><td>Var(N):</td><td>'    + results[idx]['Var_N'] + '</td></tr> \
 			 	<tr><td>Pos(A):</td><td>'    + results[idx]['Position_A'] + '</td></tr> \
