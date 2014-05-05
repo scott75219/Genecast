@@ -180,15 +180,12 @@ text-align: center;
 	font-weight: bold;
 }
 
-.tips p {
-	margin-top: 0 !important;
-	padding-top: 0 !important;
-}
 
 .superscript {
 	position: relative; 
 	top: -0.5em; 
-	font-size: 75%;
+	font-size: 65%;
+	color: #003300;
 }
 
 .legend rect {
