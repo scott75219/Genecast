@@ -432,7 +432,8 @@ function biomuta() {
 	
 	// When click on a row show full detail page
  	page.results_table_tbody.on('click', 'tr', showDetails);    
-
+	
+	// For results that have priority targets based on my analysis, show a button to filter
 	$(page.id + ' input:checkbox').live('change', function(){
 		$.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
 	    if($(this).is(':checked')){
@@ -446,7 +447,7 @@ function biomuta() {
 	        $("input[type='checkbox']").attr("checked",false).checkboxradio("refresh");
 	        $(pagediv + ' .btn-submit').trigger('click');
 	    }
-	    $.mobile.loading( 'show', { text: "Loading. Please wait...", textVisible: true, theme: "c"});
+		$.mobile.loading("hide");	
 	});
 
 	// END -- BIOMUTA
