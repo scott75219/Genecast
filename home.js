@@ -308,12 +308,12 @@ function biomuta() {
 			
 		//	var cancertype = obj['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
 		//	if (cancertype ==''|| cancertype==null ||cancertype='undefined'){
-				var cancertype = obj['Cancer_Type'].match(/\/([\s\S]*)$/)[0].replace('/', '');
-				cancertype = cancertype.substring(1, 6);
+				var c = obj['Cancer_Type'].match(/\/([\s\S]*)$/)[0];
+				var cancertype = c.substring(1, 6);
 
 		//	}
 		//	if(cancertype == 'OTHERS' && obj['Cancer_Type'].match(/^[Cc]ancer(.*)/) == null) {
-				cancertype = truncate(obj['Cancer_Type'].substr(0,obj['Cancer_Type'].indexOf(' ')),8,false);
+		//		cancertype = truncate(obj['Cancer_Type'].substr(0,obj['Cancer_Type'].indexOf(' ')),8,false);
 		//	}
 			//console.log(obj['Gene_Name'] + " " + obj['Cancer_Type']);
 			if(!(cancertype in freq)) {freq[cancertype] = 1; }
