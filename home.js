@@ -313,7 +313,7 @@ function biomuta() {
 			if(cancertype == 'OTHERS' && obj['Cancer_Type'].match(/^[Cc]ancer(.*)/) == null) {
 				cancertype = truncate(obj['Cancer_Type'].substr(0,obj['Cancer_Type'].indexOf(' ')),8,false);
 			}
-		//	 cancertype = cancertype.substring(1, 6);
+			 cancertype = cancertype.substring(1, 8);
 
 		//	}
 		
