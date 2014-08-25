@@ -305,7 +305,13 @@ function biomuta() {
 		
 		// organize data into javascript object
 		$.each(results, function(indx, obj){
+			
 			var cancertype = obj['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
+			if (cancertype ==''|| cancertype==null ||cancertype='undefined'){
+				cancertype = obj['Cancer_Type'].match(/\/[A-Za-z0-9]+/)[0].replace('/', '');
+				cancertype = cancertype.substring(1, 6);
+
+			}
 			if(cancertype == 'OTHERS' && obj['Cancer_Type'].match(/^[Cc]ancer(.*)/) == null) {
 				cancertype = truncate(obj['Cancer_Type'].substr(0,obj['Cancer_Type'].indexOf(' ')),8,false);
 			}
