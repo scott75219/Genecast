@@ -226,8 +226,9 @@ function biomuta() {
 			var pmidlink = 'http://www.ncbi.nlm.nih.gov/pubmed/?term='+ pmid;
 			var polyphen   = polyphenConvert(results[i]['Polyphen_Pred'],'colors');
 			var sourceType = truncate(results[i]['Source'],8,true);
-			var cancerType = results[i]['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
-			
+		//	var cancerType = results[i]['Cancer_Type'].match(/\[[A-Za-z0-9]+\]/)[0].replace('[', '').replace(']', '');
+			var cancerType = results[i]['Cancer_Type'].match(/\/([\s\S]*)$/)[0].replace('/', '');
+
 			// print out table row
 			page.results_table_tbody.append('<tr' + (currpriority ? '' : ' class="nonpriority"') + '> \
 				<td><a href="#biomuta-detail" >' + results[i]['Position_A'] + (currpriority ? window.defaults.SUPERSCRIPT_ABBR_MSG : '') + '</a></td> \
