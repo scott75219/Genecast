@@ -37,6 +37,11 @@
 
         }
         document.addEventListener("deviceready", deviceready, true);        
+        
+        function Apps(name){
+        	if (name="Gene"){window.open("https://hive.biochemistry.gwu.edu/dna.cgi?cmd=hivegenecast");} 
+        	if (name="Pub"){window.open("https://hive.biochemistry.gwu.edu/dna.cgi?cmd=hivepubcast");} 
+        }
         </script>
         
   </head>
@@ -286,7 +291,7 @@
 				<table style="width:100%; text-align: center;">
 					<tr>
 						<td>
-							<a href="https://hive.biochemistry.gwu.edu/dna.cgi?cmd=hivepubcast" data-role="button" data-inline="true" id="btn_update_pubcast">Download HIVE Pubcast</a>
+							< on click="App('Pub')" data-role="button" data-inline="true" id="btn_update_pubcast">Download HIVE Pubcast
 						</td>
 					</tr>
 					<tr style="margin-top: 2px;">
